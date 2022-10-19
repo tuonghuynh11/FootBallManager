@@ -67,7 +67,7 @@
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <uc:ControlBarUC Grid.Row="0" ></uc:ControlBarUC>
+            <uc:ControlBarUC Grid.Row="0"></uc:ControlBarUC>
             <Grid Grid.Row="1" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" ></ColumnDefinition>
