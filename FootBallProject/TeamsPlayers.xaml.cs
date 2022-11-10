@@ -23,5 +23,25 @@ namespace FootBallProject
         {
             InitializeComponent();
         }
+
+        private void TextBlock_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void TextBlock_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+
+        }
+
+        private void Players_List_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void RowDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

@@ -92,6 +92,9 @@
     <Compile Include="DS_BLD.xaml.cs">
       <DependentUpon>DS_BLD.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PlayerProfile.xaml.cs">
+      <DependentUpon>PlayerProfile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TeamsPlayers.xaml.cs">
       <DependentUpon>TeamsPlayers.xaml</DependentUpon>
     </Compile>
@@ -127,6 +130,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PlayerProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ResourceXAML\MainResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
