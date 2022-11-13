@@ -7,6 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="PlayerProfile" Height="900" Width="600"
+        
         >
     <Window.Resources>
         <Style TargetType="TextBlock">
@@ -32,7 +33,7 @@
         </Grid.RowDefinitions>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
             <!--Tao hinh dai dien hinh torn-->
-            <Border CornerRadius="90" Width="200" Height="200" >
+            <Border Name="ImageBorder" CornerRadius="90" Width="200" Height="200" >
                 <Border.Background>
                     <ImageBrush  ImageSource="Images/1.jpg"/>
                 </Border.Background>
@@ -41,39 +42,39 @@
         </StackPanel>
         <Border Margin="10,300,330,440" RenderTransformOrigin="0.531,0.58">
             <StackPanel>
-                <TextBlock Text="Appearance" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="UltraBlack" Foreground="Purple"/>
-                <TextBlock Text="0" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
+                <TextBlock Text="Appearances" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="UltraBlack" Foreground="Purple"/>
+                <TextBlock Text="{Binding Appearances}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
             </StackPanel>
             
         </Border>
         <Border Margin="250,300,198,440"  RenderTransformOrigin="0.531,0.58">
             <StackPanel>
                 <TextBlock Text="Goals" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
-                <TextBlock Text="0" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding Goals}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
             </StackPanel>
         </Border>
         <Border Margin="402,300,32,440" RenderTransformOrigin="0.531,0.58">
             <StackPanel>
                 <TextBlock Text="Assists" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
-                <TextBlock Text="0" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>    
+                <TextBlock Text="{Binding Assists}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>    
             </StackPanel>
         </Border>
         <Border Margin="10 460 330 280">
             <StackPanel>
                 <TextBlock Text="Left Foot" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
-                <TextBlock Text="0" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding Left_foot}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
             </StackPanel>
         </Border>
         <Border Margin="250 460 198 280">
             <StackPanel>
                 <TextBlock Text="Right Foot" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
-                <TextBlock Text="0" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding Right_foot}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
             </StackPanel>
         </Border>
         <Border Margin="402 460 32 280">
             <StackPanel>
                 <TextBlock Text="Head" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
-                <TextBlock Text="0" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding Head}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
             </StackPanel>
         </Border>
         <!--<Border Margin="100 300 100 100" Background="Aqua">

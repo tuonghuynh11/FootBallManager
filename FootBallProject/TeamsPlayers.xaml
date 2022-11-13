@@ -82,7 +82,7 @@
             </ListView.View>
         </ListView> -->
         <Border Background="Orange" Grid.Row="3" Grid.Column="1" Margin="50 60 50 60">
-            <DataGrid Background="Transparent" HorizontalAlignment="Left" Style ="{DynamicResource MaterialDesignDataGrid}" IsReadOnly="True" Name ="Players_List" AutoGenerateColumns="False" ItemsSource ="{Binding}" FontFamily="Roboto" SelectionChanged="Players_List_SelectionChanged"  >
+            <DataGrid Background="Transparent"   HorizontalAlignment="Left" Style ="{DynamicResource MaterialDesignDataGrid}" IsReadOnly="True" Name ="Players_List" AutoGenerateColumns="False" ItemsSource ="{Binding}" FontFamily="Roboto" SelectionChanged="Players_List_SelectionChanged"  >
                 <DataGrid.Columns>
 
                     <DataGridTextColumn Header="Number" Width="300" Binding="{Binding Number}"/>

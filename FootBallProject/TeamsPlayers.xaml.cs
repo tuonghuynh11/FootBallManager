@@ -19,9 +19,14 @@ namespace FootBallProject
     /// </summary>
     public partial class TeamsPlayers : Window
     {
+        List<Player> players;
         public TeamsPlayers()
         {
             InitializeComponent();
+            players = new List<Player>();
+            for(int i = 0; i < 10; i++)
+                players.Add(new Player(9, "Erling Haaland", 22, "Norway", "Forward"));
+            Players_List.ItemsSource = players;
         }
 
         private void TextBlock_MouseEnter(object sender, MouseEventArgs e)
@@ -43,5 +48,31 @@ namespace FootBallProject
         {
 
         }
+    }
+    public class Player
+    {
+        int number;
+        string name;
+        int age;
+        string nationality;
+        string position;
+        public Player(int number = 0, string name = "", int age = 0, string nationality = "", string position = "")
+        {
+            this.number = number;
+            this.name = name;
+            this.age = age;
+            this.nationality = nationality;
+            this.position = position;
+            
+        }
+
+        public int Number { get { return number; } set { number = value; } }
+        public string Name { get { return name; } set { name = value; } }
+        public int Age { get { return age; } set { age = value; } }
+
+        public string Nationality { get { return nationality; } set { nationality = value; } }
+        public string Position { get { return position; } set { position = value; } }
+
+
     }
 }
