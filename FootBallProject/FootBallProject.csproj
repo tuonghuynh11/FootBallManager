@@ -84,6 +84,7 @@
     </Compile>
     <Compile Include="DS_BLD_ADD.xaml.cs">
       <DependentUpon>DS_BLD_ADD.xaml</DependentUpon>
+      </Compile>
     <Compile Include="UserControlBar\ControlBarUC.xaml.cs">
       <DependentUpon>ControlBarUC.xaml</DependentUpon>
     </Compile>
