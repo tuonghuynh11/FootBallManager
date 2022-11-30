@@ -6,9 +6,14 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:FootBallProject"
         xmlns:uc="clr-namespace:FootBallProject.UserControlBar"
-
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Name ="TeamPlayers"
         mc:Ignorable="d"
-        Title="TeamsPlayers" Height="800" Width="1300">
+        Title="TeamsPlayers" Height="800" Width="1300"
+        DataContext="{StaticResource TeamPlayersVM}">
+    <i:Interaction.Triggers>
+        
+    </i:Interaction.Triggers>
     
     <Grid>
         <Grid.ColumnDefinitions>
@@ -81,17 +86,23 @@
                 </GridView>
             </ListView.View>
         </ListView> -->
-        <Border Background="Orange" Grid.Row="3" Grid.Column="1" Margin="50 60 50 60">
-            <DataGrid Background="Transparent"   HorizontalAlignment="Left" Style ="{DynamicResource MaterialDesignDataGrid}" IsReadOnly="True" Name ="Players_List" AutoGenerateColumns="False" ItemsSource ="{Binding}" FontFamily="Roboto" SelectionChanged="Players_List_SelectionChanged"  >
+        <Button Grid.Row="3" Grid.Column="1" Margin="600 600 50 30" Width="100" Name="Add" Background="Gray" Foreground="White" Command="{Binding AddPlayerCommand}" CommandParameter="{Binding ElementName=TeamPlayers}">
+            Add
+        </Button>
+        <Border Background="Orange" Grid.Row="3" Grid.Column="1" Margin="50 60 50 150">
+            <DataGrid ItemsSource="{Binding PlayerList}"  Background="Transparent" SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}"  HorizontalAlignment="Left" Style ="{DynamicResource MaterialDesignDataGrid}" IsReadOnly="True" Name ="Players_List" AutoGenerateColumns="False" FontFamily="Roboto" SelectionChanged="Players_List_SelectionChanged"  >
                 <DataGrid.Columns>
 
-                    <DataGridTextColumn Header="Number" Width="300" Binding="{Binding Number}"/>
-                    <DataGridTextColumn Header="Name" Width="300" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Age" Width="300" Binding="{Binding Age}"/>
-                    <DataGridTextColumn Header="Nationality" Width="300" Binding="{Binding Nationality}"/>
+                    <DataGridTextColumn Header="ID" Visibility="Hidden" Binding="{Binding ID}"/>
+                    <DataGridTextColumn Header="ClubID" Visibility="Hidden" Binding="{Binding ClubID}"/>
+
+                    <DataGridTextColumn Header="Number" Width="100" Binding="{Binding Number}"/>
+                    <DataGridTextColumn Header="Name" Width="200" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Age" Width="100" Binding="{Binding Age}"/>
+                    <DataGridTextColumn Header="Nationality" Width="150" Binding="{Binding Nationality}"/>
                     <DataGridTextColumn Header="Position" Width="300" Binding="{Binding Position}"/>
-                    <DataGridTextColumn Header="Appearances" Width="300" Binding="{Binding Appearance}"/>
-                    <DataGridTextColumn Header="Goals" Width="300" Binding="{Binding Goals}"/>
+                    <!--<DataGridTextColumn Header="Appearances" Width="100" Binding="{Binding Appearance}"/>-->
+                    <DataGridTextColumn Header="Goals" Width="100" Binding="{Binding Goals}"/>
                 </DataGrid.Columns>
 
                 <DataGrid.ItemContainerStyle>

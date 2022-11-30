@@ -23,8 +23,7 @@ namespace FootBallProject
         public PlayerProfile()
         {
             InitializeComponent();
-            Statistics stat = new Statistics(10, 10, 10, 10, 10, 10);
-            this.DataContext = stat;
+            
            
         }
     }

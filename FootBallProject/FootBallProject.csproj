@@ -107,9 +107,14 @@
     <Compile Include="UserControlBar\MenuBarUC.xaml.cs">
       <DependentUpon>MenuBarUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AddPlayerViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="AddPlayerForm.xaml.cs">
+      <DependentUpon>AddPlayerForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\TeamPlayersViewModel.cs" />
     <Page Include="AdminScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlBar\MenuBarUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddPlayerForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -7,7 +7,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:uc="clr-namespace:FootBallProject.UserControlBar"
         mc:Ignorable="d"
-        Title="TransferWindow" Height="800" Width="1300">
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Title="TransferWindow" Height="800" Width="1300"
+        DataContext="{StaticResource TeamPlayersVM}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
@@ -24,19 +27,21 @@
 
             <DataGrid AutoGenerateColumns="False" Name="dgrid1" Margin="0 0 0 0" Background="#E3F42A">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Number" Binding="{Binding Number}">
+                    
 
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                    
+                    <DataGridTextColumn Header="Name" Binding="{Binding SelectedPlayer.Name}" />
 
 
 
-                    <DataGridTextColumn Header="Nationality" Binding="{Binding Nationality}"/>
-                    <DataGridTextColumn Header="Price" Binding="{Binding Price}"/>
+                    <DataGridTextColumn Header="Nationality" Binding="{Binding SelectedPlayer.Nationality}"/>
+                    <DataGridTextColumn Header="Price" Binding="{Binding SelectedPlayer.Price}"/>
                     <DataGridTemplateColumn Header="Button">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Name="Sell"/>
+                                <Button Name="Sell">
+                                    <TextBlock>Sell</TextBlock>
+                                </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
 
@@ -52,6 +57,7 @@
 
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Team" Width="100" Binding="{Binding ClubID}"/>
 
 
 
@@ -60,7 +66,9 @@
                     <DataGridTemplateColumn Header="Button">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Name="Sell"/>
+                                <Button Name="Buy">
+                                    <TextBlock>Buy</TextBlock>
+                                </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
 

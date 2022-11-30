@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:FootBallProject"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="PlayerProfile" Height="900" Width="600"
+        Title="PlayerProfile" Height="900" Width="1000"
+        DataContext="{StaticResource TeamPlayersVM}"
         
         >
     <Window.Resources>
@@ -33,48 +34,48 @@
         </Grid.RowDefinitions>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
             <!--Tao hinh dai dien hinh torn-->
-            <Border Name="ImageBorder" CornerRadius="90" Width="200" Height="200" >
+            <Border Name="ImageBorder" CornerRadius="90" Width="300" Height="200" >
                 <Border.Background>
                     <ImageBrush  ImageSource="Images/1.jpg"/>
                 </Border.Background>
             </Border>
-            <TextBlock Text="Cristiano Ronaldo" FontSize="45" FontStyle="Normal" Foreground="Black" FontWeight="DemiBold" FontFamily="{DynamicResource MaterialDesignFont}"/>
+            <TextBlock Text="{Binding SelectedPlayer.Name}" FontSize="45" FontStyle="Normal" Foreground="Black" FontWeight="DemiBold" FontFamily="{DynamicResource MaterialDesignFont}"/>
         </StackPanel>
-        <Border Margin="10,300,330,440" RenderTransformOrigin="0.531,0.58">
+        <Border Margin="250,300,570,440" Width="200">
             <StackPanel>
-                <TextBlock Text="Appearances" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="UltraBlack" Foreground="Purple"/>
-                <TextBlock Text="{Binding Appearances}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
+                <TextBlock Text="Age" VerticalAlignment="Top" HorizontalAlignment="CEnter" FontSize="23" FontWeight="UltraBlack" Foreground="Purple"/>
+                <TextBlock Text="{Binding SelectedPlayer.Age}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
             </StackPanel>
             
         </Border>
-        <Border Margin="250,300,198,440"  RenderTransformOrigin="0.531,0.58">
+        <Border Margin="290,300,198,440" Width="200" RenderTransformOrigin="0.531,0.58">
             <StackPanel>
                 <TextBlock Text="Goals" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
-                <TextBlock Text="{Binding Goals}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding SelectedPlayer.Goals}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
             </StackPanel>
         </Border>
-        <Border Margin="402,300,32,440" RenderTransformOrigin="0.531,0.58">
+        <Border Margin="500,300,32,440" Width="200" RenderTransformOrigin="0.531,0.58">
             <StackPanel>
-                <TextBlock Text="Assists" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
-                <TextBlock Text="{Binding Assists}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>    
+                <TextBlock Text="Cân nặng(kg)" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
+                <TextBlock Text="{Binding SelectedPlayer.Weight}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>    
             </StackPanel>
         </Border>
-        <Border Margin="10 460 330 280">
+        <Border Margin="250 460 550 280" Width="200">
             <StackPanel>
-                <TextBlock Text="Left Foot" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
-                <TextBlock Text="{Binding Left_foot}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
+                <TextBlock Text="Chiều cao (cm)" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
+                <TextBlock Text="{Binding SelectedPlayer.Height}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
             </StackPanel>
         </Border>
-        <Border Margin="250 460 198 280">
+        <Border Margin="290 460 198 280" Width="200">
             <StackPanel>
-                <TextBlock Text="Right Foot" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
-                <TextBlock Text="{Binding Right_foot}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
+                <TextBlock Text="Chân thuận" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
+                <TextBlock Text="{Binding Foot}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
             </StackPanel>
         </Border>
-        <Border Margin="402 460 32 280">
+        <Border Margin="500 460 32 280" Width="200">
             <StackPanel>
-                <TextBlock Text="Head" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
-                <TextBlock Text="{Binding Head}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
+                <TextBlock Text="Physique" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
+                <TextBlock Text="{Binding SelectedPlayer.Physique}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
             </StackPanel>
         </Border>
         <!--<Border Margin="100 300 100 100" Background="Aqua">
