@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="Calendar.xaml.cs">
       <DependentUpon>Calendar.xaml</DependentUpon>
+      </Compile>
     <Compile Include="AdminScreen.xaml.cs">
       <DependentUpon>AdminScreen.xaml</DependentUpon>
     </Compile>
