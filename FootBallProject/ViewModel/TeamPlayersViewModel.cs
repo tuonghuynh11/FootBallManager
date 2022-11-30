@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Controls;
 
 namespace FootBallProject.ViewModel
 {
@@ -118,17 +119,40 @@ namespace FootBallProject.ViewModel
                 (p) => { if (p as Window1 == null) return false; return true; },
                 (p) =>
                 {
+                    
                     Window1 wd1 = p as Window1;
+                    System.Windows.MessageBox.Show(wd1.txbclub.Text);
                     string connString = @"Server=DESKTOP-GUE0JS7\SQLEXPRESS;Database=FOOTBALLMANAGER2;Trusted_Connection=True;";
                     string query = "INSERT CAUTHU values(@teamid, @idquoctich, @hoten, @tuoi, 0, 0, NULL, @chanthuan, @Thetrang, @height, @weight, 0)";
+                    PullClub();
+                    string IDDoiBong = "";
+                    foreach(DataRow dr in dataTable.Rows)
+                    {
+                        if (dr["TEN"].ToString() == wd1.txbclub.Text)
+                        {
+                            IDDoiBong = dr["ID"].ToString();
+                            break;
+                        }
+                    }
+                    PullNationalities();
+                    string IdQG = "";
+                    foreach(DataRow dr in dataTable.Rows)
+                    {
+                        if (dr["TENQUOCGIA"].ToString() == wd1.txbNationality.Text)
+                        {
+                            IdQG = dr["ID"].ToString();
+                            break;
+                        }
+                    }
+
                     try
                     {
                         using (SqlConnection conn = new SqlConnection(connString))
                         {
                             using (SqlCommand cmd = new SqlCommand(query, conn))
                             {
-                                cmd.Parameters.AddWithValue("@teamid", wd1.txbclub.SelectedValue.ToString());
-                                cmd.Parameters.AddWithValue("@idquoctich", wd1.txbNationality.SelectedValue.ToString());
+                                cmd.Parameters.AddWithValue("@teamid", IDDoiBong); //THIS IS WRONG
+                                cmd.Parameters.AddWithValue("@idquoctich", IdQG);
                                 cmd.Parameters.AddWithValue("@hoten", wd1.txbName.Text);
                                 cmd.Parameters.AddWithValue("@tuoi", Convert.ToInt32(wd1.txbAge.Text));
                                 cmd.Parameters.AddWithValue("@chanthuan", wd1.txbFoot.SelectedValue.ToString());
@@ -158,11 +182,12 @@ namespace FootBallProject.ViewModel
 
                             }
                         }
-                    }catch(Exception e)
+                    }
+                    catch (Exception e)
                     {
                         System.Windows.Forms.MessageBox.Show(e.Message);
                     }
-                    
+
                 }
 
                 );
@@ -207,7 +232,7 @@ namespace FootBallProject.ViewModel
         void PullNationalities()
         {
             string connString = @"Server=DESKTOP-GUE0JS7\SQLEXPRESS;Database=FOOTBALLMANAGER2;Trusted_Connection=True;";
-            string query = "SELECT TENQUOCGIA FROM dbo.QUOCTICH";
+            string query = "SELECT * FROM dbo.QUOCTICH";
             SqlConnection conn = new SqlConnection(connString);
             SqlCommand cmd = new SqlCommand(query, conn);
             dataTable = new DataTable();
@@ -221,6 +246,7 @@ namespace FootBallProject.ViewModel
             conn.Close();
             da.Dispose();
         }
+        
     }
     public class Player : BaseViewModel
     {
