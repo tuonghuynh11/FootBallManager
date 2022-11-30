@@ -23,6 +23,12 @@ namespace FootBallProject
         public MainWindow()
         {
             InitializeComponent();
+
+            DS_BLD dS_BLD = new DS_BLD();
+            dS_BLD.Show();
+
+            Calendar calendar = new Calendar();
+            calendar.Show();
         }
     }
 }
