@@ -10,7 +10,8 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         Title="TransferWindow" Height="800" Width="1300"
-        DataContext="{StaticResource TeamPlayersVM}">
+        DataContext="{StaticResource TeamPlayersVM}"
+        Name="transferWindow1">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
@@ -25,22 +26,23 @@
         <TextBlock Grid.Row="1" Grid.Column="1" Margin="50,20,500,632" Text="Who do you want to sell?" FontSize="29" FontWeight="Bold" FontFamily="Microsoft YaHei"/>
         <Border Grid.Column="1" Grid.Row="1" Margin="0 100 10 400" >
 
-            <DataGrid AutoGenerateColumns="False" Name="dgrid1" Margin="0 0 0 0" Background="#E3F42A">
+            <DataGrid ItemsSource="{Binding PlayerList, NotifyOnSourceUpdated=True,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False" Name="dgrid1" Margin="100 0 100 0" Background="#E3F42A">
                 <DataGrid.Columns>
                     
 
                     
-                    <DataGridTextColumn Header="Name" Binding="{Binding SelectedPlayer.Name}" />
+                    <DataGridTextColumn Header="Name" Width="200"  Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Team" Width="200" Binding="{Binding ClubID}"/>
 
 
 
-                    <DataGridTextColumn Header="Nationality" Binding="{Binding SelectedPlayer.Nationality}"/>
-                    <DataGridTextColumn Header="Price" Binding="{Binding SelectedPlayer.Price}"/>
+                    <DataGridTextColumn Header="Nationality" Width="200" Binding="{Binding Nationality}"/>
+                    <DataGridTextColumn Header="Price"  Width="200" Binding="{Binding Price}"/>
                     <DataGridTemplateColumn Header="Button">
                         <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Name="Sell">
-                                    <TextBlock>Sell</TextBlock>
+                            <DataTemplate >
+                                <Button  Name="Sell" Command="{Binding  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.TransferCommand}" CommandParameter="{Binding ElementName=transferWindow1}">
+                                    Sell
                                 </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -51,22 +53,22 @@
             </DataGrid>
         </Border>
         <Border Grid.Column="1" Grid.Row="1" Margin="0 400 10 0">
-            <DataGrid AutoGenerateColumns="False" Name="dgrid2" Margin="0 0 0 0" Background="#E3F42A">
+            <DataGrid  ItemsSource="{Binding TransferPlayers, NotifyOnSourceUpdated=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}"  AutoGenerateColumns="False" Name="dgrid2" Margin="100 0 100 70" Background="#E3F42A">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Number" Binding="{Binding Number}">
+                    <DataGridTextColumn Header="Number" Binding="{Binding Number}" Visibility="Hidden">
 
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Team" Width="100" Binding="{Binding ClubID}"/>
+                    <DataGridTextColumn Header="Name" Width="200" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Team" Width="200" Binding="{Binding ClubID}"/>
 
 
 
-                    <DataGridTextColumn Header="Nationality" Binding="{Binding Nationality}"/>
-                    <DataGridTextColumn Header="Price" Binding="{Binding Price}"/>
+                    <DataGridTextColumn Header="Nationality" Width="200" Binding="{Binding Nationality}"/>
+                    <DataGridTextColumn Header="Price"  Width="200" Binding="{Binding Price}"/>
                     <DataGridTemplateColumn Header="Button">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Name="Buy">
+                                <Button Name="Buy" Command="{Binding  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.BuyCommand}" CommandParameter="{Binding ElementName=transferWindow1}" >
                                     <TextBlock>Buy</TextBlock>
                                 </Button>
                             </DataTemplate>

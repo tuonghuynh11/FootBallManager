@@ -10,25 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace FootBallProject
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for EditPlayerForm.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class EditPlayerForm : Window
     {
-        public MainWindow()
+        public EditPlayerForm()
         {
             InitializeComponent();
-            TeamsPlayers tp = new TeamsPlayers();
-            TransferWindow tw = new TransferWindow();
-            tw.Show();
-            tp.Show();
-           
-            
         }
     }
 }

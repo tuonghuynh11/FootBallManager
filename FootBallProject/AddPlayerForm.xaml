@@ -52,7 +52,7 @@
 
                     <TextBox FontSize="28" Height="40" Name="txbWeight"></TextBox>
 
-                    <ComboBox  FontSize="28" Height="40" Name="txbFoot" SelectedValuePath="Content">
+                    <ComboBox  FontSize="28" Height="40" Name="txbFoot" SelectedItem="{Binding Path=Left}" SelectedValuePath="Content">
                         <ComboBoxItem>
                             Left
                         </ComboBoxItem>

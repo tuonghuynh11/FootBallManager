@@ -60,6 +60,12 @@ namespace FootBallProject
             pp.Show();
             
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            EditPlayerForm edit = new EditPlayerForm();
+            edit.Show();
+        }
     }
     public class Player
     {
@@ -95,6 +101,7 @@ namespace FootBallProject
             
             
         }
+        public string Id { get { return id; } set { id = value; } }
 
         public int Number { get { return number; } set { number = value; } }
         public string Name { get { return name; } set { name = value; } }
