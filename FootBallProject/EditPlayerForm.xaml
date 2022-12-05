@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FootBallProject"
         mc:Ignorable="d"
-        Title="EditPlayerForm" Height="550" Width="900"
+        Title="EditPlayerForm" Height="650" Width="900"
         DataContext="{StaticResource TeamPlayersVM}"
         Name="editPlayerForm1">
     <Grid>
@@ -33,6 +33,7 @@
                     <TextBlock FontSize="30">Sức khỏe</TextBlock>
 
                     <TextBlock FontSize="30">Quốc tịch</TextBlock>
+                    <TextBlock FontSize="30">Hình ảnh</TextBlock>
 
 
                 </StackPanel>
@@ -59,6 +60,8 @@
 
                     <TextBox FontSize="28" Height="40" Name="txbPhysyque" Text="{Binding SelectedPlayer.Physique}"></TextBox>
                     <ComboBox FontSize="28" Height="40" Name="txbNationality" SelectedValuePath="Content"  ItemsSource="{Binding Nationalities}" IsSynchronizedWithCurrentItem="True" ></ComboBox>
+                    <TextBox FontSize="28" Height="40" Name="txbImage">Ghi file ảnh lên nhé bạn</TextBox>
+                    <Button Width="50" Background="LightGray" HorizontalAlignment="Right" Command="{Binding LoadImageCommand}" CommandParameter="{Binding ElementName=editPlayerForm1}">...</Button>
 
 
                 </StackPanel>

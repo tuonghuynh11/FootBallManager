@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using System.Windows.Controls;
 using System.Windows.Media.Media3D;
 using System.Collections;
+using System.IO;
 
 namespace FootBallProject.ViewModel
 {
@@ -27,6 +28,7 @@ namespace FootBallProject.ViewModel
         public ICommand OpenUpdateCommand { get; set; }
         public ICommand TransferCommand { get; set; }
         public ICommand BuyCommand { get; set; }
+        public ICommand LoadImageCommand { get; set; }
         private List<Player> playerList = new List<Player>();
         private List<Player> transferPlayers = new List<Player>();
         public List<Player> TransferPlayers
@@ -141,7 +143,7 @@ namespace FootBallProject.ViewModel
                     
                     Window1 wd1 = p as Window1;
                     System.Windows.MessageBox.Show(wd1.txbclub.Text);
-                    string query = "INSERT CAUTHU values(@teamid, @idquoctich, @hoten, @tuoi, 0, 0, NULL, @chanthuan, @Thetrang, @height, @weight, 0)";
+                    string query = "INSERT CAUTHU values(@teamid, @idquoctich, @hoten, @tuoi, 0, 0, @hinhanh, @chanthuan, @Thetrang, @height, @weight, 0)";
                     PullClub();
                     string IDDoiBong = "";
                     foreach(DataRow dr in dataTable.Rows)
@@ -173,6 +175,7 @@ namespace FootBallProject.ViewModel
                                 cmd.Parameters.AddWithValue("@idquoctich", IdQG);
                                 cmd.Parameters.AddWithValue("@hoten", wd1.txbName.Text);
                                 cmd.Parameters.AddWithValue("@tuoi", Convert.ToInt32(wd1.txbAge.Text));
+                                cmd.Parameters.AddWithValue("@hinhanh", wd1.txbImage.Text);
                                 cmd.Parameters.AddWithValue("@chanthuan", wd1.txbFoot.SelectedValue.ToString());
                                 cmd.Parameters.AddWithValue("@Thetrang", wd1.txbPhysyque.Text);
                                 cmd.Parameters.AddWithValue("@height", wd1.txbHeight.Text);
@@ -232,7 +235,7 @@ namespace FootBallProject.ViewModel
                 (p) =>
                 {
                     EditPlayerForm edit = p as EditPlayerForm;
-                    string query = "UPDATE CAUTHU SET HOTEN = @hoten, IDQUOCTICH=@idquoctich, TUOI =@tuoi, CHANTHUAN = @chanthuan, THETRANG = @Thetrang, CHIEUCAO =@height, CANNANG = @weight WHERE ID = @id";
+                    string query = "UPDATE CAUTHU SET HOTEN = @hoten, IDQUOCTICH=@idquoctich, TUOI =@tuoi, HINHANH = @hinhanh, CHANTHUAN = @chanthuan, THETRANG = @Thetrang, CHIEUCAO =@height, CANNANG = @weight WHERE ID = @id";
                     PullClub();
                     string IDDoiBong = "";
                     foreach (DataRow dr in dataTable.Rows)
@@ -267,6 +270,8 @@ namespace FootBallProject.ViewModel
                                 cmd.Parameters.AddWithValue("@Thetrang", edit.txbPhysyque.Text);
                                 cmd.Parameters.AddWithValue("@height", edit.txbHeight.Text);
                                 cmd.Parameters.AddWithValue("@weight", edit.txbWeight.Text);
+                                cmd.Parameters.AddWithValue("@hinhanh", edit.txbImage.Text);
+
                                 conn.Open();
                                 cmd.ExecuteNonQuery();
                                 conn.Close();
@@ -361,10 +366,60 @@ namespace FootBallProject.ViewModel
                    
                 }
                 );
+            LoadImageCommand = new RelayCommand<object>(
+                (p) =>
+                {
+                    if (p as Window1 == null && p as EditPlayerForm == null) return false; return true;
+                },
+                (p)=>
+                {
+                    
+                   
+                    OpenFileDialog openfile = new OpenFileDialog();
+                    openfile.Filter = "Image file |*.img; *.bmp; *.png; *.jpg; *.jpeg ";
+                    string path = @"...\FootballProject\Images";
+                    try
+                    {
+                        openfile.InitialDirectory = path;
+                    }
+                    catch(Exception e)
+                    {
+                        System.Windows.Forms.MessageBox.Show(e.Message);
+                    }
+                    openfile.FileOk += Openfile_FileOk;
+                    if(openfile.ShowDialog() == DialogResult.OK)
+                    {
+                         if(p as Window1 != null)
+                        {
+                            Window1 x = p as Window1;
+                            x.txbImage.Text = openfile.FileName;
+                        }
+                         else
+                        {
+                            EditPlayerForm x = p as EditPlayerForm;
+                            x.txbImage.Text = openfile.FileName;
+
+                        }
+                    }
+
+                }
+                );
 
 
 
         }
+
+        private void Openfile_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var x = sender as OpenFileDialog;
+            string filename = x.FileName;
+         
+            if (Path.GetDirectoryName(filename) != x.InitialDirectory)
+            {
+                System.Windows.MessageBox.Show(Path.GetDirectoryName(filename));
+            }
+        }
+
         void PullData()
         {
             string query = "SELECT * FROM dbo.CAUTHU ct JOIN QUOCTICH qt on ct.IDQUOCTICH = qt.ID";

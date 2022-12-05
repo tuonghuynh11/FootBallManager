@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 
-        Title="AddPlayerForm" Height="550" Width="900"
+        Title="AddPlayerForm" Height="750" Width="900"
         DataContext="{StaticResource TeamPlayersVM}"
         Name="AddPlayerForm">
     <Grid>
@@ -35,7 +35,7 @@
                     <TextBlock FontSize="30">Sức khỏe</TextBlock>
 
                     <TextBlock FontSize="30">Quốc tịch</TextBlock>
-
+                    <TextBlock FontSize="30">Hình ảnh</TextBlock>
 
                 </StackPanel>
             </Border>
@@ -61,6 +61,9 @@
 
                     <TextBox FontSize="28" Height="40" Name="txbPhysyque"></TextBox>
                     <ComboBox FontSize="28" Height="40" Name="txbNationality" SelectedValuePath="Content" ItemsSource="{Binding Nationalities}" ></ComboBox>
+                    <TextBox FontSize="28" Height="40" Name="txbImage">Ghi link file ảnh lên nhé bạn</TextBox>
+                    <Button Width="50" Background="LightGray" HorizontalAlignment="Right" Command="{Binding LoadImageCommand}" CommandParameter="{Binding ElementName=AddPlayerForm}">...</Button>
+                   
 
 
                 </StackPanel>
