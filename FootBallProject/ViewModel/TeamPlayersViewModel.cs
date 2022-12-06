@@ -12,6 +12,8 @@ using System.Windows.Controls;
 using System.Windows.Media.Media3D;
 using System.Collections;
 using System.IO;
+using System.Drawing;
+using System.Windows.Media.Imaging;
 
 namespace FootBallProject.ViewModel
 {
@@ -21,6 +23,7 @@ namespace FootBallProject.ViewModel
         public ICommand RowDoubleClickCommand { get; set; }
         public ICommand AddPlayerCommand2 { get; set; }
         private DataTable dataTable;
+        BitmapImage bitmap = new BitmapImage();
 
         public ICommand AddPlayerCommand { get; set; }
         public ICommand DeletePlayerCommand { get; set; }
@@ -164,6 +167,11 @@ namespace FootBallProject.ViewModel
                             break;
                         }
                     }
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(wd1.txbImage.Text, UriKind.RelativeOrAbsolute);
+
+                    bitmap.EndInit();
+                    byte[] bites = ConvertBitmaptoByteArray(bitmap);
 
                     try
                     {
@@ -175,7 +183,7 @@ namespace FootBallProject.ViewModel
                                 cmd.Parameters.AddWithValue("@idquoctich", IdQG);
                                 cmd.Parameters.AddWithValue("@hoten", wd1.txbName.Text);
                                 cmd.Parameters.AddWithValue("@tuoi", Convert.ToInt32(wd1.txbAge.Text));
-                                cmd.Parameters.AddWithValue("@hinhanh", wd1.txbImage.Text);
+                                cmd.Parameters.AddWithValue("@hinhanh", bites);
                                 cmd.Parameters.AddWithValue("@chanthuan", wd1.txbFoot.SelectedValue.ToString());
                                 cmd.Parameters.AddWithValue("@Thetrang", wd1.txbPhysyque.Text);
                                 cmd.Parameters.AddWithValue("@height", wd1.txbHeight.Text);
@@ -256,7 +264,11 @@ namespace FootBallProject.ViewModel
                             break;
                         }
                     }
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(edit.txbImage.Text, UriKind.RelativeOrAbsolute);
 
+                    bitmap.EndInit();
+                    byte[] bites = ConvertBitmaptoByteArray(bitmap);
                     try
                     {
                         using (SqlConnection conn = new SqlConnection(connString))
@@ -270,7 +282,7 @@ namespace FootBallProject.ViewModel
                                 cmd.Parameters.AddWithValue("@Thetrang", edit.txbPhysyque.Text);
                                 cmd.Parameters.AddWithValue("@height", edit.txbHeight.Text);
                                 cmd.Parameters.AddWithValue("@weight", edit.txbWeight.Text);
-                                cmd.Parameters.AddWithValue("@hinhanh", edit.txbImage.Text);
+                                cmd.Parameters.AddWithValue("@hinhanh", bites);
 
                                 conn.Open();
                                 cmd.ExecuteNonQuery();
@@ -400,6 +412,7 @@ namespace FootBallProject.ViewModel
                             x.txbImage.Text = openfile.FileName;
 
                         }
+                        
                     }
 
                 }
@@ -416,10 +429,39 @@ namespace FootBallProject.ViewModel
          
             if (Path.GetDirectoryName(filename) != x.InitialDirectory)
             {
-                System.Windows.MessageBox.Show(Path.GetDirectoryName(filename));
+                //System.Windows.MessageBox.Show(Path.GetDirectoryName(filename));
             }
         }
-
+        private byte[] ConvertBitmaptoByteArray(BitmapImage bitmapImage)
+        {
+            
+            byte[] data;
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+            using (MemoryStream ms = new MemoryStream())
+            {
+                encoder.Save(ms);
+                data = ms.ToArray();
+            }
+            return data;
+        }
+        private static BitmapImage LoadImage(byte[] imageData)
+        {
+            if (imageData == null || imageData.Length == 0) return null;
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(imageData))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
+        }
         void PullData()
         {
             string query = "SELECT * FROM dbo.CAUTHU ct JOIN QUOCTICH qt on ct.IDQUOCTICH = qt.ID";
@@ -469,7 +511,8 @@ namespace FootBallProject.ViewModel
                 player.Height = dr["CHIEUCAO"].ToString();
                 player.Weight = dr["CANNANG"].ToString();
                 player.Price = dr["GIATIEN"].ToString();
-                player.Image = dr["HINHANH"].ToString();
+                if (!Convert.IsDBNull(dr["HINHANH"]))
+                    player.Image = (byte[])dr["HINHANH"];
                 playerList.Add(player);
 
             }
@@ -491,7 +534,8 @@ namespace FootBallProject.ViewModel
                 player.Height = dr["CHIEUCAO"].ToString();
                 player.Weight = dr["CANNANG"].ToString();
                 player.Price = dr["GIATIEN"].ToString();
-                player.Image = dr["HINHANH"].ToString();
+                if (!Convert.IsDBNull(dr["HINHANH"]))
+                    player.Image = (byte[])dr["HINHANH"];
                 transferPlayers.Add(player);
 
             }
@@ -566,7 +610,7 @@ namespace FootBallProject.ViewModel
         public string Position { get { return position; } set { position = value; OnPropertyChanged(); } }
         string price;
         public string Price { get { return price; } set { price = value; OnPropertyChanged(); } }
-        private string image;
-        public string Image { get { return image; } set { image = value; OnPropertyChanged(); } }
+        private byte[] image;
+        public byte[] Image { get { return image; } set { image = value; OnPropertyChanged(); } }
     }
 }

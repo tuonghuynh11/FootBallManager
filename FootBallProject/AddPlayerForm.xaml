@@ -61,7 +61,7 @@
 
                     <TextBox FontSize="28" Height="40" Name="txbPhysyque"></TextBox>
                     <ComboBox FontSize="28" Height="40" Name="txbNationality" SelectedValuePath="Content" ItemsSource="{Binding Nationalities}" ></ComboBox>
-                    <TextBox FontSize="28" Height="40" Name="txbImage">Ghi link file ảnh lên nhé bạn</TextBox>
+                    <TextBox FontSize="28" Height="40" Name="txbImage">Bấm button bên dưới</TextBox>
                     <Button Width="50" Background="LightGray" HorizontalAlignment="Right" Command="{Binding LoadImageCommand}" CommandParameter="{Binding ElementName=AddPlayerForm}">...</Button>
                    
 

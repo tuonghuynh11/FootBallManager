@@ -23,10 +23,7 @@ namespace FootBallProject
         public MainWindow()
         {
             InitializeComponent();
-            TeamsPlayers tp = new TeamsPlayers();
-            TransferWindow tw = new TransferWindow();
-            tw.Show();
-            tp.Show();
+            
            
             
         }
