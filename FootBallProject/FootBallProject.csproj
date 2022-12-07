@@ -58,8 +58,10 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=4.6.1.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.4.6.1\lib\net462\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -86,12 +88,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BLD_Appear.xaml.cs">
+      <DependentUpon>BLD_Appear.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Calendar.xaml.cs">
+      <DependentUpon>Calendar.xaml</DependentUpon>
+      </Compile>
     <Compile Include="AdminScreen.xaml.cs">
       <DependentUpon>AdminScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="DS_BLD.xaml.cs">
       <DependentUpon>DS_BLD.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="EditPlayerForm.xaml.cs">
       <DependentUpon>EditPlayerForm.xaml</DependentUpon>
     </Compile>
@@ -104,6 +113,10 @@
     <Compile Include="TransferWindow.xaml.cs">
       <DependentUpon>TransferWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DS_BLD_ADD.xaml.cs">
+      <DependentUpon>DS_BLD_ADD.xaml</DependentUpon>
+      </Compile>
+
     <Compile Include="UserControlBar\ControlBarUC.xaml.cs">
       <DependentUpon>ControlBarUC.xaml</DependentUpon>
     </Compile>
@@ -114,10 +127,20 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+
     <Compile Include="AddPlayerForm.xaml.cs">
       <DependentUpon>AddPlayerForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\TeamPlayersViewModel.cs" />
+
+    <Page Include="BLD_Appear.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Calendar.xaml">
+       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdminScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -127,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditPlayerForm.xaml">
+    <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+   </Page>
+    <Page Include="DS_BLD_ADD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -202,6 +229,31 @@
     <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1234876499.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\avatar_temp.png" />
+
     <Resource Include="Icons\home.png" />
     <Resource Include="Icons\person.png" />
     <Resource Include="Icons\process.png" />
