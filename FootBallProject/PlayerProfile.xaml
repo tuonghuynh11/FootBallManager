@@ -8,123 +8,70 @@
         mc:Ignorable="d"
         Title="PlayerProfile" Height="700" Width="1000"
         DataContext="{StaticResource TeamPlayersVM}"
-        
+        Background="LightGreen"    
+                WindowStartupLocation="CenterOwner"
+
         >
     <Window.Resources>
         <Style TargetType="TextBlock">
                <Setter Property="Foreground" Value="Purple"/>
-            
+            <Setter Property="HorizontalAlignment" Value="Center"/>
 
 
         </Style>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <!--
-            <ColumnDefinition Width="60"/>
-            <ColumnDefinition Width="60"/>
-            <ColumnDefinition Width="60"/>
-            <ColumnDefinition Width="60"/>
-            <ColumnDefinition Width="60"/>
-            -->
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
 
-
         </Grid.RowDefinitions>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" >
             <!--Tao hinh dai dien hinh torn-->
-            <Border Name="ImageBorder" CornerRadius="45" Width="300" Height="200" >
+            <Border CornerRadius="90" Width="150" Height="150" >
                 <Border.Background>
                     <ImageBrush  ImageSource="{Binding SelectedPlayer.Image}"/>
                 </Border.Background>
             </Border>
-            <TextBlock Text="{Binding SelectedPlayer.Name}" FontSize="45" FontStyle="Normal" Foreground="Black" FontWeight="DemiBold" FontFamily="{DynamicResource MaterialDesignFont}"/>
+            <TextBlock Text="{Binding SelectedPlayer.Name}" FontSize="45" FontStyle="Normal" FontFamily="{materialDesign:MaterialDesignFont}"/>
         </StackPanel>
-        <Border Margin="250,300,570,240" Width="200">
-            <StackPanel>
-                <TextBlock Text="Age" VerticalAlignment="Top" HorizontalAlignment="CEnter" FontSize="23" FontWeight="UltraBlack" Foreground="Purple"/>
-                <TextBlock Text="{Binding SelectedPlayer.Age}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
-            </StackPanel>
-            
-        </Border>
-        <Border Margin="290,300,198,240" Width="200" RenderTransformOrigin="0.531,0.58">
-            <StackPanel>
-                <TextBlock Text="Goals" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
-                <TextBlock Text="{Binding SelectedPlayer.Goals}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
-            </StackPanel>
-        </Border>
-        <Border Margin="500,300,32,240" Width="200" RenderTransformOrigin="0.531,0.58">
-            <StackPanel>
-                <TextBlock Text="Cân nặng(kg)" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
-                <TextBlock Text="{Binding SelectedPlayer.Weight}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>    
-            </StackPanel>
-        </Border>
-        <Border Margin="250 460 550 80" Width="200">
-            <StackPanel>
-                <TextBlock Text="Chiều cao (cm)" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
-                <TextBlock Text="{Binding SelectedPlayer.Height}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
-            </StackPanel>
-        </Border>
-        <Border Margin="290 460 198 80" Width="200">
-            <StackPanel>
-                <TextBlock Text="Chân thuận" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
-                <TextBlock Text="{Binding SelectedPlayer.Foot}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
-            </StackPanel>
-        </Border>
-        <Border Margin="500 460 32 80" Width="200">
-            <StackPanel>
-                <TextBlock Text="Physique" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
-                <TextBlock Text="{Binding SelectedPlayer.Physique}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
-            </StackPanel>
-        </Border>
-        <!--<Border Margin="100 300 100 100" Background="Aqua">
-            <DataGrid Name="DG1" HeadersVisibility="All"  Background ="Transparent" ItemsSource="{Binding}" Style="{DynamicResource MaterialDesignDataGrid}">
-                <DataGrid.LayoutTransform>
-                    <TransformGroup>
-                        <RotateTransform Angle="90"/>
-                        <MatrixTransform Matrix="-1,0,0,1,0,0"/>
-                    </TransformGroup>
-                </DataGrid.LayoutTransform>
-                <DataGrid.ColumnHeaderStyle>
-                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
-                        <Setter Property="LayoutTransform">
-                            <Setter.Value>
-                                <TransformGroup>
-                                    <RotateTransform Angle="-90"/>
-                                    <ScaleTransform ScaleX="1" ScaleY="-1" />
-                                </TransformGroup>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </DataGrid.ColumnHeaderStyle>
-                <DataGrid.CellStyle>
-                    <Style  TargetType="DataGridCell">
-                        <Setter Property="LayoutTransform">
-                            <Setter.Value>
-                                <TransformGroup>
-                                    <RotateTransform Angle="-90"/>
-                                    <ScaleTransform ScaleX="1" ScaleY="-1" />
-                                </TransformGroup>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </DataGrid.CellStyle>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nationality" Binding="{Binding Nationality}"/>
-                    <DataGridTextColumn Header='Foot' Binding="{Binding Foot}"/>
-                    <DataGridTextColumn Header="Head" Binding="{Binding Head}"/>
-                    <DataGridTextColumn Header="Goals"/>
+        <Grid Grid.Column="0">
+            <Label Margin="50 40 300 500" FontSize="25">Tuổi:</Label>
 
-                </DataGrid.Columns>
-                <DataGrid.RowHeaderTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="New header"/>
-                    </DataTemplate>
-                </DataGrid.RowHeaderTemplate>
-            </DataGrid>
+            <Label Margin="50 100 300 440" FontSize="25">Câu lạc bộ:</Label>
+            <Label Margin="50 160 300 380" FontSize="25">Chiều cao:</Label>
+            <Label Margin="50 220 300 320" FontSize="25">Cân nặng:</Label>
+            <Label Margin="50 280 300 260" FontSize="25">Số áo:</Label>
+            <Label Margin="50 340 300 200" FontSize="25">Vị trí</Label>
+            <Label Margin="50 400 300 140" FontSize="25">Số giải đáu</Label>
+            <Label Margin="50 460 300 80" FontSize="25">Số bàn thắng</Label>
+            <TextBlock Margin="200 44 100 500" Text = "{Binding SelectedPlayer.Age}" FontSize="25"></TextBlock>
+            <TextBlock Margin="200,104,100,440" Text = "{Binding SelectedPlayer.Club}" FontSize="25"></TextBlock>
+            <TextBlock Margin="200,164,100,380"  FontSize="25" Text = "{Binding SelectedPlayer.Height}"></TextBlock>
+            <TextBlock Margin="200,224,100,320" FontSize="25" Text = "{Binding SelectedPlayer.Weight}"></TextBlock>
+            <TextBlock Margin="200,284,100,260" Text = "{Binding SelectedPlayer.KitNumber}" FontSize="25"></TextBlock>
+            <TextBlock Margin="200,344,100,200" Text = "{Binding SelectedPlayer.Position}" FontSize="25"></TextBlock>
+            <TextBlock Margin="200,404,100,140" FontSize="25" Text = "{Binding SelectedPlayer.LeaguesNum}"></TextBlock>
+            <TextBlock Margin="200,464,100,80" FontSize="25" Text = "{Binding SelectedPlayer.Goals}"></TextBlock>
 
-        </Border>-->
 
+
+            <!--<Label Margin="50 150 300 400" FontSize="25">Label</Label>-->
+        </Grid>
+        <Grid Grid.Column="1">
+
+
+            <Label Margin="50 280 300 260" FontSize="25">Quốc tịch:</Label>
+            <Label Margin="50 340 300 200" FontSize="25">Thể trạng</Label>
+            <Label Margin="50 400 300 140" FontSize="25">Giá</Label>
+            <Label Margin="50 460 300 80" FontSize="25">Chân thuận</Label>
+            <TextBlock Margin="200,284,100,260" FontSize="25" Text = "{Binding SelectedPlayer.Nationality }"></TextBlock>
+            <TextBlock Margin="200,344,100,200" Text = "{Binding SelectedPlayer.Physique}" FontSize="25"></TextBlock>
+            <TextBlock Margin="200,404,100,140" FontSize="25" Text = "{Binding SelectedPlayer.Price}"></TextBlock>
+            <TextBlock Margin="200,464,100,80" FontSize="25" Text="{Binding SelectedPlayer.Foot}"></TextBlock>
+        </Grid>
     </Grid>
+
 </Window>

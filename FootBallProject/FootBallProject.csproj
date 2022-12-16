@@ -61,7 +61,6 @@
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -93,14 +92,13 @@
     </Compile>
     <Compile Include="Calendar.xaml.cs">
       <DependentUpon>Calendar.xaml</DependentUpon>
-      </Compile>
+    </Compile>
     <Compile Include="AdminScreen.xaml.cs">
       <DependentUpon>AdminScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="DS_BLD.xaml.cs">
       <DependentUpon>DS_BLD.xaml</DependentUpon>
     </Compile>
-
     <Compile Include="EditPlayerForm.xaml.cs">
       <DependentUpon>EditPlayerForm.xaml</DependentUpon>
     </Compile>
@@ -115,8 +113,7 @@
     </Compile>
     <Compile Include="DS_BLD_ADD.xaml.cs">
       <DependentUpon>DS_BLD_ADD.xaml</DependentUpon>
-      </Compile>
-
+    </Compile>
     <Compile Include="UserControlBar\ControlBarUC.xaml.cs">
       <DependentUpon>ControlBarUC.xaml</DependentUpon>
     </Compile>
@@ -127,18 +124,19 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-
     <Compile Include="AddPlayerForm.xaml.cs">
       <DependentUpon>AddPlayerForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\TeamPlayersViewModel.cs" />
-
+    <Compile Include="Window2.xaml.cs">
+      <DependentUpon>Window2.xaml</DependentUpon>
+    </Compile>
     <Page Include="BLD_Appear.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Calendar.xaml">
-       <SubType>Designer</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminScreen.xaml">
@@ -150,9 +148,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditPlayerForm.xaml">
-    <SubType>Designer</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-   </Page>
+    </Page>
     <Page Include="DS_BLD_ADD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -194,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddPlayerForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -253,7 +255,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\avatar_temp.png" />
-
     <Resource Include="Icons\home.png" />
     <Resource Include="Icons\person.png" />
     <Resource Include="Icons\process.png" />

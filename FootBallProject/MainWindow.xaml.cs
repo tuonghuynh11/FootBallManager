@@ -23,6 +23,8 @@ namespace FootBallProject
         public MainWindow()
         {
             InitializeComponent();
+            Window2 wd2 = new Window2();
+            wd2.Show();
 
         }
     }

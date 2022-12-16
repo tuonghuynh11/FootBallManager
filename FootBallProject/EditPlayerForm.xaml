@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FootBallProject"
         mc:Ignorable="d"
-        Title="EditPlayerForm" Height="650" Width="900"
+        Title="EditPlayerForm" Height="780" Width="900"
         DataContext="{StaticResource TeamPlayersVM}"
-        Name="editPlayerForm1">
+        Name="editPlayerForm1"
+        WindowStartupLocation="CenterOwner"
+        >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -31,7 +33,8 @@
                     <TextBlock FontSize="30">Chân thuận</TextBlock>
 
                     <TextBlock FontSize="30">Sức khỏe</TextBlock>
-
+                    <TextBlock FontSize="30">Vị trí</TextBlock>
+                    <TextBlock FontSize="30">Số áo</TextBlock>
                     <TextBlock FontSize="30">Quốc tịch</TextBlock>
                     <TextBlock FontSize="30">Hình ảnh</TextBlock>
 
@@ -46,21 +49,23 @@
                 <StackPanel>
                     <TextBox Text="{Binding SelectedPlayer.Name}" FontSize="28" Height="40" Name="txbName"></TextBox>
                     <TextBox FontSize="28" Height="40" Name="txbAge" Text="{Binding SelectedPlayer.Age}"></TextBox>
-                    <ComboBox IsEnabled="False" IsReadOnly="True" FontSize="28" Height="40" Name="txbclub" IsEditable="False" SelectedValuePath="Content" ItemsSource="{Binding ClubsNames}"></ComboBox>
+                    <ComboBox SelectedValue="{Binding SelectedPlayer.Club}" IsEditable="False" IsReadOnly="True" FontSize="28" Height="40" Name="txbclub" ItemsSource="{Binding ClubsNames}"></ComboBox>
                     <TextBox Text ="{Binding SelectedPlayer.Height}" FontSize="28" Height="40" Name="txbHeight"></TextBox>
 
                     <TextBox Text ="{Binding SelectedPlayer.Weight}"  FontSize="28" Height="40" Name="txbWeight"></TextBox>
 
-                    <ComboBox  FontSize="28" Height="40" Name="txbFoot" SelectedValue="0" SelectedItem="Left"  IsSynchronizedWithCurrentItem="True" SelectedValuePath="Content">
+                    <ComboBox  FontSize="28" Height="40" Name="txbFoot"  SelectedValue="{Binding SelectedPlayer.Foot}"   >
                         <ComboBoxItem>
-                            Left
+                            Trái
                         </ComboBoxItem>
-                        <ComboBoxItem IsSelected="True">Right</ComboBoxItem>
+                        <ComboBoxItem IsSelected="True">Phải</ComboBoxItem>
                     </ComboBox>
 
                     <TextBox FontSize="28" Height="40" Name="txbPhysyque" Text="{Binding SelectedPlayer.Physique}"></TextBox>
-                    <ComboBox FontSize="28" Height="40" Name="txbNationality" SelectedValuePath="Content"  ItemsSource="{Binding Nationalities}" IsSynchronizedWithCurrentItem="True" ></ComboBox>
-                    <TextBox FontSize="28" Height="40" Name="txbImage">Ghi file ảnh lên nhé bạn</TextBox>
+                    <TextBox FontSize="28" Height="40" Name="txbPos" Text="{Binding SelectedPlayer.Position}"></TextBox>
+                    <TextBox FontSize="28" Height="40" Name="txbNumber" Text="{Binding SelectedPlayer.KitNumber}"></TextBox>
+                    <ComboBox SelectedValue="{Binding SelectedPlayer.Nationality}" FontSize="28" Height="40" Name="txbNationality"  ItemsSource="{Binding Nationalities}" IsSynchronizedWithCurrentItem="False"  ></ComboBox>
+                    <TextBox FontSize="28" Height="40" Name="txbImage" IsReadOnly="True"></TextBox>
                     <Button Width="50" Background="LightGray" HorizontalAlignment="Right" Command="{Binding LoadImageCommand}" CommandParameter="{Binding ElementName=editPlayerForm1}">...</Button>
 
 
@@ -71,6 +76,6 @@
 
         <Button Grid.Column="1" Margin="30 450 230 10" Command="{Binding UpdatePlayerCommand}" CommandParameter="{Binding ElementName=editPlayerForm1}" IsEnabled="True">Edit</Button>
 
-        <Button Grid.Column="1" Margin="250 450 40 10">Cancel</Button>
+        <Button Grid.Column="1" Margin="250 450 40 10" Click="Button_Click">Cancel</Button>
     </Grid>
 </Window>

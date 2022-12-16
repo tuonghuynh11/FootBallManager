@@ -9,7 +9,9 @@
 
         Title="AddPlayerForm" Height="750" Width="900"
         DataContext="{StaticResource TeamPlayersVM}"
-        Name="AddPlayerForm">
+        Name="AddPlayerForm"
+                WindowStartupLocation="CenterOwner"
+>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -26,14 +28,15 @@
                     <TextBlock FontSize="30">Tên</TextBlock>
                     <TextBlock FontSize="30">Tuổi</TextBlock>
                     <TextBlock FontSize="30">CLB</TextBlock>
-                    <TextBlock FontSize="30">Chiều cao</TextBlock>
+                    <TextBlock FontSize="30">Chiều cao(cm)</TextBlock>
 
-                    <TextBlock FontSize="30">Cân nặng</TextBlock>
+                    <TextBlock FontSize="30">Cân nặng(kg)</TextBlock>
 
                     <TextBlock FontSize="30">Chân thuận</TextBlock>
 
-                    <TextBlock FontSize="30">Sức khỏe</TextBlock>
-
+                    <TextBlock FontSize="30">Thể trạng</TextBlock>
+                    <TextBlock FontSize="30">Vị trí</TextBlock>
+                    <TextBlock FontSize="30">Số áo</TextBlock>
                     <TextBlock FontSize="30">Quốc tịch</TextBlock>
                     <TextBlock FontSize="30">Hình ảnh</TextBlock>
 
@@ -49,19 +52,22 @@
                     <TextBox FontSize="28" Height="40" Name="txbAge"></TextBox>
                     <ComboBox FontSize="28" Height="40" Name="txbclub" IsEditable="True" SelectedValuePath="Content" ItemsSource="{Binding ClubsNames}"></ComboBox>
                     <TextBox FontSize="28" Height="40" Name="txbHeight"></TextBox>
-
+                    
                     <TextBox FontSize="28" Height="40" Name="txbWeight"></TextBox>
 
-                    <ComboBox  FontSize="28" Height="40" Name="txbFoot" SelectedItem="{Binding Path=Left}" SelectedValuePath="Content">
+                    <ComboBox  FontSize="28" Height="40" Name="txbFoot" SelectedItem="{Binding Path=Trái}" SelectedValuePath="Content">
                         <ComboBoxItem>
-                            Left
+                            Trái
                         </ComboBoxItem>
-                        <ComboBoxItem>Right</ComboBoxItem>
+                        <ComboBoxItem>Phải</ComboBoxItem>
                     </ComboBox>
 
                     <TextBox FontSize="28" Height="40" Name="txbPhysyque"></TextBox>
-                    <ComboBox FontSize="28" Height="40" Name="txbNationality" SelectedValuePath="Content" ItemsSource="{Binding Nationalities}" ></ComboBox>
-                    <TextBox FontSize="28" Height="40" Name="txbImage">Bấm button bên dưới</TextBox>
+                    <TextBox FontSize="28" Height="40" Name="txbPos" ></TextBox>
+                    <TextBox FontSize="28" Height="40" Name="txbNumber" ></TextBox>
+
+                    <ComboBox FontSize="28" Height="40" Name="txbNationality"   ItemsSource="{Binding Nationalities}" ></ComboBox>
+                    <TextBox FontSize="28" Height="40" Name="txbImage" IsReadOnly="True"></TextBox>
                     <Button Width="50" Background="LightGray" HorizontalAlignment="Right" Command="{Binding LoadImageCommand}" CommandParameter="{Binding ElementName=AddPlayerForm}">...</Button>
                    
 
@@ -71,9 +77,9 @@
             
         </Grid>
         
-        <Button Grid.Column="1" Margin="30 450 230 10" Command="{Binding AddPlayerCommand2}" CommandParameter="{Binding ElementName=AddPlayerForm}" IsEnabled="True">Add</Button>
+        <Button Grid.Column="1" Margin="30,578,230,34" Command="{Binding AddPlayerCommand2}" CommandParameter="{Binding ElementName=AddPlayerForm}" IsEnabled="True">Add</Button>
         
-        <Button Grid.Column="1" Margin="250 450 40 10">Cancel</Button>
+        <Button Grid.Column="1" Margin="250 578 40 34" Click="Button_Click">Cancel</Button>
 
 
 

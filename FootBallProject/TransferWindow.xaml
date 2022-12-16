@@ -1,4 +1,4 @@
-﻿<Window x:Class="FootBallProject.TransferWindow"
+﻿<UserControl x:Class="FootBallProject.TransferWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,10 +6,9 @@
         xmlns:local="clr-namespace:FootBallProject"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:uc="clr-namespace:FootBallProject.UserControlBar"
-        mc:Ignorable="d"
-        ResizeMode="NoResize"
-        WindowStyle="None"
-        Title="TransferWindow" Height="800" Width="1300"
+             Height="800" Width="1300"
+        Background="WHite"
+             mc:Ignorable="d"
         DataContext="{StaticResource TeamPlayersVM}"
         Name="transferWindow1">
     <Grid>
@@ -23,10 +22,10 @@
 
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="1" Grid.Column="1" Margin="50,20,500,632" Text="Who do you want to sell?" FontSize="29" FontWeight="Bold" FontFamily="Microsoft YaHei"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Margin="50,20,500,632" Text="Danh sách cầu thủ" FontSize="29" FontWeight="Bold" FontFamily="Microsoft YaHei"/>
         <Border Grid.Column="1" Grid.Row="1" Margin="0 100 10 400" >
 
-            <DataGrid ItemsSource="{Binding PlayerList, NotifyOnSourceUpdated=True,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False" Name="dgrid1" Margin="100 0 100 0" Background="#E3F42A">
+            <DataGrid ItemsSource="{Binding ClubPlayerList, NotifyOnSourceUpdated=True,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False" Name="dgrid1" Margin="100,-24,100,24" Background="#E3F42A">
                 <DataGrid.Columns>
                     
 
@@ -41,7 +40,7 @@
                     <DataGridTemplateColumn Header="Button">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate >
-                                <Button  Name="Sell" Command="{Binding  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.TransferCommand}" CommandParameter="{Binding ElementName=transferWindow1}">
+                                <Button  Name="Sell" Command="{Binding  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.TransferCommand}" CommandParameter="{Binding ElementName=transferWindow1}">
                                     Sell
                                 </Button>
                             </DataTemplate>
@@ -68,7 +67,7 @@
                     <DataGridTemplateColumn Header="Button">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Name="Buy" Command="{Binding  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.BuyCommand}" CommandParameter="{Binding ElementName=transferWindow1}" >
+                                <Button Name="Buy" Command="{Binding  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.BuyCommand}" CommandParameter="{Binding ElementName=transferWindow1}" >
                                     <TextBlock>Buy</TextBlock>
                                 </Button>
                             </DataTemplate>
@@ -104,7 +103,7 @@
             </Button>
 
         </ToolBar>-->
-        <TextBlock Grid.Row="1" Grid.Column="1" Margin="50,339,500,313" Text="Who do you want to buy?" FontSize="29" FontWeight="Bold" FontFamily="Microsoft YaHei"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Margin="50,325,500,327" Text="Thị trường chuyển nhượng" FontSize="29" FontWeight="Bold" FontFamily="Microsoft YaHei"/>
 
     </Grid>
-</Window>
+</UserControl>
