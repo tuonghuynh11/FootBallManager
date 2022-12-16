@@ -14,6 +14,14 @@ namespace FootBallProject.Model
     
     public partial class HUANLUYENVIEN
     {
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HUANLUYENVIEN()
+        {
+            this.TAPLUYENs = new HashSet<TAPLUYEN>();
+        }
+    
+
         public int ID { get; set; }
         public string IDDOIBONG { get; set; }
         public Nullable<int> IDQUOCTICH { get; set; }
@@ -22,6 +30,24 @@ namespace FootBallProject.Model
         public string GMAIL { get; set; }
         public Nullable<System.DateTime> NGAYSINH { get; set; }
         public string CHUCVU { get; set; }
+
+        public byte[] HINHANH { get; set; }
+        public string QUOCGIA
+        {
+            get
+            {
+                var qg = DataProvider.ins.DB.QUOCTICHes.Find(IDQUOCTICH);
+
+                return qg == null ? " " : qg.TENQUOCGIA;
+            }
+            set { }
+        }
+        public virtual DOIBONG DOIBONG { get; set; }
+        public virtual QUOCTICH QUOCTICH { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TAPLUYEN> TAPLUYENs { get; set; }
+
         public string HINHANH { get; set; }
+
     }
 }

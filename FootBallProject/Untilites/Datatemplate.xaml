@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm ="clr-namespace:FootBallProject.ViewModel"
+                    xmlns:view="clr-namespace:FootBallProject.UserControlBar.ScreenNavigation"
+                    >
+    <DataTemplate DataType="{x:Type vm:AdminScreenViewModel}">
+        <view:Admin />
+    </DataTemplate> 
+    <DataTemplate DataType="{x:Type vm:TeamBuilderViewModel}">
+        <view:TeamBuilder />
+    </DataTemplate> 
+    <DataTemplate DataType="{x:Type vm:FootballTeamListViewModel}">
+        <view:FootballTeamList />
+    </DataTemplate>
+</ResourceDictionary>

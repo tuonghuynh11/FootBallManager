@@ -19,5 +19,8 @@ namespace FootBallProject.Model
         public Nullable<int> SODIEM { get; set; }
     
         public virtual DOIBONG DOIBONG { get; set; }
+
+        public virtual GIAIDAU GIAIDAU { get; set; }
+
     }
 }

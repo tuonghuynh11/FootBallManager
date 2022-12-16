@@ -14,11 +14,24 @@ namespace FootBallProject.Model
     
     public partial class TEAMOFLEAGUE
     {
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TEAMOFLEAGUE()
+        {
+            this.THONGTINTRANDAUs = new HashSet<THONGTINTRANDAU>();
+        }
+    
+
         public int ID { get; set; }
         public Nullable<int> IDGIAIDAU { get; set; }
         public string IDDOIBONG { get; set; }
     
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<THONGTINTRANDAU> THONGTINTRANDAUs { get; set; }
+
         public virtual DOIBONG DOIBONG { get; set; }
         public virtual LEAGUE LEAGUE { get; set; }
+
     }
 }

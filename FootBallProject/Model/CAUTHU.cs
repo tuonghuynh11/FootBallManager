@@ -11,13 +11,21 @@ namespace FootBallProject.Model
 {
     using System;
     using System.Collections.Generic;
-    
+
+    using System.Windows.Media;
+
+
     public partial class CAUTHU
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CAUTHU()
         {
+
+            this.DOIHINHCHINHs = new HashSet<DOIHINHCHINH>();
+            this.THAMGIAs = new HashSet<THAMGIA>();
+
             this.ITEMs = new HashSet<ITEM>();
+
         }
     
         public int ID { get; set; }
@@ -27,7 +35,11 @@ namespace FootBallProject.Model
         public Nullable<int> TUOI { get; set; }
         public Nullable<int> SOGIAI { get; set; }
         public Nullable<int> SOBANTHANG { get; set; }
+
+        public byte[] HINHANH { get; set; }
+
         public string HINHANH { get; set; }
+
         public string CHANTHUAN { get; set; }
         public string THETRANG { get; set; }
         public string VITRI { get; set; }
@@ -35,10 +47,74 @@ namespace FootBallProject.Model
         public string CHIEUCAO { get; set; }
         public string CANNANG { get; set; }
         public Nullable<long> GIATRICAUTHU { get; set; }
+
+
+        public string QUOCGIA
+        {
+            get
+            {
+                var qg = DataProvider.ins.DB.QUOCTICHes.Find(IDQUOCTICH);
+
+                return qg == null ? " " : qg.TENQUOCGIA;
+            }
+            set { }
+        }
+
+        public string VAITRO
+        {
+            get
+            {
+                var qg = DataProvider.ins.DB.DOIHINHCHINHs.Find(IDDOIBONG, ID);
+
+                return qg == null ? " " : qg.VAITRO;
+            }
+            set { }
+        }
+
+        public int STT { get; set; }
+        public string VITRIAO { get; set; }
+
+        public string _VAITROAO{ get; set; }
+    public string VAITROAO
+    {
+        get
+        {
+
+            return _VAITROAO;
+
+        }
+        set
+        {
+
+            _VAITROAO = value;
+        }
+    }
+    public System.Windows.Media.Brush brush
+    {
+        get
+        {
+            Random r = new Random();
+
+            SolidColorBrush brush = new SolidColorBrush(System.Windows.Media.Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233)));
+            return brush;
+        }
+
+        set
+        {
+        }
+    }
+    public virtual DOIBONG DOIBONG { get; set; }
+        public virtual QUOCTICH QUOCTICH { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DOIHINHCHINH> DOIHINHCHINHs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<THAMGIA> THAMGIAs { get; set; }
+
     
         public virtual DOIBONG DOIBONG { get; set; }
         public virtual QUOCTICH QUOCTICH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ITEM> ITEMs { get; set; }
+
     }
 }

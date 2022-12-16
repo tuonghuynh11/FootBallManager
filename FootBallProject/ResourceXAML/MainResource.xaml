@@ -3,5 +3,17 @@
                     xmlns:viewmodel="clr-namespace:FootBallProject.ViewModel"
                     >
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
+
+    <viewmodel:FootballTeamListViewModel x:Key="FootballTeamListVM"></viewmodel:FootballTeamListViewModel>
+    <viewmodel:DSCLBViewModel x:Key="DanhSachCLBVM"></viewmodel:DSCLBViewModel>
+    <viewmodel:ClubInfomationViewModel x:Key="ClubInfomationVM"></viewmodel:ClubInfomationViewModel>
+    <viewmodel:TeamBuilderViewModel x:Key="TeamBuilderVM"></viewmodel:TeamBuilderViewModel>
+    <viewmodel:AdminScreenViewModel x:Key="AdminScreenVM"></viewmodel:AdminScreenViewModel>
+    <viewmodel:DS_GiaiDauViewModel x:Key="GiaiDauVM"></viewmodel:DS_GiaiDauViewModel>
+    <viewmodel:TournamentInformationViewModel x:Key="TournamentInformationVM"></viewmodel:TournamentInformationViewModel>
+    <viewmodel:MatchInformationViewModel x:Key="MatchInformationVM"></viewmodel:MatchInformationViewModel>
+
+
     <viewmodel:TeamPlayersViewModel x:Key="TeamPlayersVM"></viewmodel:TeamPlayersViewModel>
+
 </ResourceDictionary>

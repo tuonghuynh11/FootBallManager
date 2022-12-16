@@ -25,6 +25,15 @@ namespace FootBallProject.Model
         public Nullable<int> THEDO { get; set; }
         public Nullable<int> THEVANG { get; set; }
         public Nullable<int> KETQUA { get; set; }
+
+        public Nullable<int> IDDOIBONG { get; set; }
+        public Nullable<int> IDTRANDAU { get; set; }
+    
+        public virtual FOOTBALLMATCH FOOTBALLMATCH { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ITEM> ITEMs { get; set; }
+        public virtual TEAMOFLEAGUE TEAMOFLEAGUE { get; set; }
+
         public string IDDOIBONG { get; set; }
         public Nullable<int> IDTRANDAU { get; set; }
     
@@ -32,5 +41,6 @@ namespace FootBallProject.Model
         public virtual FOOTBALLMATCH FOOTBALLMATCH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ITEM> ITEMs { get; set; }
+
     }
 }
