@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FootBallProject"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontWeight="Regular"
      TextElement.FontSize="13"

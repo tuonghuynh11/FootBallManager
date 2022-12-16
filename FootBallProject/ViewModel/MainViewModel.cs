@@ -18,6 +18,7 @@ namespace FootBallProject.ViewModel
             LoadWindowCommand = new RelayCommand<UserControl>((p) => { return true; },
                 (p) => {
                    IsLoad = true;
+
                     AdminScreen adminscreen = new AdminScreen();
 
                     adminscreen.Show();
@@ -31,8 +32,14 @@ namespace FootBallProject.ViewModel
                     //ThongTinCLB thongTinCLB = new ThongTinCLB();
                     //thongTinCLB.Show();
 
+
+                    AdminScreen adminScreen = new AdminScreen();
+                    adminScreen.Show();
+                    
+
                 });
         }
+        
         
      
     }

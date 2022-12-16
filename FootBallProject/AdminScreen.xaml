@@ -135,7 +135,6 @@
                         </ListView>
                     </StackPanel>
                 </Grid>-->
-
                 <!--Màn hình chính-->
                 <Grid Grid.Column="1">
                     <ContentControl x:Name="Pages" Content="{Binding CurrentView}"></ContentControl>
@@ -143,6 +142,7 @@
                 </Grid>
                 <!--Đưa menubar lên trên màn hình-->
                 <Grid Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="716" VerticalAlignment="Top">
+
                     <uc:MenuBarUC HorizontalAlignment="Center"/>
 
                 </Grid>

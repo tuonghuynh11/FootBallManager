@@ -24,10 +24,18 @@ namespace FootBallProject.Model
         public string TENTRANDAU { get; set; }
         public Nullable<int> VONGBANG { get; set; }
         public Nullable<int> IDVONG { get; set; }
+
         public string DIADIEM { get; set; }
         public Nullable<System.DateTime> THOIGIAN { get; set; }
     
         public virtual VONGDAU VONGDAU { get; set; }
+
+        public Nullable<int> DIADIEM { get; set; }
+        public Nullable<System.DateTime> THOIGIAN { get; set; }
+    
+        public virtual DIADIEM DIADIEM1 { get; set; }
+        public virtual ROUND ROUND { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<THONGTINTRANDAU> THONGTINTRANDAUs { get; set; }
     }

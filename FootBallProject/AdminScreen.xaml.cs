@@ -21,8 +21,7 @@ namespace FootBallProject
     /// </summary>
     public partial class AdminScreen : Window
     {
-       
-       
+
         public AdminScreen()
         {
             InitializeComponent();
@@ -34,3 +33,4 @@ namespace FootBallProject
         
     }
 }
+

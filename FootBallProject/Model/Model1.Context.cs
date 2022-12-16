@@ -13,10 +13,17 @@ namespace FootBallProject.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
+
     public partial class FOOTBALLMANAGERDEMOEntities : DbContext
     {
         public FOOTBALLMANAGERDEMOEntities()
             : base("name=FOOTBALLMANAGERDEMOEntities")
+
+    public partial class officialleagueEntities : DbContext
+    {
+        public officialleagueEntities()
+            : base("name=officialleagueEntities")
+
         {
         }
     
@@ -31,6 +38,7 @@ namespace FootBallProject.Model
         public virtual DbSet<DOIBONG> DOIBONGs { get; set; }
         public virtual DbSet<DOIHINHCHINH> DOIHINHCHINHs { get; set; }
         public virtual DbSet<FOOTBALLMATCH> FOOTBALLMATCHes { get; set; }
+
         public virtual DbSet<GIAIDAU> GIAIDAUs { get; set; }
         public virtual DbSet<HUANLUYENVIEN> HUANLUYENVIENs { get; set; }
         public virtual DbSet<ITEM> ITEMs { get; set; }
@@ -44,5 +52,19 @@ namespace FootBallProject.Model
         public virtual DbSet<THONGTINTRANDAU> THONGTINTRANDAUs { get; set; }
         public virtual DbSet<TRANDAU> TRANDAUs { get; set; }
         public virtual DbSet<VONGDAU> VONGDAUs { get; set; }
+
+        public virtual DbSet<HUANLUYENVIEN> HUANLUYENVIENs { get; set; }
+        public virtual DbSet<ITEM> ITEMs { get; set; }
+        public virtual DbSet<ITEMTYPE> ITEMTYPEs { get; set; }
+        public virtual DbSet<LEAGUE> LEAGUEs { get; set; }
+        public virtual DbSet<OTP> OTPs { get; set; }
+        public virtual DbSet<QUOCTICH> QUOCTICHes { get; set; }
+        public virtual DbSet<ROUND> ROUNDs { get; set; }
+        public virtual DbSet<TAPLUYEN> TAPLUYENs { get; set; }
+        public virtual DbSet<TEAMOFLEAGUE> TEAMOFLEAGUEs { get; set; }
+        public virtual DbSet<THONGTINTRANDAU> THONGTINTRANDAUs { get; set; }
+        public virtual DbSet<USERROLE> USERROLEs { get; set; }
+        public virtual DbSet<USER> USERS { get; set; }
+
     }
 }

@@ -18,8 +18,10 @@ namespace FootBallProject.Model
         public int IDCAUTHU { get; set; }
         public string VITRI { get; set; }
         public string VAITRO { get; set; }
+
     
         public virtual CAUTHU CAUTHU { get; set; }
         public virtual DOIBONG DOIBONG { get; set; }
+
     }
 }

@@ -23,6 +23,8 @@ namespace FootBallProject
         public MainWindow()
         {
             InitializeComponent();
+        
+
         }
     }
 }
