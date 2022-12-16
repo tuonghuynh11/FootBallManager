@@ -1,0 +1,130 @@
+﻿<Window x:Class="FootBallProject.PlayerProfile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FootBallProject"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="PlayerProfile" Height="700" Width="1000"
+        DataContext="{StaticResource TeamPlayersVM}"
+        
+        >
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+               <Setter Property="Foreground" Value="Purple"/>
+            
+
+
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <!--
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="60"/>
+            -->
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+
+
+        </Grid.RowDefinitions>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+            <!--Tao hinh dai dien hinh torn-->
+            <Border Name="ImageBorder" CornerRadius="45" Width="300" Height="200" >
+                <Border.Background>
+                    <ImageBrush  ImageSource="{Binding SelectedPlayer.Image}"/>
+                </Border.Background>
+            </Border>
+            <TextBlock Text="{Binding SelectedPlayer.Name}" FontSize="45" FontStyle="Normal" Foreground="Black" FontWeight="DemiBold" FontFamily="{DynamicResource MaterialDesignFont}"/>
+        </StackPanel>
+        <Border Margin="250,300,570,240" Width="200">
+            <StackPanel>
+                <TextBlock Text="Age" VerticalAlignment="Top" HorizontalAlignment="CEnter" FontSize="23" FontWeight="UltraBlack" Foreground="Purple"/>
+                <TextBlock Text="{Binding SelectedPlayer.Age}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
+            </StackPanel>
+            
+        </Border>
+        <Border Margin="290,300,198,240" Width="200" RenderTransformOrigin="0.531,0.58">
+            <StackPanel>
+                <TextBlock Text="Goals" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
+                <TextBlock Text="{Binding SelectedPlayer.Goals}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+        <Border Margin="500,300,32,240" Width="200" RenderTransformOrigin="0.531,0.58">
+            <StackPanel>
+                <TextBlock Text="Cân nặng(kg)" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
+                <TextBlock Text="{Binding SelectedPlayer.Weight}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>    
+            </StackPanel>
+        </Border>
+        <Border Margin="250 460 550 80" Width="200">
+            <StackPanel>
+                <TextBlock Text="Chiều cao (cm)" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
+                <TextBlock Text="{Binding SelectedPlayer.Height}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+        <Border Margin="290 460 198 80" Width="200">
+            <StackPanel>
+                <TextBlock Text="Chân thuận" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
+                <TextBlock Text="{Binding SelectedPlayer.Foot}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+        <Border Margin="500 460 32 80" Width="200">
+            <StackPanel>
+                <TextBlock Text="Physique" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="ExtraBlack" Foreground="Purple"/>
+                <TextBlock Text="{Binding SelectedPlayer.Physique}" Margin="0 30 10 0" FontSize="23" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+        <!--<Border Margin="100 300 100 100" Background="Aqua">
+            <DataGrid Name="DG1" HeadersVisibility="All"  Background ="Transparent" ItemsSource="{Binding}" Style="{DynamicResource MaterialDesignDataGrid}">
+                <DataGrid.LayoutTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="90"/>
+                        <MatrixTransform Matrix="-1,0,0,1,0,0"/>
+                    </TransformGroup>
+                </DataGrid.LayoutTransform>
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                        <Setter Property="LayoutTransform">
+                            <Setter.Value>
+                                <TransformGroup>
+                                    <RotateTransform Angle="-90"/>
+                                    <ScaleTransform ScaleX="1" ScaleY="-1" />
+                                </TransformGroup>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.CellStyle>
+                    <Style  TargetType="DataGridCell">
+                        <Setter Property="LayoutTransform">
+                            <Setter.Value>
+                                <TransformGroup>
+                                    <RotateTransform Angle="-90"/>
+                                    <ScaleTransform ScaleX="1" ScaleY="-1" />
+                                </TransformGroup>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nationality" Binding="{Binding Nationality}"/>
+                    <DataGridTextColumn Header='Foot' Binding="{Binding Foot}"/>
+                    <DataGridTextColumn Header="Head" Binding="{Binding Head}"/>
+                    <DataGridTextColumn Header="Goals"/>
+
+                </DataGrid.Columns>
+                <DataGrid.RowHeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="New header"/>
+                    </DataTemplate>
+                </DataGrid.RowHeaderTemplate>
+            </DataGrid>
+
+        </Border>-->
+
+    </Grid>
+</Window>

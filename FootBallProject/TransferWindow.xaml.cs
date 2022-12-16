@@ -10,20 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace FootBallProject
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TransferWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TransferWindow : Window
     {
-        public MainWindow()
+        public TransferWindow()
         {
             InitializeComponent();
-
         }
     }
 }
