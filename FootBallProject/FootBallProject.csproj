@@ -75,6 +75,7 @@
       <HintPath>..\packages\System.Configuration.ConfigurationManager.7.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
+
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
@@ -90,6 +91,7 @@
     </Reference>
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Transactions" />
+
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -116,6 +118,11 @@
     <Compile Include="BLD_Appear.xaml.cs">
       <DependentUpon>BLD_Appear.xaml</DependentUpon>
     </Compile>
+
+    <Compile Include="Calendar.xaml.cs">
+      <DependentUpon>Calendar.xaml</DependentUpon>
+    </Compile>
+
     <Compile Include="AdminScreen.xaml.cs">
       <DependentUpon>AdminScreen.xaml</DependentUpon>
     </Compile>
@@ -134,9 +141,22 @@
     <Compile Include="TransferWindow.xaml.cs">
       <DependentUpon>TransferWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditPlayerForm.xaml.cs">
+      <DependentUpon>EditPlayerForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PlayerProfile.xaml.cs">
+      <DependentUpon>PlayerProfile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TeamsPlayers.xaml.cs">
+      <DependentUpon>TeamsPlayers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TransferWindow.xaml.cs">
+      <DependentUpon>TransferWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DS_BLD_ADD.xaml.cs">
       <DependentUpon>DS_BLD_ADD.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="Error.xaml.cs">
       <DependentUpon>Error.xaml</DependentUpon>
     </Compile>
@@ -152,12 +172,14 @@
     <Compile Include="UserControlBar\MenuBarUC.xaml.cs">
       <DependentUpon>MenuBarUC.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="UserControlBar\UserControl_Calendar.xaml.cs">
       <DependentUpon>UserControl_Calendar.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlBar\UserControl_DS_BLD.xaml.cs">
       <DependentUpon>UserControl_DS_BLD.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="ViewModel\AddPlayerViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
@@ -166,15 +188,30 @@
       <DependentUpon>AddPlayerForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\TeamPlayersViewModel.cs" />
+
+    <Compile Include="Window2.xaml.cs">
+      <DependentUpon>Window2.xaml</DependentUpon>
+    </Compile>
+
     <Page Include="BLD_Appear.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AdminScreen.xaml">
+
+    <Page Include="Calendar.xaml"> 
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+
+    <Page Include="AdminScreen.xaml"> 
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ChangePass.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditPlayerForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -210,11 +247,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+
     <Page Include="Success.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TeamsPlayers.xaml">
       <SubType>Designer</SubType>
@@ -232,11 +272,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+
+    <Page Include="AddPlayerForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+
     <Page Include="UserControlBar\UserControl_Calendar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlBar\UserControl_DS_BLD.xaml">
+     <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddPlayerForm.xaml">
       <SubType>Designer</SubType>

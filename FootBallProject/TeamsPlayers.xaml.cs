@@ -64,6 +64,7 @@ namespace FootBallProject
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             EditPlayerForm edit = new EditPlayerForm();
+
             edit.Show();
         }
     }
