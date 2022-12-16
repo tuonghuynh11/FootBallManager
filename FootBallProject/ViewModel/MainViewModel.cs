@@ -20,7 +20,7 @@ namespace FootBallProject.ViewModel
                    IsLoad = true;
                     AdminScreen adminScreen = new AdminScreen();
                     adminScreen.Show();
-
+                    
                 });
         }
         

@@ -35,11 +35,11 @@
                 Background="#878CF8"
                 Style="{StaticResource MaterialDesignRaisedLightButton}"
                 Width="100"
-                ToolTip="Resource name: MaterialDesignRaisedLightButton" 
-                Margin="960,27,160,0" RenderTransformOrigin="-0.35,0.314" Click="AddNewPerson_Click">
+                ToolTip="Thêm" 
+                Margin="960,33,160,0" RenderTransformOrigin="0.5,0.501" Click="AddNewPerson_Click">
                 _Thêm
             </Button>
-            <Button
+            <!--<Button
                 VerticalAlignment="Top"
                 Grid.Column="1"
                 Background="#17DB4E"
@@ -49,7 +49,7 @@
                 RenderTransformOrigin="-0.35,0.314" 
                 Click="Button_Click_ExportExcel" Margin="755,27,315,0" >
                 Xuất Excel
-            </Button>
+            </Button>-->
             <DataGrid x:Name="DTG" IsReadOnly="True"
                       Margin="70,104,160,165" Grid.Column="1"
                       Background="White" RenderTransformOrigin="0.494,0.52"
@@ -134,8 +134,8 @@
                 Background="Wheat"
                 Style="{StaticResource MaterialDesignRaisedLightButton}"
                 Width="100"
-                ToolTip="Resource name: MaterialDesignRaisedLightButton" 
-                Margin="610,28,510,0" RenderTransformOrigin="-0.35,0.314" Content="_LOAD" Click="_Load_Click"/>
+                ToolTip="Load" 
+                Margin="760,31,360,0" RenderTransformOrigin="0.5,0.407" Content="_LOAD" Click="_Load_Click"/>
         </Grid>
     </Grid>
 </Window>
