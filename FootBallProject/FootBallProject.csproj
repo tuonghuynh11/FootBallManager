@@ -116,19 +116,12 @@
     <Compile Include="BLD_Appear.xaml.cs">
       <DependentUpon>BLD_Appear.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Calendar.xaml.cs">
-      <DependentUpon>Calendar.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AdminScreen.xaml.cs">
       <DependentUpon>AdminScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="ChangePass.xaml.cs">
       <DependentUpon>ChangePass.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DS_BLD.xaml.cs">
-      <DependentUpon>DS_BLD.xaml</DependentUpon>
-    </Compile>
-
     <Compile Include="EditPlayerForm.xaml.cs">
       <DependentUpon>EditPlayerForm.xaml</DependentUpon>
     </Compile>
@@ -153,7 +146,6 @@
     <Compile Include="UserAccount.xaml.cs">
       <DependentUpon>UserAccount.xaml</DependentUpon>
     </Compile>
-
     <Compile Include="UserControlBar\ControlBarUC.xaml.cs">
       <DependentUpon>ControlBarUC.xaml</DependentUpon>
     </Compile>
@@ -170,17 +162,11 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-
     <Compile Include="AddPlayerForm.xaml.cs">
       <DependentUpon>AddPlayerForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\TeamPlayersViewModel.cs" />
-
     <Page Include="BLD_Appear.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Calendar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -192,14 +178,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DS_BLD.xaml">
+    <Page Include="EditPlayerForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditPlayerForm.xaml">
-    <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-   </Page>
     <Page Include="DS_BLD_ADD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
