@@ -12,9 +12,7 @@
         Background="White"
  
         mc:Ignorable="d"
-        ResizeMode="NoResize"
-        WindowStyle="None"
-        Title="TransferWindow" Height="800" Width="1300"
+        Height="800" Width="1300"
 
         DataContext="{StaticResource TeamPlayersVM}"
         Name="transferWindow1">
