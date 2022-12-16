@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="FootBallProject.Component.RightBar.MatchListRightBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FootBallProject.Component.RightBar"
+             xmlns:viewmodel="clr-namespace:FootBallProject.ViewModel"
+             xmlns:rightbar="clr-namespace:FootBallProject.Component.RightBar"
+             xmlns:view="clr-namespace:FootBallProject.View"
+             DataContext="{StaticResource ListMatchRightSideBarVM}"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="300">
+    <Grid>
+        <ContentControl Content="{Binding RightSideBarItemViewModel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type viewmodel:EmptyRightSideBarViewModel}">
+                    <rightbar:EmptyMatchInfo></rightbar:EmptyMatchInfo>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodel:ListMatchRightSideBarInfo}">
+                    <rightbar:MatchInfoUC></rightbar:MatchInfoUC>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodel:CreateNewMatchViewModel}">
+                    <rightbar:NewMatch></rightbar:NewMatch>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodel:ListMatchRightSideBarInfo2}">
+                    <rightbar:MatchInfomation></rightbar:MatchInfomation>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodel:MatchResultViewModel}">
+                    <view:MatchResult2></view:MatchResult2>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+    </Grid>
+</UserControl>
