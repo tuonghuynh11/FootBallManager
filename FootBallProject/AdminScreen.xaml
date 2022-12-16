@@ -617,7 +617,12 @@
                 </Grid>-->
                 <!--Đưa menubar lên trên màn hình-->
                 <Grid Grid.Column="1">
-                    
+                    <!--<uc:UserControl_DS_BLD>
+                        
+                    </uc:UserControl_DS_BLD>-->
+                    <uc:UserControl_Calendar>
+                        
+                    </uc:UserControl_Calendar>
                 </Grid>
                 <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,1128,0" HorizontalAlignment="Left">
                     <uc:MenuBarUC HorizontalAlignment="Center"/>
