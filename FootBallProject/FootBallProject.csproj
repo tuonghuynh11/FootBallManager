@@ -137,18 +137,6 @@
     <Compile Include="TransferWindow.xaml.cs">
       <DependentUpon>TransferWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditPlayerForm.xaml.cs">
-      <DependentUpon>EditPlayerForm.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PlayerProfile.xaml.cs">
-      <DependentUpon>PlayerProfile.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TeamsPlayers.xaml.cs">
-      <DependentUpon>TeamsPlayers.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TransferWindow.xaml.cs">
-      <DependentUpon>TransferWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="DS_BLD_ADD.xaml.cs">
       <DependentUpon>DS_BLD_ADD.xaml</DependentUpon>
     </Compile>
