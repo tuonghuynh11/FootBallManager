@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace FootBallProject
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for Success.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class Success : Window
     {
-        public Window1()
+        public Success()
         {
             InitializeComponent();
         }
@@ -28,6 +28,5 @@ namespace FootBallProject
         {
             this.Close();
         }
-
     }
 }

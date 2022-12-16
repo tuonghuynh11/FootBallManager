@@ -9,9 +9,11 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         Name ="TeamPlayers"
         mc:Ignorable="d"
-        Height="800" Width="1300"
-             Background="#FFFFFF"
-        
+        Background="#FFFFFF"
+        Title="TeamsPlayers" Height="800" Width="1300"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+
         DataContext="{StaticResource TeamPlayersVM}">
     <i:Interaction.Triggers>
         
@@ -94,17 +96,21 @@
         <Button Grid.Row="3" Grid.Column="1" Margin="600 600 50 30" Width="100" Name="Delete" Background="Gray" Foreground="White" Command="{Binding DeletePlayerCommand}" CommandParameter="{Binding ElementName=TeamPlayers}">
             Delete
             </Button>
+
         <Button Command="{Binding GoToEdit}" CommandParameter="{Binding ElementName=TeamPlayers}" Grid.Row="3" Grid.Column="1" Margin="1000 600 100 30" >Edit</Button>
+
             <Border Background="Orange" Grid.Row="3" Grid.Column="1" Margin="50 60 50 150">
             <DataGrid  ItemsSource="{Binding PlayerList,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  Background="Transparent" SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}"  HorizontalAlignment="Left" Style ="{DynamicResource MaterialDesignDataGrid}" IsReadOnly="True" Name ="Players_List" AutoGenerateColumns="False" FontFamily="Roboto" SelectionChanged="Players_List_SelectionChanged"  >
                 <DataGrid.Columns>
 
                     <DataGridTextColumn Header="ID"  Binding="{Binding Id}"/>
                     <DataGridTextColumn Header="ClubID" Visibility="Hidden" Binding="{Binding ClubID}"/>
+
                     <DataGridTextColumn Header="Kit Number" Binding="{Binding KitNumber}"/>
                     <DataGridTextColumn Header="Name" Width="200" Binding="{Binding Name}"/>
                     <DataGridTextColumn Header="Age" Width="100" Binding="{Binding Age}"/>
                     <DataGridTextColumn Header="Club" Width="200" Binding="{Binding Club}"/>
+
                     <DataGridTextColumn Header="Nationality" Width="150" Binding="{Binding Nationality}"/>
                     <DataGridTextColumn Header="Position" Width="300" Binding="{Binding Position}"/>
                     <!--<DataGridTextColumn Header="Appearances" Width="100" Binding="{Binding Appearance}"/>-->

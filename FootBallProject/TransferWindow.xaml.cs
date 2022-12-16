@@ -17,7 +17,9 @@ namespace FootBallProject
     /// <summary>
     /// Interaction logic for TransferWindow.xaml
     /// </summary>
+
     public partial class TransferWindow : UserControl
+
     {
         public TransferWindow()
         {

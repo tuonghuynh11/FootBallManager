@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="PlayerProfile" Height="700" Width="1000"
         DataContext="{StaticResource TeamPlayersVM}"
+
         Background="LightGreen"    
                 WindowStartupLocation="CenterOwner"
 
@@ -16,8 +17,6 @@
         <Style TargetType="TextBlock">
                <Setter Property="Foreground" Value="Purple"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
-
-
         </Style>
     </Window.Resources>
     <Grid>
@@ -26,15 +25,16 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" >
             <!--Tao hinh dai dien hinh torn-->
             <Border CornerRadius="90" Width="150" Height="150" >
+
                 <Border.Background>
                     <ImageBrush  ImageSource="{Binding SelectedPlayer.Image}"/>
                 </Border.Background>
             </Border>
+
             <TextBlock Text="{Binding SelectedPlayer.Name}" FontSize="45" FontStyle="Normal" FontFamily="{materialDesign:MaterialDesignFont}"/>
         </StackPanel>
         <Grid Grid.Column="0">
@@ -55,14 +55,9 @@
             <TextBlock Margin="200,344,100,200" Text = "{Binding SelectedPlayer.Position}" FontSize="25"></TextBlock>
             <TextBlock Margin="200,404,100,140" FontSize="25" Text = "{Binding SelectedPlayer.LeaguesNum}"></TextBlock>
             <TextBlock Margin="200,464,100,80" FontSize="25" Text = "{Binding SelectedPlayer.Goals}"></TextBlock>
-
-
-
             <!--<Label Margin="50 150 300 400" FontSize="25">Label</Label>-->
         </Grid>
         <Grid Grid.Column="1">
-
-
             <Label Margin="50 280 300 260" FontSize="25">Quốc tịch:</Label>
             <Label Margin="50 340 300 200" FontSize="25">Thể trạng</Label>
             <Label Margin="50 400 300 140" FontSize="25">Giá</Label>

@@ -14,13 +14,14 @@ using System.Collections;
 using System.IO;
 using System.Drawing;
 using System.Windows.Media.Imaging;
+
 using System.Net;
 using System.Net.Mail;
+
 namespace FootBallProject.ViewModel
 {
     public class TeamPlayersViewModel : BaseViewModel
     {
-        
         public ICommand RowDoubleClickCommand { get; set; }
         public ICommand AddPlayerCommand2 { get; set; }
         private DataTable dataTable;
@@ -34,6 +35,7 @@ namespace FootBallProject.ViewModel
         public ICommand BuyCommand { get; set; }
         public ICommand LoadImageCommand { get; set; }
         public ICommand GoToEdit { get; set; }
+
         private List<Player> playerList = new List<Player>();
         private List<Player> transferPlayers = new List<Player>();
         public List<Player> TransferPlayers
@@ -51,6 +53,7 @@ namespace FootBallProject.ViewModel
                 OnPropertyChanged();
             }
         }
+
         private List<Player> clubPlayerList = new List<Player>();
         public List<Player> ClubPlayerList
         {
@@ -61,6 +64,7 @@ namespace FootBallProject.ViewModel
                 OnPropertyChanged();
             }
         }
+
         private List<string> clubsNames = new List<string>();
         public List<string> ClubsNames
         {
@@ -97,17 +101,22 @@ namespace FootBallProject.ViewModel
                 OnPropertyChanged();
             }
         }
+
         string connString = @"Data Source=DESKTOP-GUE0JS7\SQLEXPRESS;Initial Catalog=FOOTBALLMANAGERDEMO;Integrated Security=true;";
+
 
         public TeamPlayersViewModel()
         {
             //dataTable = new DataTable();
+
             PullData();
             PutDataTolist();
             PullTransferData();
             PutTransfertoList();
+
             PullClubData();
             PutClubDataToList();
+
             PullClub();
             foreach(DataRow dr in dataTable.Rows)
             {
@@ -123,6 +132,7 @@ namespace FootBallProject.ViewModel
                 nationalities.Add(nationality);
                 nationID.Add(ID);
             }
+
 
             GoToEdit = new RelayCommand<object>(
                 (p) => {
@@ -142,6 +152,7 @@ namespace FootBallProject.ViewModel
                     edit.ShowDialog();
                 }
                 );
+
             RowDoubleClickCommand = new RelayCommand<object>((p) => { if (p as TeamsPlayers == null) return false;   return true; }, (p) =>
             {
                 TeamsPlayers tp = p as TeamsPlayers;
@@ -280,8 +291,7 @@ namespace FootBallProject.ViewModel
                             System.Windows.Forms.MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-                   
-                    
+
 
                 }
 
@@ -324,6 +334,7 @@ namespace FootBallProject.ViewModel
                 (p) => { if (p as EditPlayerForm == null) return false; return true; },
                 (p) =>
                 {
+
                    
                     EditPlayerForm edit = p as EditPlayerForm;
                     edit.txbNationality.SelectedItem = (ComboBoxItem)edit.txbNationality.FindName(SelectedPlayer.Nationality);
@@ -421,6 +432,7 @@ namespace FootBallProject.ViewModel
                         }
                     }
                     
+
                 }
 
                 );
@@ -449,6 +461,7 @@ namespace FootBallProject.ViewModel
                         catch (Exception e)
                         {
                             System.Windows.Forms.MessageBox.Show(e.Message);
+
                             System.Windows.Forms.MessageBox.Show("Cầu thủ đã được bán", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         }
                         sqlConnection.Close();
@@ -457,6 +470,7 @@ namespace FootBallProject.ViewModel
                     tw.dgrid1.ItemsSource = null;
                     tw.dgrid2.ItemsSource = null;
                     tw.dgrid1.ItemsSource = clubPlayerList;
+
                     tw.dgrid2.ItemsSource = TransferPlayers;
                 }
                 );
@@ -468,10 +482,12 @@ namespace FootBallProject.ViewModel
                     string query1 = "UPDATE CAUTHU SET IDDOIBONG = @iddoibong where ID = @id";
                     string query2 = "DELETE FROM CHUYENNHUONG WHERE IDCAUTHU = @id";
                     string id = SelectedPlayer.Id;
+
                     //System.Windows.Forms.MessageBox.Show(id);
 
                     
                     string selectedclubid = "mu";
+
                     using(SqlConnection conn = new SqlConnection(connString))
                     {
                         conn.Open();
@@ -492,7 +508,9 @@ namespace FootBallProject.ViewModel
                         }
                         catch (Exception e)
                         {
+
                             System.Windows.Forms.MessageBox.Show("Hiện tại chưa có cầu thủ trên thị trường chuyển nhượng");
+
                         }
                     }
                     TransferPlayers.Remove(SelectedPlayer);
@@ -546,6 +564,7 @@ namespace FootBallProject.ViewModel
 
 
         }
+
         void RandomSquad(string iddoibong)
         {            
             string query = "BEGIN " +
@@ -633,7 +652,9 @@ namespace FootBallProject.ViewModel
         }
         void PullData()
         {
+
             string query = "SELECT ct.*, qt.TENQUOCGIA, db.TEN TenDoi FROM CAUTHU ct join QUOCTICH QT on ct.IDQUOCTICH = qt.ID join DOIBONG db on ct.IDDOIBONG = db.ID";
+
             dataTable = new DataTable();
 
             SqlConnection conn = new SqlConnection(connString);
@@ -652,7 +673,9 @@ namespace FootBallProject.ViewModel
         }
         void PullTransferData()
         {
+
             string query = "SELECT cn.*, ct.*, qt.TENQUOCGIA, db.TEN TenDoi FROM CHUYENNHUONG cn join CAUTHU ct on cn.IDCAUTHU = ct.ID join  QUOCTICH qt on ct.IDQUOCTICH = qt.ID JOIN DOIBONG db on ct.IDDOIBONG = db.ID where ct.IDDOIBONG <> 'MU'";
+
             dataTable = new DataTable();
             SqlConnection conn = new SqlConnection(connString);
 
@@ -663,6 +686,7 @@ namespace FootBallProject.ViewModel
             da.Dispose();
             transferPlayers.Clear();
         }
+
         void PullClubData()
         {
             string query = "SELECT ct.*, qt.TENQUOCGIA, db.TEN TenDoi FROM CAUTHU ct join QUOCTICH QT on ct.IDQUOCTICH = qt.ID join DOIBONG db on ct.IDDOIBONG = db.ID WHERE IDDOIBONG = 'mu'";
@@ -704,6 +728,7 @@ namespace FootBallProject.ViewModel
 
             }
         }
+
         void PutDataTolist()
         {
             foreach (DataRow dr in dataTable.Rows)
@@ -711,7 +736,9 @@ namespace FootBallProject.ViewModel
                 Player player = new Player();
                 player.Id = dr["ID"].ToString();
                 player.ClubID = dr["IDDOIBONG"].ToString();
+
                 player.Club = dr["TenDoi"].ToString();
+
                 player.Nationality = dr["TENQUOCGIA"].ToString();
                 player.Name = dr["HOTEN"].ToString();
                 player.Age = Convert.ToInt32(dr["TUOI"]);
@@ -721,11 +748,13 @@ namespace FootBallProject.ViewModel
                 player.Physique = dr["THETRANG"].ToString();
                 player.Height = dr["CHIEUCAO"].ToString();
                 player.Weight = dr["CANNANG"].ToString();
+
                 player.Price = dr["GIATRICAUTHU"].ToString();
                 player.Position = dr["VITRI"].ToString();
                 int n;
                 if (int.TryParse(dr["SOAO"].ToString(), out n))
                     player.KitNumber = Convert.ToInt32(dr["SOAO"]);
+
                 if (!Convert.IsDBNull(dr["HINHANH"]))
                     player.Image = (byte[])dr["HINHANH"];
                 playerList.Add(player);
@@ -739,7 +768,9 @@ namespace FootBallProject.ViewModel
                 Player player = new Player();
                 player.Id = dr["IDCAUTHU"].ToString();
                 player.ClubID = dr["IDDOIBONG"].ToString();
+
                 player.Club = dr["TenDoi"].ToString();
+
                 player.Nationality = dr["TENQUOCGIA"].ToString();
                 player.Name = dr["HOTEN"].ToString();
                 player.Age = Convert.ToInt32(dr["TUOI"]);
@@ -749,11 +780,13 @@ namespace FootBallProject.ViewModel
                 player.Physique = dr["THETRANG"].ToString();
                 player.Height = dr["CHIEUCAO"].ToString();
                 player.Weight = dr["CANNANG"].ToString();
+
                 player.Price = dr["GIATRICAUTHU"].ToString();
                 player.Position = dr["VITRI"].ToString();
                 int n;
                 if (int.TryParse(dr["SOAO"].ToString(), out n))
                     player.KitNumber = Convert.ToInt32(dr["SOAO"]);
+
                 if (!Convert.IsDBNull(dr["HINHANH"]))
                     player.Image = (byte[])dr["HINHANH"];
                 transferPlayers.Add(player);
@@ -805,8 +838,10 @@ namespace FootBallProject.ViewModel
         public string Id { get { return id; } set { id = value; OnPropertyChanged(); } }
         string clubID;
         public string ClubID { get { return clubID; } set { clubID = value; OnPropertyChanged(); } }
+
         string club;
         public string Club { get { return club; } set { club = value; OnPropertyChanged(); } }
+
         //int number;
         //public int Number { get { return number; } set { number = value; OnPropertyChanged(); } }
         string name;
@@ -830,8 +865,10 @@ namespace FootBallProject.ViewModel
         public string Nationality { get { return nationality; } set { nationality = value; OnPropertyChanged(); } }
         string position;
         public string Position { get { return position; } set { position = value; OnPropertyChanged(); } }
+
         int kitNumber;
         public int KitNumber { get { return kitNumber; } set { kitNumber = value; OnPropertyChanged(); } }
+
         string price;
         public string Price { get { return price; } set { price = value; OnPropertyChanged(); } }
         private byte[] image;

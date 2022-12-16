@@ -124,7 +124,7 @@
                     </StackPanel>
                 </Grid>-->
 
-                <Grid Grid.Column="1" Margin="70 20 20 20">
+                <!--<Grid Grid.Column="1" Margin="70 20 20 20">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="360"></ColumnDefinition>
                         <ColumnDefinition Width="600" ></ColumnDefinition>
@@ -142,7 +142,7 @@
 
                             </Grid.RowDefinitions>
 
-                            <!--Danh sách CLB-->
+                            --><!--Danh sách CLB--><!--
 
                             <DockPanel Grid.Row="0" Grid.RowSpan="2" Margin="0 0 0 10">
                                 <TextBlock DockPanel.Dock="Left"
@@ -188,7 +188,7 @@
                                 </ListView>
                             </Border>
 
-                            <!--Danh sách các giải đấu-->
+                            --><!--Danh sách các giải đấu--><!--
 
                             <DockPanel Margin="0 30 0 0" Grid.Row="3">
 
@@ -321,7 +321,7 @@
 
 
 
-                    <!--Danh sách các trận đấu-->
+                    --><!--Danh sách các trận đấu--><!--
 
                     <Border Margin="0 0 15 0" Padding="0 0 10 0" Grid.Column="1" >
                         <Grid >
@@ -332,7 +332,7 @@
                                 <RowDefinition ></RowDefinition>
                             </Grid.RowDefinitions>
 
-                            <!--Hình các cầu thủ-->
+                            --><!--Hình các cầu thủ--><!--
 
                             <Border  Grid.Row="0" Margin="5 0 5 5" CornerRadius="20" >
                                 <Border.Background>
@@ -420,7 +420,7 @@
                                 </ToggleButton>
                             </StackPanel>
 
-                            <!--Filter chọn ngày xem trận đấu-->
+                            --><!--Filter chọn ngày xem trận đấu--><!--
 
                             <DockPanel Grid.Row="2">
                                 <Button DockPanel.Dock="Left" Margin="0 0 70 0" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" Foreground="#FF959FA8"  Width="100" Content="Lastest Matches" HorizontalContentAlignment="Left" Padding="0" FontSize="13">
@@ -476,7 +476,7 @@
                                 </Button>
                             </DockPanel>
 
-                            <!--Danh sách các trận đấu-->
+                            --><!--Danh sách các trận đấu--><!--
 
                             <Border Grid.Row="4" Margin="0 0 0 10">
                                 <ListView  x:Name="lsTranDau" IsHitTestVisible="True" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="Transparent" BorderBrush="Transparent" Margin="5,10,5,10">
@@ -537,16 +537,16 @@
                     </Border>
 
 
-                    <!--IsHitTestVisible="True" cho phép tương tác với item , false là không được tương tác
+                    --><!--IsHitTestVisible="True" cho phép tương tác với item , false là không được tương tác
                     focusable= true khi nhấn vào item dấu focus vẫn nằm ở item, false thì khi chọn item xong dấu focus tự biến mất-->
-                    <!--Danh sách cầu thủ, CLB xuất sắc-->
+                    <!--Danh sách cầu thủ, CLB xuất sắc--><!--
                     <Border Grid.Column="2" Background="White" Margin="10,0,25,0" CornerRadius="20" Height="673" VerticalAlignment="Top">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
-                            <!--Best Team-->
+                            --><!--Best Team--><!--
                             <Grid Grid.Row="0" Margin="0 0 0 0">
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock Text="Best Teams" FontWeight="Bold" FontFamily="Roboto" Foreground="#172C41" Margin="20 20 0 0" Width="100" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left"></TextBlock>
@@ -574,7 +574,7 @@
 
 
                             </Grid>
-                            <!--Best Players-->
+                            --><!--Best Players--><!--
                             <Grid Grid.Row="1" Margin="0 -10 0 0">
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock Text="Best Players" FontWeight="Bold" FontFamily="Roboto" Foreground="#172C41" Margin="20 20 0 0" Width="100" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left"></TextBlock>
@@ -614,8 +614,11 @@
 
                     </Border>
 
-                </Grid>
+                </Grid>-->
                 <!--Đưa menubar lên trên màn hình-->
+                <Grid Grid.Column="1">
+                    
+                </Grid>
                 <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,1128,0" HorizontalAlignment="Left">
                     <uc:MenuBarUC HorizontalAlignment="Center"/>
 

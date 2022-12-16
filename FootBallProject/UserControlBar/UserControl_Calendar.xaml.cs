@@ -5,7 +5,6 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,29 +13,29 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static FootBallProject.DS_BLD;
-using System.IO.Packaging;
+using System.Configuration;
 
-namespace FootBallProject
+namespace FootBallProject.UserControlBar
 {
     /// <summary>
-    /// Interaction logic for Calendar.xaml
+    /// Interaction logic for UserControl_Calendar.xaml
     /// </summary>
-    public partial class Calendar : Window
+    public partial class UserControl_Calendar : UserControl
     {
-        public string connectstr = "Data Source=LAPTOP-SCVD25EQ\\SQLEXPRESS;Database=FOOTBALLMANAGER2;Trusted_Connection=True;";
+        public string connectstr = ConfigurationManager.ConnectionStrings["connectstr"].ConnectionString;
         public List<DS_Cal> Cals = new List<DS_Cal>();
         public string chosendate;
         public string chosenyear;
         public string chosenmonth;
         public string chosenday;
         public int givenlist;
-        public Calendar()
+        public UserControl_Calendar()
         {
             InitializeComponent();
+            ReadOrderData2(connectstr);
         }
-
         public class DS_Cal
         {
             public bool IsDone { get; set; }
@@ -57,20 +56,36 @@ namespace FootBallProject
 
         private void NewNote_Click(object sender, RoutedEventArgs e)
         {
-            DS_Cal dS_Cal = new DS_Cal(false, "0:00:00 AM", "0:00:00 AM", "Công việc");
-            dS_Cal.Ghichu = "Ghi chú";
-            Cals.Add(dS_Cal);
-            DTGTime.Items.Refresh();
-            DTGGhichu.Items.Refresh();
+            if (cbID.Text == "")
+            {
+                Error error = new Error();
+                error.ShowDialog();
+            }
+            else
+            {
+                DS_Cal dS_Cal = new DS_Cal(false, "0:00:00 AM", "0:00:00 AM", "Công việc");
+                dS_Cal.Ghichu = "Ghi chú";
+                Cals.Add(dS_Cal);
+                DTGTime.Items.Refresh();
+                DTGGhichu.Items.Refresh();
+            }
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            int i = 0;
-            
-            foreach(DS_Cal cal in Cals)
+            if (cbID.Text == "")
             {
-                if(i < givenlist)
+                Error error = new Error();
+                error.ShowDialog();
+                return;
+            }
+            string GetIDDOIBONG = cbID.Text;
+            GetIDDOIBONG = GetIDDOIBONG.Substring(0, GetIDDOIBONG.IndexOf('.'));
+            int i = 0;
+
+            foreach (DS_Cal cal in Cals)
+            {
+                if (i < givenlist)
                 {
                     i++;
                     string iD = cal.id.ToString();
@@ -103,14 +118,14 @@ namespace FootBallProject
                                 command.ExecuteNonQuery();
                             }
                         }
-                        DTGTime.Items.Refresh();
-                        DTGGhichu.Items.Refresh();
+                    }
+                        catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                        Error error = new Error();
+                        error.ShowDialog();
+                    }
                 }
-                    catch (Exception)
-                {
-                    MessageBox.Show("ERROR");
-                }
-            }
                 else
                 {
                     string commandText1 = "INSERT INTO dbo.TAPLUYEN (TRANGTHAI, THOIGIANBATDAU, THOIGIANKETTHUC, HOATDONG, GHICHU, IDDOIBONG) VALUES (@trangthai, @thoigianbatdau, @thoigianketthuc, " +
@@ -138,22 +153,22 @@ namespace FootBallProject
                                 command.Parameters["@ghichu"].Value = cal.Ghichu;
 
                                 command.Parameters.Add("@iddoibong", SqlDbType.VarChar);
-                                command.Parameters["@iddoibong"].Value = iddoibong.Text;
+                                command.Parameters["@iddoibong"].Value = GetIDDOIBONG;
 
 
                                 command.ExecuteNonQuery();
                             }
                         }
-                        DTGTime.Items.Refresh();
-                        DTGGhichu.Items.Refresh();
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("ERROR");
+                        Error error = new Error();
+                        error.ShowDialog();
                     }
                 }
             }
-            MessageBox.Show("Lưu thành công");
+            Success success = new Success();
+            success.ShowDialog();
         }
 
         private void PresetTimePicker_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
@@ -168,9 +183,10 @@ namespace FootBallProject
 
         private void Calendar1_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (iddoibong.Text == "")
+            if (cbID.Text == "")
             {
-                MessageBox.Show("Vui lòng nhập đội");
+                Error error = new Error();
+                error.ShowDialog();
             }
             else
             {
@@ -190,11 +206,13 @@ namespace FootBallProject
 
         private void ReadOrderData(string connectionString)
         {
+            string GetIDDOIBONG = cbID.Text;
+            GetIDDOIBONG = GetIDDOIBONG.Substring(0, GetIDDOIBONG.IndexOf('.'));
             Cals.Clear();
             givenlist = 0;
             string queryString = "SELECT * FROM dbo.TAPLUYEN tl";
-            string newString = queryString + " WHERE YEAR(tl.THOIGIANBATDAU) = " + chosenyear + " AND MONTH(tl.THOIGIANBATDAU) = " + chosenmonth + 
-                " AND DAY(tl.THOIGIANBATDAU) = " + chosenday + " AND tl.IDDOIBONG = " + "'" + iddoibong.Text + "'";
+            string newString = queryString + " WHERE YEAR(tl.THOIGIANBATDAU) = " + chosenyear + " AND MONTH(tl.THOIGIANBATDAU) = " + chosenmonth +
+                " AND DAY(tl.THOIGIANBATDAU) = " + chosenday + " AND tl.IDDOIBONG = " + "'" + GetIDDOIBONG + "'";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(newString, connection);
@@ -215,7 +233,7 @@ namespace FootBallProject
             DS_Cal cal = new DS_Cal(false, dataRecord[4].ToString(), dataRecord[5].ToString(), (string)dataRecord[6]);
             string temp = (string)dataRecord[3];
             temp = temp.ToLower();
-            if(temp == "false")
+            if (temp == "false")
             {
                 cal.IsDone = false;
             }
@@ -229,5 +247,34 @@ namespace FootBallProject
             cal.TimeEnd = cal.TimeEnd.Substring(cal.TimeEnd.IndexOf(" "));
             Cals.Add(cal);
         }
+
+        private void PresetTimePicker_SelectedTimeChanged_1(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
+        {
+            DS_Cal dt = DTGTime.SelectedItems[0] as DS_Cal;
+            TimePicker timePicker = sender as TimePicker;
+            timePicker.SelectedTimeFormat = DatePickerFormat.Short;
+            string a = timePicker.SelectedTime.ToString();
+            string b = a.Substring(a.IndexOf(" "));
+            dt.TimeEnd = b;
+        }
+
+        private void ReadOrderData2(string connectionString)
+        {
+            string queryString = "SELECT * FROM dbo.DOIBONG";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    string tmp = reader.GetString(0) + ". " + reader.GetString(4);
+                    cbID.Items.Add(tmp);
+                }
+                reader.Close();
+            }
+        }
     }
 }
+
