@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5bc1d70b1b3b4cfbb20cb880cfef2d15" Name="Diagram1" ZoomLevel="91">
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.CAUTHU" Width="1.5" PointX="3" PointY="12.5" />
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.DIADIEM" Width="1.5" PointX="3" PointY="18.125" />
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.DIEM" Width="1.5" PointX="7.5" PointY="18.625" />
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.DOIBONG" Width="1.5" PointX="5.25" PointY="14.875" />
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.DOIHINHCHINH" Width="1.5" PointX="7.5" PointY="15.125" />
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.FOOTBALLMATCH" Width="1.5" PointX="7.5" PointY="21.375" />
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.GIAIDAU" Width="1.5" PointX="3" PointY="21" />
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.HUANLUYENVIEN" Width="1.5" PointX="10.5" PointY="15.625" />
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.ITEM" Width="1.5" PointX="13" PointY="18.125" />
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.ITEMTYPE" Width="1.5" PointX="10.75" PointY="12.5" />
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.QUOCTICH" Width="1.5" PointX="0.75" PointY="14.625" />
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.TAPLUYEN" Width="1.5" PointX="15.75" PointY="16" />
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.TEAMOFLEAGUE" Width="1.5" PointX="7.5" PointY="24.75" />
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.THAMGIA" Width="1.5" PointX="5.25" PointY="11.875" />
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.THONGTINGIAIDAU" Width="1.5" PointX="12.5" PointY="22.125" />
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.THONGTINTRANDAU" Width="1.5" PointX="9.75" PointY="21.25" />
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.TRANDAU" Width="1.5" PointX="13.5" PointY="13.875" />
+        <EntityTypeShape EntityType="FOOTBALLMANAGERDEMOModel.VONGDAU" Width="1.5" PointX="5.25" PointY="21.75" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_CT1" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_CT2" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_DHC2" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_TG2" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_1" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_DB3" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_TD3" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_D1" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_D2" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_DB1" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_DB2" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_DHC1" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_IT_O2" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_TD1" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_TD2" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_TL2" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_TTGD2" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_FM01" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_TTTD_02" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_GD1" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_TD4" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_TTGD1" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_VD_01" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_HLV1" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_TL1" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_IT_01" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_IT_03" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_TTTD_01" />
+        <AssociationConnector Association="FOOTBALLMANAGERDEMOModel.FK_TG1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

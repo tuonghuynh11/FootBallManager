@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FootBallProject.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,18 +11,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FootBallProject
+namespace FootBallProject.UserControlBar
 {
     /// <summary>
-    /// Interaction logic for DS_BLD.xaml
+    /// Interaction logic for TitleBarUC.xaml
     /// </summary>
-    public partial class DS_BLD : Window
+    public partial class TitleBarUC : UserControl
     {
-        public DS_BLD()
+        public TitleBarViewModel ViewModel { get; set; }
+        public TitleBarUC()
         {
             InitializeComponent();
+            this.DataContext = ViewModel= new TitleBarViewModel();
         }
     }
 }

@@ -33,7 +33,7 @@
                     Height="20"
                     CornerRadius="10 10 0 0"
                 >
-            <DockPanel>
+            <DockPanel Background="{Binding Background,ElementName=ucControlBar}">
                 <StackPanel Margin="2 2 5 2" Orientation="Horizontal"  Height="16" DockPanel.Dock="Right">
 
                     <Button x:Name="btnMinimize"                          
@@ -68,7 +68,7 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Separator Width="15" Background="Transparent"></Separator>
+                    <Separator Width="15" Background="Transparent" Foreground="Transparent" BorderBrush="Transparent" BorderThickness="0"></Separator>
                     <Button x:Name="btnClose"                          
                             BorderThickness="0"
                             Content="X"
@@ -109,7 +109,7 @@
                     <TextBlock
                              VerticalAlignment="Center"
                              Margin="16 0 0 0"
-                            Text="FBM"
+                            Text="{Binding Tag, ElementName=ucControlBar}"
                             FontWeight="Bold"
                             >
 

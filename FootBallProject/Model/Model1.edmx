@@ -1,0 +1,1717 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FOOTBALLMANAGERDEMOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CAUTHU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDDOIBONG" Type="varchar" MaxLength="10" />
+          <Property Name="IDQUOCTICH" Type="int" />
+          <Property Name="HOTEN" Type="nvarchar" MaxLength="100" />
+          <Property Name="TUOI" Type="int" />
+          <Property Name="SOGIAI" Type="int" />
+          <Property Name="SOBANTHANG" Type="int" />
+          <Property Name="HINHANH" Type="image" />
+          <Property Name="CHANTHUAN" Type="nvarchar" MaxLength="30" />
+          <Property Name="THETRANG" Type="nvarchar" MaxLength="30" />
+          <Property Name="VITRI" Type="varchar" MaxLength="10" />
+          <Property Name="SOAO" Type="int" />
+          <Property Name="CHIEUCAO" Type="nvarchar" MaxLength="30" />
+          <Property Name="CANNANG" Type="nvarchar" MaxLength="30" />
+          <Property Name="GIATRICAUTHU" Type="bigint" />
+        </EntityType>
+        <EntityType Name="DIADIEM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TENDIADIEM" Type="nvarchar" MaxLength="100" />
+          <Property Name="IDQUOCGIA" Type="int" />
+        </EntityType>
+        <EntityType Name="DIEM">
+          <Key>
+            <PropertyRef Name="IDDOIBONG" />
+            <PropertyRef Name="IDGIAIDAU" />
+          </Key>
+          <Property Name="IDDOIBONG" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IDGIAIDAU" Type="int" Nullable="false" />
+          <Property Name="SODIEM" Type="int" />
+        </EntityType>
+        <EntityType Name="DOIBONG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IDQUOCTICH" Type="int" />
+          <Property Name="THANHPHO" Type="int" />
+          <Property Name="HINHANH" Type="image" />
+          <Property Name="TEN" Type="nvarchar" MaxLength="100" />
+          <Property Name="SOLUONGTHANHVIEN" Type="int" />
+          <Property Name="NGAYTHANHLAP" Type="date" />
+          <Property Name="SANNHA" Type="nvarchar" MaxLength="100" />
+          <Property Name="SODOCHIENTHUAT" Type="varchar" MaxLength="20" />
+          <Property Name="GIATRI" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DOIHINHCHINH">
+          <Key>
+            <PropertyRef Name="IDDOIBONG" />
+            <PropertyRef Name="IDCAUTHU" />
+          </Key>
+          <Property Name="IDDOIBONG" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IDCAUTHU" Type="int" Nullable="false" />
+          <Property Name="VITRI" Type="varchar" MaxLength="10" />
+          <Property Name="VAITRO" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FOOTBALLMATCH">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TENTRANDAU" Type="nvarchar(max)" />
+          <Property Name="VONGBANG" Type="int" />
+          <Property Name="IDVONG" Type="int" />
+          <Property Name="DIADIEM" Type="nvarchar(max)" />
+          <Property Name="THOIGIAN" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="GIAIDAU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDQUOCGIA" Type="int" />
+          <Property Name="HINHANH" Type="image" />
+          <Property Name="TEN" Type="nvarchar" MaxLength="100" />
+          <Property Name="NGAYBATDAU" Type="date" />
+          <Property Name="NGAYKETTHUC" Type="date" />
+          <Property Name="SODOITG" Type="int" />
+        </EntityType>
+        <EntityType Name="HUANLUYENVIEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDDOIBONG" Type="varchar" MaxLength="10" />
+          <Property Name="IDQUOCTICH" Type="int" />
+          <Property Name="HOTEN" Type="nvarchar" MaxLength="100" />
+          <Property Name="TUOI" Type="int" />
+          <Property Name="GMAIL" Type="varchar" MaxLength="100" />
+          <Property Name="NGAYSINH" Type="date" />
+          <Property Name="CHUCVU" Type="nvarchar" MaxLength="50" />
+          <Property Name="HINHANH" Type="image" />
+        </EntityType>
+        <EntityType Name="ITEM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDTHONGTINTRANDAU" Type="int" />
+          <Property Name="IDDOIBONG" Type="varchar" MaxLength="10" />
+          <Property Name="IDITEM" Type="int" />
+          <Property Name="THOIGIAN" Type="nvarchar(max)" />
+          <Property Name="IDCAUTHU" Type="int" />
+        </EntityType>
+        <EntityType Name="ITEMTYPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TENITEM" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="QUOCTICH">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TENQUOCGIA" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TAPLUYEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDNGUOIQUANLY" Type="int" />
+          <Property Name="IDDOIBONG" Type="varchar" MaxLength="10" />
+          <Property Name="TRANGTHAI" Type="nvarchar" MaxLength="20" />
+          <Property Name="THOIGIANBATDAU" Type="smalldatetime" />
+          <Property Name="THOIGIANKETTHUC" Type="smalldatetime" />
+          <Property Name="HOATDONG" Type="nvarchar" MaxLength="100" />
+          <Property Name="GHICHU" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TEAMOFLEAGUE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDGIAIDAU" Type="int" />
+          <Property Name="IDDOIBONG" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="THAMGIA">
+          <Key>
+            <PropertyRef Name="IDTRAN" />
+            <PropertyRef Name="IDCAUTHU" />
+          </Key>
+          <Property Name="IDTRAN" Type="int" Nullable="false" />
+          <Property Name="IDCAUTHU" Type="int" Nullable="false" />
+          <Property Name="SOBANTHANG" Type="int" />
+        </EntityType>
+        <EntityType Name="THONGTINGIAIDAU">
+          <Key>
+            <PropertyRef Name="IDGIAIDAU" />
+            <PropertyRef Name="IDDOIBONG" />
+          </Key>
+          <Property Name="IDGIAIDAU" Type="int" Nullable="false" />
+          <Property Name="IDDOIBONG" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="WIN" Type="int" />
+          <Property Name="DRAW" Type="int" />
+          <Property Name="LOSE" Type="int" />
+          <Property Name="GA" Type="int" />
+          <Property Name="GD" Type="int" />
+          <Property Name="POINTS" Type="int" />
+        </EntityType>
+        <EntityType Name="THONGTINTRANDAU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DIEM" Type="int" />
+          <Property Name="THEDO" Type="int" />
+          <Property Name="THEVANG" Type="int" />
+          <Property Name="KETQUA" Type="int" />
+          <Property Name="IDDOIBONG" Type="int" />
+          <Property Name="IDTRANDAU" Type="int" />
+        </EntityType>
+        <EntityType Name="TRANDAU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOAI" Type="nvarchar" MaxLength="30" />
+          <Property Name="IDDOI1" Type="varchar" MaxLength="10" />
+          <Property Name="IDDOI2" Type="varchar" MaxLength="10" />
+          <Property Name="IDDIADIEM" Type="int" />
+          <Property Name="NGAY" Type="smalldatetime" />
+          <Property Name="GIO" Type="time" Precision="7" />
+          <Property Name="IDGIAIDAU" Type="int" />
+        </EntityType>
+        <EntityType Name="VONGDAU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDGIAIDAU" Type="int" />
+          <Property Name="TENVONGDAU" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_1">
+          <End Role="QUOCTICH" Type="Self.QUOCTICH" Multiplicity="0..1" />
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUOCTICH">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DIADIEM">
+              <PropertyRef Name="IDQUOCGIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT1">
+          <End Role="DOIBONG" Type="Self.DOIBONG" Multiplicity="0..1" />
+          <End Role="CAUTHU" Type="Self.CAUTHU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOIBONG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CAUTHU">
+              <PropertyRef Name="IDDOIBONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT2">
+          <End Role="QUOCTICH" Type="Self.QUOCTICH" Multiplicity="0..1" />
+          <End Role="CAUTHU" Type="Self.CAUTHU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUOCTICH">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CAUTHU">
+              <PropertyRef Name="IDQUOCTICH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D1">
+          <End Role="DOIBONG" Type="Self.DOIBONG" Multiplicity="1" />
+          <End Role="DIEM" Type="Self.DIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOIBONG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DIEM">
+              <PropertyRef Name="IDDOIBONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D2">
+          <End Role="GIAIDAU" Type="Self.GIAIDAU" Multiplicity="1" />
+          <End Role="DIEM" Type="Self.DIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIAIDAU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DIEM">
+              <PropertyRef Name="IDGIAIDAU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB1">
+          <End Role="DOIBONG" Type="Self.DOIBONG" Multiplicity="0..1" />
+          <End Role="HUANLUYENVIEN" Type="Self.HUANLUYENVIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOIBONG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HUANLUYENVIEN">
+              <PropertyRef Name="IDDOIBONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB2">
+          <End Role="QUOCTICH" Type="Self.QUOCTICH" Multiplicity="0..1" />
+          <End Role="DOIBONG" Type="Self.DOIBONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUOCTICH">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOIBONG">
+              <PropertyRef Name="IDQUOCTICH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB3">
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="0..1" />
+          <End Role="DOIBONG" Type="Self.DOIBONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOIBONG">
+              <PropertyRef Name="THANHPHO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DHC1">
+          <End Role="DOIBONG" Type="Self.DOIBONG" Multiplicity="1" />
+          <End Role="DOIHINHCHINH" Type="Self.DOIHINHCHINH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOIBONG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOIHINHCHINH">
+              <PropertyRef Name="IDDOIBONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DHC2">
+          <End Role="CAUTHU" Type="Self.CAUTHU" Multiplicity="1" />
+          <End Role="DOIHINHCHINH" Type="Self.DOIHINHCHINH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAUTHU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOIHINHCHINH">
+              <PropertyRef Name="IDCAUTHU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FM01">
+          <End Role="VONGDAU" Type="Self.VONGDAU" Multiplicity="0..1" />
+          <End Role="FOOTBALLMATCH" Type="Self.FOOTBALLMATCH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VONGDAU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FOOTBALLMATCH">
+              <PropertyRef Name="IDVONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GD1">
+          <End Role="QUOCTICH" Type="Self.QUOCTICH" Multiplicity="0..1" />
+          <End Role="GIAIDAU" Type="Self.GIAIDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUOCTICH">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GIAIDAU">
+              <PropertyRef Name="IDQUOCGIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HLV1">
+          <End Role="QUOCTICH" Type="Self.QUOCTICH" Multiplicity="0..1" />
+          <End Role="HUANLUYENVIEN" Type="Self.HUANLUYENVIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUOCTICH">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HUANLUYENVIEN">
+              <PropertyRef Name="IDQUOCTICH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IT_01">
+          <End Role="THONGTINTRANDAU" Type="Self.THONGTINTRANDAU" Multiplicity="0..1" />
+          <End Role="ITEM" Type="Self.ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THONGTINTRANDAU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ITEM">
+              <PropertyRef Name="IDTHONGTINTRANDAU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IT_03">
+          <End Role="ITEMTYPE" Type="Self.ITEMTYPE" Multiplicity="0..1" />
+          <End Role="ITEM" Type="Self.ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ITEMTYPE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ITEM">
+              <PropertyRef Name="IDITEM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IT_O2">
+          <End Role="DOIBONG" Type="Self.DOIBONG" Multiplicity="0..1" />
+          <End Role="ITEM" Type="Self.ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOIBONG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ITEM">
+              <PropertyRef Name="IDDOIBONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TD1">
+          <End Role="DOIBONG" Type="Self.DOIBONG" Multiplicity="0..1" />
+          <End Role="TRANDAU" Type="Self.TRANDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOIBONG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TRANDAU">
+              <PropertyRef Name="IDDOI1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TD2">
+          <End Role="DOIBONG" Type="Self.DOIBONG" Multiplicity="0..1" />
+          <End Role="TRANDAU" Type="Self.TRANDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOIBONG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TRANDAU">
+              <PropertyRef Name="IDDOI2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TD3">
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="0..1" />
+          <End Role="TRANDAU" Type="Self.TRANDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TRANDAU">
+              <PropertyRef Name="IDDIADIEM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TD4">
+          <End Role="GIAIDAU" Type="Self.GIAIDAU" Multiplicity="0..1" />
+          <End Role="TRANDAU" Type="Self.TRANDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIAIDAU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TRANDAU">
+              <PropertyRef Name="IDGIAIDAU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TG1">
+          <End Role="TRANDAU" Type="Self.TRANDAU" Multiplicity="1" />
+          <End Role="THAMGIA" Type="Self.THAMGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANDAU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="THAMGIA">
+              <PropertyRef Name="IDTRAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TG2">
+          <End Role="CAUTHU" Type="Self.CAUTHU" Multiplicity="1" />
+          <End Role="THAMGIA" Type="Self.THAMGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAUTHU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="THAMGIA">
+              <PropertyRef Name="IDCAUTHU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TL1">
+          <End Role="HUANLUYENVIEN" Type="Self.HUANLUYENVIEN" Multiplicity="0..1" />
+          <End Role="TAPLUYEN" Type="Self.TAPLUYEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HUANLUYENVIEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TAPLUYEN">
+              <PropertyRef Name="IDNGUOIQUANLY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TL2">
+          <End Role="DOIBONG" Type="Self.DOIBONG" Multiplicity="0..1" />
+          <End Role="TAPLUYEN" Type="Self.TAPLUYEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOIBONG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TAPLUYEN">
+              <PropertyRef Name="IDDOIBONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TTGD1">
+          <End Role="GIAIDAU" Type="Self.GIAIDAU" Multiplicity="1" />
+          <End Role="THONGTINGIAIDAU" Type="Self.THONGTINGIAIDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIAIDAU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="THONGTINGIAIDAU">
+              <PropertyRef Name="IDGIAIDAU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TTGD2">
+          <End Role="DOIBONG" Type="Self.DOIBONG" Multiplicity="1" />
+          <End Role="THONGTINGIAIDAU" Type="Self.THONGTINGIAIDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOIBONG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="THONGTINGIAIDAU">
+              <PropertyRef Name="IDDOIBONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TTTD_01">
+          <End Role="TEAMOFLEAGUE" Type="Self.TEAMOFLEAGUE" Multiplicity="0..1" />
+          <End Role="THONGTINTRANDAU" Type="Self.THONGTINTRANDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEAMOFLEAGUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="THONGTINTRANDAU">
+              <PropertyRef Name="IDDOIBONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TTTD_02">
+          <End Role="FOOTBALLMATCH" Type="Self.FOOTBALLMATCH" Multiplicity="0..1" />
+          <End Role="THONGTINTRANDAU" Type="Self.THONGTINTRANDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FOOTBALLMATCH">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="THONGTINTRANDAU">
+              <PropertyRef Name="IDTRANDAU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VD_01">
+          <End Role="GIAIDAU" Type="Self.GIAIDAU" Multiplicity="0..1" />
+          <End Role="VONGDAU" Type="Self.VONGDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIAIDAU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VONGDAU">
+              <PropertyRef Name="IDGIAIDAU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FOOTBALLMANAGERDEMOModelStoreContainer">
+          <EntitySet Name="CAUTHU" EntityType="Self.CAUTHU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DIADIEM" EntityType="Self.DIADIEM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DIEM" EntityType="Self.DIEM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOIBONG" EntityType="Self.DOIBONG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOIHINHCHINH" EntityType="Self.DOIHINHCHINH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FOOTBALLMATCH" EntityType="Self.FOOTBALLMATCH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GIAIDAU" EntityType="Self.GIAIDAU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HUANLUYENVIEN" EntityType="Self.HUANLUYENVIEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ITEM" EntityType="Self.ITEM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ITEMTYPE" EntityType="Self.ITEMTYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QUOCTICH" EntityType="Self.QUOCTICH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAPLUYEN" EntityType="Self.TAPLUYEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TEAMOFLEAGUE" EntityType="Self.TEAMOFLEAGUE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THAMGIA" EntityType="Self.THAMGIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THONGTINGIAIDAU" EntityType="Self.THONGTINGIAIDAU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THONGTINTRANDAU" EntityType="Self.THONGTINTRANDAU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRANDAU" EntityType="Self.TRANDAU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VONGDAU" EntityType="Self.VONGDAU" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_1" Association="Self.FK_1">
+            <End Role="QUOCTICH" EntitySet="QUOCTICH" />
+            <End Role="DIADIEM" EntitySet="DIADIEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT1" Association="Self.FK_CT1">
+            <End Role="DOIBONG" EntitySet="DOIBONG" />
+            <End Role="CAUTHU" EntitySet="CAUTHU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT2" Association="Self.FK_CT2">
+            <End Role="QUOCTICH" EntitySet="QUOCTICH" />
+            <End Role="CAUTHU" EntitySet="CAUTHU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D1" Association="Self.FK_D1">
+            <End Role="DOIBONG" EntitySet="DOIBONG" />
+            <End Role="DIEM" EntitySet="DIEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D2" Association="Self.FK_D2">
+            <End Role="GIAIDAU" EntitySet="GIAIDAU" />
+            <End Role="DIEM" EntitySet="DIEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB1" Association="Self.FK_DB1">
+            <End Role="DOIBONG" EntitySet="DOIBONG" />
+            <End Role="HUANLUYENVIEN" EntitySet="HUANLUYENVIEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB2" Association="Self.FK_DB2">
+            <End Role="QUOCTICH" EntitySet="QUOCTICH" />
+            <End Role="DOIBONG" EntitySet="DOIBONG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB3" Association="Self.FK_DB3">
+            <End Role="DIADIEM" EntitySet="DIADIEM" />
+            <End Role="DOIBONG" EntitySet="DOIBONG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DHC1" Association="Self.FK_DHC1">
+            <End Role="DOIBONG" EntitySet="DOIBONG" />
+            <End Role="DOIHINHCHINH" EntitySet="DOIHINHCHINH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DHC2" Association="Self.FK_DHC2">
+            <End Role="CAUTHU" EntitySet="CAUTHU" />
+            <End Role="DOIHINHCHINH" EntitySet="DOIHINHCHINH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FM01" Association="Self.FK_FM01">
+            <End Role="VONGDAU" EntitySet="VONGDAU" />
+            <End Role="FOOTBALLMATCH" EntitySet="FOOTBALLMATCH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GD1" Association="Self.FK_GD1">
+            <End Role="QUOCTICH" EntitySet="QUOCTICH" />
+            <End Role="GIAIDAU" EntitySet="GIAIDAU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HLV1" Association="Self.FK_HLV1">
+            <End Role="QUOCTICH" EntitySet="QUOCTICH" />
+            <End Role="HUANLUYENVIEN" EntitySet="HUANLUYENVIEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IT_01" Association="Self.FK_IT_01">
+            <End Role="THONGTINTRANDAU" EntitySet="THONGTINTRANDAU" />
+            <End Role="ITEM" EntitySet="ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IT_03" Association="Self.FK_IT_03">
+            <End Role="ITEMTYPE" EntitySet="ITEMTYPE" />
+            <End Role="ITEM" EntitySet="ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IT_O2" Association="Self.FK_IT_O2">
+            <End Role="DOIBONG" EntitySet="DOIBONG" />
+            <End Role="ITEM" EntitySet="ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TD1" Association="Self.FK_TD1">
+            <End Role="DOIBONG" EntitySet="DOIBONG" />
+            <End Role="TRANDAU" EntitySet="TRANDAU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TD2" Association="Self.FK_TD2">
+            <End Role="DOIBONG" EntitySet="DOIBONG" />
+            <End Role="TRANDAU" EntitySet="TRANDAU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TD3" Association="Self.FK_TD3">
+            <End Role="DIADIEM" EntitySet="DIADIEM" />
+            <End Role="TRANDAU" EntitySet="TRANDAU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TD4" Association="Self.FK_TD4">
+            <End Role="GIAIDAU" EntitySet="GIAIDAU" />
+            <End Role="TRANDAU" EntitySet="TRANDAU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TG1" Association="Self.FK_TG1">
+            <End Role="TRANDAU" EntitySet="TRANDAU" />
+            <End Role="THAMGIA" EntitySet="THAMGIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TG2" Association="Self.FK_TG2">
+            <End Role="CAUTHU" EntitySet="CAUTHU" />
+            <End Role="THAMGIA" EntitySet="THAMGIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TL1" Association="Self.FK_TL1">
+            <End Role="HUANLUYENVIEN" EntitySet="HUANLUYENVIEN" />
+            <End Role="TAPLUYEN" EntitySet="TAPLUYEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TL2" Association="Self.FK_TL2">
+            <End Role="DOIBONG" EntitySet="DOIBONG" />
+            <End Role="TAPLUYEN" EntitySet="TAPLUYEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TTGD1" Association="Self.FK_TTGD1">
+            <End Role="GIAIDAU" EntitySet="GIAIDAU" />
+            <End Role="THONGTINGIAIDAU" EntitySet="THONGTINGIAIDAU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TTGD2" Association="Self.FK_TTGD2">
+            <End Role="DOIBONG" EntitySet="DOIBONG" />
+            <End Role="THONGTINGIAIDAU" EntitySet="THONGTINGIAIDAU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TTTD_01" Association="Self.FK_TTTD_01">
+            <End Role="TEAMOFLEAGUE" EntitySet="TEAMOFLEAGUE" />
+            <End Role="THONGTINTRANDAU" EntitySet="THONGTINTRANDAU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TTTD_02" Association="Self.FK_TTTD_02">
+            <End Role="FOOTBALLMATCH" EntitySet="FOOTBALLMATCH" />
+            <End Role="THONGTINTRANDAU" EntitySet="THONGTINTRANDAU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VD_01" Association="Self.FK_VD_01">
+            <End Role="GIAIDAU" EntitySet="GIAIDAU" />
+            <End Role="VONGDAU" EntitySet="VONGDAU" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FOOTBALLMANAGERDEMOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FOOTBALLMANAGERDEMOEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CAUTHUs" EntityType="FOOTBALLMANAGERDEMOModel.CAUTHU" />
+          <EntitySet Name="DIADIEMs" EntityType="FOOTBALLMANAGERDEMOModel.DIADIEM" />
+          <EntitySet Name="DIEMs" EntityType="FOOTBALLMANAGERDEMOModel.DIEM" />
+          <EntitySet Name="DOIBONGs" EntityType="FOOTBALLMANAGERDEMOModel.DOIBONG" />
+          <EntitySet Name="DOIHINHCHINHs" EntityType="FOOTBALLMANAGERDEMOModel.DOIHINHCHINH" />
+          <EntitySet Name="FOOTBALLMATCHes" EntityType="FOOTBALLMANAGERDEMOModel.FOOTBALLMATCH" />
+          <EntitySet Name="GIAIDAUs" EntityType="FOOTBALLMANAGERDEMOModel.GIAIDAU" />
+          <EntitySet Name="HUANLUYENVIENs" EntityType="FOOTBALLMANAGERDEMOModel.HUANLUYENVIEN" />
+          <EntitySet Name="ITEMs" EntityType="FOOTBALLMANAGERDEMOModel.ITEM" />
+          <EntitySet Name="ITEMTYPEs" EntityType="FOOTBALLMANAGERDEMOModel.ITEMTYPE" />
+          <EntitySet Name="QUOCTICHes" EntityType="FOOTBALLMANAGERDEMOModel.QUOCTICH" />
+          <EntitySet Name="sysdiagrams" EntityType="FOOTBALLMANAGERDEMOModel.sysdiagram" />
+          <EntitySet Name="TAPLUYENs" EntityType="FOOTBALLMANAGERDEMOModel.TAPLUYEN" />
+          <EntitySet Name="TEAMOFLEAGUEs" EntityType="FOOTBALLMANAGERDEMOModel.TEAMOFLEAGUE" />
+          <EntitySet Name="THAMGIAs" EntityType="FOOTBALLMANAGERDEMOModel.THAMGIA" />
+          <EntitySet Name="THONGTINGIAIDAUs" EntityType="FOOTBALLMANAGERDEMOModel.THONGTINGIAIDAU" />
+          <EntitySet Name="THONGTINTRANDAUs" EntityType="FOOTBALLMANAGERDEMOModel.THONGTINTRANDAU" />
+          <EntitySet Name="TRANDAUs" EntityType="FOOTBALLMANAGERDEMOModel.TRANDAU" />
+          <EntitySet Name="VONGDAUs" EntityType="FOOTBALLMANAGERDEMOModel.VONGDAU" />
+          <AssociationSet Name="FK_CT1" Association="FOOTBALLMANAGERDEMOModel.FK_CT1">
+            <End Role="DOIBONG" EntitySet="DOIBONGs" />
+            <End Role="CAUTHU" EntitySet="CAUTHUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT2" Association="FOOTBALLMANAGERDEMOModel.FK_CT2">
+            <End Role="QUOCTICH" EntitySet="QUOCTICHes" />
+            <End Role="CAUTHU" EntitySet="CAUTHUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DHC2" Association="FOOTBALLMANAGERDEMOModel.FK_DHC2">
+            <End Role="CAUTHU" EntitySet="CAUTHUs" />
+            <End Role="DOIHINHCHINH" EntitySet="DOIHINHCHINHs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TG2" Association="FOOTBALLMANAGERDEMOModel.FK_TG2">
+            <End Role="CAUTHU" EntitySet="CAUTHUs" />
+            <End Role="THAMGIA" EntitySet="THAMGIAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_1" Association="FOOTBALLMANAGERDEMOModel.FK_1">
+            <End Role="QUOCTICH" EntitySet="QUOCTICHes" />
+            <End Role="DIADIEM" EntitySet="DIADIEMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB3" Association="FOOTBALLMANAGERDEMOModel.FK_DB3">
+            <End Role="DIADIEM" EntitySet="DIADIEMs" />
+            <End Role="DOIBONG" EntitySet="DOIBONGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TD3" Association="FOOTBALLMANAGERDEMOModel.FK_TD3">
+            <End Role="DIADIEM" EntitySet="DIADIEMs" />
+            <End Role="TRANDAU" EntitySet="TRANDAUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D1" Association="FOOTBALLMANAGERDEMOModel.FK_D1">
+            <End Role="DOIBONG" EntitySet="DOIBONGs" />
+            <End Role="DIEM" EntitySet="DIEMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D2" Association="FOOTBALLMANAGERDEMOModel.FK_D2">
+            <End Role="GIAIDAU" EntitySet="GIAIDAUs" />
+            <End Role="DIEM" EntitySet="DIEMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB1" Association="FOOTBALLMANAGERDEMOModel.FK_DB1">
+            <End Role="DOIBONG" EntitySet="DOIBONGs" />
+            <End Role="HUANLUYENVIEN" EntitySet="HUANLUYENVIENs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB2" Association="FOOTBALLMANAGERDEMOModel.FK_DB2">
+            <End Role="QUOCTICH" EntitySet="QUOCTICHes" />
+            <End Role="DOIBONG" EntitySet="DOIBONGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DHC1" Association="FOOTBALLMANAGERDEMOModel.FK_DHC1">
+            <End Role="DOIBONG" EntitySet="DOIBONGs" />
+            <End Role="DOIHINHCHINH" EntitySet="DOIHINHCHINHs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IT_O2" Association="FOOTBALLMANAGERDEMOModel.FK_IT_O2">
+            <End Role="DOIBONG" EntitySet="DOIBONGs" />
+            <End Role="ITEM" EntitySet="ITEMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TD1" Association="FOOTBALLMANAGERDEMOModel.FK_TD1">
+            <End Role="DOIBONG" EntitySet="DOIBONGs" />
+            <End Role="TRANDAU" EntitySet="TRANDAUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TD2" Association="FOOTBALLMANAGERDEMOModel.FK_TD2">
+            <End Role="DOIBONG" EntitySet="DOIBONGs" />
+            <End Role="TRANDAU" EntitySet="TRANDAUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TL2" Association="FOOTBALLMANAGERDEMOModel.FK_TL2">
+            <End Role="DOIBONG" EntitySet="DOIBONGs" />
+            <End Role="TAPLUYEN" EntitySet="TAPLUYENs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TTGD2" Association="FOOTBALLMANAGERDEMOModel.FK_TTGD2">
+            <End Role="DOIBONG" EntitySet="DOIBONGs" />
+            <End Role="THONGTINGIAIDAU" EntitySet="THONGTINGIAIDAUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FM01" Association="FOOTBALLMANAGERDEMOModel.FK_FM01">
+            <End Role="VONGDAU" EntitySet="VONGDAUs" />
+            <End Role="FOOTBALLMATCH" EntitySet="FOOTBALLMATCHes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TTTD_02" Association="FOOTBALLMANAGERDEMOModel.FK_TTTD_02">
+            <End Role="FOOTBALLMATCH" EntitySet="FOOTBALLMATCHes" />
+            <End Role="THONGTINTRANDAU" EntitySet="THONGTINTRANDAUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GD1" Association="FOOTBALLMANAGERDEMOModel.FK_GD1">
+            <End Role="QUOCTICH" EntitySet="QUOCTICHes" />
+            <End Role="GIAIDAU" EntitySet="GIAIDAUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TD4" Association="FOOTBALLMANAGERDEMOModel.FK_TD4">
+            <End Role="GIAIDAU" EntitySet="GIAIDAUs" />
+            <End Role="TRANDAU" EntitySet="TRANDAUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TTGD1" Association="FOOTBALLMANAGERDEMOModel.FK_TTGD1">
+            <End Role="GIAIDAU" EntitySet="GIAIDAUs" />
+            <End Role="THONGTINGIAIDAU" EntitySet="THONGTINGIAIDAUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VD_01" Association="FOOTBALLMANAGERDEMOModel.FK_VD_01">
+            <End Role="GIAIDAU" EntitySet="GIAIDAUs" />
+            <End Role="VONGDAU" EntitySet="VONGDAUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HLV1" Association="FOOTBALLMANAGERDEMOModel.FK_HLV1">
+            <End Role="QUOCTICH" EntitySet="QUOCTICHes" />
+            <End Role="HUANLUYENVIEN" EntitySet="HUANLUYENVIENs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TL1" Association="FOOTBALLMANAGERDEMOModel.FK_TL1">
+            <End Role="HUANLUYENVIEN" EntitySet="HUANLUYENVIENs" />
+            <End Role="TAPLUYEN" EntitySet="TAPLUYENs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IT_01" Association="FOOTBALLMANAGERDEMOModel.FK_IT_01">
+            <End Role="THONGTINTRANDAU" EntitySet="THONGTINTRANDAUs" />
+            <End Role="ITEM" EntitySet="ITEMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IT_03" Association="FOOTBALLMANAGERDEMOModel.FK_IT_03">
+            <End Role="ITEMTYPE" EntitySet="ITEMTYPEs" />
+            <End Role="ITEM" EntitySet="ITEMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TTTD_01" Association="FOOTBALLMANAGERDEMOModel.FK_TTTD_01">
+            <End Role="TEAMOFLEAGUE" EntitySet="TEAMOFLEAGUEs" />
+            <End Role="THONGTINTRANDAU" EntitySet="THONGTINTRANDAUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TG1" Association="FOOTBALLMANAGERDEMOModel.FK_TG1">
+            <End Role="TRANDAU" EntitySet="TRANDAUs" />
+            <End Role="THAMGIA" EntitySet="THAMGIAs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CAUTHU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDDOIBONG" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IDQUOCTICH" Type="Int32" />
+          <Property Name="HOTEN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TUOI" Type="Int32" />
+          <Property Name="SOGIAI" Type="Int32" />
+          <Property Name="SOBANTHANG" Type="Int32" />
+          <Property Name="HINHANH" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CHANTHUAN" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="THETRANG" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="VITRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SOAO" Type="Int32" />
+          <Property Name="CHIEUCAO" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CANNANG" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GIATRICAUTHU" Type="Int64" />
+          <NavigationProperty Name="DOIBONG" Relationship="FOOTBALLMANAGERDEMOModel.FK_CT1" FromRole="CAUTHU" ToRole="DOIBONG" />
+          <NavigationProperty Name="QUOCTICH" Relationship="FOOTBALLMANAGERDEMOModel.FK_CT2" FromRole="CAUTHU" ToRole="QUOCTICH" />
+          <NavigationProperty Name="DOIHINHCHINHs" Relationship="FOOTBALLMANAGERDEMOModel.FK_DHC2" FromRole="CAUTHU" ToRole="DOIHINHCHINH" />
+          <NavigationProperty Name="THAMGIAs" Relationship="FOOTBALLMANAGERDEMOModel.FK_TG2" FromRole="CAUTHU" ToRole="THAMGIA" />
+        </EntityType>
+        <EntityType Name="DIADIEM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TENDIADIEM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IDQUOCGIA" Type="Int32" />
+          <NavigationProperty Name="QUOCTICH" Relationship="FOOTBALLMANAGERDEMOModel.FK_1" FromRole="DIADIEM" ToRole="QUOCTICH" />
+          <NavigationProperty Name="DOIBONGs" Relationship="FOOTBALLMANAGERDEMOModel.FK_DB3" FromRole="DIADIEM" ToRole="DOIBONG" />
+          <NavigationProperty Name="TRANDAUs" Relationship="FOOTBALLMANAGERDEMOModel.FK_TD3" FromRole="DIADIEM" ToRole="TRANDAU" />
+        </EntityType>
+        <EntityType Name="DIEM">
+          <Key>
+            <PropertyRef Name="IDDOIBONG" />
+            <PropertyRef Name="IDGIAIDAU" />
+          </Key>
+          <Property Name="IDDOIBONG" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IDGIAIDAU" Type="Int32" Nullable="false" />
+          <Property Name="SODIEM" Type="Int32" />
+          <NavigationProperty Name="DOIBONG" Relationship="FOOTBALLMANAGERDEMOModel.FK_D1" FromRole="DIEM" ToRole="DOIBONG" />
+          <NavigationProperty Name="GIAIDAU" Relationship="FOOTBALLMANAGERDEMOModel.FK_D2" FromRole="DIEM" ToRole="GIAIDAU" />
+        </EntityType>
+        <EntityType Name="DOIBONG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IDQUOCTICH" Type="Int32" />
+          <Property Name="THANHPHO" Type="Int32" />
+          <Property Name="HINHANH" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="TEN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SOLUONGTHANHVIEN" Type="Int32" />
+          <Property Name="NGAYTHANHLAP" Type="DateTime" Precision="0" />
+          <Property Name="SANNHA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SODOCHIENTHUAT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="GIATRI" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CAUTHUs" Relationship="FOOTBALLMANAGERDEMOModel.FK_CT1" FromRole="DOIBONG" ToRole="CAUTHU" />
+          <NavigationProperty Name="DIADIEM" Relationship="FOOTBALLMANAGERDEMOModel.FK_DB3" FromRole="DOIBONG" ToRole="DIADIEM" />
+          <NavigationProperty Name="DIEMs" Relationship="FOOTBALLMANAGERDEMOModel.FK_D1" FromRole="DOIBONG" ToRole="DIEM" />
+          <NavigationProperty Name="HUANLUYENVIENs" Relationship="FOOTBALLMANAGERDEMOModel.FK_DB1" FromRole="DOIBONG" ToRole="HUANLUYENVIEN" />
+          <NavigationProperty Name="QUOCTICH" Relationship="FOOTBALLMANAGERDEMOModel.FK_DB2" FromRole="DOIBONG" ToRole="QUOCTICH" />
+          <NavigationProperty Name="DOIHINHCHINHs" Relationship="FOOTBALLMANAGERDEMOModel.FK_DHC1" FromRole="DOIBONG" ToRole="DOIHINHCHINH" />
+          <NavigationProperty Name="ITEMs" Relationship="FOOTBALLMANAGERDEMOModel.FK_IT_O2" FromRole="DOIBONG" ToRole="ITEM" />
+          <NavigationProperty Name="TRANDAUs" Relationship="FOOTBALLMANAGERDEMOModel.FK_TD1" FromRole="DOIBONG" ToRole="TRANDAU" />
+          <NavigationProperty Name="TRANDAUs1" Relationship="FOOTBALLMANAGERDEMOModel.FK_TD2" FromRole="DOIBONG" ToRole="TRANDAU" />
+          <NavigationProperty Name="TAPLUYENs" Relationship="FOOTBALLMANAGERDEMOModel.FK_TL2" FromRole="DOIBONG" ToRole="TAPLUYEN" />
+          <NavigationProperty Name="THONGTINGIAIDAUs" Relationship="FOOTBALLMANAGERDEMOModel.FK_TTGD2" FromRole="DOIBONG" ToRole="THONGTINGIAIDAU" />
+        </EntityType>
+        <EntityType Name="DOIHINHCHINH">
+          <Key>
+            <PropertyRef Name="IDDOIBONG" />
+            <PropertyRef Name="IDCAUTHU" />
+          </Key>
+          <Property Name="IDDOIBONG" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IDCAUTHU" Type="Int32" Nullable="false" />
+          <Property Name="VITRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VAITRO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CAUTHU" Relationship="FOOTBALLMANAGERDEMOModel.FK_DHC2" FromRole="DOIHINHCHINH" ToRole="CAUTHU" />
+          <NavigationProperty Name="DOIBONG" Relationship="FOOTBALLMANAGERDEMOModel.FK_DHC1" FromRole="DOIHINHCHINH" ToRole="DOIBONG" />
+        </EntityType>
+        <EntityType Name="FOOTBALLMATCH">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TENTRANDAU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VONGBANG" Type="Int32" />
+          <Property Name="IDVONG" Type="Int32" />
+          <Property Name="DIADIEM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="THOIGIAN" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="VONGDAU" Relationship="FOOTBALLMANAGERDEMOModel.FK_FM01" FromRole="FOOTBALLMATCH" ToRole="VONGDAU" />
+          <NavigationProperty Name="THONGTINTRANDAUs" Relationship="FOOTBALLMANAGERDEMOModel.FK_TTTD_02" FromRole="FOOTBALLMATCH" ToRole="THONGTINTRANDAU" />
+        </EntityType>
+        <EntityType Name="GIAIDAU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDQUOCGIA" Type="Int32" />
+          <Property Name="HINHANH" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="TEN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NGAYBATDAU" Type="DateTime" Precision="0" />
+          <Property Name="NGAYKETTHUC" Type="DateTime" Precision="0" />
+          <Property Name="SODOITG" Type="Int32" />
+          <NavigationProperty Name="DIEMs" Relationship="FOOTBALLMANAGERDEMOModel.FK_D2" FromRole="GIAIDAU" ToRole="DIEM" />
+          <NavigationProperty Name="QUOCTICH" Relationship="FOOTBALLMANAGERDEMOModel.FK_GD1" FromRole="GIAIDAU" ToRole="QUOCTICH" />
+          <NavigationProperty Name="TRANDAUs" Relationship="FOOTBALLMANAGERDEMOModel.FK_TD4" FromRole="GIAIDAU" ToRole="TRANDAU" />
+          <NavigationProperty Name="THONGTINGIAIDAUs" Relationship="FOOTBALLMANAGERDEMOModel.FK_TTGD1" FromRole="GIAIDAU" ToRole="THONGTINGIAIDAU" />
+          <NavigationProperty Name="VONGDAUs" Relationship="FOOTBALLMANAGERDEMOModel.FK_VD_01" FromRole="GIAIDAU" ToRole="VONGDAU" />
+        </EntityType>
+        <EntityType Name="HUANLUYENVIEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDDOIBONG" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IDQUOCTICH" Type="Int32" />
+          <Property Name="HOTEN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TUOI" Type="Int32" />
+          <Property Name="GMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NGAYSINH" Type="DateTime" Precision="0" />
+          <Property Name="CHUCVU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HINHANH" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="DOIBONG" Relationship="FOOTBALLMANAGERDEMOModel.FK_DB1" FromRole="HUANLUYENVIEN" ToRole="DOIBONG" />
+          <NavigationProperty Name="QUOCTICH" Relationship="FOOTBALLMANAGERDEMOModel.FK_HLV1" FromRole="HUANLUYENVIEN" ToRole="QUOCTICH" />
+          <NavigationProperty Name="TAPLUYENs" Relationship="FOOTBALLMANAGERDEMOModel.FK_TL1" FromRole="HUANLUYENVIEN" ToRole="TAPLUYEN" />
+        </EntityType>
+        <EntityType Name="ITEM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDTHONGTINTRANDAU" Type="Int32" />
+          <Property Name="IDDOIBONG" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IDITEM" Type="Int32" />
+          <Property Name="THOIGIAN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IDCAUTHU" Type="Int32" />
+          <NavigationProperty Name="DOIBONG" Relationship="FOOTBALLMANAGERDEMOModel.FK_IT_O2" FromRole="ITEM" ToRole="DOIBONG" />
+          <NavigationProperty Name="THONGTINTRANDAU" Relationship="FOOTBALLMANAGERDEMOModel.FK_IT_01" FromRole="ITEM" ToRole="THONGTINTRANDAU" />
+          <NavigationProperty Name="ITEMTYPE" Relationship="FOOTBALLMANAGERDEMOModel.FK_IT_03" FromRole="ITEM" ToRole="ITEMTYPE" />
+        </EntityType>
+        <EntityType Name="ITEMTYPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TENITEM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ITEMs" Relationship="FOOTBALLMANAGERDEMOModel.FK_IT_03" FromRole="ITEMTYPE" ToRole="ITEM" />
+        </EntityType>
+        <EntityType Name="QUOCTICH">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TENQUOCGIA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CAUTHUs" Relationship="FOOTBALLMANAGERDEMOModel.FK_CT2" FromRole="QUOCTICH" ToRole="CAUTHU" />
+          <NavigationProperty Name="DIADIEMs" Relationship="FOOTBALLMANAGERDEMOModel.FK_1" FromRole="QUOCTICH" ToRole="DIADIEM" />
+          <NavigationProperty Name="DOIBONGs" Relationship="FOOTBALLMANAGERDEMOModel.FK_DB2" FromRole="QUOCTICH" ToRole="DOIBONG" />
+          <NavigationProperty Name="GIAIDAUs" Relationship="FOOTBALLMANAGERDEMOModel.FK_GD1" FromRole="QUOCTICH" ToRole="GIAIDAU" />
+          <NavigationProperty Name="HUANLUYENVIENs" Relationship="FOOTBALLMANAGERDEMOModel.FK_HLV1" FromRole="QUOCTICH" ToRole="HUANLUYENVIEN" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TAPLUYEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDNGUOIQUANLY" Type="Int32" />
+          <Property Name="IDDOIBONG" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TRANGTHAI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="THOIGIANBATDAU" Type="DateTime" Precision="0" />
+          <Property Name="THOIGIANKETTHUC" Type="DateTime" Precision="0" />
+          <Property Name="HOATDONG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GHICHU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DOIBONG" Relationship="FOOTBALLMANAGERDEMOModel.FK_TL2" FromRole="TAPLUYEN" ToRole="DOIBONG" />
+          <NavigationProperty Name="HUANLUYENVIEN" Relationship="FOOTBALLMANAGERDEMOModel.FK_TL1" FromRole="TAPLUYEN" ToRole="HUANLUYENVIEN" />
+        </EntityType>
+        <EntityType Name="TEAMOFLEAGUE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDGIAIDAU" Type="Int32" />
+          <Property Name="IDDOIBONG" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="THONGTINTRANDAUs" Relationship="FOOTBALLMANAGERDEMOModel.FK_TTTD_01" FromRole="TEAMOFLEAGUE" ToRole="THONGTINTRANDAU" />
+        </EntityType>
+        <EntityType Name="THAMGIA">
+          <Key>
+            <PropertyRef Name="IDTRAN" />
+            <PropertyRef Name="IDCAUTHU" />
+          </Key>
+          <Property Name="IDTRAN" Type="Int32" Nullable="false" />
+          <Property Name="IDCAUTHU" Type="Int32" Nullable="false" />
+          <Property Name="SOBANTHANG" Type="Int32" />
+          <NavigationProperty Name="CAUTHU" Relationship="FOOTBALLMANAGERDEMOModel.FK_TG2" FromRole="THAMGIA" ToRole="CAUTHU" />
+          <NavigationProperty Name="TRANDAU" Relationship="FOOTBALLMANAGERDEMOModel.FK_TG1" FromRole="THAMGIA" ToRole="TRANDAU" />
+        </EntityType>
+        <EntityType Name="THONGTINGIAIDAU">
+          <Key>
+            <PropertyRef Name="IDGIAIDAU" />
+            <PropertyRef Name="IDDOIBONG" />
+          </Key>
+          <Property Name="IDGIAIDAU" Type="Int32" Nullable="false" />
+          <Property Name="IDDOIBONG" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="WIN" Type="Int32" />
+          <Property Name="DRAW" Type="Int32" />
+          <Property Name="LOSE" Type="Int32" />
+          <Property Name="GA" Type="Int32" />
+          <Property Name="GD" Type="Int32" />
+          <Property Name="POINTS" Type="Int32" />
+          <NavigationProperty Name="DOIBONG" Relationship="FOOTBALLMANAGERDEMOModel.FK_TTGD2" FromRole="THONGTINGIAIDAU" ToRole="DOIBONG" />
+          <NavigationProperty Name="GIAIDAU" Relationship="FOOTBALLMANAGERDEMOModel.FK_TTGD1" FromRole="THONGTINGIAIDAU" ToRole="GIAIDAU" />
+        </EntityType>
+        <EntityType Name="THONGTINTRANDAU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DIEM" Type="Int32" />
+          <Property Name="THEDO" Type="Int32" />
+          <Property Name="THEVANG" Type="Int32" />
+          <Property Name="KETQUA" Type="Int32" />
+          <Property Name="IDDOIBONG" Type="Int32" />
+          <Property Name="IDTRANDAU" Type="Int32" />
+          <NavigationProperty Name="FOOTBALLMATCH" Relationship="FOOTBALLMANAGERDEMOModel.FK_TTTD_02" FromRole="THONGTINTRANDAU" ToRole="FOOTBALLMATCH" />
+          <NavigationProperty Name="ITEMs" Relationship="FOOTBALLMANAGERDEMOModel.FK_IT_01" FromRole="THONGTINTRANDAU" ToRole="ITEM" />
+          <NavigationProperty Name="TEAMOFLEAGUE" Relationship="FOOTBALLMANAGERDEMOModel.FK_TTTD_01" FromRole="THONGTINTRANDAU" ToRole="TEAMOFLEAGUE" />
+        </EntityType>
+        <EntityType Name="TRANDAU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOAI" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="IDDOI1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IDDOI2" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IDDIADIEM" Type="Int32" />
+          <Property Name="NGAY" Type="DateTime" Precision="0" />
+          <Property Name="GIO" Type="Time" Precision="7" />
+          <Property Name="IDGIAIDAU" Type="Int32" />
+          <NavigationProperty Name="DIADIEM" Relationship="FOOTBALLMANAGERDEMOModel.FK_TD3" FromRole="TRANDAU" ToRole="DIADIEM" />
+          <NavigationProperty Name="DOIBONG" Relationship="FOOTBALLMANAGERDEMOModel.FK_TD1" FromRole="TRANDAU" ToRole="DOIBONG" />
+          <NavigationProperty Name="DOIBONG1" Relationship="FOOTBALLMANAGERDEMOModel.FK_TD2" FromRole="TRANDAU" ToRole="DOIBONG" />
+          <NavigationProperty Name="GIAIDAU" Relationship="FOOTBALLMANAGERDEMOModel.FK_TD4" FromRole="TRANDAU" ToRole="GIAIDAU" />
+          <NavigationProperty Name="THAMGIAs" Relationship="FOOTBALLMANAGERDEMOModel.FK_TG1" FromRole="TRANDAU" ToRole="THAMGIA" />
+        </EntityType>
+        <EntityType Name="VONGDAU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDGIAIDAU" Type="Int32" />
+          <Property Name="TENVONGDAU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FOOTBALLMATCHes" Relationship="FOOTBALLMANAGERDEMOModel.FK_FM01" FromRole="VONGDAU" ToRole="FOOTBALLMATCH" />
+          <NavigationProperty Name="GIAIDAU" Relationship="FOOTBALLMANAGERDEMOModel.FK_VD_01" FromRole="VONGDAU" ToRole="GIAIDAU" />
+        </EntityType>
+        <Association Name="FK_CT1">
+          <End Type="FOOTBALLMANAGERDEMOModel.DOIBONG" Role="DOIBONG" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.CAUTHU" Role="CAUTHU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOIBONG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CAUTHU">
+              <PropertyRef Name="IDDOIBONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT2">
+          <End Type="FOOTBALLMANAGERDEMOModel.QUOCTICH" Role="QUOCTICH" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.CAUTHU" Role="CAUTHU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUOCTICH">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CAUTHU">
+              <PropertyRef Name="IDQUOCTICH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DHC2">
+          <End Type="FOOTBALLMANAGERDEMOModel.CAUTHU" Role="CAUTHU" Multiplicity="1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.DOIHINHCHINH" Role="DOIHINHCHINH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAUTHU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOIHINHCHINH">
+              <PropertyRef Name="IDCAUTHU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TG2">
+          <End Type="FOOTBALLMANAGERDEMOModel.CAUTHU" Role="CAUTHU" Multiplicity="1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.THAMGIA" Role="THAMGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAUTHU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="THAMGIA">
+              <PropertyRef Name="IDCAUTHU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_1">
+          <End Type="FOOTBALLMANAGERDEMOModel.QUOCTICH" Role="QUOCTICH" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.DIADIEM" Role="DIADIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUOCTICH">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DIADIEM">
+              <PropertyRef Name="IDQUOCGIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB3">
+          <End Type="FOOTBALLMANAGERDEMOModel.DIADIEM" Role="DIADIEM" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.DOIBONG" Role="DOIBONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOIBONG">
+              <PropertyRef Name="THANHPHO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TD3">
+          <End Type="FOOTBALLMANAGERDEMOModel.DIADIEM" Role="DIADIEM" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.TRANDAU" Role="TRANDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TRANDAU">
+              <PropertyRef Name="IDDIADIEM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D1">
+          <End Type="FOOTBALLMANAGERDEMOModel.DOIBONG" Role="DOIBONG" Multiplicity="1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.DIEM" Role="DIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOIBONG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DIEM">
+              <PropertyRef Name="IDDOIBONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D2">
+          <End Type="FOOTBALLMANAGERDEMOModel.GIAIDAU" Role="GIAIDAU" Multiplicity="1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.DIEM" Role="DIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIAIDAU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DIEM">
+              <PropertyRef Name="IDGIAIDAU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB1">
+          <End Type="FOOTBALLMANAGERDEMOModel.DOIBONG" Role="DOIBONG" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.HUANLUYENVIEN" Role="HUANLUYENVIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOIBONG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HUANLUYENVIEN">
+              <PropertyRef Name="IDDOIBONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB2">
+          <End Type="FOOTBALLMANAGERDEMOModel.QUOCTICH" Role="QUOCTICH" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.DOIBONG" Role="DOIBONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUOCTICH">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOIBONG">
+              <PropertyRef Name="IDQUOCTICH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DHC1">
+          <End Type="FOOTBALLMANAGERDEMOModel.DOIBONG" Role="DOIBONG" Multiplicity="1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.DOIHINHCHINH" Role="DOIHINHCHINH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOIBONG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOIHINHCHINH">
+              <PropertyRef Name="IDDOIBONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IT_O2">
+          <End Type="FOOTBALLMANAGERDEMOModel.DOIBONG" Role="DOIBONG" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.ITEM" Role="ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOIBONG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ITEM">
+              <PropertyRef Name="IDDOIBONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TD1">
+          <End Type="FOOTBALLMANAGERDEMOModel.DOIBONG" Role="DOIBONG" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.TRANDAU" Role="TRANDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOIBONG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TRANDAU">
+              <PropertyRef Name="IDDOI1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TD2">
+          <End Type="FOOTBALLMANAGERDEMOModel.DOIBONG" Role="DOIBONG" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.TRANDAU" Role="TRANDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOIBONG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TRANDAU">
+              <PropertyRef Name="IDDOI2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TL2">
+          <End Type="FOOTBALLMANAGERDEMOModel.DOIBONG" Role="DOIBONG" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.TAPLUYEN" Role="TAPLUYEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOIBONG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TAPLUYEN">
+              <PropertyRef Name="IDDOIBONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TTGD2">
+          <End Type="FOOTBALLMANAGERDEMOModel.DOIBONG" Role="DOIBONG" Multiplicity="1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.THONGTINGIAIDAU" Role="THONGTINGIAIDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOIBONG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="THONGTINGIAIDAU">
+              <PropertyRef Name="IDDOIBONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FM01">
+          <End Type="FOOTBALLMANAGERDEMOModel.VONGDAU" Role="VONGDAU" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.FOOTBALLMATCH" Role="FOOTBALLMATCH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VONGDAU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FOOTBALLMATCH">
+              <PropertyRef Name="IDVONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TTTD_02">
+          <End Type="FOOTBALLMANAGERDEMOModel.FOOTBALLMATCH" Role="FOOTBALLMATCH" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.THONGTINTRANDAU" Role="THONGTINTRANDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FOOTBALLMATCH">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="THONGTINTRANDAU">
+              <PropertyRef Name="IDTRANDAU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GD1">
+          <End Type="FOOTBALLMANAGERDEMOModel.QUOCTICH" Role="QUOCTICH" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.GIAIDAU" Role="GIAIDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUOCTICH">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GIAIDAU">
+              <PropertyRef Name="IDQUOCGIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TD4">
+          <End Type="FOOTBALLMANAGERDEMOModel.GIAIDAU" Role="GIAIDAU" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.TRANDAU" Role="TRANDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIAIDAU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TRANDAU">
+              <PropertyRef Name="IDGIAIDAU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TTGD1">
+          <End Type="FOOTBALLMANAGERDEMOModel.GIAIDAU" Role="GIAIDAU" Multiplicity="1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.THONGTINGIAIDAU" Role="THONGTINGIAIDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIAIDAU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="THONGTINGIAIDAU">
+              <PropertyRef Name="IDGIAIDAU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VD_01">
+          <End Type="FOOTBALLMANAGERDEMOModel.GIAIDAU" Role="GIAIDAU" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.VONGDAU" Role="VONGDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIAIDAU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VONGDAU">
+              <PropertyRef Name="IDGIAIDAU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HLV1">
+          <End Type="FOOTBALLMANAGERDEMOModel.QUOCTICH" Role="QUOCTICH" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.HUANLUYENVIEN" Role="HUANLUYENVIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUOCTICH">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HUANLUYENVIEN">
+              <PropertyRef Name="IDQUOCTICH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TL1">
+          <End Type="FOOTBALLMANAGERDEMOModel.HUANLUYENVIEN" Role="HUANLUYENVIEN" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.TAPLUYEN" Role="TAPLUYEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HUANLUYENVIEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TAPLUYEN">
+              <PropertyRef Name="IDNGUOIQUANLY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IT_01">
+          <End Type="FOOTBALLMANAGERDEMOModel.THONGTINTRANDAU" Role="THONGTINTRANDAU" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.ITEM" Role="ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THONGTINTRANDAU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ITEM">
+              <PropertyRef Name="IDTHONGTINTRANDAU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IT_03">
+          <End Type="FOOTBALLMANAGERDEMOModel.ITEMTYPE" Role="ITEMTYPE" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.ITEM" Role="ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ITEMTYPE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ITEM">
+              <PropertyRef Name="IDITEM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TTTD_01">
+          <End Type="FOOTBALLMANAGERDEMOModel.TEAMOFLEAGUE" Role="TEAMOFLEAGUE" Multiplicity="0..1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.THONGTINTRANDAU" Role="THONGTINTRANDAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEAMOFLEAGUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="THONGTINTRANDAU">
+              <PropertyRef Name="IDDOIBONG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TG1">
+          <End Type="FOOTBALLMANAGERDEMOModel.TRANDAU" Role="TRANDAU" Multiplicity="1" />
+          <End Type="FOOTBALLMANAGERDEMOModel.THAMGIA" Role="THAMGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANDAU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="THAMGIA">
+              <PropertyRef Name="IDTRAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FOOTBALLMANAGERDEMOModelStoreContainer" CdmEntityContainer="FOOTBALLMANAGERDEMOEntities">
+          <EntitySetMapping Name="CAUTHUs">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.CAUTHU">
+              <MappingFragment StoreEntitySet="CAUTHU">
+                <ScalarProperty Name="GIATRICAUTHU" ColumnName="GIATRICAUTHU" />
+                <ScalarProperty Name="CANNANG" ColumnName="CANNANG" />
+                <ScalarProperty Name="CHIEUCAO" ColumnName="CHIEUCAO" />
+                <ScalarProperty Name="SOAO" ColumnName="SOAO" />
+                <ScalarProperty Name="VITRI" ColumnName="VITRI" />
+                <ScalarProperty Name="THETRANG" ColumnName="THETRANG" />
+                <ScalarProperty Name="CHANTHUAN" ColumnName="CHANTHUAN" />
+                <ScalarProperty Name="HINHANH" ColumnName="HINHANH" />
+                <ScalarProperty Name="SOBANTHANG" ColumnName="SOBANTHANG" />
+                <ScalarProperty Name="SOGIAI" ColumnName="SOGIAI" />
+                <ScalarProperty Name="TUOI" ColumnName="TUOI" />
+                <ScalarProperty Name="HOTEN" ColumnName="HOTEN" />
+                <ScalarProperty Name="IDQUOCTICH" ColumnName="IDQUOCTICH" />
+                <ScalarProperty Name="IDDOIBONG" ColumnName="IDDOIBONG" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIADIEMs">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.DIADIEM">
+              <MappingFragment StoreEntitySet="DIADIEM">
+                <ScalarProperty Name="IDQUOCGIA" ColumnName="IDQUOCGIA" />
+                <ScalarProperty Name="TENDIADIEM" ColumnName="TENDIADIEM" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIEMs">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.DIEM">
+              <MappingFragment StoreEntitySet="DIEM">
+                <ScalarProperty Name="SODIEM" ColumnName="SODIEM" />
+                <ScalarProperty Name="IDGIAIDAU" ColumnName="IDGIAIDAU" />
+                <ScalarProperty Name="IDDOIBONG" ColumnName="IDDOIBONG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOIBONGs">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.DOIBONG">
+              <MappingFragment StoreEntitySet="DOIBONG">
+                <ScalarProperty Name="GIATRI" ColumnName="GIATRI" />
+                <ScalarProperty Name="SODOCHIENTHUAT" ColumnName="SODOCHIENTHUAT" />
+                <ScalarProperty Name="SANNHA" ColumnName="SANNHA" />
+                <ScalarProperty Name="NGAYTHANHLAP" ColumnName="NGAYTHANHLAP" />
+                <ScalarProperty Name="SOLUONGTHANHVIEN" ColumnName="SOLUONGTHANHVIEN" />
+                <ScalarProperty Name="TEN" ColumnName="TEN" />
+                <ScalarProperty Name="HINHANH" ColumnName="HINHANH" />
+                <ScalarProperty Name="THANHPHO" ColumnName="THANHPHO" />
+                <ScalarProperty Name="IDQUOCTICH" ColumnName="IDQUOCTICH" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOIHINHCHINHs">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.DOIHINHCHINH">
+              <MappingFragment StoreEntitySet="DOIHINHCHINH">
+                <ScalarProperty Name="VAITRO" ColumnName="VAITRO" />
+                <ScalarProperty Name="VITRI" ColumnName="VITRI" />
+                <ScalarProperty Name="IDCAUTHU" ColumnName="IDCAUTHU" />
+                <ScalarProperty Name="IDDOIBONG" ColumnName="IDDOIBONG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FOOTBALLMATCHes">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.FOOTBALLMATCH">
+              <MappingFragment StoreEntitySet="FOOTBALLMATCH">
+                <ScalarProperty Name="THOIGIAN" ColumnName="THOIGIAN" />
+                <ScalarProperty Name="DIADIEM" ColumnName="DIADIEM" />
+                <ScalarProperty Name="IDVONG" ColumnName="IDVONG" />
+                <ScalarProperty Name="VONGBANG" ColumnName="VONGBANG" />
+                <ScalarProperty Name="TENTRANDAU" ColumnName="TENTRANDAU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GIAIDAUs">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.GIAIDAU">
+              <MappingFragment StoreEntitySet="GIAIDAU">
+                <ScalarProperty Name="SODOITG" ColumnName="SODOITG" />
+                <ScalarProperty Name="NGAYKETTHUC" ColumnName="NGAYKETTHUC" />
+                <ScalarProperty Name="NGAYBATDAU" ColumnName="NGAYBATDAU" />
+                <ScalarProperty Name="TEN" ColumnName="TEN" />
+                <ScalarProperty Name="HINHANH" ColumnName="HINHANH" />
+                <ScalarProperty Name="IDQUOCGIA" ColumnName="IDQUOCGIA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HUANLUYENVIENs">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.HUANLUYENVIEN">
+              <MappingFragment StoreEntitySet="HUANLUYENVIEN">
+                <ScalarProperty Name="HINHANH" ColumnName="HINHANH" />
+                <ScalarProperty Name="CHUCVU" ColumnName="CHUCVU" />
+                <ScalarProperty Name="NGAYSINH" ColumnName="NGAYSINH" />
+                <ScalarProperty Name="GMAIL" ColumnName="GMAIL" />
+                <ScalarProperty Name="TUOI" ColumnName="TUOI" />
+                <ScalarProperty Name="HOTEN" ColumnName="HOTEN" />
+                <ScalarProperty Name="IDQUOCTICH" ColumnName="IDQUOCTICH" />
+                <ScalarProperty Name="IDDOIBONG" ColumnName="IDDOIBONG" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ITEMs">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.ITEM">
+              <MappingFragment StoreEntitySet="ITEM">
+                <ScalarProperty Name="IDCAUTHU" ColumnName="IDCAUTHU" />
+                <ScalarProperty Name="THOIGIAN" ColumnName="THOIGIAN" />
+                <ScalarProperty Name="IDITEM" ColumnName="IDITEM" />
+                <ScalarProperty Name="IDDOIBONG" ColumnName="IDDOIBONG" />
+                <ScalarProperty Name="IDTHONGTINTRANDAU" ColumnName="IDTHONGTINTRANDAU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ITEMTYPEs">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.ITEMTYPE">
+              <MappingFragment StoreEntitySet="ITEMTYPE">
+                <ScalarProperty Name="TENITEM" ColumnName="TENITEM" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QUOCTICHes">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.QUOCTICH">
+              <MappingFragment StoreEntitySet="QUOCTICH">
+                <ScalarProperty Name="TENQUOCGIA" ColumnName="TENQUOCGIA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAPLUYENs">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.TAPLUYEN">
+              <MappingFragment StoreEntitySet="TAPLUYEN">
+                <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
+                <ScalarProperty Name="HOATDONG" ColumnName="HOATDONG" />
+                <ScalarProperty Name="THOIGIANKETTHUC" ColumnName="THOIGIANKETTHUC" />
+                <ScalarProperty Name="THOIGIANBATDAU" ColumnName="THOIGIANBATDAU" />
+                <ScalarProperty Name="TRANGTHAI" ColumnName="TRANGTHAI" />
+                <ScalarProperty Name="IDDOIBONG" ColumnName="IDDOIBONG" />
+                <ScalarProperty Name="IDNGUOIQUANLY" ColumnName="IDNGUOIQUANLY" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEAMOFLEAGUEs">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.TEAMOFLEAGUE">
+              <MappingFragment StoreEntitySet="TEAMOFLEAGUE">
+                <ScalarProperty Name="IDDOIBONG" ColumnName="IDDOIBONG" />
+                <ScalarProperty Name="IDGIAIDAU" ColumnName="IDGIAIDAU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THAMGIAs">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.THAMGIA">
+              <MappingFragment StoreEntitySet="THAMGIA">
+                <ScalarProperty Name="SOBANTHANG" ColumnName="SOBANTHANG" />
+                <ScalarProperty Name="IDCAUTHU" ColumnName="IDCAUTHU" />
+                <ScalarProperty Name="IDTRAN" ColumnName="IDTRAN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THONGTINGIAIDAUs">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.THONGTINGIAIDAU">
+              <MappingFragment StoreEntitySet="THONGTINGIAIDAU">
+                <ScalarProperty Name="POINTS" ColumnName="POINTS" />
+                <ScalarProperty Name="GD" ColumnName="GD" />
+                <ScalarProperty Name="GA" ColumnName="GA" />
+                <ScalarProperty Name="LOSE" ColumnName="LOSE" />
+                <ScalarProperty Name="DRAW" ColumnName="DRAW" />
+                <ScalarProperty Name="WIN" ColumnName="WIN" />
+                <ScalarProperty Name="IDDOIBONG" ColumnName="IDDOIBONG" />
+                <ScalarProperty Name="IDGIAIDAU" ColumnName="IDGIAIDAU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THONGTINTRANDAUs">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.THONGTINTRANDAU">
+              <MappingFragment StoreEntitySet="THONGTINTRANDAU">
+                <ScalarProperty Name="IDTRANDAU" ColumnName="IDTRANDAU" />
+                <ScalarProperty Name="IDDOIBONG" ColumnName="IDDOIBONG" />
+                <ScalarProperty Name="KETQUA" ColumnName="KETQUA" />
+                <ScalarProperty Name="THEVANG" ColumnName="THEVANG" />
+                <ScalarProperty Name="THEDO" ColumnName="THEDO" />
+                <ScalarProperty Name="DIEM" ColumnName="DIEM" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANDAUs">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.TRANDAU">
+              <MappingFragment StoreEntitySet="TRANDAU">
+                <ScalarProperty Name="IDGIAIDAU" ColumnName="IDGIAIDAU" />
+                <ScalarProperty Name="GIO" ColumnName="GIO" />
+                <ScalarProperty Name="NGAY" ColumnName="NGAY" />
+                <ScalarProperty Name="IDDIADIEM" ColumnName="IDDIADIEM" />
+                <ScalarProperty Name="IDDOI2" ColumnName="IDDOI2" />
+                <ScalarProperty Name="IDDOI1" ColumnName="IDDOI1" />
+                <ScalarProperty Name="LOAI" ColumnName="LOAI" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VONGDAUs">
+            <EntityTypeMapping TypeName="FOOTBALLMANAGERDEMOModel.VONGDAU">
+              <MappingFragment StoreEntitySet="VONGDAU">
+                <ScalarProperty Name="TENVONGDAU" ColumnName="TENVONGDAU" />
+                <ScalarProperty Name="IDGIAIDAU" ColumnName="IDGIAIDAU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
