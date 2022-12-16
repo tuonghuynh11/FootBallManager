@@ -83,10 +83,10 @@ namespace FootBallProject
             bLDs.Add(bLD);
         }
 
-        private void Button_Click_ExportExcel(object sender, RoutedEventArgs e)
-        {
+        //private void Button_Click_ExportExcel(object sender, RoutedEventArgs e)
+        //{
             
-        }
+        //}
 
         private void AddNewPerson_Click(object sender, RoutedEventArgs e)
         {
@@ -99,7 +99,7 @@ namespace FootBallProject
             DataGrid dg = sender as DataGrid;
             BLD bLD = dg.SelectedItem as BLD;
             BLD_Appear bLD_Appear = new BLD_Appear();
-            bLD_Appear.Init(bLD.IDdoibong, bLD.Name, bLD.Dateofbirth, bLD.Position, bLD.Mailcontact, bLD.Nationality);
+            //bLD_Appear.Init(bLD.IDdoibong, bLD.Name, bLD.Dateofbirth, bLD.Position, bLD.Mailcontact, bLD.Nationality);
             bLD_Appear.ShowDialog();
         }
 

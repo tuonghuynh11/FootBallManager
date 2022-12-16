@@ -10,28 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace FootBallProject
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Error.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Error : Window
     {
-        public MainWindow()
+        public Error()
         {
             InitializeComponent();
+        }
 
-            //DS_BLD dS_BLD = new DS_BLD();
-            //dS_BLD.Show();
-
-            UserAccount userAccount = new UserAccount();
-            userAccount.Show();
-
-            //Calendar calendar = new Calendar();
-            //calendar.Show();
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

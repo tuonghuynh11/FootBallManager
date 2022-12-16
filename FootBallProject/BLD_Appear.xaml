@@ -9,72 +9,88 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Background="#D0D6DB"
+        AllowsTransparency="True" Background="Transparent" WindowStyle="None"
         FontFamily="{DynamicResource MaterialDesignFont}"
         
         DataContext="{StaticResource MainVM}"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="BLD_Appear" Height="330" Width="600">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="15"></RowDefinition>
-            <RowDefinition Height="300"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="1">
-            <Label x:Name="ttname" 
-                   HorizontalAlignment="Center"
-                   FontSize="15" FontWeight="Bold">
-                Thành viên Ban Lãnh Đạo
-            </Label>
-            <Label x:Name="nncname" Margin="60,29,445,246" Height="25">
-                ID Đội Bóng
-            </Label>
-            <Label x:Name="htname" Margin="60,66,445,208" Height="25">
-                Họ và tên
-            </Label>
-            <Label x:Name="nsname" Margin="60,109,445,166" Height="25">
-                Ngày sinh
-            </Label>
-            <Label x:Name="cvname" Margin="60,150,445,125" Height="25">
-                Chức vụ
-            </Label>
-            <Label x:Name="dcname" Margin="60,189,445,86" Height="25">
-                Địa chỉ mail
-            </Label>
-            <Label x:Name="qtname" Margin="60,229,445,46" Height="25">
-                Quốc tịch
-            </Label>
-            <TextBox x:Name="tbID" Width="250" 
-                       IsReadOnly="True"
-                       HorizontalAlignment="Center"
-                       Height="25" Background="White" Margin="0,29,0,246"/>
-            <TextBox x:Name="tbht" Width="250" 
-                      IsReadOnly="True"
-                       HorizontalAlignment="Center"
-                       Height="25" Background="White" Margin="0,66,0,208"/>
-            <TextBox x:Name="tbcv" Width="250" 
-                       IsReadOnly="True"
-                       HorizontalAlignment="Center"
-                       Height="25" Background="White" Margin="0,150,0,125"/>
-            <TextBox x:Name="tbdc" Width="250" 
-                       IsReadOnly="True"
-                       HorizontalAlignment="Center"
-                       Height="25" Background="White" Margin="0,189,0,86"/>
-            <TextBox x:Name="tbqt" Width="250" 
-                       IsReadOnly="True"
-                       HorizontalAlignment="Center"
-                       Height="25" Background="White" Margin="0,229,0,46"/>
-            <TextBox x:Name="nsdp" Width="250" 
-                        IsReadOnly="True"
-                        HorizontalAlignment="Center"
-                        Height="25" Margin="0,109,0,0"
-                        Background="White" VerticalAlignment="Top">
-            </TextBox>
-            <Image HorizontalAlignment="Left" 
-                   Height="96" Margin="475,29,0,0" 
-                   VerticalAlignment="Top" Width="100"
-                   Source="Images/avatar_temp.png"/>
+        Title="BLD_Appear" Height="380" Width="600">
+    <Border CornerRadius="10" Padding="6" Background="#d3ffce">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15"></RowDefinition>
+                <RowDefinition Height="350"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Button x:Name="Close_but" Height="20" Width="20" VerticalAlignment="Center"
+                        HorizontalAlignment="Right" Margin="0 0 5 0" BorderBrush="{x:Null}" Click="Close_but_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Images/x_icon.png"/>
+                    </Button.Background>
+
+                </Button>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Label FontSize="30" Height="50" Width="320" Margin="20,19,230,231">
+                    Thông Tin Thành Viên
+                </Label>
+                <Label x:Name="nncname" Margin="20,99,485,226" Height="25">
+                    Đội Bóng
+                </Label>
+                <Label x:Name="htname" Margin="20,150,485,175" Height="25">
+                    Họ và tên
+                </Label>
+                <Label x:Name="nsname" Margin="325,206,180,119" Height="25">
+                    Ngày sinh
+                </Label>
+                <Label x:Name="cvname" Margin="20,208,485,116" Height="25">
+                    Chức vụ
+                </Label>
+                <Label x:Name="dcname" Margin="325,262,180,63" Height="25">
+                    Địa chỉ mail
+                </Label>
+                <Label x:Name="qtname" Margin="20,262,485,63" Height="25">
+                    Quốc tịch
+                </Label>
+                <TextBox x:Name="tbID" Width="160" 
+                           IsReadOnly="True"
+                           HorizontalAlignment="Left"
+                           Height="25" Background="White" Margin="115,99,0,226"/>
+                <TextBox x:Name="tbht" Width="160" 
+                          IsReadOnly="True"
+                           HorizontalAlignment="Left"
+                           Height="25" Background="White" Margin="115,150,0,175"/>
+                <TextBox x:Name="tbcv" Width="160" 
+                           IsReadOnly="True"
+                           HorizontalAlignment="Left"
+                           Height="25" Background="White" Margin="115,208,0,116"/>
+                <TextBox x:Name="tbdc" Width="160" 
+                           IsReadOnly="True"
+                           HorizontalAlignment="Left"
+                           Height="25" Background="White" Margin="420,262,0,64"/>
+                <TextBox x:Name="tbqt" Width="160" 
+                           IsReadOnly="True"
+                           HorizontalAlignment="Left"
+                           Height="25" Background="White" Margin="115,262,0,64"/>
+                <TextBox x:Name="nsdp" Width="160" 
+                            IsReadOnly="True"
+                            HorizontalAlignment="Left"
+                            Height="25" Margin="420,206,0,0"
+                            Background="White" VerticalAlignment="Top">
+                </TextBox>
+                <Image x:Name="bldimg" HorizontalAlignment="Left" 
+                       Height="186" Margin="360,0,0,0" 
+                       VerticalAlignment="Top" Width="190"
+                       Source="Images/avatar_temp.png"/>
+                <Button 
+                    x:Name="delete"
+                    VerticalAlignment="Top"
+                    Background="#fc5959"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Width="100" ToolTip="Xóa" RenderTransformOrigin="-0.3,0.156" 
+                    Content="_Xóa" Margin="450,308,38,0" Click="delete_Click"/>
+            </Grid>
         </Grid>
-    </Grid>
+    </Border>
 </Window>
