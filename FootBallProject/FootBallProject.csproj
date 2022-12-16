@@ -294,7 +294,7 @@
     </Compile>
     <Compile Include="Model\THONGTINGIAIDAU.cs">
       <DependentUpon>Model1.tt</DependentUpon>
-
+    </Compile>
     <Compile Include="Model\THONGTINTRANDAU.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
