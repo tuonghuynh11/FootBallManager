@@ -13,7 +13,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using static FootBallProject.DS_BLD;
 using static FootBallProject.UserControlBar.UserControl_DS_BLD;
 using System.Configuration;
 using Microsoft.Win32;
