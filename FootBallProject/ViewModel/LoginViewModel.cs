@@ -274,11 +274,16 @@ namespace FootBallProject.ViewModel
         }
         private void DoOpenMainWindow()
         {
-            if (IsExistAccount())
-            {
-                LoginSuccessful();
-                return;
-            }
+            //if (IsExistAccount())
+            //{
+            //    LoginSuccessful();
+            //    return;
+            //}
+            Window window = Application.Current.MainWindow as Window;
+            AdminScreen mainWindow = new AdminScreen();
+            Application.Current.MainWindow = mainWindow;
+            Application.Current.MainWindow.Show();
+            window.Close();
         }
         private void LoginSuccessful()
         {

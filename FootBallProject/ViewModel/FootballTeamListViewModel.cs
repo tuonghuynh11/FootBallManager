@@ -4,7 +4,6 @@ using DevExpress.Mvvm.Xpf;
 using DevExpress.Xpf.Grid;
 using FootBallProject.Model;
 using FootBallProject.UserControlBar.ScreenNavigation;
-using Microsoft.Expression.Interactivity.Core;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

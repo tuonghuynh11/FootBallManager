@@ -19,6 +19,7 @@ namespace FootBallProject.Model
         {
             this.ROUNDs = new HashSet<ROUND>();
             this.TEAMOFLEAGUEs = new HashSet<TEAMOFLEAGUE>();
+            this.THONGTINGIAIDAUs = new HashSet<THONGTINGIAIDAU>();
         }
     
         public int ID { get; set; }
@@ -26,12 +27,23 @@ namespace FootBallProject.Model
         public Nullable<System.DateTime> NGAYKETTHUC { get; set; }
         public string TENGIAIDAU { get; set; }
         public Nullable<int> IDQUOCGIA { get; set; }
-        public string HINHANH { get; set; }
-    
+        public byte[] HINHANH { get; set; }
+        public string QUOCGIA
+        {
+            get
+            {
+                var qg = DataProvider.ins.DB.QUOCTICHes.Find(IDQUOCGIA);
+
+                return qg == null ? " " : qg.TENQUOCGIA;
+            }
+            set { }
+        }
         public virtual QUOCTICH QUOCTICH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ROUND> ROUNDs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TEAMOFLEAGUE> TEAMOFLEAGUEs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<THONGTINGIAIDAU> THONGTINGIAIDAUs { get; set; }
     }
 }

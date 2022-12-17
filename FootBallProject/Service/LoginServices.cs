@@ -41,7 +41,7 @@ namespace FootBallProject.Service
 
         public int CountPeriodTodayOfUser;
 
-        public officialleagueEntities db = DataProvider.Instance.Database;
+        public officialleagueEntities1 db = DataProvider.Instance.Database;
 
 
         public LoginServices() { }

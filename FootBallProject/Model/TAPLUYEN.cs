@@ -22,10 +22,5 @@ namespace FootBallProject.Model
         public Nullable<System.DateTime> THOIGIANKETTHUC { get; set; }
         public string HOATDONG { get; set; }
         public string GHICHU { get; set; }
-
-    
-        public virtual DOIBONG DOIBONG { get; set; }
-        public virtual HUANLUYENVIEN HUANLUYENVIEN { get; set; }
-
     }
 }

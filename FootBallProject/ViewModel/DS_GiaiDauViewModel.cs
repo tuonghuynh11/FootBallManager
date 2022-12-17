@@ -10,12 +10,12 @@ namespace FootBallProject.ViewModel
 {
     public class DS_GiaiDauViewModel:BaseViewModel
     {
-        private ObservableCollection<GIAIDAU> _Leagues;
-        public ObservableCollection<GIAIDAU> Leagues { get => _Leagues; set { _Leagues = value; OnPropertyChanged(); } }
+        private ObservableCollection<LEAGUE> _Leagues;
+        public ObservableCollection<LEAGUE> Leagues { get => _Leagues; set { _Leagues = value; OnPropertyChanged(); } }
 
         public DS_GiaiDauViewModel()
         {
-            Leagues = new ObservableCollection<GIAIDAU>(DataProvider.ins.DB.GIAIDAUs);
+            Leagues = new ObservableCollection<LEAGUE>(DataProvider.ins.DB.LEAGUEs);
         }
     }
 }

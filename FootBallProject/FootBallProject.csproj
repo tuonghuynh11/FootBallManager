@@ -52,7 +52,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-
     <Reference Include="DevExpress.Data.Desktop.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Mvvm.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -60,7 +59,6 @@
     <Reference Include="DevExpress.Xpf.Core.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Grid.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Grid.v21.2.Core, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -80,9 +78,10 @@
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
-
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.ConfigurationManager, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Configuration.ConfigurationManager.7.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
@@ -104,7 +103,6 @@
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Drawing" />
-
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
@@ -135,7 +133,6 @@
     <Compile Include="AdminScreen.xaml.cs">
       <DependentUpon>AdminScreen.xaml</DependentUpon>
     </Compile>
-
     <Compile Include="Class\ConvertByteArrToImage.cs" />
     <Compile Include="Class\Format team\BasicTeam.cs" />
     <Compile Include="Class\Format team\Team_4231.cs" />
@@ -153,7 +150,6 @@
     <Compile Include="MatchInfomation.xaml.cs">
       <DependentUpon>MatchInfomation.xaml</DependentUpon>
     </Compile>
-
     <Compile Include="ChangePass.xaml.cs">
       <DependentUpon>ChangePass.xaml</DependentUpon>
     </Compile>
@@ -215,7 +211,6 @@
     <Compile Include="MainWindow2.xaml.cs">
       <DependentUpon>MainWindow2.xaml</DependentUpon>
     </Compile>
-
     <Compile Include="Model\CAUTHU.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -235,11 +230,6 @@
     <Compile Include="Model\FOOTBALLMATCH.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-
-    <Compile Include="Model\GIAIDAU.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-
     <Compile Include="Model\HUANLUYENVIEN.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -249,11 +239,9 @@
     <Compile Include="Model\ITEMTYPE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-
     <Compile Include="Model\LEAGUE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-
     <Compile Include="Model\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -269,9 +257,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-
-    <Compile Include="Model\sysdiagram.cs">
-</Compile>
     <Compile Include="Model\OTP.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -279,17 +264,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ROUND.cs">
-
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TAPLUYEN.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TEAMOFLEAGUE.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-
-    <Compile Include="Model\THAMGIA.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\THONGTINGIAIDAU.cs">
@@ -335,15 +315,6 @@
     <Compile Include="UserAccount.xaml.cs">
       <DependentUpon>UserAccount.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\THONGTINTRANDAU.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\TRANDAU.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\VONGDAU.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="PopUp\OKCancelPopUp.xaml.cs">
       <DependentUpon>OKCancelPopUp.xaml</DependentUpon>
     </Compile>
@@ -375,7 +346,6 @@
     <Compile Include="UserControlBar\MenuBarUC.xaml.cs">
       <DependentUpon>MenuBarUC.xaml</DependentUpon>
     </Compile>
-
     <Compile Include="UserControlBar\ScreenNavigation\Admin.xaml.cs">
       <DependentUpon>Admin.xaml</DependentUpon>
     </Compile>
@@ -389,7 +359,6 @@
       <DependentUpon>TitleBarUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AdminScreenViewModel.cs" />
-
     <Compile Include="UserControlBar\UserControl_Calendar.xaml.cs">
       <DependentUpon>UserControl_Calendar.xaml</DependentUpon>
     </Compile>
@@ -404,11 +373,9 @@
     </Compile>
     <Compile Include="Utils\SHA256Cryptography.cs" />
     <Compile Include="ViewModel\AddPlayerViewModel.cs" />
-
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ClubInfomationViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
-
     <Compile Include="ViewModel\DH433VIewModel.cs" />
     <Compile Include="ViewModel\DSCLBViewModel.cs" />
     <Compile Include="ViewModel\DS_GiaiDauViewModel.cs" />
@@ -419,7 +386,6 @@
     <Compile Include="ViewModel\TeamBuilderViewModel.cs" />
     <Compile Include="ViewModel\TitleBarViewModel.cs" />
     <Compile Include="ViewModel\TournamentInformationViewModel.cs" />
-
     <Compile Include="ViewModel\CreateNewMatchViewModel.cs" />
     <Compile Include="ViewModel\EmptyRightSideBarViewModel.cs" />
     <Compile Include="ViewModel\ErrorBaseViewModel.cs" />
@@ -445,21 +411,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-
     <Page Include="AdminScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-
     <Page Include="DS_CLB.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DS_GiaiDau.xaml"> 
-       <SubType>Designer</SubType>
+    <Page Include="DS_GiaiDau.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-     </Page>
-
+    </Page>
     <Page Include="ChangePass.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -556,7 +519,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-
     <Page Include="MatchInfomation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -569,8 +531,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PopUp\PopUpCustom.xaml"> 
-     <SubType>Designer</SubType>
+    <Page Include="PopUp\PopUpCustom.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow2.xaml">
@@ -585,7 +547,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-
     <Page Include="Styles\Button.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -642,7 +603,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-
     <Page Include="UserControlBar\ScreenNavigation\Admin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -656,10 +616,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlBar\TitleBarUC.xaml">
-     <SubType>Designer</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-
     <Page Include="UserControlBar\UserControl_Calendar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -720,22 +679,21 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-
-    <Resource Include="Images\addroleposition.png" />
-    <Resource Include="Images\anhnengd.jpg" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Model\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\addroleposition.png" />
+    <Resource Include="Images\anhnengd.jpg" />
     <COMReference Include="Microsoft.Office.Core">
       <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
       <VersionMajor>2</VersionMajor>
@@ -754,7 +712,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\1234876499.jpeg" />
@@ -791,7 +748,6 @@
     <Resource Include="Images\3.jpg" />
   </ItemGroup>
   <ItemGroup>
-
     <Resource Include="Images\SDCT.png" />
   </ItemGroup>
   <ItemGroup>
@@ -843,19 +799,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Anonymous.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Model\Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model\Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
-
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.6.1\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.6.1\build\MaterialDesignThemes.targets')" />

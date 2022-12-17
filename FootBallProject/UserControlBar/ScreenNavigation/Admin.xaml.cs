@@ -141,7 +141,7 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            var tt = lsTranDau.SelectedItem as TRANDAU;
+            var tt = lsTranDau.SelectedItem as FOOTBALLMATCH;
             if (tt != null)
             {
                 DOIBONG team1 = DataProvider.ins.DB.DOIBONGs.Find(tt.IDDOI1);

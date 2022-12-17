@@ -32,7 +32,7 @@
         
         
         
-        Title="MatchInfomation" Height="720" Width="1300" Loaded="Window_Loaded">
+        Title="MatchInfomation" Height="720" Width="1200" Loaded="Window_Loaded">
     <Window.Resources>
         <convert:ConvertByteArrToImage x:Key="imageconvert"></convert:ConvertByteArrToImage>
     </Window.Resources>
@@ -46,8 +46,8 @@
             <uc:TitleBarUC x:Name="titlebar" Tag="Thông tin trận đấu" Foreground="#FF52AE4B" Grid.Row="0" />
             <Grid Grid.Row="1" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition ></ColumnDefinition>
+                    <ColumnDefinition Width="600"></ColumnDefinition>
+                    <ColumnDefinition Width="600" ></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" Margin="0 0 5 0">
                     <Border CornerRadius="0 0 10 10"  Background="#171630" Grid.ColumnSpan="2">
@@ -75,14 +75,14 @@
                                 </Border>
 
                                 <!--Tên HLV-->
-                                <StackPanel Orientation="Vertical" Margin="0 0 10 0">
+                                <StackPanel Orientation="Vertical" Margin="0 0 0 0">
                                     <TextBlock Text="HLV" Foreground="#818591" Margin="10 0 10 10" FontSize="20"></TextBlock>
                                     <TextBlock Text="{Binding Team1.HLV}" Foreground="White" VerticalAlignment="Center" FontSize="17" Margin="10 0 10 0" Width="120"></TextBlock>
 
                                 </StackPanel>
                                 <!--Tên HLV-->
                                 <!--Giá trị đội hình-->
-                                <StackPanel Orientation="Vertical" Margin="10 0 10 0">
+                                <StackPanel Orientation="Vertical" Margin="0 0 0 0">
                                     <TextBlock Text="Giá trị đội hình" Foreground="#818591" Margin="10 0 10 10" FontSize="20"></TextBlock>
                                     <TextBlock x:Name="GTDHtbl_DOINHA" Text="{Binding Team1.GIATRI }" Foreground="White" VerticalAlignment="Center" FontSize="17" Width="170" Margin="10 0 10 0" Loaded="GTDHtbl_DOINHA_Loaded"  />
 
@@ -132,14 +132,14 @@
 
                                 
                                 <!--Tên HLV-->
-                                <StackPanel Orientation="Vertical" Margin="0 0 10 0">
+                                <StackPanel Orientation="Vertical" Margin="0 0 0 0">
                                     <TextBlock Text="HLV" Foreground="#818591" Margin="10 0 10 10" FontSize="20"></TextBlock>
                                     <TextBlock Text="{Binding Team2.HLV}" Foreground="White" VerticalAlignment="Center" FontSize="17" Width="120" Margin="10 0 10 0" ></TextBlock>
 
                                 </StackPanel>
                                 <!--Tên HLV-->
                                 <!--Giá trị đội hình-->
-                                <StackPanel Orientation="Vertical" Margin="10 0 10 0">
+                                <StackPanel Orientation="Vertical" Margin="0 0 0 0">
                                     <TextBlock Text="Giá trị đội hình" Foreground="#818591" Margin="10 0 10 10" FontSize="20"></TextBlock>
                                     <TextBlock x:Name="GTDHtbl_DOIKHACH" Text="{Binding Team2.GIATRI }" Foreground="White" VerticalAlignment="Center" FontSize="17" Width="170" Margin="10 0 10 0" Loaded="GTDHtbl_DOIKHACH_Loaded" />
 
