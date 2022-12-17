@@ -8,7 +8,6 @@ namespace FootBallProject.Model
 {
     public class DataProvider
     {
-
         private static DataProvider _ins;
         public static DataProvider ins
         {
@@ -23,23 +22,27 @@ namespace FootBallProject.Model
             }
             set { _ins = value; }
         }
-        public FOOTBALLMANAGERDEMOEntities DB { get; set; }
+        private static DataProvider _Instance;
+        public static DataProvider Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                {
+                    _Instance = new DataProvider();
+                }
+                return _Instance;
+
+            }
+            set { _Instance = value; }
+        }
+        public officialleagueEntities1 DB { get; set; }
+        public officialleagueEntities1 Database { get; set; }
         private DataProvider()
         {
-            DB = new FOOTBALLMANAGERDEMOEntities();
+            DB = new officialleagueEntities1();
+            Database = new officialleagueEntities1();
 
         }
-
-        private static DataProvider s_instance;
-
-        public static DataProvider Instance => s_instance ?? (s_instance = new DataProvider());
-
-        private DataProvider()
-        {
-            Database = new officialleagueEntities();
-        }
-
-        public officialleagueEntities Database { get; set; }
-
     }
 }

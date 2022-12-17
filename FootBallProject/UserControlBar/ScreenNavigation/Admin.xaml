@@ -415,9 +415,9 @@
                                         <Separator Width="7" Background="Transparent" Foreground="Transparent" BorderBrush="Transparent" BorderThickness="0"></Separator>
 
                                         <materialDesign:PackIcon Kind="Clock" VerticalAlignment="Center" Foreground="#979FA7" FontSize="10"/>
-                                        <TextBlock Margin="5 0 10 0" Text="{Binding GIO }" VerticalAlignment="Center" Foreground="#979FA7" FontSize="10"></TextBlock>
+                                        <TextBlock Margin="5 0 10 0" Text="{Binding THOIGIAN,StringFormat=HH:mm tt }" VerticalAlignment="Center" Foreground="#979FA7" FontSize="10"></TextBlock>
                                         <materialDesign:PackIcon Kind="MapMarker" VerticalAlignment="Center" FontSize="10" Foreground="#979FA7" />
-                                        <TextBlock Margin="5 0 0 0" Width="53" Text="{Binding TENDIADIEM}" VerticalAlignment="Center" Foreground="#979FA7" FontSize="10"></TextBlock>
+                                        <TextBlock Margin="5 0 0 0" Width="50" Text="{Binding TENDIADIEM}" VerticalAlignment="Center" Foreground="#979FA7" FontSize="10"></TextBlock>
                                         <Button IsEnabled="True" Margin="0 0 5 0" HorizontalContentAlignment="Center"  Background="Transparent" Foreground="#979FA7" BorderThickness="0" FontSize="10" Click="Button_Click">
                                             <Button.Content>
                                                 <DockPanel>

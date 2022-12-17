@@ -25,8 +25,8 @@ namespace FootBallProject.ViewModel
         public ObservableCollection<THONGTINGIAIDAU> TournamentInformation { get => _TournamentInformation; set { _TournamentInformation = value; OnPropertyChanged(); } }
 
 
-        private ObservableCollection<TRANDAU> _MatchInformation;
-        public ObservableCollection<TRANDAU> MatchInformation { get => _MatchInformation; set { _MatchInformation = value; OnPropertyChanged(); } }
+        private ObservableCollection<FOOTBALLMATCH> _MatchInformation;
+        public ObservableCollection<FOOTBALLMATCH> MatchInformation { get => _MatchInformation; set { _MatchInformation = value; OnPropertyChanged(); } }
 
         public AdminScreenViewModel()
         {
@@ -34,11 +34,11 @@ namespace FootBallProject.ViewModel
             Teams = new ObservableCollection<DOIBONG>(DataProvider.ins.DB.Database.SqlQuery<DOIBONG>("SELECT TOP(4) * FROM DOIBONG"));
             BestPlayers = new ObservableCollection<CAUTHU>(DataProvider.ins.DB.Database.SqlQuery<CAUTHU>("SELECT TOP(5) * FROM CAUTHU ORDER BY SOBANTHANG DESC"));
 
-            GIAIDAU id_giaidau = DataProvider.ins.DB.Database.SqlQuery<GIAIDAU>("SELECT TOP(1) * FROM GIAIDAU ORDER BY ID DESC").FirstOrDefault<GIAIDAU>();
+            LEAGUE id_giaidau = DataProvider.ins.DB.Database.SqlQuery<LEAGUE>("SELECT TOP(1) * FROM LEAGUE ORDER BY ID ASC").FirstOrDefault<LEAGUE>();
 
             TournamentInformation= new ObservableCollection<THONGTINGIAIDAU>(DataProvider.ins.DB.Database.SqlQuery<THONGTINGIAIDAU>("SELECT * FROM THONGTINGIAIDAU WHERE IDGIAIDAU =@ID ", new SqlParameter("@ID", id_giaidau.ID)));
 
-            MatchInformation = new ObservableCollection<TRANDAU>(DataProvider.ins.DB.Database.SqlQuery<TRANDAU>("SELECT TOP(4) * FROM TRANDAU ORDER BY NGAY DESC"));
+            MatchInformation = new ObservableCollection<FOOTBALLMATCH>(DataProvider.ins.DB.Database.SqlQuery<FOOTBALLMATCH>("SELECT TOP(4) * FROM FOOTBALLMATCH ORDER BY THOIGIAN DESC"));
         }
 
     }

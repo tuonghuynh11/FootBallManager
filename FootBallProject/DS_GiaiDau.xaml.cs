@@ -35,9 +35,9 @@ namespace FootBallProject
         private void tbviewGiaiDau_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             CardView cardView = sender as CardView;
-            var carditem = cardView.SelectedRows[0] as GIAIDAU;
+            var carditem = cardView.SelectedRows[0] as LEAGUE;
            // MessageBox.Show(carditem.Name, "Name leagues");
-            ThongTinGiaiDau thongTinGiaiDau = new ThongTinGiaiDau(carditem.ID,carditem.TEN) ;
+            ThongTinGiaiDau thongTinGiaiDau = new ThongTinGiaiDau(carditem.ID,carditem.TENGIAIDAU) ;
             thongTinGiaiDau.Show();
             
           

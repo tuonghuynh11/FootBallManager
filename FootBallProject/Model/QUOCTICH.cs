@@ -20,12 +20,7 @@ namespace FootBallProject.Model
             this.CAUTHUs = new HashSet<CAUTHU>();
             this.DIADIEMs = new HashSet<DIADIEM>();
             this.DOIBONGs = new HashSet<DOIBONG>();
-
-            this.GIAIDAUs = new HashSet<GIAIDAU>();
-            this.HUANLUYENVIENs = new HashSet<HUANLUYENVIEN>();
-
             this.LEAGUEs = new HashSet<LEAGUE>();
-
         }
     
         public int ID { get; set; }
@@ -38,11 +33,6 @@ namespace FootBallProject.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DOIBONG> DOIBONGs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-  public virtual ICollection<GIAIDAU> GIAIDAUs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HUANLUYENVIEN> HUANLUYENVIENs { get; set; }
-
         public virtual ICollection<LEAGUE> LEAGUEs { get; set; }
-
     }
 }

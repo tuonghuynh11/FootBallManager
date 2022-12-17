@@ -17,18 +17,11 @@ namespace FootBallProject.Model
         public int ID { get; set; }
         public Nullable<int> IDTHONGTINTRANDAU { get; set; }
         public string IDDOIBONG { get; set; }
-
-        public Nullable<int> IDITEM { get; set; }
-        public string THOIGIAN { get; set; }
-        public Nullable<int> IDCAUTHU { get; set; }
-    
-
         public Nullable<int> IDITEMTYPE { get; set; }
         public string THOIGIAN { get; set; }
         public Nullable<int> IDCAUTHU { get; set; }
     
         public virtual CAUTHU CAUTHU { get; set; }
-
         public virtual DOIBONG DOIBONG { get; set; }
         public virtual THONGTINTRANDAU THONGTINTRANDAU { get; set; }
         public virtual ITEMTYPE ITEMTYPE { get; set; }

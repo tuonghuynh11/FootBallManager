@@ -11,7 +11,6 @@ namespace FootBallProject.Model
 {
     using System;
     using System.Collections.Generic;
-
     using System.Data.SqlClient;
     using System.Drawing;
     using System.IO;
@@ -24,19 +23,10 @@ namespace FootBallProject.Model
         {
             this.CAUTHUs = new HashSet<CAUTHU>();
             this.DIEMs = new HashSet<DIEM>();
-
-            this.HUANLUYENVIENs = new HashSet<HUANLUYENVIEN>();
-            this.DOIHINHCHINHs = new HashSet<DOIHINHCHINH>();
-            this.ITEMs = new HashSet<ITEM>();
-            this.TRANDAUs = new HashSet<TRANDAU>();
-            this.TRANDAUs1 = new HashSet<TRANDAU>();
-            this.TAPLUYENs = new HashSet<TAPLUYEN>();
-            this.THONGTINGIAIDAUs = new HashSet<THONGTINGIAIDAU>();
-
             this.ITEMs = new HashSet<ITEM>();
             this.TEAMOFLEAGUEs = new HashSet<TEAMOFLEAGUE>();
+            this.THONGTINGIAIDAUs = new HashSet<THONGTINGIAIDAU>();
             this.THONGTINTRANDAUs = new HashSet<THONGTINTRANDAU>();
-
         }
     
         public string ID { get; set; }
@@ -49,8 +39,6 @@ namespace FootBallProject.Model
         public string SANNHA { get; set; }
         public string SODOCHIENTHUAT { get; set; }
         public string GIATRI { get; set; }
-
-
         public Image _Picture { get; set; }
         public Image Picture
         {
@@ -163,38 +151,20 @@ namespace FootBallProject.Model
             set { }
 
         }
-=======
-    
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CAUTHU> CAUTHUs { get; set; }
         public virtual DIADIEM DIADIEM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DIEM> DIEMs { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HUANLUYENVIEN> HUANLUYENVIENs { get; set; }
-        public virtual QUOCTICH QUOCTICH { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DOIHINHCHINH> DOIHINHCHINHs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ITEM> ITEMs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TRANDAU> TRANDAUs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TRANDAU> TRANDAUs1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TAPLUYEN> TAPLUYENs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<THONGTINGIAIDAU> THONGTINGIAIDAUs { get; set; }
-
         public virtual QUOCTICH QUOCTICH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ITEM> ITEMs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TEAMOFLEAGUE> TEAMOFLEAGUEs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<THONGTINGIAIDAU> THONGTINGIAIDAUs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<THONGTINTRANDAU> THONGTINTRANDAUs { get; set; }
-
     }
 }
