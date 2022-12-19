@@ -10,18 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FootBallProject
+namespace FootBallProject.UserControlBar
 {
     /// <summary>
-    /// Interaction logic for TransferWindow.xaml
+    /// Interaction logic for TeamPlayersUC.xaml
     /// </summary>
-
-    public partial class TransferWindow : UserControl
-
+    public partial class TeamPlayersUC : UserControl
     {
-        public TransferWindow()
+        public TeamPlayersUC()
         {
             InitializeComponent();
         }
