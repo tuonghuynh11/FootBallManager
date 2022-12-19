@@ -669,5 +669,24 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
             popUp.Show();
 
         }
+
+        private void dtgDSCauThuDuBi_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            dtgDSCauThuDuBi.UnselectAll();
+        }
+
+        private void bttPlayerInfo_MainTeam(object sender, RoutedEventArgs e)
+        {
+            CAUTHU player = dtgDSCauThu.SelectedItem as CAUTHU;
+            PlayerProfile playerProfile = new PlayerProfile(player);
+            playerProfile.ShowDialog();
+        }
+
+        private void bttPlayerInfo_Subteam(object sender, RoutedEventArgs e)
+        {
+            CAUTHU player = dtgDSCauThuDuBi.SelectedItem as CAUTHU;
+            PlayerProfile playerProfile = new PlayerProfile(player);
+            playerProfile.ShowDialog();
+        }
     }
 }

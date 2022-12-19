@@ -1,5 +1,7 @@
-﻿using System;
+﻿using FootBallProject.Model;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +27,45 @@ namespace FootBallProject
             InitializeComponent();
             
            
+        }
+        public PlayerProfile(CAUTHU player)
+        {
+            InitializeComponent();
+            if (player.HINHANH.Length != 0)
+            {
+                image.ImageSource = LoadImage(player.HINHANH);
+
+            }
+            Nametbl.Text = player.HOTEN;
+            Agetbl.Text = player.TUOI.ToString();
+            Clubtbl.Text = player.TENDOIBONG;
+            Heighttbl.Text = player.CHIEUCAO;
+            Weighttbl.Text = player.CANNANG;
+            KitNumbertbl.Text = player.SOAO.ToString();
+            Positiontbl.Text = player.VITRI;
+            Goalstbl.Text = player.SOBANTHANG.ToString();
+            LeagueSumtbl.Text = player.SOGIAI.ToString();
+            Nationlb.Text = player.QUOCGIA;
+            Physiclb.Text = player.THETRANG;
+            Pricelb.Text= String.Format("${0:n0}", player.GIATRICAUTHU);
+            Footlb.Text = player.CHANTHUAN;
+        }
+        private static BitmapImage LoadImage(byte[] imageData)
+        {
+            if (imageData == null || imageData.Length == 0) return null;
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(imageData))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
         }
     }
     public class Statistics

@@ -1,7 +1,9 @@
-﻿using FootBallProject.Model;
+﻿using FootBallProject.Class;
+using FootBallProject.Model;
 using FootBallProject.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,72 +23,25 @@ namespace FootBallProject
     /// </summary>
     public partial class ThongTinGiaiDau : Window
     {
-        List<Teams> list1 = new List<Teams>();
-        List<Teams> list2 = new List<Teams>();
+     
         public string LeagueName { get; set; }
-
+        public static int leagueid;
         public TournamentInformationViewModel tournamentInformation { get; set; }
         public ThongTinGiaiDau()
         {
             InitializeComponent();
         
-            list1.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
-            list1.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
-            list1.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
-            list1.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
-            list1.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
-            list1.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
-            list1.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
-            list1.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
-
-            list2.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list2.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list2.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list2.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list2.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list2.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-
-
+           
                   
         }
         public ThongTinGiaiDau(int id, string leagueName)
         {
             InitializeComponent();
+            leagueid = id;
             this.DataContext = tournamentInformation= new TournamentInformationViewModel(id);
             this.LeagueName = leagueName;
             this.titlebar.Tag = LeagueName;
-            List<Teams> list = new List<Teams>();
-            list1.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
-            list1.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
-            list1.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
-            list1.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
-            list1.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
-            list1.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
-            list1.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
-            list1.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
-
-            list2.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list2.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list2.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list2.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list2.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list2.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-
-
-            list.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
-            list.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
-            list.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
-            list.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 10, Lost = 1, Ga = 10, Gd = 11 });
-            //dtgThongTinGiaDau.ItemsSource = list;
+        
         }
 
        
@@ -95,20 +50,12 @@ namespace FootBallProject
         {
             DataGrid dataGrid = sender as DataGrid;
             THONGTINGIAIDAU teams = dataGrid.SelectedItem as THONGTINGIAIDAU;
-            if (teams.TENDOIBONG == "Manchester City")
-            {
-                lsThongTinTranDau.ItemsSource = list1;
-            }
-            else if (teams.TENDOIBONG == "Real marid")
-            {
-                lsThongTinTranDau.ItemsSource = list2;
 
-            }
-            else
-            {
-                lsThongTinTranDau.ItemsSource = new List<Teams>();
+            ObservableCollection<MatchesPlayed> matched= new ObservableCollection<MatchesPlayed>(DataProvider.ins.DB.Database.SqlQuery<MatchesPlayed>(
+                $"select  T1.IDDOIBONG IDDOIBONG1, T5.IDDOIBONG IDDOIBONG2, t1.diem DIEM1,t5.diem DIEM2 from THONGTINTRANDAU T1 JOIN THONGTINTRANDAU T5 ON T1.IDTRANDAU = T5.IDTRANDAU JOIN FOOTBALLMATCH T2 ON T1.IDTRANDAU = T2.ID JOIN ROUND T3 ON T2.IDVONG = T3.ID JOIN LEAGUE T4 ON T3.IDGIAIDAU = T4.ID where T1.IDDOIBONG <> T5.IDDOIBONG AND T1.IDDOIBONG = '{teams.IDDOIBONG}' AND T4.ID={leagueid}"));
+       
+            lsThongTinTranDau.ItemsSource=matched;
 
-            }
         }
     }
 }

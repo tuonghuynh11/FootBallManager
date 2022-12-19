@@ -198,6 +198,7 @@ namespace FootBallProject.ViewModel
 
         private ICommand _conFirmCommand;
         #endregion
+        public static USER user;
         public LoginViewModel()
         {
             IsGetCode = false;
@@ -274,22 +275,24 @@ namespace FootBallProject.ViewModel
         }
         private void DoOpenMainWindow()
         {
-            //if (IsExistAccount())
-            //{
-            //    LoginSuccessful();
-            //    return;
-            //}
-            Window window = Application.Current.MainWindow as Window;
-            AdminScreen mainWindow = new AdminScreen();
-            Application.Current.MainWindow = mainWindow;
-            Application.Current.MainWindow.Show();
-            window.Close();
+            if (IsExistAccount())
+            {
+                LoginSuccessful();
+                return;
+            }
+          
         }
         private void LoginSuccessful()
         {
             USER user = DataProvider.Instance.Database.USERS.Where(x => x.USERNAME == Username).First();
+            USER.ROLE = user.ROLENAME;
+            //Window window = Application.Current.MainWindow as Window;
+            //MainWindow2 mainWindow = new MainWindow2();
+            //Application.Current.MainWindow = mainWindow;
+            //Application.Current.MainWindow.Show();
+            //window.Close();
             Window window = Application.Current.MainWindow as Window;
-            MainWindow2 mainWindow = new MainWindow2();
+            AdminScreen mainWindow = new AdminScreen();
             Application.Current.MainWindow = mainWindow;
             Application.Current.MainWindow.Show();
             window.Close();

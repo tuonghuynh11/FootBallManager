@@ -146,20 +146,20 @@
                                         <Border CornerRadius="5" Margin="5"  Background="WhiteSmoke" Width="345" Height="68">
                                             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" >
 
-                                                <Label Margin="5 0 10 0"  Foreground="#979FA7" HorizontalContentAlignment="Right" VerticalAlignment="Center"  Content="{Binding Name}"  FontSize="11" Width="90"></Label>
-                                                <Image Source="{Binding logo }" Margin="0 0 0 0" Width="25" Height="35"  >
+                                                <Label Margin="5 0 10 0"  Foreground="#979FA7" HorizontalContentAlignment="Right" VerticalAlignment="Center"  Content="{Binding TENDOIBONG1}"  FontSize="11" Width="90"></Label>
+                                                <Image Source="{Binding HINHANHDOIBONG1,Converter={StaticResource ResourceKey=imageconvert} }" Margin="0 0 0 0" Width="25" Height="35"  >
                                                 </Image>
                                                 <!--Tỉ số trận đấu-->
                                                 <StackPanel Orientation="Horizontal" Width="40" Margin="20 0 10 2" VerticalAlignment="Center" >
-                                                    <TextBlock Text="1" Margin="1 0 0 0" VerticalAlignment="Center"></TextBlock>
+                                                    <TextBlock Text="{Binding DIEM1}" Margin="1 0 0 0" VerticalAlignment="Center"></TextBlock>
                                                     <TextBlock Text=" - " Foreground="#979FA7" FontSize="15" VerticalAlignment="Center"></TextBlock>
-                                                    <TextBlock Text="1" VerticalAlignment="Center"></TextBlock>
+                                                    <TextBlock Text="{Binding DIEM2}" VerticalAlignment="Center"></TextBlock>
 
                                                 </StackPanel>
                                                 <!--Tỉ số trận đấu-->
-                                                <Image Source="{Binding logo }"  Width="25" Height="35" Margin="0 0 10 0" >
+                                                <Image Source="{Binding HINHANHDOIBONG2,Converter={StaticResource ResourceKey=imageconvert} }"  Width="25" Height="35" Margin="0 0 10 0" >
                                                 </Image>
-                                                <TextBlock Foreground="#979FA7" HorizontalAlignment="Left" VerticalAlignment="Center"  Text="{Binding Name}"  FontSize="11" Width="90"></TextBlock>
+                                                <TextBlock Foreground="#979FA7" HorizontalAlignment="Left" VerticalAlignment="Center"  Text="{Binding TENDOIBONG2}"  FontSize="11" Width="90"></TextBlock>
 
 
 

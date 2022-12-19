@@ -57,7 +57,16 @@ namespace FootBallProject.Model
             }
             set { }
         }
+        public string TENDOIBONG
+        {
+            get
+            {
+                var qg = DataProvider.ins.DB.DOIBONGs.Find(IDDOIBONG);
 
+                return qg == null ? " " : qg.TEN;
+            }
+            set { }
+        }
         public int STT { get; set; }
         public string VITRIAO { get; set; }
 

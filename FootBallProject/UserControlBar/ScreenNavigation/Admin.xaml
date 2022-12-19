@@ -456,20 +456,22 @@
                 <Grid Grid.Row="0" Margin="0 0 0 0">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Best Teams" FontWeight="Bold" FontFamily="Roboto" Foreground="#172C41" Margin="20 20 0 0" Width="100" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left"></TextBlock>
-                        <ListView  x:Name="lvBestTeams" IsHitTestVisible="True" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="Transparent" BorderBrush="Transparent" Margin="5,10,5,10">
+                        <ListView  x:Name="lvBestTeams" ItemsSource="{Binding BestTeams}" IsHitTestVisible="True" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="Transparent" BorderBrush="Transparent" Margin="5,10,5,10" MouseDoubleClick="best_teams">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
-                                    <Setter Property="Focusable" Value="False"/>
+                                    <Setter Property="Focusable" Value="True"/>
                                 </Style>
 
                             </ListView.ItemContainerStyle>
                             <ListView.ItemTemplate >
                                 <DataTemplate>
                                     <DockPanel Margin="10 10 10 10" Width="auto">
-                                        <Image DockPanel.Dock="Left" Source="{Binding logo }" Margin="0 0 10 0" Width="25" Height="30"  >
+                                        <Image DockPanel.Dock="Left" Source="{Binding HINHANH , Converter= {StaticResource ResourceKey=imageconvert}}" Margin="0 0 10 0" Width="25" Height="30"  >
                                         </Image>
-                                        <Label DockPanel.Dock="Left" Margin="0 0 10 0"  Foreground="#979FA7" VerticalAlignment="Center"  Content="{Binding Name}" FontSize="10" Width="90"></Label>
-                                        <materialDesign:PackIcon Kind="Poll" Margin="25 0 10 0" DockPanel.Dock="Right" Foreground="{Binding brush}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                                        <Label DockPanel.Dock="Left" Margin="0 0 10 0"  Foreground="#979FA7" VerticalAlignment="Center"  Content="{Binding TEN}" FontSize="10" Width="90"></Label>
+                                        <materialDesign:PackIcon Kind="Poll" Margin="10 0 10 0" DockPanel.Dock="Right" Foreground="{Binding brush}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                                        <TextBlock DockPanel.Dock="Right" Text="{Binding POINTS}" Margin="10 0 0 0" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+
                                     </DockPanel>
 
                                 </DataTemplate>
@@ -487,7 +489,7 @@
                         <ListView  x:Name="lvBestPlayers" IsHitTestVisible="True" ItemsSource="{Binding BestPlayers}" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="Transparent" BorderBrush="Transparent" Margin="5,10,5,10" MouseDoubleClick="lvBestPlayers_MouseDoubleClick">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
-                                    <Setter Property="Focusable" Value="False"/>
+                                    <Setter Property="Focusable" Value="True"/>
                                 </Style>
 
                             </ListView.ItemContainerStyle>

@@ -44,7 +44,9 @@ namespace FootBallProject
       
         private void bttPlayerInfo_Click(object sender, RoutedEventArgs e)
         {
-
+            CAUTHU player= dtgThongTinCLB.SelectedItem as CAUTHU;
+            PlayerProfile playerProfile = new PlayerProfile(player);
+            playerProfile.ShowDialog();
         }
 
      

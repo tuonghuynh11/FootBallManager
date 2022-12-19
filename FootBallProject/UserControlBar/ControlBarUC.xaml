@@ -130,12 +130,10 @@
                             </Border.Background>-->
                         </Border>
                         <Label Content="User1" VerticalAlignment="Center" Margin="5"></Label>
-                        <ComboBox HorizontalAlignment="Center" VerticalAlignment="Center" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" Width="17"  BorderThickness="0 0 0 0" BorderBrush="Gray" Background="Transparent">
-                            <ComboBoxItem>Tài khoàn</ComboBoxItem>
-                            <ComboBoxItem>Tài khoàn</ComboBoxItem>
-                            <ComboBoxItem>Tài khoàn</ComboBoxItem>
-                            <ComboBoxItem>Tài khoàn</ComboBoxItem>
-                            <ComboBoxItem>Tài khoàn</ComboBoxItem>
+                        <ComboBox x:Name="Accountcbb" HorizontalAlignment="Center" VerticalAlignment="Center" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" Width="17"  BorderThickness="0 0 0 0" BorderBrush="Gray" Background="Transparent" SelectionChanged="Accountcbb_SelectionChanged">
+                            <ComboBoxItem Content="Thông tin tài khoản"></ComboBoxItem>
+                            <ComboBoxItem Content="Đăng xuất"></ComboBoxItem>
+                            
                         </ComboBox>
                     </StackPanel>
                     <StackPanel
