@@ -1,6 +1,8 @@
-﻿using FootBallProject.ViewModel;
+﻿using FootBallProject.Model;
+using FootBallProject.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +43,35 @@ namespace FootBallProject
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var a = this.DataContext as MatchInformationViewModel;
+            //Đội nhà
+            CAUTHU player = a.MainPlayers1[0];
+           
+            TenCauThutbl.Text = player.HOTEN;
+            QuocTichtbl.Text = player.QUOCGIA;
+            ChieuCaotbl.Text = player.CHIEUCAO;
+            CanNangtbl.Text = player.CANNANG;
+            TheTrangtbl.Text = player.THETRANG;
+            ChanThuantbl.Text = player.CHANTHUAN;
+            if (player.HINHANH.Length != 0)
+            {
+                AnhCauThutbl.ImageSource = LoadImage(player.HINHANH);
+
+            }
+            SoAotbl.Text = player.SOAO.ToString();
+            //Đội khách
+            CAUTHU player1 = a.MainPlayers2[0];
+            TenCauThutbl_DOIKHACH.Text = player1.HOTEN;
+            QuocTichtbl_DOIKHACH.Text = player1.QUOCGIA;
+            ChieuCaotbl_DOIKHACH.Text = player1.CHIEUCAO;
+            CanNangtbl_DOIKHACH.Text = player1.CANNANG;
+            TheTrangtbl_DOIKHACH.Text = player1.THETRANG;
+            ChanThuantbl_DOIKHACH.Text = player1.CHANTHUAN;
+            if (player.HINHANH.Length != 0)
+            {
+                AnhCauThutbl_DOIKHACH.ImageSource = LoadImage(player1.HINHANH);
+
+            }
+            SoAotbl_DOIKHACH.Text = player1.SOAO.ToString();
 
             //Đội nhà
             if (a.Team1.SODOCHIENTHUAT == "4-3-3")
@@ -94,6 +125,37 @@ namespace FootBallProject
                 DoiHinhChienThuatUC4231_DOIKHACH.DataContext = a.Teamformat2;
                 ///Thêm datacontext cho DoiHinhChienThuatUC4231
             }
+        }
+        private static BitmapImage LoadImage(byte[] imageData)
+        {
+            if (imageData == null || imageData.Length == 0) return null;
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(imageData))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
+        }
+
+        private void bttPlayerInfo_click(object sender, RoutedEventArgs e)
+        {
+            CAUTHU player = dtgThongTinCLB.SelectedItem as CAUTHU;
+            PlayerProfile playerProfile = new PlayerProfile(player);
+            playerProfile.ShowDialog();
+        }
+
+        private void bttPlayerInfo_doikhach_click(object sender, RoutedEventArgs e)
+        {
+            CAUTHU player = dtgThongTinCLB_DOIKHACH.SelectedItem as CAUTHU;
+            PlayerProfile playerProfile = new PlayerProfile(player);
+            playerProfile.ShowDialog();
         }
     }
 }

@@ -27,5 +27,18 @@ namespace FootBallProject.UserControlBar
             InitializeComponent();
             this.DataContext = ViewModel = new ControlBarViewModel();
         }
+
+        private void Accountcbb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox combo = (ComboBox)sender;
+            ComboBoxItem select = (ComboBoxItem)combo.SelectedItem;
+
+            if (select.Content.ToString()=="Thông tin tài khoản")
+            {
+                UserAccount userAccount = new UserAccount();
+                userAccount.ShowDialog();
+            }
+
+        }
     }
 }

@@ -186,7 +186,7 @@
                                                 <TextBlock Text="{Binding VITRIAO}" FontSize="15" Margin="10 0 10 0" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
 
                                                 <Button x:Name="bttPlayerInfo" Visibility="Hidden" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                                                    ToolTip="MaterialDesignFloatingActionMiniAccentButton" Height="25" Width="25">
+                                                    ToolTip="MaterialDesignFloatingActionMiniAccentButton" Height="25" Width="25" Click="bttPlayerInfo_MainTeam">
                                                     <materialDesign:PackIcon
                                                     Kind="Search"
                                                     Height="20"
@@ -366,14 +366,14 @@
                                 <Border DockPanel.Dock="Top" CornerRadius="10" Width="200" BorderBrush="Aqua" BorderThickness="2" Height="30" Padding="1" Background="White">
                                     <TextBox x:Name="tbSearch1" materialDesign:HintAssist.Hint="Tìm kiếm cầu thủ" BorderThickness="0 0 0 0" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Width="180" Height="30" TextChanged="tbSearch1_TextChanged"  ></TextBox>
                                 </Border>
-                                <DataGrid x:Name="dtgDSCauThuDuBi" CanUserAddRows="False" ItemsSource="{Binding SubTeamPlayers}" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden" RowBackground="Transparent"  IsReadOnly="True" Margin="20 10 20 20" GridLinesVisibility="None" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" Foreground="White" FontSize="20"  BorderThickness="0" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False"  HorizontalGridLinesBrush="Black" >
+                                <DataGrid x:Name="dtgDSCauThuDuBi" CanUserAddRows="False" ItemsSource="{Binding SubTeamPlayers}" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden" RowBackground="Transparent"  IsReadOnly="True" Margin="20 10 20 20" GridLinesVisibility="None" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" Foreground="White" FontSize="20"  BorderThickness="0" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False"  HorizontalGridLinesBrush="Black" MouseDoubleClick="dtgDSCauThuDuBi_MouseDoubleClick" >
                                     <DataGrid.Resources>
                                         <DataTemplate x:Key="DataTemplate"  >
                                             <StackPanel x:Name="stckpnlPosition" Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Center">
                                                 <TextBlock Text="{Binding VITRI}" FontSize="15" Margin="10 0 10 0" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
 
                                                 <Button x:Name="bttPlayerInfo" Visibility="Hidden" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                                                    ToolTip="MaterialDesignFloatingActionMiniAccentButton" Height="25" Width="25">
+                                                    ToolTip="MaterialDesignFloatingActionMiniAccentButton" Height="25" Width="25" Click="bttPlayerInfo_Subteam">
                                                     <materialDesign:PackIcon
                                                     Kind="Search"
                                                     Height="20"

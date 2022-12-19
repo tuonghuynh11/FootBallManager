@@ -133,11 +133,15 @@
     <Compile Include="AdminScreen.xaml.cs">
       <DependentUpon>AdminScreen.xaml</DependentUpon>
     </Compile>
+
+    <Compile Include="Class\BestTeam.cs" />
+
     <Compile Include="Class\ConvertByteArrToImage.cs" />
     <Compile Include="Class\Format team\BasicTeam.cs" />
     <Compile Include="Class\Format team\Team_4231.cs" />
     <Compile Include="Class\Format team\Team_433.cs" />
     <Compile Include="Class\Format team\Team_442.cs" />
+    <Compile Include="Class\MatchesPlayed.cs" />
     <Compile Include="DragAndDrop\DraggableExtender.cs" />
     <Compile Include="DS_CLB.xaml.cs">
       <DependentUpon>DS_CLB.xaml</DependentUpon>
@@ -380,6 +384,7 @@
     <Compile Include="ViewModel\DSCLBViewModel.cs" />
     <Compile Include="ViewModel\DS_GiaiDauViewModel.cs" />
     <Compile Include="ViewModel\FootballTeamListViewModel.cs" />
+    <Compile Include="ViewModel\LeaderListViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MatchInformationViewModel.cs" />
     <Compile Include="ViewModel\MenuBarViewModel.cs" />
@@ -404,6 +409,7 @@
     <Compile Include="ViewModel\MainViewModel2.cs" />
     <Compile Include="ViewModel\MatchResultViewModel.cs" />
     <Compile Include="ViewModel\TeamPlayersViewModel.cs" />
+    <Compile Include="ViewModel\TrainCalendarViewModel.cs" />
     <Compile Include="View\MatchResult2.xaml.cs">
       <DependentUpon>MatchResult2.xaml</DependentUpon>
     </Compile>
@@ -680,6 +686,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Icons\calendar.png" />
+    <Resource Include="Icons\leader.png" />
+    <Resource Include="Icons\transfer.png" />
+
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

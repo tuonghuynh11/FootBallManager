@@ -22,7 +22,28 @@ namespace FootBallProject.Model
         public string EMAIL { get; set; }
         public Nullable<int> IDOTP { get; set; }
         public Nullable<int> IDAVATAR { get; set; }
-    
+
+
+        public static string ROLE = "";
+
+       
+        public string _ROLENAME;
+        public string ROLENAME
+        {
+            get
+            {
+                var qg = DataProvider.ins.DB.USERROLEs.Find(IDUSERROLE);
+
+                return qg == null ? " " : qg.ROLE;
+
+            }
+            set
+            {
+                
+            }
+
+        }
+
         public virtual OTP OTP { get; set; }
         public virtual USERROLE USERROLE { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿using FootBallProject.Model;
+﻿using FootBallProject.Class;
+using FootBallProject.Model;
 using FootBallProject.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -56,7 +57,7 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
             listPlayer.Add(new Players() { Name = "Roberto Carlos", Image = @"/images/7.jpg", brush = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233))) });
            
           //   lsTranDau.ItemsSource = list;
-            lvBestTeams.ItemsSource = list1;
+          //  lvBestTeams.ItemsSource = list1;
 
         }
 
@@ -134,6 +135,11 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
         //Xem thông tin cầu thủ trong best players
         private void lvBestPlayers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            ListView list= (ListView)sender;    
+            CAUTHU ct= list.SelectedItem as CAUTHU;
+            PlayerProfile profile= new PlayerProfile(ct);
+            profile.ShowDialog();
+            list.UnselectAll();
 
         }
 
@@ -152,6 +158,18 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
                 matchInfomation.Show();
             }
            
+        }
+
+        private void best_teams(object sender, MouseButtonEventArgs e)
+        {
+            ListView list = (ListView)sender;
+            BestTeam teams = list.SelectedItem as BestTeam;
+            ThongTinCLB thongTinCLB = new ThongTinCLB(teams.TEN);
+            DOIBONG db = DataProvider.ins.DB.DOIBONGs.Find(teams.ID);
+            ClubInfomationViewModel club = new ClubInfomationViewModel(db);
+            thongTinCLB.DataContext = club;
+            thongTinCLB.ShowDialog();
+            list.UnselectAll();
         }
     }
 }

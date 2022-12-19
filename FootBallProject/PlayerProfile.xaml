@@ -6,12 +6,14 @@
         xmlns:local="clr-namespace:FootBallProject"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
+        xmlns:uc="clr-namespace:FootBallProject.UserControlBar"
         Title="PlayerProfile" Height="700" Width="1000"
         DataContext="{StaticResource TeamPlayersVM}"
-
-        Background="LightGreen"    
-                WindowStartupLocation="CenterOwner"
-
+        
+        AllowsTransparency="True"
+         WindowStyle="None"
+        Background="Transparent" 
+        WindowStartupLocation="CenterScreen"
         >
     <Window.Resources>
         <Style TargetType="TextBlock">
@@ -19,54 +21,89 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
     </Window.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="500"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" >
-            <!--Tao hinh dai dien hinh torn-->
-            <Border CornerRadius="90" Width="150" Height="150" >
+    <Border BorderThickness="2" BorderBrush="DarkGreen" Background="Wheat" CornerRadius="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <uc:TitleBarUC x:Name="titlebar" Tag="Thông tin cầu thủ" Foreground="#FF52AE4B" Grid.Row="0" />
+            <Grid Grid.Row="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="500"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                </Grid.RowDefinitions>
+            
+                <Border  Grid.Column="0"  Margin="15 15 15 15" Background="#FF63B0FF" CornerRadius="10" >
+                    <Grid >
+                        <Label Margin="50 40 300 500" FontSize="25">Tuổi:</Label>
 
-                <Border.Background>
-                    <ImageBrush  ImageSource="{Binding SelectedPlayer.Image}"/>
-                </Border.Background>
-            </Border>
+                        <Label Margin="50 100 290 440" FontSize="25">Câu lạc bộ:</Label>
+                        <Label Margin="50 160 300 380" FontSize="25">Chiều cao:</Label>
+                        <Label Margin="50 220 300 320" FontSize="25">Cân nặng:</Label>
+                        <Label Margin="50 280 300 260" FontSize="25">Số áo:</Label>
+                        <Label Margin="50 340 300 200" FontSize="25">Vị trí:</Label>
+                        <Label Margin="50 400 280 140" FontSize="25">Số giải đấu:</Label>
+                        <Label Margin="50 460 260 80" FontSize="25">Số bàn thắng:</Label>
+                        <TextBlock x:Name="Agetbl" Margin="200 44 100 500" Text = "{Binding SelectedPlayer.Age}" FontSize="25"></TextBlock>
+                        <TextBlock x:Name="Clubtbl" Margin="200,104,90,440" Text = "{Binding SelectedPlayer.Club}" FontSize="25"></TextBlock>
+                        <TextBlock x:Name="Heighttbl" Margin="200,164,100,380"  FontSize="25" Text = "{Binding SelectedPlayer.Height}"></TextBlock>
+                        <TextBlock x:Name="Weighttbl" Margin="200,224,100,320" FontSize="25" Text = "{Binding SelectedPlayer.Weight}"></TextBlock>
+                        <TextBlock x:Name="KitNumbertbl" Margin="200,284,100,260" Text = "{Binding SelectedPlayer.KitNumber}" FontSize="25"></TextBlock>
+                        <TextBlock x:Name="Positiontbl" Margin="200,344,100,200" Text = "{Binding SelectedPlayer.Position}" FontSize="25"></TextBlock>
+                        <TextBlock x:Name="LeagueSumtbl" Margin="200,404,100,140" FontSize="25" Text = "{Binding SelectedPlayer.LeaguesNum}"></TextBlock>
+                        <TextBlock x:Name="Goalstbl" Margin="200,464,100,80" FontSize="25" Text = "{Binding SelectedPlayer.Goals}"></TextBlock>
+                        <!--<Label Margin="50 150 300 400" FontSize="25">Label</Label>-->
+                    </Grid>
 
-            <TextBlock Text="{Binding SelectedPlayer.Name}" FontSize="45" FontStyle="Normal" FontFamily="{materialDesign:MaterialDesignFont}"/>
-        </StackPanel>
-        <Grid Grid.Column="0">
-            <Label Margin="50 40 300 500" FontSize="25">Tuổi:</Label>
+                </Border>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Margin="0 15 15 15" CornerRadius="10" Background="LightBlue">
+                        <StackPanel Margin="10 0 0 0"  HorizontalAlignment="Center" VerticalAlignment="Center" >
+                            <!--Tao hinh dai dien hinh torn-->
+                            <Border CornerRadius="90" Width="150" Height="150" >
 
-            <Label Margin="50 100 300 440" FontSize="25">Câu lạc bộ:</Label>
-            <Label Margin="50 160 300 380" FontSize="25">Chiều cao:</Label>
-            <Label Margin="50 220 300 320" FontSize="25">Cân nặng:</Label>
-            <Label Margin="50 280 300 260" FontSize="25">Số áo:</Label>
-            <Label Margin="50 340 300 200" FontSize="25">Vị trí</Label>
-            <Label Margin="50 400 300 140" FontSize="25">Số giải đáu</Label>
-            <Label Margin="50 460 300 80" FontSize="25">Số bàn thắng</Label>
-            <TextBlock Margin="200 44 100 500" Text = "{Binding SelectedPlayer.Age}" FontSize="25"></TextBlock>
-            <TextBlock Margin="200,104,100,440" Text = "{Binding SelectedPlayer.Club}" FontSize="25"></TextBlock>
-            <TextBlock Margin="200,164,100,380"  FontSize="25" Text = "{Binding SelectedPlayer.Height}"></TextBlock>
-            <TextBlock Margin="200,224,100,320" FontSize="25" Text = "{Binding SelectedPlayer.Weight}"></TextBlock>
-            <TextBlock Margin="200,284,100,260" Text = "{Binding SelectedPlayer.KitNumber}" FontSize="25"></TextBlock>
-            <TextBlock Margin="200,344,100,200" Text = "{Binding SelectedPlayer.Position}" FontSize="25"></TextBlock>
-            <TextBlock Margin="200,404,100,140" FontSize="25" Text = "{Binding SelectedPlayer.LeaguesNum}"></TextBlock>
-            <TextBlock Margin="200,464,100,80" FontSize="25" Text = "{Binding SelectedPlayer.Goals}"></TextBlock>
-            <!--<Label Margin="50 150 300 400" FontSize="25">Label</Label>-->
+                                <Border.Background>
+                                    <ImageBrush x:Name="image" ImageSource="{Binding SelectedPlayer.Image}"/>
+                                </Border.Background>
+                            </Border>
+
+                            <TextBlock x:Name="Nametbl" Text="{Binding SelectedPlayer.Name}" FontSize="45" FontStyle="Normal" FontFamily="{materialDesign:MaterialDesignFont}"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="1" CornerRadius="10" Background="#FF71EE71" Margin="0 0 15 15">
+                        <StackPanel Orientation="Vertical"  >
+                            <StackPanel Orientation="Horizontal" Margin="10">
+                                <Label   FontSize="25">Quốc tịch:</Label>
+                                <TextBlock x:Name="Nationlb" VerticalAlignment="Center"  Margin="60 0 0 0" FontSize="25" Text = "{Binding SelectedPlayer.Nationality }"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10">
+                                <Label   FontSize="25">Thể trạng:</Label>
+                                <TextBlock x:Name="Physiclb" VerticalAlignment="Center"  Margin="60 0 0 0"  Text = "{Binding SelectedPlayer.Physique}" FontSize="25"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10">
+                                <Label   FontSize="25">Giá:</Label>
+                                <TextBlock x:Name="Pricelb" VerticalAlignment="Center"  Margin="130 0 0 0" FontSize="25" Text = "{Binding SelectedPlayer.Price}"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10">
+                                <Label   FontSize="25">Chân thuận:</Label>
+                                <TextBlock x:Name="Footlb" VerticalAlignment="Center"  Margin="40 0 0 0"  FontSize="25" Text="{Binding SelectedPlayer.Foot}"></TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    
+                </Grid>
+                
+            </Grid>
+            
         </Grid>
-        <Grid Grid.Column="1">
-            <Label Margin="50 280 300 260" FontSize="25">Quốc tịch:</Label>
-            <Label Margin="50 340 300 200" FontSize="25">Thể trạng</Label>
-            <Label Margin="50 400 300 140" FontSize="25">Giá</Label>
-            <Label Margin="50 460 300 80" FontSize="25">Chân thuận</Label>
-            <TextBlock Margin="200,284,100,260" FontSize="25" Text = "{Binding SelectedPlayer.Nationality }"></TextBlock>
-            <TextBlock Margin="200,344,100,200" Text = "{Binding SelectedPlayer.Physique}" FontSize="25"></TextBlock>
-            <TextBlock Margin="200,404,100,140" FontSize="25" Text = "{Binding SelectedPlayer.Price}"></TextBlock>
-            <TextBlock Margin="200,464,100,80" FontSize="25" Text="{Binding SelectedPlayer.Foot}"></TextBlock>
-        </Grid>
-    </Grid>
+
+    </Border>
 
 </Window>
