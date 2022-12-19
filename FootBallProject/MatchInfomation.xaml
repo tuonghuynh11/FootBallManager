@@ -32,7 +32,9 @@
         
         
         
+
         Title="MatchInfomation" Height="720" Width="1000" Loaded="Window_Loaded">
+
     <Window.Resources>
         <convert:ConvertByteArrToImage x:Key="imageconvert"></convert:ConvertByteArrToImage>
     </Window.Resources>
@@ -45,6 +47,7 @@
 
             <uc:TitleBarUC x:Name="titlebar" Tag="Thông tin trận đấu" Foreground="#FF52AE4B" Grid.Row="0" />
             <Grid Grid.Row="1" >
+
                 <TabControl Padding="0 0 0 0" Margin="0 0 0 0"  >
                     <TabControl.Resources>
                         <Style TargetType="TabItem">
@@ -144,6 +147,7 @@
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Border Grid.Row="0"  Background="White" BorderBrush="Black" BorderThickness="0 0.5 0 0">
+
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="200"></ColumnDefinition>
@@ -307,6 +311,7 @@
                         </Grid>
 
 
+
                     </TabItem>
                     <TabItem Header="Đội khách" Height="24" HorizontalAlignment="Right">
                         <Grid Margin="0 0 0 0">
@@ -464,6 +469,7 @@
                                                 <Setter Property="Foreground" Value="#FFF9F17E"></Setter>
                                                 <Setter Property="Background" Value="Transparent"></Setter>
                                                 <Setter Property="Margin" Value="22 10 15 10"></Setter>
+
 
                                             </Style>
                                             <!--Chỉnh backgroud row selected-->

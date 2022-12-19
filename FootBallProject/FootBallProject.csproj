@@ -133,7 +133,9 @@
     <Compile Include="AdminScreen.xaml.cs">
       <DependentUpon>AdminScreen.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="Class\BestTeam.cs" />
+
     <Compile Include="Class\ConvertByteArrToImage.cs" />
     <Compile Include="Class\Format team\BasicTeam.cs" />
     <Compile Include="Class\Format team\Team_4231.cs" />
@@ -687,6 +689,7 @@
     <Resource Include="Icons\calendar.png" />
     <Resource Include="Icons\leader.png" />
     <Resource Include="Icons\transfer.png" />
+
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
