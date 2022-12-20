@@ -301,12 +301,6 @@
     <Compile Include="Service\MatchCardService.cs" />
     <Compile Include="Service\OTPServices.cs" />
     <Compile Include="Service\UserServices.cs" />
-    <Compile Include="TeamsPlayers.xaml.cs">
-      <DependentUpon>TeamsPlayers.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TransferWindow.xaml.cs">
-      <DependentUpon>TransferWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="DS_BLD_ADD.xaml.cs">
       <DependentUpon>DS_BLD_ADD.xaml</DependentUpon>
     </Compile>
@@ -578,14 +572,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserAccount.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TeamsPlayers.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TransferWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
