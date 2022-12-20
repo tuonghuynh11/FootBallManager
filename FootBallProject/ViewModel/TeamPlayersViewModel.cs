@@ -107,7 +107,10 @@ namespace FootBallProject.ViewModel
             }
         }
 
-        string connString = ConfigurationManager.ConnectionStrings["connectstr"].ConnectionString;
+
+       // string connString = @"Data Source=DESKTOP-GUE0JS7\SQLEXPRESS;Initial Catalog=FOOTBALLMANAGERDEMO;Integrated Security=true;";
+        string connString = @"Data Source=LAPTOP-37LM0CEF\SQLEXPRESS;Initial Catalog=officialleague;Integrated Security=true;";
+
 
 
         public TeamPlayersViewModel()

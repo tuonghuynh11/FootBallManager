@@ -133,7 +133,10 @@
     <Compile Include="AdminScreen.xaml.cs">
       <DependentUpon>AdminScreen.xaml</DependentUpon>
     </Compile>
+
+
     <Compile Include="Class\BestTeam.cs" />
+
     <Compile Include="Class\ConvertByteArrToImage.cs" />
     <Compile Include="Class\Format team\BasicTeam.cs" />
     <Compile Include="Class\Format team\Team_4231.cs" />
@@ -299,12 +302,6 @@
     <Compile Include="Service\MatchCardService.cs" />
     <Compile Include="Service\OTPServices.cs" />
     <Compile Include="Service\UserServices.cs" />
-    <Compile Include="TeamsPlayers.xaml.cs">
-      <DependentUpon>TeamsPlayers.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TransferWindow.xaml.cs">
-      <DependentUpon>TransferWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="DS_BLD_ADD.xaml.cs">
       <DependentUpon>DS_BLD_ADD.xaml</DependentUpon>
     </Compile>
@@ -585,14 +582,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TeamsPlayers.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TransferWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UserControlBar\ControlBarUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -701,6 +690,7 @@
     <Resource Include="Icons\calendar.png" />
     <Resource Include="Icons\leader.png" />
     <Resource Include="Icons\transfer.png" />
+
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
