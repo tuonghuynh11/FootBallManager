@@ -24,6 +24,7 @@ namespace FootBallProject.UserControlBar
         {
             InitializeComponent();
         }
+
         private void RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
             int x = Players_List.SelectedIndex;
@@ -38,5 +39,6 @@ namespace FootBallProject.UserControlBar
 
         }
     }
+
 
 }

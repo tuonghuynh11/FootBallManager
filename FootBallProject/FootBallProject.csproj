@@ -134,6 +134,7 @@
       <DependentUpon>AdminScreen.xaml</DependentUpon>
     </Compile>
 
+
     <Compile Include="Class\BestTeam.cs" />
 
     <Compile Include="Class\ConvertByteArrToImage.cs" />
@@ -353,8 +354,14 @@
     <Compile Include="UserControlBar\ScreenNavigation\TeamBuilder.xaml.cs">
       <DependentUpon>TeamBuilder.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlBar\TeamPlayersUC.xaml.cs">
+      <DependentUpon>TeamPlayersUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControlBar\TitleBarUC.xaml.cs">
       <DependentUpon>TitleBarUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlBar\TransferWindowUC.xaml.cs">
+      <DependentUpon>TransferWindowUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AdminScreenViewModel.cs" />
     <Compile Include="UserControlBar\UserControl_Calendar.xaml.cs">
@@ -607,7 +614,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControlBar\TeamPlayersUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControlBar\TitleBarUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlBar\TransferWindowUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
