@@ -32,13 +32,41 @@ namespace FootBallProject.UserControlBar
         {
             ComboBox combo = (ComboBox)sender;
             ComboBoxItem select = (ComboBoxItem)combo.SelectedItem;
-
-            if (select.Content.ToString()=="Thông tin tài khoản")
+            if (select!=null)
             {
-                UserAccount userAccount = new UserAccount();
-                userAccount.ShowDialog();
+                if (select.Content.ToString() == "Thông tin tài khoản")
+                {
+                    UserAccount userAccount = new UserAccount();
+                    userAccount.ShowDialog();
+                    combo.SelectedIndex = -1;
+                }
+                else if (select.Content.ToString() == "Đăng xuất")
+                {
+                    FrameworkElement window = GetWindowParent(this);
+                    var w = window as Window;
+                    if (w != null)
+                    {
+                        w.Close();
+                        LoginWindow loginWindow = new LoginWindow();
+                        loginWindow.ShowDialog();
+                    }
+
+                    ///lỗi không xuất hiện màn hình
+                }
+
             }
 
+        }
+        FrameworkElement GetWindowParent(UserControl p)
+        {
+            FrameworkElement parent = p;
+            while (parent.Parent != null)
+            {
+
+                parent = parent.Parent as FrameworkElement;
+
+            }
+            return parent;
         }
     }
 }

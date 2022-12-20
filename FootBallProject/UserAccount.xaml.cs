@@ -23,7 +23,7 @@ namespace FootBallProject
     public partial class UserAccount : Window
     {
         public string connectstr2 = ConfigurationManager.ConnectionStrings["connectstr2"].ConnectionString;
-        public string usr = "newuser"; // Lay du lieu tu luc dang nhap
+        public string usr = "admin"; // Lay du lieu tu luc dang nhap
         public UserAccount()
         {
             InitializeComponent();
@@ -53,7 +53,7 @@ namespace FootBallProject
 
         private void ReadOrderData(string connectionString)
         {
-            string queryString = "SELECT * FROM dbo._USER WHERE USERNAME=" + "'" + usr + "'";
+            string queryString = "SELECT * FROM USERS WHERE USERNAME=" + "'" + usr + "'";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
@@ -62,10 +62,12 @@ namespace FootBallProject
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    txbhoten.Text = reader.GetString(2);
-                    txbhusername.Text = reader.GetString(0);
-                    pbpass.Password = reader.GetString(1);
-                    txbemail.Text = reader.GetString(3);
+                    txbhoten.Text = reader.GetString(4);
+                    txbhusername.Text = reader.GetString(2);
+
+                   
+                    pbpass.Password = reader.GetString(3);
+                    txbemail.Text = reader.GetString(5);
                 }
                 reader.Close();
             }
