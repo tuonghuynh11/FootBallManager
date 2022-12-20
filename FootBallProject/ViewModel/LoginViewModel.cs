@@ -275,12 +275,13 @@ namespace FootBallProject.ViewModel
         }
         private void DoOpenMainWindow()
         {
+
             if (IsExistAccount())
             {
                 LoginSuccessful();
                 return;
             }
-          
+
         }
         private void LoginSuccessful()
         {

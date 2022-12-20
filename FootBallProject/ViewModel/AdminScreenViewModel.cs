@@ -42,12 +42,14 @@ namespace FootBallProject.ViewModel
             MatchInformation = new ObservableCollection<FOOTBALLMATCH>(DataProvider.ins.DB.Database.SqlQuery<FOOTBALLMATCH>("SELECT TOP(4) * FROM FOOTBALLMATCH ORDER BY THOIGIAN DESC"));
 
 
+
             var bt = (from a in DataProvider.ins.DB.THONGTINGIAIDAUs
                             join b in DataProvider.ins.DB.DOIBONGs on a.IDDOIBONG equals b.ID
                             orderby a.POINTS descending 
                             select (a) ).ToList<object>();
             var c = DataProvider.ins.DB.Database.SqlQuery<BestTeam>(" SELECT TOP(5) b.ID, b.IDQUOCTICH, b.THANHPHO, b.HINHANH, b.TEN,  b.SOLUONGTHANHVIEN,  b.NGAYTHANHLAP, b.SANNHA,  b.SODOCHIENTHUAT, b.GIATRI FROM dbo.THONGTINGIAIDAU a JOIN dbo.DOIBONG b ON a.IDDOIBONG=b.ID ORDER BY a.POINTS DESC");
             BestTeams = new ObservableCollection<BestTeam>(c);
+
         }
 
     }
