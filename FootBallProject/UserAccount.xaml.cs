@@ -24,7 +24,9 @@ namespace FootBallProject
     public partial class UserAccount : Window
     {
         public string connectstr2 = ConfigurationManager.ConnectionStrings["connectstr2"].ConnectionString;
+
         public string usr = USER.USERN; // Lay du lieu tu luc dang nhap
+
         public UserAccount()
         {
             InitializeComponent();
