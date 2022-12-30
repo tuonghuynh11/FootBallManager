@@ -138,7 +138,8 @@
                 <!--Màn hình chính-->
                 <Grid Grid.Column="1">
                     <ContentControl x:Name="Pages" Content="{Binding CurrentView}"></ContentControl>
-                   
+                    <materialDesign:Snackbar HorizontalAlignment="Right" VerticalAlignment="Top"  MessageQueue="{materialDesign:MessageQueue}" x:Name="SnackbarNotify"  Message="hello" IsActive="False"  />
+
                 </Grid>
                 <!--Đưa menubar lên trên màn hình-->
                 <Grid Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="716" VerticalAlignment="Top">

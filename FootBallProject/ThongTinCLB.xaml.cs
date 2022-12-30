@@ -55,14 +55,14 @@ namespace FootBallProject
         private void GTDHtbl_Loaded(object sender, RoutedEventArgs e)
         {
             var a = this.DataContext as ClubInfomationViewModel;
-            GTDHtbl.Text = String.Format("${0:n0}", double.Parse(a.Team.GIATRI));
+            GTDHtbl.Text = String.Format("${0:n0}", a.Team.GIATRI);
         }
 
         //Set cầu thủ mặc định khi xem đội bóng
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var a = this.DataContext as ClubInfomationViewModel;
-            CAUTHU player = a.PlayerList[0];
+            CAUTHU player = a.MainPlayers[0];
             TenCauThutbl.Text = player.HOTEN;
             QuocTichtbl.Text = player.QUOCGIA;
             ChieuCaotbl.Text = player.CHIEUCAO;

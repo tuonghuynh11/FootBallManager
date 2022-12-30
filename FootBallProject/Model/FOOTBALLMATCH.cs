@@ -19,6 +19,7 @@ namespace FootBallProject.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FOOTBALLMATCH()
         {
+            this.THAMGIAs = new HashSet<THAMGIA>();
             this.THONGTINTRANDAUs = new HashSet<THONGTINTRANDAU>();
         }
     
@@ -101,6 +102,8 @@ namespace FootBallProject.Model
         }
         public virtual DIADIEM DIADIEM1 { get; set; }
         public virtual ROUND ROUND { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<THAMGIA> THAMGIAs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<THONGTINTRANDAU> THONGTINTRANDAUs { get; set; }
     }

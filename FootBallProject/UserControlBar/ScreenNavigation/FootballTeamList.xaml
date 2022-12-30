@@ -87,7 +87,7 @@
                         </Style>
                     </devexpress:GridControl.Resources>
                     <devexpress:GridControl.Columns >
-                        <devexpress:GridColumn x:Name="IDcol" Header="ID" Width="60" FieldName="ID" ReadOnly="False" IsSmart="True" AllowEditing="true" AllowSearchPanel="True" HorizontalHeaderContentAlignment="Center">
+                        <devexpress:GridColumn x:Name="IDcol" Header="ID" Width="60" FieldName="ID" ReadOnly="False" IsSmart="True" AllowEditing="false" AllowSearchPanel="True" HorizontalHeaderContentAlignment="Center">
                             <devexpress:GridColumn.EditSettings>
                                 <dxe:TextEditSettings MaxWidth="50" MaxLength="50" HorizontalContentAlignment="Center"/>
                             </devexpress:GridColumn.EditSettings>

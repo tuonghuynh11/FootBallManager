@@ -12,13 +12,13 @@ namespace FootBallProject.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class DOIHINHCHINH
+    public partial class THAMGIA
     {
-        public string IDDOIBONG { get; set; }
+        public int IDTRAN { get; set; }
         public int IDCAUTHU { get; set; }
-        public string VITRI { get; set; }
-        public string VAITRO { get; set; }
+        public Nullable<int> SOBANTHANG { get; set; }
     
-        public virtual DOIBONG DOIBONG { get; set; }
+        public virtual CAUTHU CAUTHU { get; set; }
+        public virtual FOOTBALLMATCH FOOTBALLMATCH { get; set; }
     }
 }

@@ -75,48 +75,61 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
         {
             tbviewCLB.NewItemRowPosition= NewItemRowPosition.Top;
             tbviewCLB.AddNewRow();
-            
+            IDcol.AllowEditing=DevExpress.Utils.DefaultBoolean.True;
+
         }
         //xóa đội bóng
         private void deletebt_Click(object sender, RoutedEventArgs e)
         {
-            int count = 0;
-            List<int> selectedRowHandles = new List<int>(tbviewCLB.Grid.GetSelectedRowHandles());
-            var descendingOrder = selectedRowHandles.OrderByDescending(i => i);
-            foreach (int handle in descendingOrder)
+            if (tbviewCLB.SelectedRows.Count>0)
             {
-                DOIBONG item = tbviewCLB.SelectedRows[count] as DOIBONG;
-                OKCancelPopUp pop = new OKCancelPopUp();
-                pop.ShowDialog();
-                if (pop.Ok==1)
-                {
-                    try
-                    {
-                        DataProvider.ins.DB.DOIBONGs.Remove(item);
-                        DataProvider.ins.DB.SaveChanges();
-                        tbviewCLB.DeleteRow(handle);
-
-                    }
-                    catch (Exception)
-                    {
-
-                        PopUpCustom error = new PopUpCustom("Lỗi", "Đội bóng đang có cầu thủ không thể xóa!!");
-                        error.ShowDialog();
-                    }
-                }
-                else
-                {
-                    return;
-                }
+                int count = 0;
+                List<int> selectedRowHandles = new List<int>(tbviewCLB.Grid.GetSelectedRowHandles());
+                List<int> descendingOrder = selectedRowHandles.OrderByDescending(i => i).ToList();
                
+                var select = grdcontrolCLB.SelectedItems;
+                for (int i = select.Count; i > 0; i--)
+                {
+                    DOIBONG item = select[i-1] as DOIBONG;
+                    OKCancelPopUp pop = new OKCancelPopUp();
+                    pop.ShowDialog();
+                    if (pop.Ok == 1)
+                    {
+                        try
+                        {
+                            DataProvider.ins.DB.DOIBONGs.Remove(item);
+                            DataProvider.ins.DB.SaveChanges();
+                            tbviewCLB.DeleteRow(descendingOrder[count]);
+                            tbviewCLB.UpdateRow();
+                            select = grdcontrolCLB.SelectedItems;
+                            count++;
+                        }
+                        catch (Exception)
+                        {
 
-                count++;
+                            PopUpCustom error = new PopUpCustom("Lỗi", "Đội bóng đang có cầu thủ không thể xóa!!");
+                            error.ShowDialog();
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
             }
+            else
+            {
+                PopUpCustom popUpCustom = new PopUpCustom("Cảnh báo", "Vui lòng chọn một đội bóng");
+                popUpCustom.ShowDialog();
+            }
+           
         }
 
         private void tbviewCLB_RowEditFinished(object sender, RowEditFinishedEventArgs e)
         {
             tbviewCLB.NewItemRowPosition = NewItemRowPosition.None;
+            IDcol.AllowEditing = DevExpress.Utils.DefaultBoolean.False;
         }
 
 
@@ -125,12 +138,49 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
         {
             var doibong = (DOIBONG)e.Row;
             DOIBONG result = DataProvider.ins.DB.DOIBONGs.SingleOrDefault(b => b.ID == doibong.ID);
-            if (result != null)
+            if (result != null &&!e.IsNewItem)
             {
                 result.TEN = doibong.TEN;
                 result.NGAYTHANHLAP =doibong.NGAYTHANHLAP;
                 result.HINHANH = buffer;
-                DataProvider.ins.DB.SaveChanges();
+                try
+                {
+                    DataProvider.ins.DB.SaveChanges();
+
+                }
+                catch (Exception)
+                {
+
+                    PopUpCustom popUpCustom = new PopUpCustom("Lỗi", "ID đã tồn tại");
+                    popUpCustom.ShowDialog();
+                   
+                }
+            }
+            else
+            {
+                var item = (DOIBONG)e.Value;
+                if (e.IsNewItem)
+                {
+                    try
+                    {
+                        item.HINHANH = FootballTeamList.buffer;
+                        DataProvider.ins.DB.DOIBONGs.Add(item);
+                        DataProvider.ins.DB.SaveChanges();
+
+                    }
+                    catch (Exception)
+                    {
+
+                        PopUpCustom popUpCustom = new PopUpCustom("Lỗi", "ID đã tồn tại");
+                        popUpCustom.ShowDialog();
+                        DataProvider.ins.DB.DOIBONGs.Remove(item);
+                        DataProvider.ins.DB.SaveChanges();
+                        tbviewCLB.DeleteRow(e.RowHandle);
+
+                    }
+
+
+                }
             }
         }
         /// <summary>
@@ -174,5 +224,7 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
 
             }
         }
+
+      
     }
 }

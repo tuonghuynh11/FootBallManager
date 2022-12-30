@@ -31,13 +31,13 @@ namespace FootBallProject
         private void GTDHtbl_DOINHA_Loaded(object sender, RoutedEventArgs e)
         {
             var a = this.DataContext as MatchInformationViewModel;
-            GTDHtbl_DOINHA.Text = String.Format("${0:n0}", double.Parse(a.Team1.GIATRI));
+            GTDHtbl_DOINHA.Text = String.Format("${0:n0}", a.Team1.GIATRI);
         }
 
         private void GTDHtbl_DOIKHACH_Loaded(object sender, RoutedEventArgs e)
         {
             var a = this.DataContext as MatchInformationViewModel;
-            GTDHtbl_DOIKHACH.Text = String.Format("${0:n0}", double.Parse(a.Team2.GIATRI));
+            GTDHtbl_DOIKHACH.Text = String.Format("${0:n0}", a.Team2.GIATRI);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

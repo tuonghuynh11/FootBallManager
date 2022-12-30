@@ -22,9 +22,6 @@ namespace FootBallProject.Model
         public Nullable<int> GA { get; set; }
         public Nullable<int> GD { get; set; }
         public Nullable<int> POINTS { get; set; }
-    
-        public virtual DOIBONG DOIBONG { get; set; }
-        public virtual LEAGUE LEAGUE { get; set; }
         public string TENDOIBONG
         {
             get
@@ -45,5 +42,7 @@ namespace FootBallProject.Model
             }
             set { }
         }
+        public virtual DOIBONG DOIBONG { get; set; }
+        public virtual LEAGUE LEAGUE { get; set; }
     }
 }

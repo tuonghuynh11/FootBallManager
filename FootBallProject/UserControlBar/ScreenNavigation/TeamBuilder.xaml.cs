@@ -18,7 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Drawing;
 namespace FootBallProject.UserControlBar.ScreenNavigation
 {
     /// <summary>
@@ -40,7 +40,7 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
         int term1 = 0;
 
         //id của đội đang đăng nhập
-        public string id_doi ="mc";
+        public string id_doi =USER.IDDB;
         //id của đội đang đăng nhập
 
 
@@ -173,9 +173,17 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
 
 
                         dtgDSCauThuDuBi.Items.Refresh();
-                        dtgDSCauThuDuBi.UnselectAll();
+                       dtgDSCauThuDuBi.UnselectAll();
+                        dtgDSCauThuDuBi.InvalidateProperty(DataGrid.SelectedItemProperty);
+                        dtgDSCauThuDuBi.SetValue(DataGrid.SelectedItemProperty, a);
+                        dtgDSCauThuDuBi.Items.Refresh();
+
+                        dtgDSCauThu.InvalidateProperty(DataGrid.SelectedItemProperty);
+                        dtgDSCauThu.SetValue(DataGrid.SelectedItemProperty, mainteam[main]);
+                        dtgDSCauThu.Items.Refresh();
+
                     }
-                   
+
                 }
                 else
                 {
@@ -206,6 +214,8 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
                             //Set vi trí mặc định trong đội hình chiến thuật
                             mainteam[curentitem] = termPlayer;
                             mainteam[curentreplaceitem] = a;
+
+                           
 
                             a.VITRIAO = vitriao;
                             termPlayer = a;
@@ -280,10 +290,17 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
                                     break;
                                 }
                             }
+                           
                         }
-                      
+                        foreach (CAUTHU item in mainteam)
+                        {
+                            if (changeteam.ContainsKey(item.ID))
+                            {
+                                item.VITRIAO = changeteam[item.ID];
+                            }
+                        }
                         newVm1.Teamformat = new Team_433(mainteam, "basic");
-                        newVm1.MainTeamPlayers = newVm1.Teamformat.team;
+                         newVm1.MainTeamPlayers = newVm1.Teamformat.team;
 
                         DoiHinhChienThuat433UC.DataContext = newVm1.Teamformat;
                     }
@@ -308,6 +325,13 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
                                 {
                                     break;
                                 }
+                            }
+                        }
+                        foreach (CAUTHU item in mainteam)
+                        {
+                            if (changeteam.ContainsKey(item.ID))
+                            {
+                                item.VITRIAO = changeteam[item.ID];
                             }
                         }
                         newVm1.Teamformat = new Team_442(mainteam, "basic");
@@ -338,6 +362,13 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
                                 }
                             }
                         }
+                        foreach (CAUTHU item in mainteam)
+                        {
+                            if (changeteam.ContainsKey(item.ID))
+                            {
+                                item.VITRIAO = changeteam[item.ID];
+                            }
+                        }
                         newVm1.Teamformat = new Team_4231(mainteam, "basic");
                         newVm1.MainTeamPlayers = newVm1.Teamformat.team;
 
@@ -366,7 +397,13 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
                 if (DoiHinhChienThuat433UC.Visibility == Visibility.Visible)
                 {
                     // team_433 = new Team_433(mainteam);
-                   
+                    foreach (CAUTHU item in mainteam)
+                    {
+                        if (changeteam.ContainsKey(item.ID))
+                        {
+                            item.VITRIAO = changeteam[item.ID];
+                        }
+                    }
                     newVm.Teamformat = new Team_433( mainteam,"basic");
                     newVm.MainTeamPlayers = newVm.Teamformat.team ;
 
@@ -374,7 +411,13 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
                 }
                 else if (DoiHinhChienThuat442UC.Visibility == Visibility.Visible)
                 {
-
+                    foreach (CAUTHU item in mainteam)
+                    {
+                        if (changeteam.ContainsKey(item.ID))
+                        {
+                            item.VITRIAO = changeteam[item.ID];
+                        }
+                    }
                     newVm.Teamformat = new Team_442(mainteam, "basic");
                     newVm.MainTeamPlayers = newVm.Teamformat.team;
 
@@ -382,7 +425,13 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
                 }
                 else if (DoiHinhChienThuat4231UC.Visibility == Visibility.Visible)
                 {
-
+                    foreach (CAUTHU item in mainteam)
+                    {
+                        if (changeteam.ContainsKey(item.ID))
+                        {
+                            item.VITRIAO = changeteam[item.ID];
+                        }
+                    }
                     newVm.Teamformat = new Team_4231(mainteam, "basic");
                     newVm.MainTeamPlayers = newVm.Teamformat.team;
 
@@ -395,9 +444,9 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
 
                 this.DataContext = newVm;
 
-                dtgDSCauThu.InvalidateProperty(DataGrid.SelectedItemProperty);
-                dtgDSCauThu.SetValue(DataGrid.SelectedItemProperty, a);
-                dtgDSCauThu.Items.Refresh();
+                //dtgDSCauThu.InvalidateProperty(DataGrid.SelectedItemProperty);
+                //dtgDSCauThu.SetValue(DataGrid.SelectedItemProperty, a);
+                //dtgDSCauThu.Items.Refresh();
             }
         }
        
@@ -429,7 +478,7 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
             ComboBoxItem select = (ComboBoxItem)combo.SelectedItem;
 
             //id của đội đang đăng nhập
-             id_doi = "mc";
+            // id_doi = "mc";
             List<CAUTHU> mainteamremain = (from a in DataProvider.ins.DB.CAUTHUs
                             join b in DataProvider.ins.DB.DOIHINHCHINHs on a.ID equals b.IDCAUTHU
                             where b.IDDOIBONG == id_doi
@@ -481,6 +530,7 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
                 mainsubteam = newVm1.SubTeamPlayers;
                 dtgDSCauThuDuBi.Items.Refresh();
             }
+            changeteam.Clear();
             this.DataContext = newVm1;
 
         }
@@ -508,7 +558,7 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
 
                 //sub palyer
                 PlayerNameSub.Text = subplayer.HOTEN;
-                if (mainplayer.HINHANH.Length != 0)
+                if (subplayer.HINHANH.Length != 0)
                 {
                     PlayerImageSub.ImageSource = LoadImage(subplayer.HINHANH);
 
@@ -558,7 +608,7 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
 
                 }
                 HLVname.Text = teamBuilderViewModel.Team.HLV;
-                GTDH.Text = teamBuilderViewModel.Team.GIATRI;
+                GTDH.Text = teamBuilderViewModel.Team.GIATRI.ToString();
                 DHChienThuatcbb.Text = teamBuilderViewModel.Team.SODOCHIENTHUAT;
                 id_doi= teamBuilderViewModel.Team.ID;
                 this.DataContext = teamBuilderViewModel;
@@ -592,7 +642,7 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
 
         private void GTDH_Loaded(object sender, RoutedEventArgs e)
         {
-            GTDH.Text = String.Format("${0:n0}", double.Parse(teamBuilderViewModel.Team.GIATRI));
+            GTDH.Text = String.Format("${0:n0}", teamBuilderViewModel.Team.GIATRI);
         }
 
         private void addrole(object sender, MouseButtonEventArgs e)

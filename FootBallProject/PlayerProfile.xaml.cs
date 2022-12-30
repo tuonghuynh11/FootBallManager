@@ -31,7 +31,7 @@ namespace FootBallProject
         public PlayerProfile(CAUTHU player)
         {
             InitializeComponent();
-            if (player.HINHANH.Length != 0)
+            if (player.HINHANH != null&&player.HINHANH.Length != 0)
             {
                 image.ImageSource = LoadImage(player.HINHANH);
 

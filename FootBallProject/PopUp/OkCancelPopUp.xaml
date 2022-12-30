@@ -38,7 +38,7 @@
                     <TextBlock x:Name="titletxbl" Text="Cảnh báo" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="20"></TextBlock>
                 </StackPanel>
             </Border>
-            <TextBlock x:Name="content" Grid.Row="1" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"   Margin="0 10 0 0" Text="Vui lòng xác nhận" TextWrapping="WrapWithOverflow" FontSize="18"  FontWeight="ExtraBold" ></TextBlock>
+            <TextBlock x:Name="content" Grid.Row="1" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"   Margin="0 10 0 0" Text="Xác nhận xóa đội bóng" TextWrapping="WrapWithOverflow" FontSize="18"  FontWeight="ExtraBold" ></TextBlock>
             <Button x:Name="Okbtt" Grid.Row="2" Content="OK" FontSize="15" Foreground="White" Background="Red" VerticalContentAlignment="Center" BorderThickness="0.5" BorderBrush="Black" Height="25" Margin="25 0 10 10" Width="52" HorizontalAlignment="Left" Click="Okbtt_Click"></Button>
             <Button x:Name="Cancelbtt" Grid.Row="2" Content="Cancel" FontSize="15" Foreground="White" Background="DarkOliveGreen" VerticalContentAlignment="Center" BorderThickness="0.5" BorderBrush="Black" Height="25" Margin="10 0 25 10" Width="78" HorizontalAlignment="Right" Click="Cancelbtt_Click"></Button>
         </Grid>

@@ -7,13 +7,14 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              Name="ucControlBar"
+             xmlns:convert ="clr-namespace:FootBallProject.Class"
               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
               TextElement.Foreground="{DynamicResource MaterialDesignBody}"
               TextElement.FontWeight="Regular"
               TextElement.FontSize="13"
               TextOptions.TextFormattingMode="Ideal"
               TextOptions.TextRenderingMode="Auto"
-              
+              DataContext="{StaticResource ControlBarVM}"
               FontFamily="{DynamicResource MaterialDesignFont}"
                Background="Transparent"
  
@@ -24,7 +25,9 @@
             <i:InvokeCommandAction Command="{Binding MouseMoveWindowCommand}" CommandParameter="{Binding ElementName=ucControlBar}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-
+    <UserControl.Resources>
+        <convert:ConvertByteArrToImage x:Key="imageconvert"/>
+    </UserControl.Resources>
     <StackPanel Orientation="Vertical">
         <!--Thanh tiêu đề-->
         <materialDesign:ColorZone
@@ -124,12 +127,74 @@
             <materialDesign:ColorZone Height="65" Mode="PrimaryMid" Padding="16" Background="#FF52AE4B" DockPanel.Dock="Top">
                 <DockPanel >
                     <StackPanel Orientation="Horizontal" Margin="0 0 10 0"  VerticalAlignment="Center" DockPanel.Dock="Right" >
+                        <Grid Margin="0 0 20 0" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <materialDesign:PopupBox x:Name="notifipopup" ToolTip="Bạn có 0 thông báo mới"  PlacementMode="BottomAndAlignRightEdges" StaysOpen="True" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 0 0" Opened="notifipopup_Opened" Closed="notifipopup_Closed"  >
+                                <materialDesign:PopupBox.ToggleContent>
+                                    <materialDesign:PackIcon Kind="Bell" Foreground="White" Height="25" Width="25"  Margin="0 0 0 0" />
+                                </materialDesign:PopupBox.ToggleContent>
+                                <ListView Name="lvUsers" Width="300" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="lvUsers_SelectionChanged">
+                                    <ListView.View>
+                                        <GridView >
+                                            <GridViewColumn Header="Thông báo"  Width="300" DisplayMemberBinding="{Binding NOTIFY}" >
+                                                <GridViewColumn.HeaderContainerStyle>
+                                                    <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                                                        <!--<Setter Property="HorizontalAlignment" Value="Center" />-->
+                                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                                        <Setter Property="FontSize" Value="25" />
+                                                       <Setter Property="Background" Value="Orange" />
+                                                        <Setter Property="Foreground" Value="White" />
+                                                        <Setter Property="IsHitTestVisible" Value="False" />
+
+                                                    </Style>
+                                                </GridViewColumn.HeaderContainerStyle>
+                                             
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                    <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="true">
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Red" FontSize="18" VerticalAlignment="Bottom" />
+                                                     <TextBlock Text=" (" FontSize="18" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom"></TextBlock>
+                                                    <TextBlock Text= "{Binding ItemCount}" FontSize="20" Foreground="Green" FontWeight="Bold" FontStyle="Italic" Margin="0,0,0,0" VerticalAlignment="Bottom" />
+                                                     <TextBlock Text=")" FontSize="18" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom"></TextBlock>
+                                                           </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
+                                </ListView>
+                            </materialDesign:PopupBox>
+                            <materialDesign:Badged Badge="3" x:Name="numberofnotifies" BadgeForeground="White" BadgeBackground="Red"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 10 14 10">
+                            </materialDesign:Badged>
+                        
+                        </Grid>
+                       
+                       
                         <Border CornerRadius="50" BorderThickness="1" Background="Aqua" BorderBrush="Gray" Height="30" Width="33">
                             <!--<Border.Background>
                                 <ImageBrush Stretch="Fill" ImageSource="/images/7.jpg"></ImageBrush>
                             </Border.Background>-->
                         </Border>
-                        <Label Content="User1" VerticalAlignment="Center" Margin="5"></Label>
+                        <Label x:Name="UserNamelb" Content="User1" VerticalAlignment="Center" Margin="5"></Label>
                         <ComboBox x:Name="Accountcbb" HorizontalAlignment="Center" VerticalAlignment="Center" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" Width="17"  BorderThickness="0 0 0 0" BorderBrush="Gray" Background="Transparent" SelectionChanged="Accountcbb_SelectionChanged">
                             <ComboBoxItem Content="Thông tin tài khoản"></ComboBoxItem>
                             <ComboBoxItem Content="Đăng xuất"></ComboBoxItem>
@@ -186,6 +251,7 @@
             </materialDesign:ColorZone>
 
         </DockPanel>
+
     </StackPanel>
 
 </UserControl>

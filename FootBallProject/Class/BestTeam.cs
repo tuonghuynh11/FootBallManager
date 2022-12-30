@@ -18,7 +18,7 @@ namespace FootBallProject.Class
         public Nullable<System.DateTime> NGAYTHANHLAP { get; set; }
         public string SANNHA { get; set; }
         public string SODOCHIENTHUAT { get; set; }
-        public string GIATRI { get; set; }
+        public  Nullable<long> GIATRI { get; set; }
 
         public int IDGIAIDAU { get; set; }
         public string IDDOIBONG { get; set; }
