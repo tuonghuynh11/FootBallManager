@@ -32,7 +32,9 @@ namespace FootBallProject
         {
             InitializeComponent();
             content.Text = text;
+
             titletxbl.Text = title;
+            titletxbl.Foreground = Brushes.Yellow;
             border.Background = Brushes.Red;
         }
         public PopUpCustom(string title, string text,int n)

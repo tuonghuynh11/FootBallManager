@@ -22,11 +22,11 @@ namespace FootBallProject.Model
         public string EMAIL { get; set; }
         public Nullable<int> IDOTP { get; set; }
         public Nullable<int> IDAVATAR { get; set; }
-
-
+        public Nullable<int> IDNHANSU { get; set; }
         public static string ROLE = "";
+        public static string IDDB = "";
+        public static string USERN = "";
 
-       
         public string _ROLENAME;
         public string ROLENAME
         {
@@ -39,11 +39,27 @@ namespace FootBallProject.Model
             }
             set
             {
-                
+
             }
 
         }
 
+        public string _IDDOIBONG;
+        public string IDDOIBONG
+        {
+            get
+            {
+                var qg = DataProvider.ins.DB.HUANLUYENVIENs.Find(IDNHANSU);
+
+                return qg == null ? " " : qg.IDDOIBONG;
+
+            }
+            set
+            {
+
+            }
+
+        }
         public virtual OTP OTP { get; set; }
         public virtual USERROLE USERROLE { get; set; }
     }

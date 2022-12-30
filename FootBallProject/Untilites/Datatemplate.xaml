@@ -19,4 +19,16 @@
     <DataTemplate DataType="{x:Type vm:LeaderListViewModel}">
         <view1:UserControl_DS_BLD />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:TeamPlayersViewModel}">
+        <view1:TeamPlayersUC />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:TransferPlayersViewModel}">
+        <view1:TransferWindowUC />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:StatisticalChartViewModel}">
+        <view:StatisticalChart />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:TransferConfirmViewModel}">
+        <view:TransferAccept />
+    </DataTemplate>
 </ResourceDictionary>

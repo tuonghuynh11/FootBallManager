@@ -12,18 +12,13 @@ namespace FootBallProject.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class TAPLUYEN
+    public partial class Notification
     {
         public int ID { get; set; }
-        public Nullable<int> IDNGUOIQUANLY { get; set; }
-        public string IDDOIBONG { get; set; }
-        public string TRANGTHAI { get; set; }
-        public Nullable<System.DateTime> THOIGIANBATDAU { get; set; }
-        public Nullable<System.DateTime> THOIGIANKETTHUC { get; set; }
-        public string HOATDONG { get; set; }
-        public string GHICHU { get; set; }
+        public Nullable<int> IDHLV { get; set; }
+        public string NOTIFY { get; set; }
+        public string CHECKED { get; set; }
     
-        public virtual DOIBONG DOIBONG { get; set; }
         public virtual HUANLUYENVIEN HUANLUYENVIEN { get; set; }
     }
 }

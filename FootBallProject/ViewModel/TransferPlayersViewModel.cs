@@ -22,7 +22,7 @@ using FootBallProject.UserControlBar;
 
 namespace FootBallProject.ViewModel
 {
-    public class TeamPlayersViewModel : BaseViewModel
+    public class TransferPlayersViewModel:BaseViewModel
     {
         public ICommand RowDoubleClickCommand { get; set; }
         public ICommand AddPlayerCommand2 { get; set; }
@@ -108,12 +108,12 @@ namespace FootBallProject.ViewModel
         }
 
 
-       // string connString = @"Data Source=DESKTOP-GUE0JS7\SQLEXPRESS;Initial Catalog=FOOTBALLMANAGERDEMO;Integrated Security=true;";
+        // string connString = @"Data Source=DESKTOP-GUE0JS7\SQLEXPRESS;Initial Catalog=FOOTBALLMANAGERDEMO;Integrated Security=true;";
         string connString = @"Data Source=LAPTOP-37LM0CEF\SQLEXPRESS;Initial Catalog=officialleague;Integrated Security=true;";
 
 
 
-        public TeamPlayersViewModel()
+        public TransferPlayersViewModel()
         {
             //dataTable = new DataTable();
 
@@ -145,7 +145,8 @@ namespace FootBallProject.ViewModel
 
             GoToEdit = new RelayCommand<object>(
                 (p) => {
-                   
+                    if (p as TeamPlayersUC == null)
+                        return false;
                     return true;
                 },
                 (p) =>
@@ -174,7 +175,7 @@ namespace FootBallProject.ViewModel
             );
             //Command nut add
             AddPlayerCommand = new RelayCommand<object>(
-                (p) => {  return true; },
+                (p) => { if (p as TeamPlayersUC == null) return false; return true; },
                 (p) =>
                 {
                     TeamPlayersUC x = p as TeamPlayersUC;
@@ -306,7 +307,7 @@ namespace FootBallProject.ViewModel
 
                 );
             DeletePlayerCommand = new RelayCommand<object>(
-                (p) => {  return true; },
+                (p) => { if (p as TeamPlayersUC == null) return false; return true; },
                 (p) =>
                 {
                     TeamPlayersUC x = p as TeamPlayersUC;
@@ -840,48 +841,6 @@ namespace FootBallProject.ViewModel
 
 
     }
-    public class Player : BaseViewModel
-    {
-
-        string id;
-        public string Id { get { return id; } set { id = value; OnPropertyChanged(); } }
-        string clubID;
-        public string ClubID { get { return clubID; } set { clubID = value; OnPropertyChanged(); } }
-
-        string club;
-        public string Club { get { return club; } set { club = value; OnPropertyChanged(); } }
-
-        //int number;
-        //public int Number { get { return number; } set { number = value; OnPropertyChanged(); } }
-        string name;
-        public string Name { get { return name; } set { name = value; OnPropertyChanged(); } }
-        int age;
-        public int Age { get { return age; } set { age = value; OnPropertyChanged(); } }
-        string height;
-        public string Height { get { return height; } set { height = value; OnPropertyChanged(); } }
-        string weight;
-        public string Weight { get { return weight; } set { weight = value; OnPropertyChanged(); } }
-        int leaguesNum;
-        public int LeaguesNum { get { return leaguesNum; } set { leaguesNum = value; OnPropertyChanged(); } }
-        int goals;
-        public int Goals { get { return goals; } set { goals = value; OnPropertyChanged(); } }
-        string foot;
-        public string Foot { get { return foot; } set { foot = value; OnPropertyChanged(); } }
-
-        string physique;
-        public string Physique { get { return physique; } set { physique = value; OnPropertyChanged(); } }
-        string nationality;
-        public string Nationality { get { return nationality; } set { nationality = value; OnPropertyChanged(); } }
-        string position;
-        public string Position { get { return position; } set { position = value; OnPropertyChanged(); } }
-
-        int kitNumber;
-        public int KitNumber { get { return kitNumber; } set { kitNumber = value; OnPropertyChanged(); } }
-
-        string price;
-        public string Price { get { return price; } set { price = value; OnPropertyChanged(); } }
-        private byte[] image;
-        public byte[] Image { get { return image; } set { image = value; OnPropertyChanged(); } }
+   
     }
-}
 

@@ -318,7 +318,12 @@
                                             <RowDefinition Height="45"></RowDefinition>
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
-                                        <TextBlock Grid.Row="0" Text="Ban huấn luyện" FontSize="20" FontWeight="Bold" Foreground="Red" Margin="10" HorizontalAlignment="Center"></TextBlock>
+                                        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <TextBlock Grid.Row="0" Text="Ban huấn luyện" FontSize="20" FontWeight="Bold" Foreground="Red" Margin="10 10 5 10" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Text="(" FontSize="20" FontWeight="Bold" Foreground="Black" Margin="0 10 0 10" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Text="{Binding StaffList.Count}" FontSize="20" FontWeight="Bold" Foreground="Black" Margin="0 10 0 10" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Text=")" FontSize="20" FontWeight="Bold" Foreground="Black" Margin="0 10 0 10" HorizontalAlignment="Center"></TextBlock>
+                                        </StackPanel>
                                         <ListView  x:Name="lsNhanSu" Grid.Row="1" ItemsSource="{Binding StaffList}" IsHitTestVisible="True" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="Transparent" BorderBrush="Transparent" Margin="5,0,5,0" Padding="5">
                                             <ListView.ItemContainerStyle>
                                                 <Style TargetType="ListViewItem">
@@ -396,7 +401,12 @@
                                             <RowDefinition Height="45"></RowDefinition>
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
-                                        <TextBlock Grid.Row="0" Text="Danh sách cầu thủ" FontSize="20" FontWeight="Bold" Foreground="#FF8A4AD9" Margin="10" HorizontalAlignment="Center"></TextBlock>
+                                        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <TextBlock Grid.Row="0" Text="Danh sách cầu thủ" FontSize="20" FontWeight="Bold" Foreground="#FF8A4AD9" Margin="10" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Text="(" FontSize="20" FontWeight="Bold" Foreground="Black" Margin="0 10 0 10" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Text="{Binding PlayerList.Count}" FontSize="20" FontWeight="Bold" Foreground="Black" Margin="0 10 0 10" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Text=")" FontSize="20" FontWeight="Bold" Foreground="Black" Margin="0 10 0 10" HorizontalAlignment="Center"></TextBlock>
+                                        </StackPanel>
                                         <ListView  x:Name="lsPlayers" Grid.Row="1" ItemsSource="{Binding PlayerList}" IsHitTestVisible="True" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="Transparent" BorderBrush="Transparent" Margin="5,0,5,0" Padding="5">
                                             <ListView.ItemContainerStyle>
                                                 <Style TargetType="ListViewItem">

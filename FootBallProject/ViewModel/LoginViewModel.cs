@@ -19,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Threading;
 using System.Security.Cryptography;
 using FootBallProject.Utils;
+using FootBallProject.Class;
 
 namespace FootBallProject.ViewModel
 {
@@ -287,6 +288,14 @@ namespace FootBallProject.ViewModel
         {
             USER user = DataProvider.Instance.Database.USERS.Where(x => x.USERNAME == Username).First();
             USER.ROLE = user.ROLENAME;
+            USER.USERN = user.USERNAME;
+            AccessUser.userLogin = user;
+            if (user.ROLENAME!="Admin")
+            {
+                //lấy id đội bóng của hlv đang đăng nhập trừ admin
+                USER.IDDB = DataProvider.ins.Database.HUANLUYENVIENs.Where(x => x.ID == user.IDNHANSU).FirstOrDefault().IDDOIBONG;
+            }
+          
             //Window window = Application.Current.MainWindow as Window;
             //MainWindow2 mainWindow = new MainWindow2();
             //Application.Current.MainWindow = mainWindow;

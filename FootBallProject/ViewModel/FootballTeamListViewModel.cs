@@ -71,22 +71,35 @@ namespace FootBallProject.ViewModel
                 THANHPHO=1,
                 SODOCHIENTHUAT = "",
                 SOLUONGTHANHVIEN = 0,
-                GIATRI = "",
+                GIATRI = 0,
 
             };
         }
         [Command]
         public void ValidateRow(RowValidationArgs args)
         {
-            var item = (DOIBONG)args.Item;
-            if (args.IsNewItem)
-            {
-                item.HINHANH = FootballTeamList.buffer;
-                DataProvider.ins.DB.DOIBONGs.Add(item);
+            //var item = (DOIBONG)args.Item;
+            //if (args.IsNewItem)
+            //{
+            //    try
+            //    {
+            //        item.HINHANH = FootballTeamList.buffer;
+            //        DataProvider.ins.DB.DOIBONGs.Add(item);
+            //        DataProvider.ins.DB.SaveChanges();
 
-                DataProvider.ins.DB.SaveChanges();
+            //    }
+            //    catch (Exception)
+            //    {
 
-            }
+            //        PopUpCustom popUpCustom = new PopUpCustom("Lỗi","ID đã tồn tại");
+            //        popUpCustom.ShowDialog();
+            //        DataProvider.ins.DB.DOIBONGs.Remove(item);
+            //        DataProvider.ins.DB.SaveChanges();
+                    
+            //    }
+                
+
+            //}
         }
         
 

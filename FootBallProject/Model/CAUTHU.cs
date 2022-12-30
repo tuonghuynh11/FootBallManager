@@ -18,7 +18,9 @@ namespace FootBallProject.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CAUTHU()
         {
+            this.CHUYENNHUONGs = new HashSet<CHUYENNHUONG>();
             this.ITEMs = new HashSet<ITEM>();
+            this.THAMGIAs = new HashSet<THAMGIA>();
         }
     
         public int ID { get; set; }
@@ -35,7 +37,6 @@ namespace FootBallProject.Model
         public Nullable<int> SOAO { get; set; }
         public string CHIEUCAO { get; set; }
         public string CANNANG { get; set; }
-        public Nullable<long> GIATRICAUTHU { get; set; }
         public string QUOCGIA
         {
             get
@@ -57,16 +58,7 @@ namespace FootBallProject.Model
             }
             set { }
         }
-        public string TENDOIBONG
-        {
-            get
-            {
-                var qg = DataProvider.ins.DB.DOIBONGs.Find(IDDOIBONG);
 
-                return qg == null ? " " : qg.TEN;
-            }
-            set { }
-        }
         public int STT { get; set; }
         public string VITRIAO { get; set; }
 
@@ -99,9 +91,26 @@ namespace FootBallProject.Model
             {
             }
         }
+
+        public string TENDOIBONG
+        {
+            get
+            {
+                var qg = DataProvider.ins.DB.DOIBONGs.Find(IDDOIBONG);
+
+                return qg == null ? " " : qg.TEN;
+            }
+            set { }
+        }
+        public Nullable<long> GIATRICAUTHU { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CHUYENNHUONG> CHUYENNHUONGs { get; set; }
         public virtual DOIBONG DOIBONG { get; set; }
         public virtual QUOCTICH QUOCTICH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ITEM> ITEMs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<THAMGIA> THAMGIAs { get; set; }
     }
 }

@@ -24,6 +24,7 @@
              d:DesignHeight="720" d:DesignWidth="1290" Loaded="UserControl_Loaded" >
     <UserControl.Resources>
         <convert:ConvertByteArrToImage x:Key="imageconvert"/> 
+        <convert:ConvertStringToCurrency x:Key="currencyconvert"/> 
     </UserControl.Resources>
     <Grid Margin="60,10,15,0" Height="690"  >
         <Border CornerRadius="10" Background="#f3f4f7" >
@@ -60,7 +61,7 @@
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 10 0 0">
                                 <Border CornerRadius="90" Width="70" Height="70" BorderBrush="White" BorderThickness="1" Margin="10 0 5 5">
                                     <Border.Background>
-                                        <ImageBrush x:Name="HLVImage" ImageSource="/images/pepG.jpg" ></ImageBrush>
+                                        <ImageBrush x:Name="HLVImage" ImageSource="{Binding Coach.HINHANH,Converter={StaticResource ResourceKey=imageconvert}}" ></ImageBrush>
 
                                     </Border.Background>
                                 </Border>
@@ -68,14 +69,14 @@
                                 <!--Tên HLV-->
                                 <StackPanel Orientation="Vertical" Margin="0 0 10 0">
                                     <TextBlock Text="HLV" Foreground="#818591" Margin="10 0 10 10" FontSize="20"></TextBlock>
-                                    <TextBlock x:Name="HLVname" Text="Pep Guardiola" Foreground="White" VerticalAlignment="Center" FontSize="17" Margin="10 0 10 0" ></TextBlock>
+                                    <TextBlock x:Name="HLVname" Text="{Binding Coach.HOTEN}" Foreground="White" VerticalAlignment="Center" FontSize="17" Margin="10 0 10 0" ></TextBlock>
 
                                 </StackPanel>
                                 <!--Tên HLV-->
                                 <!--Giá trị đội hình-->
                                 <StackPanel Orientation="Vertical" Margin="10 0 10 0">
                                     <TextBlock Text="Giá trị đội hình" Foreground="#818591" Margin="10 0 10 10" FontSize="20"></TextBlock>
-                                    <TextBlock  x:Name="GTDH" Text="100,000,000" Foreground="White" VerticalAlignment="Center" FontSize="17" Margin="10 0 10 0" Loaded="GTDH_Loaded" ></TextBlock>
+                                    <TextBlock  x:Name="GTDH" Text="{Binding Team.GIATRI,Converter={StaticResource ResourceKey=currencyconvert}}" Foreground="White" VerticalAlignment="Center" FontSize="17" Margin="10 0 10 0" Loaded="GTDH_Loaded" ></TextBlock>
 
                                 </StackPanel>
 
@@ -179,7 +180,7 @@
                                 <Border DockPanel.Dock="Top" CornerRadius="10" Width="200" BorderBrush="Aqua" BorderThickness="2" Height="30" Padding="1" Background="White">
                                     <TextBox x:Name="tbSearch" materialDesign:HintAssist.Hint="Tìm kiếm cầu thủ" BorderThickness="0 0 0 0" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Width="180" Height="30" TextChanged="tbSearch_TextChanged"  ></TextBox>
                                 </Border>
-                                <DataGrid x:Name="dtgDSCauThu"  CanUserAddRows="False" ItemsSource="{Binding MainTeamPlayers}"  SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden" RowBackground="Transparent"  IsReadOnly="True" Margin="20 10 20 20" GridLinesVisibility="None" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" Foreground="White" FontSize="20"  BorderThickness="0" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False"  HorizontalGridLinesBrush="Black" SelectionChanged="dtgDSCauThu_SelectionChanged" MouseDoubleClick="addrole" >
+                                <DataGrid x:Name="dtgDSCauThu"  SelectionUnit="FullRow" CanUserAddRows="False" ItemsSource="{Binding MainTeamPlayers}"  SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden" RowBackground="Transparent"  IsReadOnly="True" Margin="20 10 20 20" GridLinesVisibility="None" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" Foreground="White" FontSize="20"  BorderThickness="0" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False"  HorizontalGridLinesBrush="Black" SelectionChanged="dtgDSCauThu_SelectionChanged" MouseDoubleClick="addrole" >
                                     <DataGrid.Resources>
                                         <DataTemplate x:Key="DataTemplate"  >
                                             <StackPanel x:Name="stckpnlPosition" Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Center">
@@ -253,7 +254,7 @@
 
 
                                     </DataGrid.Resources>
-
+                                   
                                     <DataGrid.Columns >
 
 

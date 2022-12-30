@@ -27,8 +27,6 @@ namespace FootBallProject.Model
         public Nullable<int> KETQUA { get; set; }
         public string IDDOIBONG { get; set; }
         public Nullable<int> IDTRANDAU { get; set; }
-    
-        public virtual DOIBONG DOIBONG { get; set; }
         public string TENDOIBONG
         {
             get
@@ -49,6 +47,7 @@ namespace FootBallProject.Model
             }
             set { }
         }
+        public virtual DOIBONG DOIBONG { get; set; }
         public virtual FOOTBALLMATCH FOOTBALLMATCH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ITEM> ITEMs { get; set; }

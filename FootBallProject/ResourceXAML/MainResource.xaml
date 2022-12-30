@@ -3,6 +3,7 @@
                     xmlns:viewmodel="clr-namespace:FootBallProject.ViewModel"
                     >
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
+    <viewmodel:ControlBarViewModel x:Key="ControlBarVM"></viewmodel:ControlBarViewModel>
 
     <viewmodel:FootballTeamListViewModel x:Key="FootballTeamListVM"></viewmodel:FootballTeamListViewModel>
     <viewmodel:DSCLBViewModel x:Key="DanhSachCLBVM"></viewmodel:DSCLBViewModel>
@@ -15,5 +16,8 @@
 
 
     <viewmodel:TeamPlayersViewModel x:Key="TeamPlayersVM"></viewmodel:TeamPlayersViewModel>
+    <viewmodel:TransferPlayersViewModel x:Key="TrainsferPlayersVM"></viewmodel:TransferPlayersViewModel>
+    <viewmodel:StatisticalChartViewModel x:Key="StatisticalChartVM"></viewmodel:StatisticalChartViewModel>
+    <viewmodel:TransferConfirmViewModel x:Key="TransferConfirmVM"></viewmodel:TransferConfirmViewModel>
 
 </ResourceDictionary>

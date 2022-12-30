@@ -52,13 +52,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Charts.v21.2.Core, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.Desktop.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.DataVisualization.v21.2.Core, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Mvvm.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Printing.v21.2.Core, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Charts.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Core.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Grid.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Grid.v21.2.Core, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Printing.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -89,6 +93,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -134,10 +139,12 @@
       <DependentUpon>AdminScreen.xaml</DependentUpon>
     </Compile>
 
+    <Compile Include="Class\AccessUser.cs" />
 
     <Compile Include="Class\BestTeam.cs" />
 
     <Compile Include="Class\ConvertByteArrToImage.cs" />
+    <Compile Include="Class\ConvertStringToCurrency.cs" />
     <Compile Include="Class\Format team\BasicTeam.cs" />
     <Compile Include="Class\Format team\Team_4231.cs" />
     <Compile Include="Class\Format team\Team_433.cs" />
@@ -219,6 +226,9 @@
     <Compile Include="Model\CAUTHU.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CHUYENNHUONG.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\DataProvider.cs" />
     <Compile Include="Model\DIADIEM.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -262,6 +272,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\Notification.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\OTP.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -275,6 +288,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TEAMOFLEAGUE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\THAMGIA.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\THONGTINGIAIDAU.cs">
@@ -351,8 +367,14 @@
     <Compile Include="UserControlBar\ScreenNavigation\FootballTeamList.xaml.cs">
       <DependentUpon>FootballTeamList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlBar\ScreenNavigation\StatisticalChart.xaml.cs">
+      <DependentUpon>StatisticalChart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControlBar\ScreenNavigation\TeamBuilder.xaml.cs">
       <DependentUpon>TeamBuilder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlBar\ScreenNavigation\TransferAccept.xaml.cs">
+      <DependentUpon>TransferAccept.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlBar\TeamPlayersUC.xaml.cs">
       <DependentUpon>TeamPlayersUC.xaml</DependentUpon>
@@ -389,6 +411,7 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MatchInformationViewModel.cs" />
     <Compile Include="ViewModel\MenuBarViewModel.cs" />
+    <Compile Include="ViewModel\StatisticalChartViewModel.cs" />
     <Compile Include="ViewModel\TeamBuilderViewModel.cs" />
     <Compile Include="ViewModel\TitleBarViewModel.cs" />
     <Compile Include="ViewModel\TournamentInformationViewModel.cs" />
@@ -411,6 +434,8 @@
     <Compile Include="ViewModel\MatchResultViewModel.cs" />
     <Compile Include="ViewModel\TeamPlayersViewModel.cs" />
     <Compile Include="ViewModel\TrainCalendarViewModel.cs" />
+    <Compile Include="ViewModel\TransferConfirmViewModel.cs" />
+    <Compile Include="ViewModel\TransferPlayersViewModel.cs" />
     <Compile Include="View\MatchResult2.xaml.cs">
       <DependentUpon>MatchResult2.xaml</DependentUpon>
     </Compile>
@@ -610,7 +635,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControlBar\ScreenNavigation\StatisticalChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControlBar\ScreenNavigation\TeamBuilder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlBar\ScreenNavigation\TransferAccept.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -690,6 +723,9 @@
     <Resource Include="Icons\calendar.png" />
     <Resource Include="Icons\leader.png" />
     <Resource Include="Icons\transfer.png" />
+
+    <Resource Include="Images\playerbackgroud.jpg" />
+    <Resource Include="Icons\confirm.png" />
 
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

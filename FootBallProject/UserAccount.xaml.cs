@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Configuration;
+using FootBallProject.Model;
 
 namespace FootBallProject
 {
@@ -23,7 +24,9 @@ namespace FootBallProject
     public partial class UserAccount : Window
     {
         public string connectstr2 = ConfigurationManager.ConnectionStrings["connectstr2"].ConnectionString;
-        public string usr = "admin"; // Lay du lieu tu luc dang nhap
+
+        public string usr = USER.USERN; // Lay du lieu tu luc dang nhap
+
         public UserAccount()
         {
             InitializeComponent();

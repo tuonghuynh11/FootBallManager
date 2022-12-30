@@ -30,15 +30,29 @@ namespace FootBallProject.ViewModel
         public ICommand LeaderListCommand { get; set; }
 
         public ICommand TransferCommand { get; set; }
+
+        public ICommand TeamPlayersCommand { get; set; }
+        public ICommand StatisticalChartCommand { get; set; }
+        public ICommand TransferConfirmCommand { get; set; }
+
         private void Home() => CurrentView = new AdminScreenViewModel();
-        private void Tactic() => CurrentView = new TeamBuilderViewModel();
+        private void Tactic() => CurrentView = new TeamBuilderViewModel(USER.IDDB);
         private void FootBallTeam() => CurrentView = new FootballTeamListViewModel();
         private void TrainingCalendar() => CurrentView = new TrainCalendarViewModel();
         private void LeaderList() => CurrentView = new LeaderListViewModel();
-        private void TransferList() => CurrentView = new TeamPlayersViewModel();
+        private void TransferList() => CurrentView = new TransferPlayersViewModel();
+
+        private void TeamPlayersList() => CurrentView = new TeamPlayersViewModel();
+        private void StatisticalChart() => CurrentView = new StatisticalChartViewModel();
+        private void TransferConfirm() => CurrentView = new TransferConfirmViewModel();
+
+
 
         //Tạo Visibility cho các nút
         public Visibility ALLTEAMVisibility { get; set; }
+        public Visibility TaticOfTEAMVisibility { get; set; }
+        public Visibility TransferConfirmisibility { get; set; }
+        
         public MenuBarViewModel()
         {
             //Tạo các màn hình cho các nút
@@ -51,6 +65,9 @@ namespace FootBallProject.ViewModel
             TrainingCalendarCommand = new RelayCommand<object>((p) => {return true; }, (p) => { TrainingCalendar(); });
             LeaderListCommand = new RelayCommand<object>((p) => {return true; }, (p) => { LeaderList(); });
             TransferCommand = new RelayCommand<object>((p) => {return true; }, (p) => { TransferList(); });
+            TeamPlayersCommand = new RelayCommand<object>((p) => {return true; }, (p) => { TeamPlayersList(); });
+            StatisticalChartCommand = new RelayCommand<object>((p) => {return true; }, (p) => { StatisticalChart(); });
+            TransferConfirmCommand = new RelayCommand<object>((p) => {return true; }, (p) => { TransferConfirm(); });
 
 
             // Startup Page
@@ -61,6 +78,11 @@ namespace FootBallProject.ViewModel
             if (USER.ROLE !="Admin")
             {
                 ALLTEAMVisibility = Visibility.Collapsed;
+                TransferConfirmisibility = Visibility.Collapsed;
+            }
+            else
+            {
+                TaticOfTEAMVisibility = Visibility.Collapsed;
             }
         }
       

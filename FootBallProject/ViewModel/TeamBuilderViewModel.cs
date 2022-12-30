@@ -20,7 +20,7 @@ namespace FootBallProject.ViewModel
 
         private BasicTeam _Teamformat;
         public BasicTeam Teamformat { get => _Teamformat; set { _Teamformat = value; OnPropertyChanged(); } }
-
+        public HUANLUYENVIEN Coach { get; set; }
 
         private DOIBONG _Team;
         public DOIBONG Team { get => _Team; set { _Team = value; OnPropertyChanged(); } }
@@ -47,6 +47,7 @@ namespace FootBallProject.ViewModel
                         join b in DataProvider.ins.DB.DOIHINHCHINHs on a.ID equals b.IDCAUTHU
                         where b.IDDOIBONG == id_doi
                         select (a)).ToList<CAUTHU>();
+            Coach = DataProvider.ins.DB.HUANLUYENVIENs.Where(x => x.IDDOIBONG == id_doi && x.CHUCVU == "HLV Trưởng").FirstOrDefault();
             if (temp.Count != 0 || temp != null)
             {
                 LoadMainteam(id_doi);

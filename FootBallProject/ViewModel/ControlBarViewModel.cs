@@ -1,5 +1,7 @@
-﻿using System;
+﻿using FootBallProject.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,7 @@ namespace FootBallProject.ViewModel
 {
     public class ControlBarViewModel:BaseViewModel
     {
+      
         #region comands
         public ICommand CloseWindowCommand { get; set; }
         public ICommand MinimizeWindowCommand { get; set; }
@@ -20,6 +23,7 @@ namespace FootBallProject.ViewModel
         #endregion
          public ControlBarViewModel()
         {
+            
             CloseWindowCommand = new RelayCommand<UserControl>((p) => { return p != null ? true : false; }, 
                 (p) => { 
                     FrameworkElement window = GetWindowParent(p);

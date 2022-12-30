@@ -26,6 +26,7 @@ namespace FootBallProject.Model
         }
     
         public virtual DbSet<CAUTHU> CAUTHUs { get; set; }
+        public virtual DbSet<CHUYENNHUONG> CHUYENNHUONGs { get; set; }
         public virtual DbSet<DIADIEM> DIADIEMs { get; set; }
         public virtual DbSet<DIEM> DIEMs { get; set; }
         public virtual DbSet<DOIBONG> DOIBONGs { get; set; }
@@ -35,11 +36,13 @@ namespace FootBallProject.Model
         public virtual DbSet<ITEM> ITEMs { get; set; }
         public virtual DbSet<ITEMTYPE> ITEMTYPEs { get; set; }
         public virtual DbSet<LEAGUE> LEAGUEs { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<OTP> OTPs { get; set; }
         public virtual DbSet<QUOCTICH> QUOCTICHes { get; set; }
         public virtual DbSet<ROUND> ROUNDs { get; set; }
         public virtual DbSet<TAPLUYEN> TAPLUYENs { get; set; }
         public virtual DbSet<TEAMOFLEAGUE> TEAMOFLEAGUEs { get; set; }
+        public virtual DbSet<THAMGIA> THAMGIAs { get; set; }
         public virtual DbSet<THONGTINGIAIDAU> THONGTINGIAIDAUs { get; set; }
         public virtual DbSet<THONGTINTRANDAU> THONGTINTRANDAUs { get; set; }
         public virtual DbSet<USERROLE> USERROLEs { get; set; }
