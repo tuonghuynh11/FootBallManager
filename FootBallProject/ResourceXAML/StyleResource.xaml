@@ -10,9 +10,11 @@
     <viewmodel:LoginViewModel x:Key="LoginViewM"></viewmodel:LoginViewModel>
     <viewmodel:MainViewModel2 x:Key="MainVM"></viewmodel:MainViewModel2>
     <object:LeagueCardOb x:Key="LeagueCardOb"></object:LeagueCardOb>
+    <viewmodel:ListMatchViewModel x:Key="ListMatchVM"></viewmodel:ListMatchViewModel>
     <viewmodel:LeagueRightBarViewModel x:Key="LeagueRightBarVM"></viewmodel:LeagueRightBarViewModel>
     <object:EmptyCard x:Key="EmptyCardOb"></object:EmptyCard>
     <viewmodel:MatchResultViewModel x:Key="MatchResultVM" ></viewmodel:MatchResultViewModel>
+    <viewmodel:ListofLeagueViewModel x:Key="ListofLeaguevm"></viewmodel:ListofLeagueViewModel>
     <!--<DataTemplate DataType="{x:Type viewmodel:MatchResultViewModel}">
         <view:MatchResult></view:MatchResult>
     </DataTemplate>-->

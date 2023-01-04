@@ -12,18 +12,12 @@ namespace FootBallProject.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class THONGTINGIAIDAU
+    public partial class sysdiagram
     {
-        public int IDGIAIDAU { get; set; }
-        public string IDDOIBONG { get; set; }
-        public Nullable<int> WIN { get; set; }
-        public Nullable<int> DRAW { get; set; }
-        public Nullable<int> LOSE { get; set; }
-        public Nullable<int> GA { get; set; }
-        public Nullable<int> GD { get; set; }
-        public Nullable<int> POINTS { get; set; }
-    
-        public virtual DOIBONG DOIBONG { get; set; }
-        public virtual LEAGUE LEAGUE { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
