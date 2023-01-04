@@ -165,7 +165,7 @@ namespace FootBallProject.UserControlBar
                 }
                 else if (select.Content.ToString() == "Đăng xuất")
                 {
-                   
+
                     Window window = Application.Current.MainWindow as Window;
 
                     if (window != null)
@@ -177,11 +177,13 @@ namespace FootBallProject.UserControlBar
                     }
                    
                   
+
                 }
 
             }
 
         }
+
 
         private void lvUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -210,6 +212,7 @@ namespace FootBallProject.UserControlBar
             int uncheck = DataProvider.ins.DB.Notifications.Where(p => p.IDHLV == AccessUser.userLogin.IDNHANSU && p.CHECKED == "Chưa xem").ToList().Count();
             numberofnotifies.Badge = uncheck;
             notifipopup.ToolTip = $"Bạn có {uncheck} thông báo mới";
+
         }
     }
   

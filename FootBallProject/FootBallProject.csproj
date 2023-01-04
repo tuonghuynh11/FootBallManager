@@ -138,8 +138,11 @@
     <Compile Include="AdminScreen.xaml.cs">
       <DependentUpon>AdminScreen.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="Class\AccessUser.cs" />
+
     <Compile Include="Class\BestTeam.cs" />
+
     <Compile Include="Class\ConvertByteArrToImage.cs" />
     <Compile Include="Class\ConvertStringToCurrency.cs" />
     <Compile Include="Class\Format team\BasicTeam.cs" />
@@ -724,8 +727,10 @@
     <Resource Include="Icons\calendar.png" />
     <Resource Include="Icons\leader.png" />
     <Resource Include="Icons\transfer.png" />
+
     <Resource Include="Images\playerbackgroud.jpg" />
     <Resource Include="Icons\confirm.png" />
+
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
