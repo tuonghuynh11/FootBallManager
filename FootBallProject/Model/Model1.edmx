@@ -793,6 +793,7 @@
     <edmx:ConceptualModels>
       <Schema Namespace="officialleagueModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="officialleagueEntities1" annotation:LazyLoadingEnabled="true">
+
           <EntitySet Name="OTPs" EntityType="officialleagueModel.OTP" />
           <EntitySet Name="USERROLEs" EntityType="officialleagueModel.USERROLE" />
           <EntitySet Name="USERS" EntityType="officialleagueModel.USER" />
@@ -804,6 +805,7 @@
             <End Role="USERROLE" EntitySet="USERROLEs" />
             <End Role="USER" EntitySet="USERS" />
           </AssociationSet>
+
           <EntitySet Name="CAUTHUs" EntityType="officialleagueModel.CAUTHU" />
           <EntitySet Name="CHUYENNHUONGs" EntityType="officialleagueModel.CHUYENNHUONG" />
           <EntitySet Name="DIADIEMs" EntityType="officialleagueModel.DIADIEM" />
@@ -816,6 +818,9 @@
           <EntitySet Name="ITEMTYPEs" EntityType="officialleagueModel.ITEMTYPE" />
           <EntitySet Name="LEAGUEs" EntityType="officialleagueModel.LEAGUE" />
           <EntitySet Name="Notifications" EntityType="officialleagueModel.Notification" />
+
+          <EntitySet Name="OTPs" EntityType="officialleagueModel.OTP" />
+
           <EntitySet Name="QUOCTICHes" EntityType="officialleagueModel.QUOCTICH" />
           <EntitySet Name="ROUNDs" EntityType="officialleagueModel.ROUND" />
           <EntitySet Name="TAPLUYENs" EntityType="officialleagueModel.TAPLUYEN" />
@@ -823,6 +828,10 @@
           <EntitySet Name="THAMGIAs" EntityType="officialleagueModel.THAMGIA" />
           <EntitySet Name="THONGTINGIAIDAUs" EntityType="officialleagueModel.THONGTINGIAIDAU" />
           <EntitySet Name="THONGTINTRANDAUs" EntityType="officialleagueModel.THONGTINTRANDAU" />
+
+          <EntitySet Name="USERROLEs" EntityType="officialleagueModel.USERROLE" />
+          <EntitySet Name="USERS" EntityType="officialleagueModel.USER" />
+
           <AssociationSet Name="FK_CN1" Association="officialleagueModel.FK_CN1">
             <End Role="CAUTHU" EntitySet="CAUTHUs" />
             <End Role="CHUYENNHUONG" EntitySet="CHUYENNHUONGs" />
@@ -943,6 +952,7 @@
             <End Role="LEAGUE" EntitySet="LEAGUEs" />
             <End Role="THONGTINGIAIDAU" EntitySet="THONGTINGIAIDAUs" />
           </AssociationSet>
+
           <EntitySet Name="sysdiagrams" EntityType="officialleagueModel.sysdiagram" />
         </EntityContainer>
         <EntityType Name="OTP">
@@ -1166,6 +1176,7 @@
           <NavigationProperty Name="ROUNDs" Relationship="officialleagueModel.fk_round_01" FromRole="LEAGUE" ToRole="ROUND" />
           <NavigationProperty Name="TEAMOFLEAGUEs" Relationship="officialleagueModel.FK_TEAMOFLEAGUE_01" FromRole="LEAGUE" ToRole="TEAMOFLEAGUE" />
           <NavigationProperty Name="THONGTINGIAIDAUs" Relationship="officialleagueModel.FK_TTGD1" FromRole="LEAGUE" ToRole="THONGTINGIAIDAU" />
+
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -1176,6 +1187,18 @@
           <Property Name="NOTIFY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CHECKED" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="HUANLUYENVIEN" Relationship="officialleagueModel.FK_TB1" FromRole="Notification" ToRole="HUANLUYENVIEN" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDHLV" Type="Int32" />
+          <Property Name="NOTIFY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CHECKED" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HUANLUYENVIEN" Relationship="officialleagueModel.FK_TB1" FromRole="Notification" ToRole="HUANLUYENVIEN" />
+
         </EntityType>
         <EntityType Name="QUOCTICH">
           <Key>
@@ -1196,9 +1219,11 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IDGIAIDAU" Type="Int32" />
           <Property Name="TENVONGDAU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+
           <Property Name="NGAYBATDAU" Type="DateTime" Precision="0" />
           <Property Name="SOLUONGDOI" Type="Int32" />
           <Property Name="IDDISPLAY" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+
           <NavigationProperty Name="FOOTBALLMATCHes" Relationship="officialleagueModel.fk_fbm_01" FromRole="ROUND" ToRole="FOOTBALLMATCH" />
           <NavigationProperty Name="LEAGUE" Relationship="officialleagueModel.fk_round_01" FromRole="ROUND" ToRole="LEAGUE" />
         </EntityType>
@@ -1268,6 +1293,32 @@
           <NavigationProperty Name="DOIBONG" Relationship="officialleagueModel.fk_tttd_01" FromRole="THONGTINTRANDAU" ToRole="DOIBONG" />
           <NavigationProperty Name="FOOTBALLMATCH" Relationship="officialleagueModel.fk_tttd_02" FromRole="THONGTINTRANDAU" ToRole="FOOTBALLMATCH" />
           <NavigationProperty Name="ITEMs" Relationship="officialleagueModel.fk_item_01" FromRole="THONGTINTRANDAU" ToRole="ITEM" />
+
+        </EntityType>
+        <EntityType Name="USERROLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ROLE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="USERS" Relationship="officialleagueModel.FK_US_01" FromRole="USERROLE" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUSERROLE" Type="Int32" />
+          <Property Name="USERNAME" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DISPLAYNAME" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IDOTP" Type="Int32" />
+          <Property Name="IDAVATAR" Type="Int32" />
+          <Property Name="IDNHANSU" Type="Int32" />
+          <NavigationProperty Name="OTP" Relationship="officialleagueModel.FK_US_02" FromRole="USER" ToRole="OTP" />
+          <NavigationProperty Name="USERROLE" Relationship="officialleagueModel.FK_US_01" FromRole="USER" ToRole="USERROLE" />
+
         </EntityType>
         <Association Name="FK_CN1">
           <End Type="officialleagueModel.CAUTHU" Role="CAUTHU" Multiplicity="0..1" />
@@ -1639,6 +1690,7 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1807,6 +1859,7 @@
                 <ScalarProperty Name="NGAYKETTHUC" ColumnName="NGAYKETTHUC" />
                 <ScalarProperty Name="NGAYBATDAU" ColumnName="NGAYBATDAU" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1817,6 +1870,7 @@
                 <ScalarProperty Name="NOTIFY" ColumnName="NOTIFY" />
                 <ScalarProperty Name="IDHLV" ColumnName="IDHLV" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1831,9 +1885,11 @@
           <EntitySetMapping Name="ROUNDs">
             <EntityTypeMapping TypeName="officialleagueModel.ROUND">
               <MappingFragment StoreEntitySet="ROUND">
+
                 <ScalarProperty Name="IDDISPLAY" ColumnName="IDDISPLAY" />
                 <ScalarProperty Name="SOLUONGDOI" ColumnName="SOLUONGDOI" />
                 <ScalarProperty Name="NGAYBATDAU" ColumnName="NGAYBATDAU" />
+
                 <ScalarProperty Name="TENVONGDAU" ColumnName="TENVONGDAU" />
                 <ScalarProperty Name="IDGIAIDAU" ColumnName="IDGIAIDAU" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -1907,6 +1963,7 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

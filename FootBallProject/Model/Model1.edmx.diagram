@@ -4,6 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
+
       <Diagram DiagramId="bc37d281b4454b6fb32abc6fcdcaf507" Name="Diagram1" ZoomLevel="50">
         <EntityTypeShape EntityType="officialleagueModel.CAUTHU" Width="1.5" PointX="3" PointY="18.125" />
         <EntityTypeShape EntityType="officialleagueModel.CHUYENNHUONG" Width="1.5" PointX="10.5" PointY="21" />
@@ -24,6 +25,7 @@
         <EntityTypeShape EntityType="officialleagueModel.THAMGIA" Width="1.5" PointX="9.75" PointY="24.25" />
         <EntityTypeShape EntityType="officialleagueModel.THONGTINGIAIDAU" Width="1.5" PointX="13.5" PointY="26.875" />
         <EntityTypeShape EntityType="officialleagueModel.THONGTINTRANDAU" Width="1.5" PointX="12.75" PointY="23.125" />
+
         <AssociationConnector Association="officialleagueModel.FK_CN1" />
         <AssociationConnector Association="officialleagueModel.FK_CT1" />
         <AssociationConnector Association="officialleagueModel.FK_CT2" />
@@ -54,7 +56,9 @@
         <AssociationConnector Association="officialleagueModel.fk_round_01" />
         <AssociationConnector Association="officialleagueModel.FK_TEAMOFLEAGUE_01" />
         <AssociationConnector Association="officialleagueModel.FK_TTGD1" />
+
         <EntityTypeShape EntityType="officialleagueModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -40,6 +40,9 @@ namespace FootBallProject.Model
         public virtual DbSet<ITEMTYPE> ITEMTYPEs { get; set; }
         public virtual DbSet<LEAGUE> LEAGUEs { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
+
+        public virtual DbSet<OTP> OTPs { get; set; }
+
         public virtual DbSet<QUOCTICH> QUOCTICHes { get; set; }
         public virtual DbSet<ROUND> ROUNDs { get; set; }
         public virtual DbSet<TAPLUYEN> TAPLUYENs { get; set; }

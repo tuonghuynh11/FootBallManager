@@ -141,7 +141,9 @@
     <Compile Include="AdminScreen.xaml.cs">
       <DependentUpon>AdminScreen.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="Class\AccessUser.cs" />
+
     <Compile Include="Class\BestTeam.cs" />
     <Compile Include="Class\ConvertByteArrToImage.cs" />
     <Compile Include="Class\ConvertStringToCurrency.cs" />
@@ -650,6 +652,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Styles\Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ThongTinCLB.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -802,6 +808,9 @@
     <Resource Include="Icons\confirm.png" />
 
     <Resource Include="Images\bldavt.png" />
+
+    <Resource Include="Images\playerbackgroud.jpg" />
+    <Resource Include="Icons\confirm.png" />
 
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

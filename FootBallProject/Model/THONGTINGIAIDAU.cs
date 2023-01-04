@@ -22,7 +22,28 @@ namespace FootBallProject.Model
         public Nullable<int> GA { get; set; }
         public Nullable<int> GD { get; set; }
         public Nullable<int> POINTS { get; set; }
-    
+
+        public string TENDOIBONG
+        {
+            get
+            {
+                var qg = DataProvider.ins.DB.DOIBONGs.Find(IDDOIBONG);
+
+                return qg == null ? " " : qg.TEN;
+            }
+            set { }
+        }
+        public byte[] HINHANHDOIBONG
+        {
+            get
+            {
+                var qg = DataProvider.ins.DB.DOIBONGs.Find(IDDOIBONG);
+
+                return qg == null ? null : qg.HINHANH;
+            }
+            set { }
+        }
+
         public virtual DOIBONG DOIBONG { get; set; }
         public virtual LEAGUE LEAGUE { get; set; }
     }
