@@ -580,6 +580,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Styles\Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ThongTinCLB.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

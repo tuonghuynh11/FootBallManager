@@ -201,13 +201,13 @@
                             
                         </ComboBox>
                     </StackPanel>
-                    <StackPanel
+                    <!--<StackPanel
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     Margin="150 0 0 0"
                     materialDesign:RippleAssist.IsCentered="True">
-                        <!--<ToggleButton
-                        Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />-->
+                        --><!--<ToggleButton
+                        Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />--><!--
                         <materialDesign:ColorZone
                             VerticalAlignment="Center"
                            
@@ -246,6 +246,30 @@
                             </Grid>
                         </materialDesign:ColorZone>
 
+                    </StackPanel>-->
+                    <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="230 0 0 0">
+                        <Label x:Name="FamousFootballQuotelb" FontFamily="VNI-Commerce" Width="700" Foreground="White" FontSize="17" FontWeight="Bold" Content='"If you do not believe you can do it then you have no chance at all" – Arsene Wenger' HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                            <Label.Triggers>
+                                <EventTrigger RoutedEvent="Loaded" >
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation 
+                                            Storyboard.TargetName="FamousFootballQuotelb"
+                                            Storyboard.TargetProperty="(TextBlock.Width)"
+                                            To="0"
+                                            Duration="0:0:20"
+                                            AutoReverse="True"
+                                            RepeatBehavior="Forever"    
+                                            >
+
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Label.Triggers>
+                        </Label>
                     </StackPanel>
                 </DockPanel>
             </materialDesign:ColorZone>

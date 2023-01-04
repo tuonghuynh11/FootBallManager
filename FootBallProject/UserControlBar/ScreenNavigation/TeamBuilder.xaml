@@ -20,7 +20,7 @@
         TextOptions.TextRenderingMode="Auto"
         DataContext="{StaticResource TeamBuilderVM}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-             
+              Style="{StaticResource Page_Style}"
              d:DesignHeight="720" d:DesignWidth="1290" Loaded="UserControl_Loaded" >
     <UserControl.Resources>
         <convert:ConvertByteArrToImage x:Key="imageconvert"/> 

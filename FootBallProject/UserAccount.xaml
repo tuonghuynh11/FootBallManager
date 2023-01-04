@@ -16,7 +16,7 @@
         DataContext="{StaticResource MainVM}"
         mc:Ignorable="d"
         Title="UserAccount" Height="600" Width="750">
-    <Border CornerRadius="20" Padding="6" Background="White">
+    <Border CornerRadius="20" Padding="6" Background="White" BorderBrush="Purple" BorderThickness="2">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"></RowDefinition>

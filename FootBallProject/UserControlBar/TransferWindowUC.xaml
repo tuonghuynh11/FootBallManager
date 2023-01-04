@@ -11,6 +11,7 @@
  
    	 mc:Ignorable="d"
     Height="720" Width="1290"
+      Style="{StaticResource Page_Style}"
    	 DataContext="{StaticResource TrainsferPlayersVM}"
    	 Name="transferWindow1">
     <UserControl.Resources>
