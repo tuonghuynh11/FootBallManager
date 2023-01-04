@@ -136,17 +136,5 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
                 return;
             }
         }
-
-        private void AcceptTransferdgrid_Loaded(object sender, RoutedEventArgs e)
-        {
-           // Refresh lại transfer list
-            TransferConfirmViewModel transferConfirm = new TransferConfirmViewModel();
-            transferConfirm.TransferPlayers = new ObservableCollection<CHUYENNHUONG>(DataProvider.ins.DB.CHUYENNHUONGs.Where(p => p.IDDOIMUA != null));
-            AcceptTransferdgrid.DataContext = transferConfirm;
-
-            AcceptTransferdgrid.Items.Refresh();
-
-        }
-
     }
 }

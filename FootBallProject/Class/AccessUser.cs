@@ -10,8 +10,5 @@ namespace FootBallProject.Class
     public class AccessUser
     {
         public static USER userLogin { get; set; }
-
-        public static DOIBONG TeamOfUser { get; set; }
-
     }
 }

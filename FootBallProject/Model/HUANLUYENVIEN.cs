@@ -30,18 +30,7 @@ namespace FootBallProject.Model
         public Nullable<System.DateTime> NGAYSINH { get; set; }
         public string CHUCVU { get; set; }
         public byte[] HINHANH { get; set; }
-
-        public string QUOCGIA
-        {
-            get
-            {
-                var qg = DataProvider.ins.DB.QUOCTICHes.Find(IDQUOCTICH);
-
-                return qg == null ? " " : qg.TENQUOCGIA;
-            }
-            set { }
-        }
-
+    
         public virtual DOIBONG DOIBONG { get; set; }
         public virtual QUOCTICH QUOCTICH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

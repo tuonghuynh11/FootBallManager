@@ -18,7 +18,6 @@
         DataContext="{StaticResource AdminScreenVM}"
          xmlns:convert ="clr-namespace:FootBallProject.Class"
              
-          Style="{StaticResource Page_Style}"   
         FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="720" d:DesignWidth="1290">
     <UserControl.Resources>
@@ -123,13 +122,13 @@
 
                     <StackPanel Orientation="Horizontal">
                         <Border Margin="0 0 10 0" BorderBrush="Black" BorderThickness="0.1" Width="31" Height="20"  Background="White">
-                            <Image x:Name="DashBoardLeagueImage" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding league.HINHANH,Converter={StaticResource ResourceKey=imageconvert}}" Width="55" Height="30" >
+                            <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="https://cdn-icons-png.flaticon.com/512/555/555527.png" Width="55" Height="30" >
 
                             </Image>
                         </Border>
                         <StackPanel Orientation="Vertical">
-                            <TextBlock x:Name="DashBoardLeagueName" Margin="0 0 0 5" Text="{Binding league.TENGIAIDAU}" Foreground="#FF9A9191"></TextBlock>
-                            <TextBlock x:Name="DashBoardLeagueLocation" Text="{Binding league.QUOCGIA}" Foreground="#FF9A9191"></TextBlock>
+                            <TextBlock Margin="0 0 0 5" Text="Premier League" Foreground="#FF9A9191"></TextBlock>
+                            <TextBlock Text="England" Foreground="#FF9A9191"></TextBlock>
                         </StackPanel>
                     </StackPanel>
                     <Separator Background="Transparent" Width="180" Foreground="Transparent" BorderBrush="Transparent" BorderThickness="0" ></Separator>

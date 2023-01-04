@@ -9,6 +9,7 @@
         xmlns:uc="clr-namespace:FootBallProject.UserControlBar"
         Title="PlayerProfile" Height="700" Width="900"
         DataContext="{StaticResource TeamPlayersVM}"
+        
         AllowsTransparency="True"
          WindowStyle="None"
         Background="Transparent" 
