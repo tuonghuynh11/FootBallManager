@@ -19,9 +19,7 @@
     <viewmodel:TransferPlayersViewModel x:Key="TrainsferPlayersVM"></viewmodel:TransferPlayersViewModel>
     <viewmodel:StatisticalChartViewModel x:Key="StatisticalChartVM"></viewmodel:StatisticalChartViewModel>
     <viewmodel:TransferConfirmViewModel x:Key="TransferConfirmVM"></viewmodel:TransferConfirmViewModel>
-
     <viewmodel:ConfigAutoViewModel x:Key="ConfigAutoVM"></viewmodel:ConfigAutoViewModel>
     <viewmodel:ConfigVongLoai1ViewModel x:Key="ConfigVongloai1VM"></viewmodel:ConfigVongLoai1ViewModel>
     <viewmodel:ConfigVongLoai2ViewModel x:Key="ConfigVongLoai2VM"></viewmodel:ConfigVongLoai2ViewModel>
-
 </ResourceDictionary>

@@ -15,12 +15,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Configuration;
 using FootBallProject.Model;
-
 using Microsoft.Win32;
 using System.IO;
 using System.Net;
 using static FootBallProject.UserControlBar.UserControl_DS_BLD;
-
 
 namespace FootBallProject
 {
@@ -29,11 +27,7 @@ namespace FootBallProject
     /// </summary>
     public partial class UserAccount : Window
     {
-
-        public string connectstr2 = ConfigurationManager.ConnectionStrings["connectstr2"].ConnectionString;
-
         public string connectstr = ConfigurationManager.ConnectionStrings["connectstr"].ConnectionString;
-
 
         public string usr = USER.USERN; // Lay du lieu tu luc dang nhap
 

@@ -15,7 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace FootBallProject.UserControlBar.ScreenNavigation
 {
@@ -31,38 +30,37 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
         {
             InitializeComponent();
             this.DataContext = new AdminScreenViewModel();
-            //Timer 
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(30);
-            timer.Tick += timer_Tick;
-            timer.Start();
+            Random r = new Random();
+
+
+
+            List<Teams> list = new List<Teams>();
+            List<Teams> list1 = new List<Teams>();
+            List<Teams> list2 = new List<Teams>();
+            List<Players> listPlayer = new List<Players>();
+
+
+            //list.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
+            //list.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
+            //list.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
+            //list.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 10, Lost = 1, Ga = 10, Gd = 11 });
+
+            list2.Add(new Teams() { Name = "Manchester City", logo = "https://iconape.com/wp-content/png_logo_vector/manchester-city-logo.png", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
+            list2.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 1, Lost = 10, Ga = 10, Gd = 11 });
+            list2.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 1, Draw = 10, Lost = 10, Ga = 10, Gd = 10 });
+            list2.Add(new Teams() { Name = "Real marid", logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiEAOaEJTpbqplSJGTXqMZWdjUs8_Ne_y_JE0MRgy&s", Win = 10, Draw = 10, Lost = 1, Ga = 10, Gd = 11 });
+
+            listPlayer.Add(new Players() { Name = "Erling Haaland", Image = @"/images/4.jpg", brush = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233))) });
+            listPlayer.Add(new Players() { Name = "Cristiano Ronaldo", Image = @"/images/1.jpg", brush = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233))) });
+            listPlayer.Add(new Players() { Name = "Kervin De Bruyne", Image = @"/images/5.jpg", brush = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233))) });
+            listPlayer.Add(new Players() { Name = "Lionel Messi", Image = @"/images/3.jpg", brush = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233))) });
+            listPlayer.Add(new Players() { Name = "Roberto Carlos", Image = @"/images/7.jpg", brush = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233))) });
+           
+          //   lsTranDau.ItemsSource = list;
+          //  lvBestTeams.ItemsSource = list1;
+
         }
-        void timer_Tick(object sender, EventArgs e)
-        {
-            if (t1 > 8)
-            {
-                t1 = t2 + 1;
-            }
-            if (tm > 8)
-            {
-                tm = t1;
-            }
-            if (t2 + 1 > 8)
-            {
-                t2 = 1;
-            }
 
-            Thumnail1.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/" + (t2 + 1) + ".jpg"));
-
-            ThumnailMain.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/" + (t1) + ".jpg"));
-
-
-            Thumnail2.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/" + (tm) + ".jpg"));
-
-            tm = t1;
-            t1 = t2 + 1;
-            t2 = t2 + 1;
-        }
         private void bttFoward(object sender, RoutedEventArgs e)
         {
             if (t1 > 8)

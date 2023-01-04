@@ -29,7 +29,6 @@ namespace FootBallProject.ViewModel
         private ObservableCollection<FOOTBALLMATCH> _MatchInformation;
         public ObservableCollection<FOOTBALLMATCH> MatchInformation { get => _MatchInformation; set { _MatchInformation = value; OnPropertyChanged(); } }
 
-        public LEAGUE league { get; set; }
         public AdminScreenViewModel()
         {
 
@@ -37,7 +36,7 @@ namespace FootBallProject.ViewModel
             BestPlayers = new ObservableCollection<CAUTHU>(DataProvider.ins.DB.Database.SqlQuery<CAUTHU>("SELECT TOP(5) * FROM CAUTHU ORDER BY SOBANTHANG DESC"));
 
             LEAGUE id_giaidau = DataProvider.ins.DB.Database.SqlQuery<LEAGUE>("SELECT TOP(1) * FROM LEAGUE ORDER BY ID ASC").FirstOrDefault<LEAGUE>();
-            league = DataProvider.ins.Database.LEAGUEs.Find(id_giaidau.ID);
+
             TournamentInformation= new ObservableCollection<THONGTINGIAIDAU>(DataProvider.ins.DB.Database.SqlQuery<THONGTINGIAIDAU>("SELECT * FROM THONGTINGIAIDAU WHERE IDGIAIDAU =@ID ", new SqlParameter("@ID", id_giaidau.ID)));
 
             MatchInformation = new ObservableCollection<FOOTBALLMATCH>(DataProvider.ins.DB.Database.SqlQuery<FOOTBALLMATCH>("SELECT TOP(4) * FROM FOOTBALLMATCH ORDER BY THOIGIAN DESC"));

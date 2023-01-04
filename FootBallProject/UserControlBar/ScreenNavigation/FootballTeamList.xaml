@@ -20,7 +20,7 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-         Style="{StaticResource Page_Style}"
+        
         FontFamily="{DynamicResource MaterialDesignFont}"
          DataContext="{StaticResource FootballTeamListVM}"
              d:DesignHeight="720" d:DesignWidth="1290">
