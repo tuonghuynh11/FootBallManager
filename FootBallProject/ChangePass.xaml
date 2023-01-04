@@ -15,8 +15,8 @@
         
         DataContext="{StaticResource MainVM}"
         mc:Ignorable="d"
-        Title="ChangePass" Height="350" Width="600">
-    <Border CornerRadius="20" Padding="6" Background="#bfe7bf">
+        Title="ChangePass" Height="400" Width="600">
+    <Border CornerRadius="20" Padding="6" BorderBrush="#fbc42d" BorderThickness="2" Background="#bfe7bf">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"></RowDefinition>
@@ -32,34 +32,42 @@
             </Grid>
             <Grid Grid.Row="1">
                 <Label Content="Mật khẩu cũ" HorizontalAlignment="Left" 
-                       Margin="17,32,0,0" VerticalAlignment="Top"
+                       Margin="17,16,0,0" VerticalAlignment="Top"
                        FontSize="20" Foreground="#f6546a"/>
                 <Label Content="Mật khẩu mới" HorizontalAlignment="Left" 
-                    Margin="11,112,0,0" VerticalAlignment="Top"
+                    Margin="11,96,0,0" VerticalAlignment="Top"
                     FontSize="20"/>
                 <Label Content="Xác nhận mật khẩu" HorizontalAlignment="Left" 
-                    Margin="11,192,0,0" VerticalAlignment="Top"
+                    Margin="11,176,0,0" VerticalAlignment="Top"
                     FontSize="20"/>
                 <!--<TextBox x:Name="Oldpass" HorizontalAlignment="Left" Margin="219,31,0,0" 
                          TextWrapping="Wrap" VerticalAlignment="Top" 
                          Width="330" FontSize="20" Background="#e9f7e9"/>-->
                 <PasswordBox x:Name="Oldpass" HorizontalAlignment="Left" 
-                         Margin="219,31,0,0" VerticalAlignment="Top" 
+                         Margin="219,16,0,0" VerticalAlignment="Top" 
                          Width="330" FontSize="20" Background="#e9f7e9"/>
                 <!--<TextBox x:Name="newPass" HorizontalAlignment="Left" Margin="219,112,0,0" 
                     TextWrapping="Wrap" VerticalAlignment="Top" 
                     Width="330" FontSize="20" Background="#e9f7e9"/>-->
                 <PasswordBox x:Name="newPass" HorizontalAlignment="Left" 
-                         Margin="219,112,0,0" VerticalAlignment="Top" 
+                         Margin="219,95,0,0" VerticalAlignment="Top" 
                          Width="330" FontSize="20" Background="#e9f7e9"/>
                 <!--<TextBox x:Name="xacnhan" HorizontalAlignment="Left" Margin="219,191,0,0" 
                     TextWrapping="Wrap" VerticalAlignment="Top" 
                     Width="330" FontSize="20" Background="#e9f7e9"/>-->
                 <PasswordBox x:Name="xacnhan" HorizontalAlignment="Left" 
-                         Margin="219,191,0,0" VerticalAlignment="Top" 
+                         Margin="219,176,0,0" VerticalAlignment="Top" 
                          Width="330" FontSize="20" Background="#e9f7e9"/>
-                <Button Width="100" Margin="449,252,39,36" Background="#f6546a" 
+                <Button Width="100" Margin="399,312,89,-24" Background="#f6546a" 
                         BorderBrush="{x:Null}" Content="OKAY" Click="Button_Click"/>
+                <Label Content="Xác nhận OTP" HorizontalAlignment="Left" 
+                    Margin="17,256,0,0" VerticalAlignment="Top"
+                    FontSize="20"/>
+                <TextBox x:Name="tbOTP" HorizontalAlignment="Left" 
+                         Margin="219,256,0,0" VerticalAlignment="Top" 
+                         Width="200" FontSize="20" Background="#e9f7e9"/>
+                <Button x:Name="getOTP" Width="100" Margin="449,256,39,32" Background="#fbc42d" 
+                    BorderBrush="{x:Null}" Content="Lấy OTP" Click="getOTP_Click" />
             </Grid>
         </Grid>
     </Border>

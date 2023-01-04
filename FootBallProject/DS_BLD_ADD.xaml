@@ -15,7 +15,7 @@
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="DS_BLD_ADD" Height="330" Width="600">
-    <Border CornerRadius="10" Padding="6" Background="#d3ffce">
+    <Border CornerRadius="10" Padding="6" BorderBrush="#fbc42d" BorderThickness="2" Background="#d3ffce">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="15"></RowDefinition>
@@ -54,12 +54,12 @@
                 <Label x:Name="qtname" Margin="60,229,445,46" Height="25">
                     Quốc tịch
                 </Label>
-                <!--<TextBox x:Name="tbID" Width="250" 
+                <TextBox x:Name="tbID" Width="250" 
+                       HorizontalAlignment="Center" IsReadOnly="True"
+                       Height="25" Background="White" Margin="0,29,0,246"/>
+                <!--<ComboBox x:Name="cbID" Width="250" 
                        HorizontalAlignment="Center"
                        Height="25" Background="White" Margin="0,29,0,246"/>-->
-                <ComboBox x:Name="cbID" Width="250" 
-                       HorizontalAlignment="Center"
-                       Height="25" Background="White" Margin="0,29,0,246"/>
                 <TextBox x:Name="tbht" Width="250" 
                        HorizontalAlignment="Center"
                        Height="25" Background="White" Margin="0,66,0,208"/>
@@ -68,7 +68,10 @@
                         Height="25" Margin="0,109,0,0"
                         Background="White" VerticalAlignment="Top">
                 </DatePicker>
-                <TextBox x:Name="tbcv" Width="250" 
+                <!--<TextBox x:Name="tbcv" Width="250" 
+                       HorizontalAlignment="Center"
+                       Height="25" Background="White" Margin="0,150,0,125"/>-->
+                <ComboBox x:Name="cbCV" Width="250" 
                        HorizontalAlignment="Center"
                        Height="25" Background="White" Margin="0,150,0,125"/>
                 <TextBox x:Name="tbdc" Width="250" 
@@ -92,7 +95,7 @@
                     _Thêm
                 </Button>
                 <Image x:Name = "bldimage" HorizontalAlignment="Left" Height="100" Margin="459,29,0,0" 
-                       VerticalAlignment="Top" Width="100"/>
+                       VerticalAlignment="Top" Width="100" Source="Images\bldavt.png"/>
                 <Button 
                     x:Name="Upload"
                     VerticalAlignment="Top"

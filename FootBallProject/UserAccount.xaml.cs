@@ -15,6 +15,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Configuration;
 using FootBallProject.Model;
+using Microsoft.Win32;
+using System.IO;
+using System.Net;
+using static FootBallProject.UserControlBar.UserControl_DS_BLD;
 
 namespace FootBallProject
 {
@@ -23,14 +27,14 @@ namespace FootBallProject
     /// </summary>
     public partial class UserAccount : Window
     {
-        public string connectstr2 = ConfigurationManager.ConnectionStrings["connectstr2"].ConnectionString;
+        public string connectstr = ConfigurationManager.ConnectionStrings["connectstr"].ConnectionString;
 
         public string usr = USER.USERN; // Lay du lieu tu luc dang nhap
 
         public UserAccount()
         {
             InitializeComponent();
-            ReadOrderData(connectstr2);
+            ReadOrderData(connectstr);
 
         }
 
@@ -69,23 +73,132 @@ namespace FootBallProject
                     txbhusername.Text = reader.GetString(2);
 
                    
-                    pbpass.Password = reader.GetString(3);
+                    pbpass.Password = "password";
                     txbemail.Text = reader.GetString(5);
+                    ReadSingleRow((IDataRecord)reader);
                 }
                 reader.Close();
+            }
+        }
+        private void ReadSingleRow(IDataRecord dataRecord)
+        {
+            
+            byte[] pic;
+            if (dataRecord[9].ToString() == "")
+            {
+                pic = null;
+            }
+            else
+            {
+                pic = (byte[])dataRecord[9];
+            }
+            if (pic != null)
+            {
+                using (var stream = new MemoryStream(pic))
+                {
+                    avtuser.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+                }
             }
         }
 
         private void Change_Pass_Click_1(object sender, RoutedEventArgs e)
         {
             ChangePass change = new ChangePass();
-            change.oldpass = pbpass.Password;
+            change.getMail = txbemail.Text;
+            string queryString = "SELECT * FROM USERS WHERE USERNAME=" + "'" + usr + "'";
+            using (SqlConnection connection = new SqlConnection(connectstr))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    change.oldpass = reader.GetString(3);
+                    
+                }
+                reader.Close();
+            }
             change.ShowDialog();
-            ReadOrderData(connectstr2);
+            //ReadOrderData(connectstr);
         }
         private void HandleInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void edit_Click(object sender, RoutedEventArgs e)
+        {
+            txbhoten.IsReadOnly = false;
+            txbemail.IsReadOnly = false;
+            editbtt.Visibility = Visibility.Hidden;
+            savebtt.Visibility = Visibility.Visible;
+            uploadbtt.Visibility = Visibility.Visible; 
+        }
+
+        private void savebtt_Click(object sender, RoutedEventArgs e)
+        {
+            string commandText = "UPDATE dbo.USERS SET DISPLAYNAME=@displayname, EMAIL=@email, avatar=@avatar WHERE USERNAME = @username";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectstr))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(commandText, connection))
+                    {
+
+                        command.Parameters.Add("@USERNAME", SqlDbType.VarChar);
+                        command.Parameters["@username"].Value = usr;
+
+                        command.Parameters.Add("@displayname", SqlDbType.NVarChar);
+                        command.Parameters["@displayname"].Value = txbhoten.Text;
+
+                        command.Parameters.Add("@email", SqlDbType.VarChar);
+                        command.Parameters["@email"].Value = txbemail.Text;
+
+                        byte[] buffer;
+
+                        var bitmap = avtuser.Source as BitmapSource;
+                        var encoder = new PngBitmapEncoder();
+                        encoder.Frames.Add(BitmapFrame.Create(bitmap));
+
+                        using (var stream = new MemoryStream())
+                        {
+                            encoder.Save(stream);
+                            buffer = stream.ToArray();
+                        }
+
+                        command.Parameters.Add("@avatar", SqlDbType.Image);
+                        command.Parameters["@avatar"].Value = buffer;
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+                Success success = new Success();
+                success.ShowDialog();
+                txbhoten.IsReadOnly = true;
+                txbemail.IsReadOnly = true;
+                editbtt.Visibility = Visibility.Visible;
+                savebtt.Visibility = Visibility.Hidden;
+                uploadbtt.Visibility = Visibility.Hidden;
+
+            }
+            catch (Exception)
+            {
+                Error error = new Error("");
+                error.ShowDialog();
+            }
+        }
+
+        private void uploadbtt_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files|*.bmp;*.jpg;*.png";
+            openFileDialog.FilterIndex = 1;
+            if (openFileDialog.ShowDialog() == true)
+            {
+                avtuser.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+            }
         }
     }
 }

@@ -16,7 +16,7 @@
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="Success" Height="300" Width="300">
-    <Border CornerRadius="10" Padding="6" Background="White">
+    <Border CornerRadius="10" Padding="6" BorderBrush="#fbc42d" BorderThickness="2" Background="White">
         <Grid>
             <Image HorizontalAlignment="Center" Height="119" 
                    Margin="0,10,0,0" VerticalAlignment="Top" 

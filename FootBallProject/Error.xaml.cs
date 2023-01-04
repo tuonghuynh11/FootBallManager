@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.Xpf.Core.Native;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,10 @@ namespace FootBallProject
     /// </summary>
     public partial class Error : Window
     {
-        public Error()
+        public Error(string text)
         {
             InitializeComponent();
+            cterror.Text = text;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
