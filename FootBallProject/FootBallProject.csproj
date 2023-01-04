@@ -132,6 +132,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Addnewusers.xaml.cs">
+      <DependentUpon>Addnewusers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BLD_Appear.xaml.cs">
       <DependentUpon>BLD_Appear.xaml</DependentUpon>
     </Compile>
@@ -142,7 +145,6 @@
     <Compile Include="Class\AccessUser.cs" />
 
     <Compile Include="Class\BestTeam.cs" />
-
     <Compile Include="Class\ConvertByteArrToImage.cs" />
     <Compile Include="Class\ConvertStringToCurrency.cs" />
     <Compile Include="Class\Format team\BasicTeam.cs" />
@@ -150,6 +152,27 @@
     <Compile Include="Class\Format team\Team_433.cs" />
     <Compile Include="Class\Format team\Team_442.cs" />
     <Compile Include="Class\MatchesPlayed.cs" />
+    <Compile Include="Component\League\ConfigAuto.xaml.cs">
+      <DependentUpon>ConfigAuto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\League\ConfigVongLoai.xaml.cs">
+      <DependentUpon>ConfigVongLoai.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\League\ConfigVongLoai2.xaml.cs">
+      <DependentUpon>ConfigVongLoai2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\League\LeagueDataGrid.xaml.cs">
+      <DependentUpon>LeagueDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\League\LeaguePickDatagrid.xaml.cs">
+      <DependentUpon>LeaguePickDatagrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\League\RoundCard.xaml.cs">
+      <DependentUpon>RoundCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\League\SearchBar.xaml.cs">
+      <DependentUpon>SearchBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DragAndDrop\DraggableExtender.cs" />
     <Compile Include="DS_CLB.xaml.cs">
       <DependentUpon>DS_CLB.xaml</DependentUpon>
@@ -284,6 +307,9 @@
     <Compile Include="Model\ROUND.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\sysdiagram.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\TAPLUYEN.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -311,6 +337,7 @@
     <Compile Include="Object\FootballMatchCard.cs" />
     <Compile Include="Object\LeagueCardOb.cs" />
     <Compile Include="Object\Navigation.cs" />
+    <Compile Include="Object\TeamItem.cs" />
     <Compile Include="PlayerProfile.xaml.cs">
       <DependentUpon>PlayerProfile.xaml</DependentUpon>
     </Compile>
@@ -385,6 +412,12 @@
     <Compile Include="UserControlBar\TransferWindowUC.xaml.cs">
       <DependentUpon>TransferWindowUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlBar\ScreenNavigation\MainLeague.xaml.cs">
+      <DependentUpon>MainLeague.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlBar\ScreenNavigation\MainMatch.xaml.cs">
+      <DependentUpon>MainMatch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\AdminScreenViewModel.cs" />
     <Compile Include="UserControlBar\UserControl_Calendar.xaml.cs">
       <DependentUpon>UserControl_Calendar.xaml</DependentUpon>
@@ -402,7 +435,11 @@
     <Compile Include="ViewModel\AddPlayerViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ClubInfomationViewModel.cs" />
+    <Compile Include="ViewModel\ConfigAutoViewModel.cs" />
+    <Compile Include="ViewModel\ConfigVongLoai1ViewModel.cs" />
+    <Compile Include="ViewModel\ConfigVongLoai2ViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
+    <Compile Include="ViewModel\CreateNewLeague.cs" />
     <Compile Include="ViewModel\DH433VIewModel.cs" />
     <Compile Include="ViewModel\DSCLBViewModel.cs" />
     <Compile Include="ViewModel\DS_GiaiDauViewModel.cs" />
@@ -439,11 +476,43 @@
     <Compile Include="View\MatchResult2.xaml.cs">
       <DependentUpon>MatchResult2.xaml</DependentUpon>
     </Compile>
+    <Page Include="Addnewusers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BLD_Appear.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Component\League\ConfigAuto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Component\League\ConfigVongLoai.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Component\League\ConfigVongLoai2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Component\League\LeagueDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Component\League\LeaguePickDatagrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Component\League\RoundCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Component\League\SearchBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -683,6 +752,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControlBar\ScreenNavigation\MainLeague.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlBar\ScreenNavigation\MainMatch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MatchResult2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -727,6 +804,10 @@
     <Resource Include="Icons\calendar.png" />
     <Resource Include="Icons\leader.png" />
     <Resource Include="Icons\transfer.png" />
+    <Resource Include="Images\playerbackgroud.jpg" />
+    <Resource Include="Icons\confirm.png" />
+
+    <Resource Include="Images\bldavt.png" />
 
     <Resource Include="Images\playerbackgroud.jpg" />
     <Resource Include="Icons\confirm.png" />

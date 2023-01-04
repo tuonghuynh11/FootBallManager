@@ -297,6 +297,7 @@ namespace FootBallProject.ViewModel
                 AccessUser.TeamOfUser = DataProvider.ins.DB.DOIBONGs.Find(USER.IDDB);
             }
           
+
             //Window window = Application.Current.MainWindow as Window;
             //MainWindow2 mainWindow = new MainWindow2();
             //Application.Current.MainWindow = mainWindow;

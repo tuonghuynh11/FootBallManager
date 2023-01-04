@@ -16,7 +16,7 @@
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="BLD_Appear" Height="380" Width="600">
-    <Border CornerRadius="10" Padding="6" Background="#d3ffce">
+    <Border CornerRadius="10" BorderBrush="#fbc42d" BorderThickness="2" Padding="6" Background="#d3ffce">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="15"></RowDefinition>
@@ -65,6 +65,10 @@
                            IsReadOnly="True"
                            HorizontalAlignment="Left"
                            Height="25" Background="White" Margin="115,208,0,116"/>
+                <ComboBox x:Name="cbcv" Width="160" 
+                           Visibility="Hidden"
+                           HorizontalAlignment="Left"
+                           Height="25" Background="White" Margin="115,208,0,116"/>
                 <TextBox x:Name="tbdc" Width="160" 
                            IsReadOnly="True"
                            HorizontalAlignment="Left"
@@ -73,23 +77,53 @@
                            IsReadOnly="True"
                            HorizontalAlignment="Left"
                            Height="25" Background="White" Margin="115,262,0,64"/>
+                <ComboBox x:Name="cbqt" Width="160" Visibility="Hidden"
+                           HorizontalAlignment="Left"
+                           Height="25" Background="White" Margin="115,262,0,64"/>
                 <TextBox x:Name="nsdp" Width="160" 
                             IsReadOnly="True"
                             HorizontalAlignment="Left"
                             Height="25" Margin="420,206,0,0"
                             Background="White" VerticalAlignment="Top">
                 </TextBox>
+                <DatePicker x:Name="dpns" Width="160" 
+                            HorizontalAlignment="Left"
+                            Height="25" Margin="420,206,0,0"
+                            Background="White" VerticalAlignment="Top"
+                            Visibility="Hidden"/>
                 <Image x:Name="bldimg" HorizontalAlignment="Left" 
                        Height="186" Margin="360,0,0,0" 
                        VerticalAlignment="Top" Width="190"
-                       Source="Images/avatar_temp.png"/>
+                       Source="Images/bldavt.png"/>
                 <Button 
                     x:Name="delete"
                     VerticalAlignment="Top"
                     Background="#fc5959"
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Width="100" ToolTip="Xóa" RenderTransformOrigin="-0.3,0.156" 
-                    Content="_Xóa" Margin="450,308,38,0" Click="delete_Click"/>
+                    Content="_Xóa" Margin="474,308,10,0" Click="delete_Click"/>
+                <Button 
+                    x:Name="editbtt"
+                    VerticalAlignment="Top"
+                    Background="#fbc42d"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Width="100" ToolTip="Sửa" RenderTransformOrigin="-0.3,0.156" 
+                    Content="_Sửa" Margin="353,308,131,0" Click="editbtt_Click" />
+                <Button 
+                    x:Name="savebtt"
+                    VerticalAlignment="Top"
+                    Background="#fff2cc"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Width="100" ToolTip="Lưu" RenderTransformOrigin="-0.3,0.156" 
+                    Content="_Lưu" Margin="27,308,457,0" Click="savebtt_Click" 
+                    Visibility="Hidden"/>
+                <Button 
+                    x:Name="uploadbtt"
+                    VerticalAlignment="Top" Visibility="Hidden"
+                    Background="#8abeb7"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Width="100" ToolTip="Upload" RenderTransformOrigin="-0.3,0.156" 
+                    Content="_Upload" Margin="157,308,327,0" Click="uploadbtt_Click"  />
             </Grid>
         </Grid>
     </Border>

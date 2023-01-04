@@ -18,7 +18,9 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
+
               Style="{StaticResource Page_Style}"
+
         FontFamily="{DynamicResource MaterialDesignFont}"
              DataContext="{StaticResource TransferConfirmVM}"
              d:DesignHeight="720" d:DesignWidth="1290">
@@ -33,6 +35,7 @@
                 <Border Margin="0 30 0 0" >
 
                     <DataGrid  CanUserAddRows="False" ItemsSource="{Binding TransferPlayers}" BorderBrush="Orange" BorderThickness="1" AutoGenerateColumns="False" Name="AcceptTransferdgrid" Background="#E3F42A" MouseDoubleClick="AcceptTransferdgrid_MouseDoubleClick" SelectionMode="Single" CanUserDeleteRows="False" Loaded="AcceptTransferdgrid_Loaded">
+
                         <DataGrid.Resources>
                            
                         </DataGrid.Resources>

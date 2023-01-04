@@ -30,16 +30,23 @@ namespace FootBallProject
         {
             InitializeComponent();
             ReadOrderData(connectstr);
-            ReadOrderData2(connectstr);
+            //ReadOrderData2(connectstr);
+            cbCV.Items.Add("HLV Trưởng");
+            cbCV.Items.Add("Trợ lí HLV");
+            cbCV.Items.Add("Chủ tịch CLB");
         }
 
+        public void GetIdDB(string id)
+        {
+            tbID.Text = id;
+        }
         private void AddNewPerson_2_Click(object sender, RoutedEventArgs e)
         {
             string commandText = "INSERT INTO dbo.HUANLUYENVIEN (IDDOIBONG,HOTEN, GMAIL, NGAYSINH, CHUCVU, IDQUOCTICH, HINHANH) VALUES " +
                 "(@iddoibong,@hoten, @gmail, @ngaysinh, @chucvu, @idquoctich, @hinhanh);";
-            if (tbht.Text == "" || cbID.Text == "" || tbdc.Text == "" || nsdp.ToString() == "" || tbcv.Text == "" || cbqt.Text == "")
+            if (tbht.Text == "" || tbID.Text == "" || tbdc.Text == "" || nsdp.ToString() == "" || cbCV.Text == "" || cbqt.Text == "")
             {
-                Error error = new Error();
+                Error error = new Error("Chưa đủ thông tin");
                 error.ShowDialog();
             }
             else
@@ -51,7 +58,7 @@ namespace FootBallProject
                         connection.Open();
                         using (SqlCommand command = new SqlCommand(commandText, connection))
                         {
-                            string tmp = cbID.Text;
+                            string tmp = tbID.Text;
                             tmp = tmp.Substring(0, tmp.IndexOf('.'));
 
                             command.Parameters.Add("@iddoibong", SqlDbType.VarChar);
@@ -67,7 +74,7 @@ namespace FootBallProject
                             command.Parameters["@ngaysinh"].Value = nsdp.ToString();
 
                             command.Parameters.Add("@chucvu", SqlDbType.NVarChar);
-                            command.Parameters["@chucvu"].Value = tbcv.Text;
+                            command.Parameters["@chucvu"].Value = cbCV.Text;
 
                             string tmpstr = cbqt.Text;
                             tmpstr = tmpstr.Substring(0, tmpstr.IndexOf('.'));
@@ -98,7 +105,7 @@ namespace FootBallProject
                 }
                 catch (Exception)
                 {
-                    Error error = new Error();
+                    Error error = new Error("");
                     error.ShowDialog();
                 }
             }
@@ -128,23 +135,23 @@ namespace FootBallProject
             }
         }
 
-        private void ReadOrderData2(string connectionString)
-        {
-            string queryString = "SELECT * FROM dbo.DOIBONG";
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand command = new SqlCommand(queryString, connection);
-                connection.Open();
+        //private void ReadOrderData2(string connectionString)
+        //{
+        //    string queryString = "SELECT * FROM dbo.DOIBONG";
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        SqlCommand command = new SqlCommand(queryString, connection);
+        //        connection.Open();
 
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    string tmp = reader.GetString(0) + ". " + reader.GetString(4);
-                    cbID.Items.Add(tmp);
-                }
-                reader.Close();
-            }
-        }
+        //        SqlDataReader reader = command.ExecuteReader();
+        //        while (reader.Read())
+        //        {
+        //            string tmp = reader.GetString(0) + ". " + reader.GetString(4);
+        //            cbID.Items.Add(tmp);
+        //        }
+        //        reader.Close();
+        //    }
+        //}
 
         private void Upload_Click(object sender, RoutedEventArgs e)
         {

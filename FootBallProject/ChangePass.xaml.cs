@@ -14,6 +14,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Configuration;
+using FootBallProject.Model;
+using FootBallProject.Utils;
+using System.Net.Mail;
+using System.Net;
 
 namespace FootBallProject
 {
@@ -22,9 +26,10 @@ namespace FootBallProject
     /// </summary>
     public partial class ChangePass : Window
     {
-        public string connectstr2 = ConfigurationManager.ConnectionStrings["connectstr2"].ConnectionString;
-        public string usr = "newuser"; // Lay du lieu tu luc dang nhap
+        public string connectstr = ConfigurationManager.ConnectionStrings["connectstr"].ConnectionString;
+        public string usr = USER.USERN; // Lay du lieu tu luc dang nhap
         public string oldpass = "";
+        public string getMail;
         public ChangePass()
         {
             InitializeComponent();
@@ -34,37 +39,43 @@ namespace FootBallProject
         {
             this.Close();
         }
-
+        Random random = new Random();
+        int otp;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (Oldpass.Password != oldpass)
+            if (SHA256Cryptography.Instance.EncryptString(Oldpass.Password) != oldpass)
             {
-                Error error = new Error();
+                Error error = new Error("Mật khẩu cũ không đúng");
                 error.ShowDialog();
             }
-            else if (newPass.Password == oldpass)
+            else if (SHA256Cryptography.Instance.EncryptString(newPass.Password) == oldpass)
             {
-                Error error = new Error();
+                Error error = new Error("Mật khẩu mới trùng mật khẩu cũ");
                 error.ShowDialog();
             }
             else if (newPass.Password != xacnhan.Password)
             {
-                Error error = new Error();
+                Error error = new Error("Mật khẩu xác nhận không trùng khớp");
+                error.ShowDialog();
+            }
+            else if(otp.ToString() != tbOTP.Text)
+            {
+                Error error = new Error("OTP không chính xác");
                 error.ShowDialog();
             }
             else
             {
-                oldpass = xacnhan.Password;
-                string commandText = "UPDATE dbo._USER SET USERPASSWORD = @userpassword WHERE USERNAME = " + "'" + usr + "'";
+                oldpass = SHA256Cryptography.Instance.EncryptString(xacnhan.Password);
+                string commandText = "UPDATE dbo.USERS SET PASSWORD = @password WHERE USERNAME = " + "'" + usr + "'";
                 try
                 {
-                    using (SqlConnection connection = new SqlConnection(connectstr2))
+                    using (SqlConnection connection = new SqlConnection(connectstr))
                     {
                         connection.Open();
                         using (SqlCommand command = new SqlCommand(commandText, connection))
                         {
-                            command.Parameters.Add("@userpassword", SqlDbType.VarChar);
-                            command.Parameters["@userpassword"].Value = xacnhan.Password;
+                            command.Parameters.Add("@password", SqlDbType.VarChar);
+                            command.Parameters["@password"].Value = SHA256Cryptography.Instance.EncryptString(xacnhan.Password);
 
                             command.ExecuteNonQuery();
                         }
@@ -75,9 +86,43 @@ namespace FootBallProject
                 }
                 catch (Exception)
                 {
-                    Error error = new Error();
+                    Error error = new Error("");
                     error.ShowDialog();
                 }
+            }
+        }
+
+        private void getOTP_Click(object sender, RoutedEventArgs e)
+        {
+            otp = random.Next(10000, 100000);
+            try
+            {
+
+                MailMessage msg = new MailMessage();
+                msg.From = new MailAddress("hienle12t1@gmail.com");
+                msg.To.Add(getMail);
+                msg.Subject = "Mã OTP xác nhận đổi mật khẩu";
+                msg.Body = otp.ToString() + " là mã dùng để xác nhận việc đổi mật khẩu của bạn.";
+
+                SmtpClient smt = new SmtpClient();
+                smt.Host = "smtp.gmail.com";
+                System.Net.NetworkCredential ntcd = new NetworkCredential();
+                ntcd.UserName = "hienle12t1@gmail.com";
+                ntcd.Password = "uxyelqzebjtlyqzo";
+                smt.Credentials = ntcd;
+                smt.EnableSsl = true;
+                smt.Port = 587;
+                smt.Send(msg);
+
+                Success success = new Success();
+                success.Show();
+
+            }
+            catch (Exception)
+            {
+
+                Error error = new Error("Gửi OTP không thành công");
+                error.Show();
             }
         }
     }

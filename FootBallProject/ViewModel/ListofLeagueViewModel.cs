@@ -1,4 +1,5 @@
-﻿using FootBallProject.Model;
+﻿using DevExpress.Mvvm.Native;
+using FootBallProject.Model;
 using FootBallProject.Object;
 using System;
 using System.Collections.Generic;
@@ -7,10 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace FootBallProject.ViewModel
 {
-    class ListofLeagueViewModel : BaseViewModel
+    public  class ListofLeagueViewModel : BaseViewModel
     {
         private static ListofLeagueViewModel _instance;
         public static ListofLeagueViewModel Instance
@@ -29,28 +31,33 @@ namespace FootBallProject.ViewModel
             }
         }
         private ObservableCollection<LeagueCardOb> leagues;
-
         public ObservableCollection<LeagueCardOb> Leagues
         {
             get { return leagues; }
             set { leagues = value; OnPropertyChanged(); }
         }
-        private ObservableCollection<TEAMOFLEAGUE> teams;
+        private ObservableCollection<TEAMOFLEAGUE> teams = new ObservableCollection<TEAMOFLEAGUE>();
         public ObservableCollection<TEAMOFLEAGUE> Teams
         {
             get { return teams; }
             set { teams = value; OnPropertyChanged(); }
         }
+        public ICommand AddLeague { get; set; }
         private void LoadTeambyLeagueid()
         {
-            Teams = null;
-            ObservableCollection<TEAMOFLEAGUE> teams = new ObservableCollection<TEAMOFLEAGUE>();
-            List<TEAMOFLEAGUE> list = DataProvider.Instance.Database.TEAMOFLEAGUEs.ToList();
+            teams.Clear();
+            List<TEAMOFLEAGUE> list = DataProvider.Instance.Database.TEAMOFLEAGUEs.Where(x=>x.IDGIAIDAU == Currentleague.League.ID).ToList();
             foreach (var item in list)
             {
                 teams.Add(item);
             }
             Teams = teams;
+        }
+        private object currentAhihi;
+        public object CurrentAhihi
+        {
+            get => currentAhihi;
+            set { currentAhihi = value; OnPropertyChanged(); }
         }
         private void AddTeamofLeague(int idleague, DOIBONG teamplayer)
         {
@@ -61,8 +68,13 @@ namespace FootBallProject.ViewModel
             };
         }
         public ICommand AddtemofLeague { get; set; }
+        public object configAutoViewModel;
+        public object config1;
+        public object config2;
+        public object createnewleague;
         public ListofLeagueViewModel()
         {
+            Instance = this;
             var currentleague = DataProvider.Instance.Database.LEAGUEs.FirstOrDefault();
             Currentleague = new LeagueCardOb(currentleague);
             ObservableCollection<LeagueCardOb> list3 = new ObservableCollection<LeagueCardOb>();
@@ -72,7 +84,34 @@ namespace FootBallProject.ViewModel
                 list3.Add(new LeagueCardOb(item));
             }
             Leagues = list3;
+            configAutoViewModel = new ConfigAutoViewModel(this);
+            config1 = new ConfigVongLoai1ViewModel(this);
+            config2 = new ConfigVongLoai2ViewModel(this);
+            createnewleague = new CreateNewLeague();
+            CurrentAhihi = configAutoViewModel;
+            AddLeague = new RelayCommand<object>((p) => { return true; }, (p) => { AddLeagueFuntion(); } );
             //AddTeamofLeague = new RelayCommand<object>((p) => true, (p) => AddTeamofLeague(1, teams[0]));
+        }
+        public void Refresh(LeagueCardOb p) 
+        {
+            Currentleague = p;
+            CurrentAhihi = configAutoViewModel;
+        }
+        public void AddLeagueFuntion() 
+        {
+            CurrentAhihi = createnewleague;
+        }
+        public void ContinueFuntion()
+        {
+            CurrentAhihi = config2;
+        }
+        public void GoNext()
+        {
+            CurrentAhihi = config1;
+        }
+        public void Return()
+        {
+            CurrentAhihi = configAutoViewModel;
         }
     }
 

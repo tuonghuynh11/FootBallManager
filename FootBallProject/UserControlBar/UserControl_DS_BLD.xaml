@@ -34,7 +34,7 @@
                 Style="{StaticResource MaterialDesignRaisedLightButton}"
                 Width="100"
                 ToolTip="Thêm" 
-                Margin="960,34,160,0" RenderTransformOrigin="-0.3,0.156" Click="AddNewPerson_Click">
+                Margin="845,38,275,0" RenderTransformOrigin="-0.3,0.156" Click="AddNewPerson_Click">
                     _Thêm
                 </Button>
                 <!--<Button
@@ -120,13 +120,13 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <Label Grid.Column="1" Content="Nhập ID đội bóng" 
-                   HorizontalAlignment="Left" Margin="115,34,0,0" 
+                   HorizontalAlignment="Left" Margin="115,40,0,0" 
                    VerticalAlignment="Top" FontSize="15"/>
                 <!--<TextBox x:Name="iddoibong" Grid.Column="1" HorizontalAlignment="Left" Margin="280,32,0,0" 
                      TextWrapping="Wrap" VerticalAlignment="Top" 
                      Width="140" Background="White" FontSize="15"/>-->
                 <ComboBox x:Name="cbIDdoibong" Grid.Column="1" HorizontalAlignment="Left"
-                          Margin="280,32,0,0" VerticalAlignment="Top" 
+                          Margin="275,40,0,0" VerticalAlignment="Top" 
                           Width="215" Background="White" FontSize="15"/>
                 <Button 
                     x:Name="_Load"
@@ -136,8 +136,18 @@
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Width="100"
                     ToolTip="Load" 
-                    Margin="790,34,330,0" RenderTransformOrigin="-0.35,0.314" 
+                    Margin="990,38,130,0" RenderTransformOrigin="-0.35,0.314" 
                     Content="_LOAD" Click="_Load_Click"/>
+                <Button 
+                    x:Name="AddNewUser"
+                    VerticalAlignment="Top"
+                    Grid.Column="1" Foreground="White"
+                    Background="#f6546a"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Width="150"
+                    ToolTip="Thêm User" 
+                    Margin="675,38,445,0" RenderTransformOrigin="-0.3,0.156" 
+                    Content="_Thêm User" Click="AddNewUser_Click"/>
                 <!--<Button 
                     x:Name="_Delete"
                     VerticalAlignment="Top"

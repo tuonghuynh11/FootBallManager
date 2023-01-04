@@ -29,10 +29,10 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="1">
                     <StackPanel Orientation="Vertical">
-                        <Calendar x:Name="Calendar1"
+                        <Calendar x:Name="Calendar1" Margin="0 8 0 0"
                                   DisplayMode="Month"
-                                  DisplayDateStart="2022/1/1"
-                                  DisplayDateEnd="2022/12/31"
+                                  DisplayDateStart="2023/1/1"
+                                  DisplayDateEnd="2023/12/31"
                                   IsTodayHighlighted="True"
                                   SelectionMode="SingleDate" SelectedDatesChanged="Calendar1_SelectedDatesChanged">
                                 <Calendar.Background>
@@ -56,8 +56,8 @@
                         <DataGrid x:Name="DTGGhichu" ScrollViewer.CanContentScroll="True"
                             ScrollViewer.VerticalScrollBarVisibility="Hidden"
                             AutoGenerateColumns="False"
-                            CanUserAddRows="False"
-                            Margin="0 20 0 0" Height="345">
+                            CanUserAddRows="False" 
+                            Margin="0 20 0 0" Height="292">
                             <DataGrid.Resources>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="Background" Value="#FFF6A4"/>
@@ -79,7 +79,7 @@
                     </StackPanel>
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Column="2" Background="White" Margin="30 0 0 50">
+                <Grid Grid.Column="2" Background="White" Margin="30 10 0 136">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="60"/>
@@ -94,8 +94,8 @@
                         ToolTip="Thêm note" 
                         RenderTransformOrigin="-0.35,0.314" Content="_Thêm Note"
                         HorizontalAlignment="Right"
-                        VerticalAlignment="Stretch"
-                        Margin="0 0 60 20" Click="NewNote_Click"/>
+                        
+                        Margin="0,-2,25,30" Click="NewNote_Click"/>
                         <Button 
                         x:Name="Save"
                         Background="#F0CF7A"
@@ -104,7 +104,7 @@
                         ToolTip="Lưu" 
                         RenderTransformOrigin="-0.35,0.314" Content="_Lưu"
                         HorizontalAlignment="Right"
-                        Margin="0,4,210,24" Click="Save_Click"/>
+                        Margin="0,-2,175,30" Click="Save_Click"/>
                     </Grid>
                     <Grid Grid.Row="2">
                         <DataGrid x:Name="DTGTime"

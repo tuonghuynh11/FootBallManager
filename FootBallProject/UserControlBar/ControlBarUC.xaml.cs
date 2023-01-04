@@ -31,7 +31,9 @@ namespace FootBallProject.UserControlBar
         List<Notification> data2;
         int flag = 0;
         int newnotifies=0;
+
         Queue<string> FamousFootBallQuotes;
+
         //So sánh sự thay đổi của database
         public ObservableCollection<Notification> Notifies { get; set; }
         public ControlBarViewModel ViewModel { get; set; }
@@ -39,6 +41,7 @@ namespace FootBallProject.UserControlBar
         {
             InitializeComponent();
             this.DataContext = ViewModel = new ControlBarViewModel();
+
             //FamousFootBallQuotes
             FamousFootBallQuotes = new Queue<string>();
            
@@ -55,13 +58,16 @@ namespace FootBallProject.UserControlBar
             FamousFootBallQuotes.Enqueue("\"They’re the second-best team in the world, and there’s no higher praise than that.\" – Kevin Keegan\"");
             FamousFootballQuotelb.Content = "\"They’re the second-best team in the world, and there’s no higher praise than that.\" – Kevin Keegan\"";
             //FamousFootBallQuotes
+
             UserNamelb.Content = USER.USERN;
 
             int uncheck = DataProvider.ins.DB.Notifications.Where(p => p.IDHLV == AccessUser.userLogin.IDNHANSU && p.CHECKED == "Chưa xem").ToList().Count();
             numberofnotifies.Badge = uncheck;
             notifipopup.ToolTip = $"Bạn có {uncheck} thông báo mới";
+
            // Notifies = new ObservableCollection<Notification>(DataProvider.ins.DB.Notifications.Where(p=>p.IDHLV==AccessUser.userLogin.IDNHANSU).OrderByDescending(p => p.CHECKED).OrderByDescending(p => p.ID));
             Notifies =new ObservableCollection<Notification>( DataProvider.ins.DB.Database.SqlQuery<Notification>($"SELECT  * FROM Notification WHERE IDHLV = {AccessUser.userLogin.IDNHANSU} order by  checked asc,id desc"));
+
             lvUsers.ItemsSource = Notifies;
             //Group thông báo
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvUsers.ItemsSource);
@@ -72,6 +78,7 @@ namespace FootBallProject.UserControlBar
             timer.Interval = TimeSpan.FromSeconds(3.5);
             timer.Tick += timer_Tick;
             timer.Start();
+
             //Timer for FamousFootBallQuotes
             DispatcherTimer FamousFootBallQuotesTimer = new DispatcherTimer();
             FamousFootBallQuotesTimer.Interval = TimeSpan.FromSeconds(60);
@@ -107,6 +114,7 @@ namespace FootBallProject.UserControlBar
         void timer_Tick(object sender, EventArgs e)
         {
             Catch();
+
         }
         public void Catch()
         {
@@ -138,6 +146,39 @@ namespace FootBallProject.UserControlBar
                       //  Notifies = new ObservableCollection<Notification>(DataProvider.ins.DB.Notifications.Where(p => p.IDHLV == AccessUser.userLogin.IDNHANSU).OrderByDescending(p => p.CHECKED).OrderByDescending(p => p.ID));
                         Notifies = new ObservableCollection<Notification>(DataProvider.ins.DB.Database.SqlQuery<Notification>($"SELECT  * FROM Notification WHERE IDHLV = {AccessUser.userLogin.IDNHANSU} order by  checked asc,id desc"));
 
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            Catch();
+        }
+        public void Catch()
+        {
+            
+            data1 = DataProvider.ins.Database.Notifications.ToList();
+            if (flag == 0)
+            {
+                flag = 1;
+                data2 = data1;
+                return;
+            }
+            else
+            {
+                if (data1.Count() != data2.Count())
+                {
+                   List<Notification> list = new List<Notification>();
+                    for (int i = data2.Count(); i < data1.Count(); i++)
+                    {
+                        list.Add(data1[i]);
+                    }
+                    //Thông báo mới
+                     newnotifies = list.Where(p => p.IDHLV == AccessUser.userLogin.IDNHANSU).Count() ;
+                    //Thông báo mới
+                    if (newnotifies>0)
+                    {
+                        int uncheck = DataProvider.ins.DB.Notifications.Where(p => p.IDHLV == AccessUser.userLogin.IDNHANSU && p.CHECKED == "Chưa xem").ToList().Count();
+                        numberofnotifies.Badge = uncheck;
+                        notifipopup.ToolTip = $"Bạn có {newnotifies} thông báo mới";
+                        Notifies = new ObservableCollection<Notification>(DataProvider.ins.DB.Notifications.Where(p => p.IDHLV == AccessUser.userLogin.IDNHANSU).OrderByDescending(p => p.CHECKED).OrderByDescending(p => p.ID));
                         lvUsers.ItemsSource = Notifies;
                         //Group thông báo
                         CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvUsers.ItemsSource);
@@ -206,6 +247,7 @@ namespace FootBallProject.UserControlBar
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("CHECKED");
             view.GroupDescriptions.Add(groupDescription);
         }
+
 
         private void notifipopup_Closed(object sender, RoutedEventArgs e)
         {
