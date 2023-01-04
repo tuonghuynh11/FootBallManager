@@ -11,7 +11,7 @@ namespace FootBallProject.Model
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class USER
     {
         public int ID { get; set; }

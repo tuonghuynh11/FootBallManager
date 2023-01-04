@@ -23,6 +23,9 @@ namespace FootBallProject.Model
         public int ID { get; set; }
         public Nullable<int> IDGIAIDAU { get; set; }
         public string TENVONGDAU { get; set; }
+        public Nullable<System.DateTime> NGAYBATDAU { get; set; }
+        public Nullable<int> SOLUONGDOI { get; set; }
+        public string IDDISPLAY { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FOOTBALLMATCH> FOOTBALLMATCHes { get; set; }

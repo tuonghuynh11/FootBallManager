@@ -9,7 +9,9 @@
              xmlns:model="clr-namespace:FootBallProject.Model"
              xmlns:object="clr-namespace:FootBallProject.Object"
              xmlns:league="clr-namespace:FootBallProject.Component.League"
-             d:DesignHeight="700" d:DesignWidth="709">
+             xmlns:component="clr-namespace:FootBallProject.Component.League"
+             xmlns:viewmodel="clr-namespace:FootBallProject.ViewModel"
+             d:DesignHeight="700" d:DesignWidth="809">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="250"></RowDefinition>
@@ -21,12 +23,26 @@
             Style="{StaticResource CardContainer}">
             <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
                 <StackPanel>
-                    <TextBlock
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
                         Margin="16,16,16,0"
                         FontWeight="Bold"
                         FontSize="22"
                         Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                         Text="Danh sách giải đấu" />
+                        <Button
+                        Width="140"
+                        Height="40"
+                        Margin="310,16,16,16"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        Background="#8FD14F"
+                        BorderBrush="Transparent"
+                        Command="{Binding AddLeague}"
+                        Content="Thêm giải đấu"
+                        Style="{StaticResource PrimaryButton}" />
+                    </StackPanel>
                     <ItemsControl ItemsSource="{Binding Leagues}">
                         <ItemsControl.Resources>
                             <DataTemplate DataType="{x:Type object:LeagueCardOb}">
@@ -86,92 +102,23 @@
                 </StackPanel>
             </ScrollViewer>
         </materialDesign:Card>
-        <Grid Width="auto" Height="auto" Grid.Row="1">
-            <materialDesign:Card VerticalAlignment="Stretch">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <DataGrid
-                    AutoGenerateColumns="False"
-                    Background="White"
-                    CanUserAddRows="False"
-                    CanUserDeleteRows="False"
-                    CanUserReorderColumns="False"
-                    HeadersVisibility="Column"
-                    IsReadOnly="True"
-                    ItemsSource="{Binding Teams, UpdateSourceTrigger=PropertyChanged}">
-                        <DataGrid.Resources>
-                            <Style
-                            x:Key="test"
-                            BasedOn="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                            TargetType="{x:Type TextBlock}">
-                                <Setter Property="HorizontalAlignment" Value="Center" />
-                            </Style>
-
-                            <Style BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="HorizontalContentAlignment" Value="Left" />
-                                <Setter Property="ContentTemplate">
-                                    <Setter.Value>
-                                        <DataTemplate>
-                                            <TextBlock
-                                            Text="{Binding}"
-                                            TextAlignment="Right"
-                                            TextWrapping="Wrap" />
-                                        </DataTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                            <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="{x:Type DataGridCell}">
-                                <Setter Property="TextBlock.TextAlignment" Value="Center" />
-                            </Style>
-
-
-                        </DataGrid.Resources>
-                        <DataGrid.CellStyle>
-                            <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="{x:Type DataGridCell}">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type DataGridCell}">
-                                            <Grid Margin="16" Background="{TemplateBinding Background}">
-                                                <Grid.ToolTip>
-                                                    <ToolTip Content="{Binding DisplayName}" />
-                                                </Grid.ToolTip>
-                                                <Grid.ContextMenu>
-                                                    <ContextMenu>
-                                                        <!--<MenuItem
-                                                        Command="{Binding Source={StaticResource BindingProxy}, Path=Data.DataContext.DeleteFile}"
-                                                        CommandParameter="{Binding Source={StaticResource BindingProxy}, Path=Data.SelectedItems}"
-                                                        Foreground="{StaticResource ErrorMain}"
-                                                        Header="Xóa tài liệu"
-                                                        Icon="{materialDesign:PackIcon Kind=DeleteOutline}" />-->
-                                                    </ContextMenu>
-                                                </Grid.ContextMenu>
-                                                <ContentPresenter VerticalAlignment="Center" />
-                                            </Grid>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </DataGrid.CellStyle>
-                        <DataGrid.Columns>
-                            <materialDesign:DataGridTextColumn
-                            Width="*"
-                            Binding="{Binding DOIBONG.TEN}"
-                            Header="Tên đội bóng" />
-                            <materialDesign:DataGridTextColumn
-                            Width="*"
-                            Binding="{Binding DOIBONG.SOLUONGCAUTHU}"
-                            Header="Số lượng cầu thủ" />
-                            <materialDesign:DataGridTextColumn
-                            Width="*"
-                            Binding="{Binding NumberOfStudents,FallbackValue='0'}"
-                            Header="Tỉ lệ thắng" />
-                            <materialDesign:DataGridTextColumn
-                            Width="*"
-                            Binding="{Binding CacHeDaoTao,FallbackValue='0'}"
-                            Header="Số bàn thắng" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </ScrollViewer>
-            </materialDesign:Card>
-        </Grid>
+        <materialDesign:Card Grid.Row="1">
+            <ContentControl Content="{Binding CurrentAhihi, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type viewmodel:CreateNewLeague}">
+                        <component:NewLeague></component:NewLeague>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodel:ConfigAutoViewModel}">
+                        <component:ConfigAuto></component:ConfigAuto>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodel:ConfigVongLoai1ViewModel}">
+                        <component:ConfigVongLoai></component:ConfigVongLoai>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodel:ConfigVongLoai2ViewModel}">
+                        <component:ConfigVongLoai2></component:ConfigVongLoai2>
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+        </materialDesign:Card>
     </Grid>
 </UserControl>

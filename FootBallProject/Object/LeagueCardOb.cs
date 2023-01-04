@@ -2,6 +2,7 @@
 using FootBallProject.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,10 +15,16 @@ namespace FootBallProject.Object
         private string _startTime;
         private string _endTime;
         private int _soDoi;
+        private LEAGUE league;
         public string DisplayName
         {
             get { return _displayName; }
             set { _displayName = value; OnPropertyChanged(); }
+        }
+        public LEAGUE League
+        {
+            get { return league; }
+            set { league = value; OnPropertyChanged();}
         }
         public string StartTime
         {
@@ -40,6 +47,19 @@ namespace FootBallProject.Object
             get { return quocTich; }
             set { quocTich = value; OnPropertyChanged(); }
         }
+        private DIADIEM diadiem;
+        public DIADIEM Diadiem
+        {
+            get { return diadiem; }
+            set { diadiem = value; OnPropertyChanged(); }
+        }
+        public ObservableCollection<string> soluongdois = new ObservableCollection<string>() { "4", "8", "16", "32", "64" };
+        private string selectedSoluong;
+        public string SelectedSoluong
+        {
+            get { return selectedSoluong; }
+            set { selectedSoluong = value; OnPropertyChanged(); }
+        }
         public LeagueCardOb(LEAGUE p)
         {
             DisplayName = p.TENGIAIDAU;
@@ -47,6 +67,7 @@ namespace FootBallProject.Object
             StartTime = p.NGAYBATDAU.ToString().Split(' ')[0];
             EndTime = p.NGAYKETTHUC.ToString().Split(' ')[0];
             SoDoi = DataProvider.Instance.Database.TEAMOFLEAGUEs.Where(x => x.IDGIAIDAU == p.ID).Count();
+            League = p;
         }
     }
 

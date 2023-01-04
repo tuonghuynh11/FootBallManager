@@ -12,7 +12,6 @@ namespace FootBallProject.Model
     using System;
     using System.Collections.Generic;
     using System.Windows.Media;
-
     public partial class CAUTHU
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
