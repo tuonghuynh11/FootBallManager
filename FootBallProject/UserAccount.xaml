@@ -16,7 +16,7 @@
         DataContext="{StaticResource MainVM}"
         mc:Ignorable="d"
         Title="UserAccount" Height="600" Width="750">
-    <Border CornerRadius="20" Padding="6" Background="White">
+    <Border CornerRadius="20" BorderBrush="#fbc42d" BorderThickness="2" Padding="6" Background="White">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"></RowDefinition>
@@ -32,13 +32,13 @@
                 </Button>
             </Grid>
             <Grid Grid.Row="1">
-                <Image HorizontalAlignment="Left" Height="270" 
+                <Image x:Name="avtuser" HorizontalAlignment="Left" Height="270" 
                        Margin="10,0,0,0" VerticalAlignment="Top" 
                        Width="264" Source="/Images/avatar_temp.png"/>
                 <Label Content="My Profile" HorizontalAlignment="Left" 
                        Margin="416,0,0,0" VerticalAlignment="Top"
                        FontSize="45"/>
-                <Label Content="Họ và tên" Margin="309,67,309,463" 
+                <Label Content="Tên hiển thị" Margin="309,67,309,463" 
                        Width="120" FontSize="20" Height="40"/>
                 <TextBox x:Name="txbhoten" HorizontalAlignment="Left" 
                        Margin="309,107,0,0" IsReadOnly="True"
@@ -71,10 +71,33 @@
                     x:Name="Change_Pass" VerticalAlignment="Top"
                     HorizontalAlignment="Left" Background="#f6546a"
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
-                    Width="148" Height="45" ToolTip="Đổi mật khẩu" 
-                    RenderTransformOrigin="-0.35,0.314" Margin="68,327,0,0"  
+                    Width="210" Height="45" ToolTip="Đổi mật khẩu" 
+                    RenderTransformOrigin="-0.35,0.314" Margin="42,285,0,0"  
                     Content="_Đổi Mật Khẩu" Foreground="White" Click="Change_Pass_Click_1" 
                     />
+                <Button 
+                    x:Name="editbtt" VerticalAlignment="Top"
+                    HorizontalAlignment="Left" Background="#fbc42d"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Width="210" Height="45" ToolTip="Sửa thông tin" 
+                    RenderTransformOrigin="-0.35,0.314" Margin="42,370,0,0"  
+                    Content="_Sửa thông tin" Foreground="White" Click="edit_Click"  
+                    />
+                <Button 
+                    x:Name="savebtt"
+                    VerticalAlignment="Top" Visibility="Hidden"
+                    Background="#fff2cc"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Width="100" ToolTip="Lưu" RenderTransformOrigin="-0.3,0.156" 
+                    Content="_Lưu" Margin="152,450,482,0" Click="savebtt_Click" 
+                    />
+                <Button 
+                    x:Name="uploadbtt"
+                    VerticalAlignment="Top" Visibility="Hidden"
+                    Background="#8abeb7"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Width="100" ToolTip="Upload" RenderTransformOrigin="-0.3,0.156" 
+                    Content="_Upload" Margin="42,450,592,0" Click="uploadbtt_Click"   />
             </Grid>
         </Grid>
     </Border>

@@ -132,17 +132,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Addnewusers.xaml.cs">
+      <DependentUpon>Addnewusers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BLD_Appear.xaml.cs">
       <DependentUpon>BLD_Appear.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdminScreen.xaml.cs">
       <DependentUpon>AdminScreen.xaml</DependentUpon>
     </Compile>
-
     <Compile Include="Class\AccessUser.cs" />
-
     <Compile Include="Class\BestTeam.cs" />
-
     <Compile Include="Class\ConvertByteArrToImage.cs" />
     <Compile Include="Class\ConvertStringToCurrency.cs" />
     <Compile Include="Class\Format team\BasicTeam.cs" />
@@ -439,6 +439,10 @@
     <Compile Include="View\MatchResult2.xaml.cs">
       <DependentUpon>MatchResult2.xaml</DependentUpon>
     </Compile>
+    <Page Include="Addnewusers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BLD_Appear.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -723,10 +727,9 @@
     <Resource Include="Icons\calendar.png" />
     <Resource Include="Icons\leader.png" />
     <Resource Include="Icons\transfer.png" />
-
     <Resource Include="Images\playerbackgroud.jpg" />
     <Resource Include="Icons\confirm.png" />
-
+    <Resource Include="Images\bldavt.png" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

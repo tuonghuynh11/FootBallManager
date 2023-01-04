@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Configuration;
+using FootBallProject.Model;
 
 namespace FootBallProject.UserControlBar
 {
@@ -31,10 +32,61 @@ namespace FootBallProject.UserControlBar
         public string chosenmonth;
         public string chosenday;
         public int givenlist;
+        public string usr = USER.USERN;
         public UserControl_Calendar()
         {
             InitializeComponent();
             ReadOrderData2(connectstr);
+            Int32 role = -1;
+            Int32 ID = -1;
+            string queryString = "SELECT * FROM dbo.USERS WHERE USERNAME = '" + usr + "'";
+            using (SqlConnection connection = new SqlConnection(connectstr))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    role = reader.GetInt32(1);
+                    if (role != 2)
+                    {
+                        ID = reader.GetInt32(8);
+                    }
+                }
+                reader.Close();
+            }
+
+            if (role != 2)
+            {
+                string tendoibong = "";
+                string queryString2 = "SELECT * FROM dbo.DOIBONG db JOIN dbo.HUANLUYENVIEN hlv ON db.ID = hlv.IDDOIBONG WHERE hlv.ID = " + ID.ToString();
+                using (SqlConnection connection = new SqlConnection(connectstr))
+                {
+                    SqlCommand command = new SqlCommand(queryString2, connection);
+                    connection.Open();
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        tendoibong = reader.GetString(0) + ". " + reader.GetString(4);
+
+                    }
+                    reader.Close();
+                }
+                int index = cbID.Items.IndexOf(tendoibong);
+                cbID.SelectedItem = cbID.Items[index];
+                cbID.IsHitTestVisible = false;
+            }
+            if(role == 2 || role == 4)
+            {
+                Save.Visibility = Visibility.Hidden;
+                NewNote.Visibility = Visibility.Hidden;
+            }
+            if(role == 3)
+            {
+                NewNote.Visibility = Visibility.Hidden;
+            }
         }
         public class DS_Cal
         {
@@ -58,7 +110,7 @@ namespace FootBallProject.UserControlBar
         {
             if (cbID.Text == "")
             {
-                Error error = new Error();
+                Error error = new Error("Chưa chọn đội bóng");
                 error.ShowDialog();
             }
             else
@@ -75,7 +127,7 @@ namespace FootBallProject.UserControlBar
         {
             if (cbID.Text == "")
             {
-                Error error = new Error();
+                Error error = new Error("Chưa chọn đội bóng");
                 error.ShowDialog();
                 return;
             }
@@ -119,10 +171,9 @@ namespace FootBallProject.UserControlBar
                             }
                         }
                     }
-                        catch (Exception ex)
+                        catch (Exception)
                     {
-                        MessageBox.Show(ex.Message);
-                        Error error = new Error();
+                        Error error = new Error("");
                         error.ShowDialog();
                     }
                 }
@@ -162,7 +213,7 @@ namespace FootBallProject.UserControlBar
                     }
                     catch (Exception)
                     {
-                        Error error = new Error();
+                        Error error = new Error("");
                         error.ShowDialog();
                     }
                 }
@@ -185,7 +236,7 @@ namespace FootBallProject.UserControlBar
         {
             if (cbID.Text == "")
             {
-                Error error = new Error();
+                Error error = new Error("Chưa chọn đội bóng");
                 error.ShowDialog();
             }
             else

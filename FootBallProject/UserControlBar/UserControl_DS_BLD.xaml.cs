@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Configuration;
 using FootBallProject.ViewModel;
 using System.IO;
+using FootBallProject.Model;
 
 namespace FootBallProject.UserControlBar
 {
@@ -27,10 +28,54 @@ namespace FootBallProject.UserControlBar
     {
         public string connectstr = ConfigurationManager.ConnectionStrings["connectstr"].ConnectionString;
         public List<BLD> bLDs = new List<BLD>();
+        public string usr = USER.USERN;
         public UserControl_DS_BLD()
         {
             InitializeComponent();
             ReadOrderData2(connectstr);
+            Int32 role = -1;
+            Int32 ID = -1;
+            string queryString = "SELECT * FROM dbo.USERS WHERE USERNAME = '" + usr + "'";
+            using (SqlConnection connection = new SqlConnection(connectstr))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    role = reader.GetInt32(1);
+                    if (role != 2)
+                    {
+                        ID = reader.GetInt32(8);
+                    }
+                }
+                reader.Close();
+            }
+            
+            if (role != 2)
+            {
+                AddNewUser.Visibility = Visibility.Hidden;
+                AddNewPerson.Visibility = Visibility.Hidden;
+                string tendoibong = "";
+                string queryString2 = "SELECT * FROM dbo.DOIBONG db JOIN dbo.HUANLUYENVIEN hlv ON db.ID = hlv.IDDOIBONG WHERE hlv.ID = " + ID.ToString();
+                using (SqlConnection connection = new SqlConnection(connectstr))
+                {
+                    SqlCommand command = new SqlCommand(queryString2, connection);
+                    connection.Open();
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        tendoibong = reader.GetString(0) + ". " + reader.GetString(4);
+
+                    }
+                    reader.Close();
+                }
+                int index = cbIDdoibong.Items.IndexOf(tendoibong);
+                cbIDdoibong.SelectedItem = cbIDdoibong.Items[index];
+                cbIDdoibong.IsHitTestVisible = false;
+            }
         }
 
         public class BLD
@@ -58,7 +103,7 @@ namespace FootBallProject.UserControlBar
         {
             if(cbIDdoibong.Text == "")
             {
-                Error error = new Error();
+                Error error = new Error("Chưa chọn đội bóng");
                 error.ShowDialog();
                 return;
             }
@@ -110,7 +155,14 @@ namespace FootBallProject.UserControlBar
 
         private void AddNewPerson_Click(object sender, RoutedEventArgs e)
         {
+            if (cbIDdoibong.Text == "")
+            {
+                Error error = new Error("Chưa chọn đội bóng");
+                error.ShowDialog();
+                return;
+            }
             DS_BLD_ADD dsadd = new DS_BLD_ADD();
+            dsadd.GetIdDB(cbIDdoibong.Text);
             dsadd.ShowDialog();
             ReadOrderData(connectstr);
             DTG.ItemsSource = bLDs;
@@ -130,7 +182,7 @@ namespace FootBallProject.UserControlBar
             string tmp2 = tmp.Substring(0, tmp.IndexOf('.'));
             if(tmp2.ToLower() != bLD.IDdoibong.ToLower())
             {
-                Error error = new Error();
+                Error error = new Error("");
                 error.ShowDialog();
                 return;
             }
@@ -166,6 +218,18 @@ namespace FootBallProject.UserControlBar
                 }
                 reader.Close();
             }
+        }
+        private void AddNewUser_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbIDdoibong.Text == "")
+            {
+                Error error = new Error("Chưa chọn đội bóng");
+                error.ShowDialog();
+                return;
+            }
+            Addnewusers addnewusers = new Addnewusers();
+            addnewusers.getID(cbIDdoibong.Text);
+            addnewusers.ShowDialog();
         }
 
         //private void _Delete_Click(object sender, RoutedEventArgs e)
