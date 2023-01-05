@@ -19,6 +19,7 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
+               Style="{StaticResource Page_Style}" 
              DataContext="{StaticResource TransferConfirmVM}"
              d:DesignHeight="720" d:DesignWidth="1290">
     <UserControl.Resources>

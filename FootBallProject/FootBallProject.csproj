@@ -650,6 +650,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Styles\Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ThongTinCLB.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -800,9 +804,8 @@
     <Resource Include="Icons\transfer.png" />
     <Resource Include="Images\playerbackgroud.jpg" />
     <Resource Include="Icons\confirm.png" />
-
     <Resource Include="Images\bldavt.png" />
-
+    <Resource Include="Icons\match.png" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

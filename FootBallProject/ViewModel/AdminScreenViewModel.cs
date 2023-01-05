@@ -29,6 +29,7 @@ namespace FootBallProject.ViewModel
         private ObservableCollection<FOOTBALLMATCH> _MatchInformation;
         public ObservableCollection<FOOTBALLMATCH> MatchInformation { get => _MatchInformation; set { _MatchInformation = value; OnPropertyChanged(); } }
 
+        public LEAGUE league { get; set; }
         public AdminScreenViewModel()
         {
 
@@ -36,17 +37,17 @@ namespace FootBallProject.ViewModel
             BestPlayers = new ObservableCollection<CAUTHU>(DataProvider.ins.DB.Database.SqlQuery<CAUTHU>("SELECT TOP(5) * FROM CAUTHU ORDER BY SOBANTHANG DESC"));
 
             LEAGUE id_giaidau = DataProvider.ins.DB.Database.SqlQuery<LEAGUE>("SELECT TOP(1) * FROM LEAGUE ORDER BY ID ASC").FirstOrDefault<LEAGUE>();
-
-            TournamentInformation= new ObservableCollection<THONGTINGIAIDAU>(DataProvider.ins.DB.Database.SqlQuery<THONGTINGIAIDAU>("SELECT * FROM THONGTINGIAIDAU WHERE IDGIAIDAU =@ID ", new SqlParameter("@ID", id_giaidau.ID)));
+            league = DataProvider.ins.Database.LEAGUEs.Find(id_giaidau.ID);
+            TournamentInformation = new ObservableCollection<THONGTINGIAIDAU>(DataProvider.ins.DB.Database.SqlQuery<THONGTINGIAIDAU>("SELECT * FROM THONGTINGIAIDAU WHERE IDGIAIDAU =@ID ", new SqlParameter("@ID", id_giaidau.ID)));
 
             MatchInformation = new ObservableCollection<FOOTBALLMATCH>(DataProvider.ins.DB.Database.SqlQuery<FOOTBALLMATCH>("SELECT TOP(4) * FROM FOOTBALLMATCH ORDER BY THOIGIAN DESC"));
 
 
 
             var bt = (from a in DataProvider.ins.DB.THONGTINGIAIDAUs
-                            join b in DataProvider.ins.DB.DOIBONGs on a.IDDOIBONG equals b.ID
-                            orderby a.POINTS descending 
-                            select (a) ).ToList<object>();
+                      join b in DataProvider.ins.DB.DOIBONGs on a.IDDOIBONG equals b.ID
+                      orderby a.POINTS descending
+                      select (a)).ToList<object>();
             var c = DataProvider.ins.DB.Database.SqlQuery<BestTeam>(" SELECT TOP(5) b.ID, b.IDQUOCTICH, b.THANHPHO, b.HINHANH, b.TEN,  b.SOLUONGTHANHVIEN,  b.NGAYTHANHLAP, b.SANNHA,  b.SODOCHIENTHUAT, b.GIATRI FROM dbo.THONGTINGIAIDAU a JOIN dbo.DOIBONG b ON a.IDDOIBONG=b.ID ORDER BY a.POINTS DESC");
             BestTeams = new ObservableCollection<BestTeam>(c);
 
