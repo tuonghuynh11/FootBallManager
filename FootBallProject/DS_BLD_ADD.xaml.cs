@@ -17,6 +17,7 @@ using static FootBallProject.UserControlBar.UserControl_DS_BLD;
 using System.Configuration;
 using Microsoft.Win32;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace FootBallProject
 {
@@ -44,9 +45,15 @@ namespace FootBallProject
         {
             string commandText = "INSERT INTO dbo.HUANLUYENVIEN (IDDOIBONG,HOTEN, GMAIL, NGAYSINH, CHUCVU, IDQUOCTICH, HINHANH) VALUES " +
                 "(@iddoibong,@hoten, @gmail, @ngaysinh, @chucvu, @idquoctich, @hinhanh);";
+            Regex mailr = new Regex(@"^[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$");
             if (tbht.Text == "" || tbID.Text == "" || tbdc.Text == "" || nsdp.ToString() == "" || cbCV.Text == "" || cbqt.Text == "")
             {
                 Error error = new Error("Chưa đủ thông tin");
+                error.ShowDialog();
+            }
+            else if (!mailr.IsMatch(tbdc.Text))
+            {
+                Error error = new Error("Địa chỉ mail không hợp lệ");
                 error.ShowDialog();
             }
             else

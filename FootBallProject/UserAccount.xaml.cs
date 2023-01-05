@@ -19,6 +19,7 @@ using Microsoft.Win32;
 using System.IO;
 using System.Net;
 using static FootBallProject.UserControlBar.UserControl_DS_BLD;
+using System.Text.RegularExpressions;
 
 namespace FootBallProject
 {
@@ -139,6 +140,19 @@ namespace FootBallProject
         private void savebtt_Click(object sender, RoutedEventArgs e)
         {
             string commandText = "UPDATE dbo.USERS SET DISPLAYNAME=@displayname, EMAIL=@email, avatar=@avatar WHERE USERNAME = @username";
+            Regex mailr = new Regex(@"^[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$");
+            if (txbhoten.Text == "" || txbemail.Text == "")
+            {
+                Error error = new Error("Chưa đủ thông tin");
+                error.ShowDialog();
+                return;
+            }
+            else if (!mailr.IsMatch(txbemail.Text))
+            {
+                Error error = new Error("Địa chỉ mail không hợp lệ");
+                error.ShowDialog();
+                return;
+            }
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectstr))
