@@ -11,11 +11,13 @@
    	 mc:Ignorable="d"
    	xmlns:convert="clr-namespace:FootBallProject.Class"
    	 Height="720" Width="1290"
-    	  Style="{StaticResource Page_Style}" 
+    	
  
-   	 DataContext="{StaticResource TeamPlayersVM}">
+   	 DataContext="{StaticResource TeamPlayersVM}" Loaded="teamPlayersUC1_Loaded">
     <i:Interaction.Triggers>
-
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command=""/>
+        </i:EventTrigger>
     </i:Interaction.Triggers>
     <UserControl.Resources>
         <convert:ConvertStringToCurrency x:Key="currencyconvert"/>
@@ -65,15 +67,21 @@
             	</GridView>
             </ListView.View>
     	</ListView> -->
-            <Button Margin="658,625,457,33" Width="100" Name="Add"  Foreground="White" Command="{Binding AddPlayerCommand}" CommandParameter="{Binding ElementName=TeamPlayers}">
+            <Button Margin="658,625,457,33" Width="100" Name="Add"  Foreground="White" Command="{Binding AddPlayerCommand}" CommandParameter="{Binding ElementName=teamPlayersUC1}">
                 Add
             </Button>
-            <Button Margin="832,625,283,33" Width="100" Name="Delete"  Foreground="White" Command="{Binding DeletePlayerCommand}" CommandParameter="{Binding ElementName=TeamPlayers}">
+            <Button Margin="836,625,279,33" Width="100" Name="Delete"  Foreground="White" Command="{Binding DeletePlayerCommand}" CommandParameter="{Binding ElementName=teamPlayersUC1}">
                 Delete
             </Button>
 
-            <Button Command="{Binding GoToEdit}" CommandParameter="{Binding ElementName=TeamPlayers}" Margin="1000,625,100,33" >Edit</Button>
-
+            <Button Name="Edit" Command="{Binding GoToEdit}" CommandParameter="{Binding ElementName=teamPlayersUC1}" Margin="1000,625,100,33" >Edit</Button>
+            <ComboBox SelectedIndex="0" Name ="teamCMB" SelectedItem="{Binding DataContext.CurrentClub, Mode=TwoWay}" Margin="100 600 800 10"  Background="White" ItemsSource="{Binding ClubsNames}" IsReadOnly="True">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding ChangeCmbSelection}" CommandParameter="{Binding ElementName=teamPlayersUC1}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
             <Border Background="Orange" Height="auto" Margin="50,70,50,86">
 
                 <DataGrid  ItemsSource="{Binding PlayerList,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="Transparent" SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}"  HorizontalAlignment="Center" Style ="{DynamicResource MaterialDesignDataGrid}" IsReadOnly="True" Name ="Players_List" AutoGenerateColumns="False" FontFamily="Roboto" Margin="0,0,0,10" SelectionMode="Single"  >

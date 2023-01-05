@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FootBallProject.Model;
+
 
 namespace FootBallProject.UserControlBar
 {
@@ -20,6 +22,7 @@ namespace FootBallProject.UserControlBar
     /// </summary>
     public partial class TeamPlayersUC : UserControl
     {
+
         public TeamPlayersUC()
         {
             InitializeComponent();
@@ -37,6 +40,15 @@ namespace FootBallProject.UserControlBar
             //pp.DataContext = players[x];
             pp.Show();
 
+        }
+
+        private void teamPlayersUC1_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (USER.ROLE != "Admin")
+            {
+                teamCMB.Visibility = Visibility.Collapsed;
+
+            }
         }
     }
 
