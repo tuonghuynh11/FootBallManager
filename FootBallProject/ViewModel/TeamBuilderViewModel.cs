@@ -27,15 +27,15 @@ namespace FootBallProject.ViewModel
         public TeamBuilderViewModel()
         {
             //Load đội hình của đội có id cho trước, test trước
-            var temp = (from a in DataProvider.ins.DB.CAUTHUs
-                        join b in DataProvider.ins.DB.DOIHINHCHINHs on a.ID equals b.IDCAUTHU
-                        where b.IDDOIBONG == "mc"
-                        select (a)).ToList<CAUTHU>();
-            if (temp.Count!=0||temp!=null)
-            {
-                LoadMainteam("mc");
+            //var temp = (from a in DataProvider.ins.DB.CAUTHUs
+            //            join b in DataProvider.ins.DB.DOIHINHCHINHs on a.ID equals b.IDCAUTHU
+            //            where b.IDDOIBONG == "mc"
+            //            select (a)).ToList<CAUTHU>();
+            //if (temp.Count!=0||temp!=null)
+            //{
+            //    LoadMainteam("mc");
 
-            }
+            //}
           
          }
 
@@ -48,11 +48,15 @@ namespace FootBallProject.ViewModel
                         where b.IDDOIBONG == id_doi
                         select (a)).ToList<CAUTHU>();
             Coach = DataProvider.ins.DB.HUANLUYENVIENs.Where(x => x.IDDOIBONG == id_doi && x.CHUCVU == "HLV Trưởng").FirstOrDefault();
-            if (temp.Count != 0 || temp != null)
+            if (temp !=null)
             {
-                LoadMainteam(id_doi);
+                if (temp.Count != 0)
+                {
+                    LoadMainteam(id_doi);
 
+                }
             }
+            
 
         }
 

@@ -35,6 +35,10 @@ namespace FootBallProject.ViewModel
         public ICommand StatisticalChartCommand { get; set; }
         public ICommand TransferConfirmCommand { get; set; }
 
+        public ICommand LeagueCommand { get; set; }
+
+        public ICommand MatchCommand { get; set; }
+
         private void Home() => CurrentView = new AdminScreenViewModel();
         private void Tactic() => CurrentView = new TeamBuilderViewModel(USER.IDDB);
         private void FootBallTeam() => CurrentView = new FootballTeamListViewModel();
@@ -45,6 +49,8 @@ namespace FootBallProject.ViewModel
         private void TeamPlayersList() => CurrentView = new TeamPlayersViewModel();
         private void StatisticalChart() => CurrentView = new StatisticalChartViewModel();
         private void TransferConfirm() => CurrentView = new TransferConfirmViewModel();
+        private void Match() => CurrentView = new ListMatchViewModel();
+        private void League() => CurrentView = new ListofLeagueViewModel();
 
 
 
@@ -68,6 +74,8 @@ namespace FootBallProject.ViewModel
             TeamPlayersCommand = new RelayCommand<object>((p) => {return true; }, (p) => { TeamPlayersList(); });
             StatisticalChartCommand = new RelayCommand<object>((p) => {return true; }, (p) => { StatisticalChart(); });
             TransferConfirmCommand = new RelayCommand<object>((p) => {return true; }, (p) => { TransferConfirm(); });
+            MatchCommand = new RelayCommand<object>((p) => {return true; }, (p) => { Match(); });
+            LeagueCommand = new RelayCommand<object>((p) => {return true; }, (p) => { League(); });
 
 
             // Startup Page

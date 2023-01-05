@@ -28,7 +28,16 @@ namespace FootBallProject.Model
         public string TENGIAIDAU { get; set; }
         public Nullable<int> IDQUOCGIA { get; set; }
         public byte[] HINHANH { get; set; }
-    
+        public string QUOCGIA
+        {
+            get
+            {
+                var qg = DataProvider.ins.DB.QUOCTICHes.Find(IDQUOCGIA);
+
+                return qg == null ? " " : qg.TENQUOCGIA;
+            }
+            set { }
+        }
         public virtual QUOCTICH QUOCTICH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ROUND> ROUNDs { get; set; }

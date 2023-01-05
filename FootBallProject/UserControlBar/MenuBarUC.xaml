@@ -45,12 +45,24 @@
 
             <Separator Background="Transparent" Foreground="Transparent" BorderBrush="Transparent" BorderThickness="0"></Separator>
 
-            <menu:Btn Width="130" HorizontalAlignment="Left" Background="Transparent" VerticalAlignment="Center" Command="{Binding AdminCommand}" BorderThickness="0" Height="45" Style="{StaticResource BtnStyle}">
+            <menu:Btn Width="130" HorizontalAlignment="Left" Background="Transparent" VerticalAlignment="Center" Command="{Binding LeagueCommand}" BorderThickness="0" Height="45" Style="{StaticResource BtnStyle}">
                 <StackPanel Orientation="Horizontal" Margin="11 0 0 0">
                     <Image Source="/Icons/tournament.png" Height="20" VerticalAlignment="Center"  ></Image>
                     <TextBlock Text="Giải đấu" Margin="15 0 0 0" Foreground="White" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </menu:Btn>
+            <Separator Background="Transparent" Foreground="Transparent" BorderBrush="Transparent" BorderThickness="0"></Separator>
+
+
+            <menu:Btn x:Name="adminbutton" Width="130" HorizontalAlignment="Left" Background="Transparent" VerticalAlignment="Center" Command="{Binding MatchCommand}" BorderThickness="0" Height="45" Style="{StaticResource BtnStyle}">
+                <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+                    <Border Background="White" Height="30" Width="30" CornerRadius="2" >
+                        <Image Source="/Icons/match.png" Height="30" VerticalAlignment="Center"  ></Image>
+                    </Border>
+                    <TextBlock Text="Trận đấu" Margin="15 0 0 0" Foreground="White" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </menu:Btn>
+
             <Separator Background="Transparent"  Foreground="Transparent" BorderBrush="Transparent" BorderThickness="0"></Separator>
 
             <menu:Btn Width="130" Visibility="{Binding ALLTEAMVisibility}" HorizontalAlignment="Left" Background="Transparent" VerticalAlignment="Center" Command="{Binding FootballTeamListCommand}" BorderThickness="0" Height="45" Style="{StaticResource BtnStyle}">
@@ -72,22 +84,13 @@
                 </StackPanel>
             </menu:Btn>
 
-            <Separator Background="Transparent" Foreground="Transparent" BorderBrush="Transparent" BorderThickness="0"></Separator>
-
-
-            <menu:Btn x:Name="adminbutton" Width="130" HorizontalAlignment="Left" Background="Transparent" VerticalAlignment="Center" Command="{Binding AdminCommand}" BorderThickness="0" Height="45" Style="{StaticResource BtnStyle}">
-                    <StackPanel Orientation="Horizontal" Margin="10 0 0 0">
-                        <Image Source="/Icons/person.png" Height="20" VerticalAlignment="Center"  ></Image>
-                        <TextBlock Text="Nhân sự" Margin="15 0 0 0" Foreground="White" VerticalAlignment="Center"></TextBlock>
-                    </StackPanel>
-                </menu:Btn>
-
+          
             <Separator Background="Transparent" Foreground="Transparent" BorderBrush="Transparent" BorderThickness="0"></Separator>
 
             <menu:Btn Width="130" HorizontalAlignment="Left" Background="Transparent" VerticalAlignment="Center" Command="{Binding TeamPlayersCommand}" BorderThickness="0" Height="45" Style="{StaticResource BtnStyle}">
                 <StackPanel Orientation="Horizontal" Margin="10 0 0 0">
                     <Image Source="/Icons/addplayer.png" Height="20" VerticalAlignment="Center"  ></Image>
-                    <TextBlock Text="Tạo đội bóng" Margin="15 0 0 0" Foreground="White" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Text="Cầu thủ" Margin="15 0 0 0" Foreground="White" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </menu:Btn>
 

@@ -55,9 +55,9 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
         public TeamBuilder()
         {
             InitializeComponent();
-            this.DataContext = teamBuilderViewModel = new TeamBuilderViewModel();
+            this.DataContext = teamBuilderViewModel = new TeamBuilderViewModel(USER.IDDB);
 
-            this.DataContext = new TeamBuilderViewModel();
+          //  this.DataContext = new TeamBuilderViewModel(USER.IDDB);
             mainteam = new List<CAUTHU>();
 
             mainsubteam = new List<CAUTHU>();
@@ -467,158 +467,185 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
 
         private void DHChienThuatcbb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (dhfirst==0)
+            try
             {
-                dhfirst = 1;
-                return;
+                
+                if (dhfirst == 0)
+                {
+                    dhfirst = 1;
+                    return;
+                }
+
+                // Xử lý chọn chiến thuật cho 3 màn hình chồng lên,chọn chiến thuật nào thì collaped 2 chiến thuật còn lại
+                ComboBox combo = (ComboBox)sender;
+                ComboBoxItem select = (ComboBoxItem)combo.SelectedItem;
+
+                //id của đội đang đăng nhập
+                // id_doi = "mc";
+                List<CAUTHU> mainteamremain = (from a in DataProvider.ins.DB.CAUTHUs
+                                               join b in DataProvider.ins.DB.DOIHINHCHINHs on a.ID equals b.IDCAUTHU
+                                               where b.IDDOIBONG == id_doi
+                                               select (a)).ToList<CAUTHU>();
+
+                List<CAUTHU> mainsubteamremain = DataProvider.ins.DB.Database.SqlQuery<CAUTHU>("SELECT * FROM CAUTHU WHERE IDDOIBONG=@ID1 AND ID NOT IN (SELECT IDCAUTHU FROM DOIHINHCHINH WHERE IDDOIBONG = @ID1 ) ", new SqlParameter("@ID1", id_doi)).ToList<CAUTHU>();
+                //id của đội đang đăng nhập
+
+                if (mainsubteamremain==null || mainsubteamremain==null)
+                {
+                    return;
+                }
+
+                TeamBuilderViewModel newVm1 = new TeamBuilderViewModel();
+                newVm1.SubTeamPlayers = mainsubteamremain;
+                if (select.Content.ToString() == "4-3-3")
+                {
+                    DoiHinhChienThuat442UC.Visibility = Visibility.Collapsed;
+                    DoiHinhChienThuat4231UC.Visibility = Visibility.Collapsed;
+                    DoiHinhChienThuat433UC.Visibility = Visibility.Visible;
+                    // team_433 = new Team_433(listPlayer);
+                    //mainteam = team_433.team;
+
+                    newVm1.Teamformat = new Team_433(mainteamremain, "basic");
+                    newVm1.MainTeamPlayers = newVm1.Teamformat.team;
+
+                    DoiHinhChienThuat433UC.DataContext = newVm1.Teamformat;
+                    mainteam = newVm1.MainTeamPlayers;
+                    mainsubteam = newVm1.SubTeamPlayers;
+                    dtgDSCauThuDuBi.Items.Refresh();
+                }
+                if (select.Content.ToString() == "4-4-2")
+                {
+                    DoiHinhChienThuat433UC.Visibility = Visibility.Collapsed;
+                    DoiHinhChienThuat4231UC.Visibility = Visibility.Collapsed;
+                    DoiHinhChienThuat442UC.Visibility = Visibility.Visible;
+                    newVm1.Teamformat = new Team_442(mainteamremain, "basic");
+                    newVm1.MainTeamPlayers = newVm1.Teamformat.team;
+
+                    DoiHinhChienThuat442UC.DataContext = newVm1.Teamformat;
+                    mainteam = newVm1.MainTeamPlayers;
+                    mainsubteam = newVm1.SubTeamPlayers;
+                    dtgDSCauThuDuBi.Items.Refresh();
+                }
+                if (select.Content.ToString() == "4-2-3-1")
+                {
+                    DoiHinhChienThuat433UC.Visibility = Visibility.Collapsed;
+                    DoiHinhChienThuat442UC.Visibility = Visibility.Collapsed;
+                    DoiHinhChienThuat4231UC.Visibility = Visibility.Visible;
+                    newVm1.Teamformat = new Team_4231(mainteamremain, "basic");
+                    newVm1.MainTeamPlayers = newVm1.Teamformat.team;
+
+                    DoiHinhChienThuat4231UC.DataContext = newVm1.Teamformat;
+                    mainteam = newVm1.MainTeamPlayers;
+                    mainsubteam = newVm1.SubTeamPlayers;
+                    dtgDSCauThuDuBi.Items.Refresh();
+                }
+                changeteam.Clear();
+                this.DataContext = newVm1;
             }
-
-        // Xử lý chọn chiến thuật cho 3 màn hình chồng lên,chọn chiến thuật nào thì collaped 2 chiến thuật còn lại
-            ComboBox combo = (ComboBox)sender;
-            ComboBoxItem select = (ComboBoxItem)combo.SelectedItem;
-
-            //id của đội đang đăng nhập
-            // id_doi = "mc";
-            List<CAUTHU> mainteamremain = (from a in DataProvider.ins.DB.CAUTHUs
-                            join b in DataProvider.ins.DB.DOIHINHCHINHs on a.ID equals b.IDCAUTHU
-                            where b.IDDOIBONG == id_doi
-                            select (a)).ToList<CAUTHU>();
-
-            List<CAUTHU> mainsubteamremain = DataProvider.ins.DB.Database.SqlQuery<CAUTHU>("SELECT * FROM CAUTHU WHERE IDDOIBONG=@ID1 AND ID NOT IN (SELECT IDCAUTHU FROM DOIHINHCHINH WHERE IDDOIBONG = @ID1 ) ", new SqlParameter("@ID1", id_doi)).ToList<CAUTHU>();
-            //id của đội đang đăng nhập
-            TeamBuilderViewModel newVm1 = new TeamBuilderViewModel();
-            newVm1.SubTeamPlayers = mainsubteamremain;
-            if (select.Content.ToString() =="4-3-3")
+            catch (Exception)
             {
-                DoiHinhChienThuat442UC.Visibility = Visibility.Collapsed;
-                DoiHinhChienThuat4231UC.Visibility = Visibility.Collapsed;
-                DoiHinhChienThuat433UC.Visibility = Visibility.Visible;
-                // team_433 = new Team_433(listPlayer);
-                //mainteam = team_433.team;
 
-                newVm1.Teamformat = new Team_433(mainteamremain,"basic");
-                newVm1.MainTeamPlayers = newVm1.Teamformat.team;
-
-                DoiHinhChienThuat433UC.DataContext = newVm1.Teamformat;
-                mainteam = newVm1.MainTeamPlayers;
-                mainsubteam = newVm1.SubTeamPlayers;
-                dtgDSCauThuDuBi.Items.Refresh();
+                return ;
             }
-            if (select.Content.ToString() == "4-4-2")
-            {
-                DoiHinhChienThuat433UC.Visibility = Visibility.Collapsed;
-                DoiHinhChienThuat4231UC.Visibility = Visibility.Collapsed;
-                DoiHinhChienThuat442UC.Visibility = Visibility.Visible;
-                newVm1.Teamformat = new Team_442(mainteamremain, "basic");
-                newVm1.MainTeamPlayers = newVm1.Teamformat.team;
-
-                DoiHinhChienThuat442UC.DataContext = newVm1.Teamformat;
-                mainteam = newVm1.MainTeamPlayers;
-                mainsubteam = newVm1.SubTeamPlayers;
-                dtgDSCauThuDuBi.Items.Refresh();
-            }
-            if (select.Content.ToString() == "4-2-3-1")
-            {
-                DoiHinhChienThuat433UC.Visibility = Visibility.Collapsed;
-                DoiHinhChienThuat442UC.Visibility = Visibility.Collapsed;
-                DoiHinhChienThuat4231UC.Visibility= Visibility.Visible;
-                newVm1.Teamformat = new Team_4231(mainteamremain, "basic");
-                newVm1.MainTeamPlayers = newVm1.Teamformat.team;
-
-                DoiHinhChienThuat4231UC.DataContext = newVm1.Teamformat;
-                mainteam = newVm1.MainTeamPlayers;
-                mainsubteam = newVm1.SubTeamPlayers;
-                dtgDSCauThuDuBi.Items.Refresh();
-            }
-            changeteam.Clear();
-            this.DataContext = newVm1;
+          
 
         }
         ///hiển thị thông tin cầu thủ đầu tiên
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (teamBuilderViewModel.MainTeamPlayers.Count!=0 && teamBuilderViewModel.SubTeamPlayers.Count!=0)
+            try
             {
-                CAUTHU mainplayer = teamBuilderViewModel.MainTeamPlayers[0];
-                CAUTHU subplayer = teamBuilderViewModel.SubTeamPlayers[0];
-
-                //main player
-                PlayerName.Text = mainplayer.HOTEN;
-                if (mainplayer.HINHANH.Length != 0)
+                if (teamBuilderViewModel.MainTeamPlayers.Count != 0 && teamBuilderViewModel.SubTeamPlayers.Count != 0)
                 {
-                    PlayerImage.ImageSource = LoadImage(mainplayer.HINHANH);
+                    CAUTHU mainplayer = teamBuilderViewModel.MainTeamPlayers[0];
+                    CAUTHU subplayer = teamBuilderViewModel.SubTeamPlayers[0];
 
-                }
-                PlayerNumber.Text = mainplayer.SOAO.ToString();
-                QuocTichtb.Text = mainplayer.QUOCGIA;
-                ChieuCaotb.Text = mainplayer.CHIEUCAO;
-                CanNangtb.Text = mainplayer.CANNANG;
-                TheTrangtb.Text = mainplayer.THETRANG;
-                ChanThuantb.Text = mainplayer.CHANTHUAN;
+                    //main player
+                    PlayerName.Text = mainplayer.HOTEN;
+                    if (mainplayer.HINHANH.Length != 0)
+                    {
+                        PlayerImage.ImageSource = LoadImage(mainplayer.HINHANH);
 
-                //sub palyer
-                PlayerNameSub.Text = subplayer.HOTEN;
-                if (subplayer.HINHANH.Length != 0)
-                {
-                    PlayerImageSub.ImageSource = LoadImage(subplayer.HINHANH);
+                    }
+                    PlayerNumber.Text = mainplayer.SOAO.ToString();
+                    QuocTichtb.Text = mainplayer.QUOCGIA;
+                    ChieuCaotb.Text = mainplayer.CHIEUCAO;
+                    CanNangtb.Text = mainplayer.CANNANG;
+                    TheTrangtb.Text = mainplayer.THETRANG;
+                    ChanThuantb.Text = mainplayer.CHANTHUAN;
 
-                }
-                PlayerNumberSub.Text = subplayer.SOAO.ToString();
-                QuocTichSubtb.Text = subplayer.QUOCGIA;
-                ChieuCaoSubtb.Text = subplayer.CHIEUCAO;
-                CanNangSubtb.Text = subplayer.CANNANG;
-                TheTrangSubtb.Text = subplayer.THETRANG;
-                ChanThuanSubtb.Text = subplayer.CHANTHUAN;
-                //Thêm lựa chọn đội hình chiến thuật
-                if (teamBuilderViewModel.Team.SODOCHIENTHUAT=="4-3-3")
-                {
-                    DoiHinhChienThuat442UC.Visibility = Visibility.Collapsed;
-                    DoiHinhChienThuat4231UC.Visibility = Visibility.Collapsed;
-                    DoiHinhChienThuat433UC.Visibility = Visibility.Visible;
-                    DoiHinhChienThuat433UC.DataContext = teamBuilderViewModel.Teamformat;
+                    //sub palyer
+                    PlayerNameSub.Text = subplayer.HOTEN;
+                    if (subplayer.HINHANH.Length != 0)
+                    {
+                        PlayerImageSub.ImageSource = LoadImage(subplayer.HINHANH);
 
-                }
-                else if (teamBuilderViewModel.Team.SODOCHIENTHUAT == "4-4-2")
-                {
-                    DoiHinhChienThuat433UC.Visibility = Visibility.Collapsed;
-                    DoiHinhChienThuat4231UC.Visibility = Visibility.Collapsed;
-                    DoiHinhChienThuat442UC.Visibility = Visibility.Visible;
+                    }
+                    PlayerNumberSub.Text = subplayer.SOAO.ToString();
+                    QuocTichSubtb.Text = subplayer.QUOCGIA;
+                    ChieuCaoSubtb.Text = subplayer.CHIEUCAO;
+                    CanNangSubtb.Text = subplayer.CANNANG;
+                    TheTrangSubtb.Text = subplayer.THETRANG;
+                    ChanThuanSubtb.Text = subplayer.CHANTHUAN;
+                    //Thêm lựa chọn đội hình chiến thuật
+                    if (teamBuilderViewModel.Team.SODOCHIENTHUAT == "4-3-3")
+                    {
+                        DoiHinhChienThuat442UC.Visibility = Visibility.Collapsed;
+                        DoiHinhChienThuat4231UC.Visibility = Visibility.Collapsed;
+                        DoiHinhChienThuat433UC.Visibility = Visibility.Visible;
+                        DoiHinhChienThuat433UC.DataContext = teamBuilderViewModel.Teamformat;
 
-                    DoiHinhChienThuat442UC.DataContext = teamBuilderViewModel.Teamformat;
+                    }
+                    else if (teamBuilderViewModel.Team.SODOCHIENTHUAT == "4-4-2")
+                    {
+                        DoiHinhChienThuat433UC.Visibility = Visibility.Collapsed;
+                        DoiHinhChienThuat4231UC.Visibility = Visibility.Collapsed;
+                        DoiHinhChienThuat442UC.Visibility = Visibility.Visible;
+
+                        DoiHinhChienThuat442UC.DataContext = teamBuilderViewModel.Teamformat;
+                    }
+                    else
+                    {
+                        DoiHinhChienThuat433UC.Visibility = Visibility.Collapsed;
+                        DoiHinhChienThuat442UC.Visibility = Visibility.Collapsed;
+                        DoiHinhChienThuat4231UC.Visibility = Visibility.Visible;
+                        DoiHinhChienThuat4231UC.DataContext = teamBuilderViewModel.Teamformat;
+
+                    }
+
+                    //Gán đội hình cho biến phụ để giữ nguyên đội hình
+                    mainteam = (teamBuilderViewModel.MainTeamPlayers);
+                    mainsubteam = teamBuilderViewModel.SubTeamPlayers;
+
+
+
+                    //team
+                    if (teamBuilderViewModel.Team.HINHANHHLV.Length != 0)
+                    {
+                        HLVImage.ImageSource = LoadImage(teamBuilderViewModel.Team.HINHANHHLV);
+
+                    }
+                    HLVname.Text = teamBuilderViewModel.Team.HLV;
+                    GTDH.Text = teamBuilderViewModel.Team.GIATRI.ToString();
+                    DHChienThuatcbb.Text = teamBuilderViewModel.Team.SODOCHIENTHUAT;
+                    id_doi = teamBuilderViewModel.Team.ID;
+                    this.DataContext = teamBuilderViewModel;
+
                 }
                 else
                 {
-                    DoiHinhChienThuat433UC.Visibility = Visibility.Collapsed;
-                    DoiHinhChienThuat442UC.Visibility = Visibility.Collapsed;
-                    DoiHinhChienThuat4231UC.Visibility = Visibility.Visible;
-                    DoiHinhChienThuat4231UC.DataContext = teamBuilderViewModel.Teamformat;
-
-                }
-
-                //Gán đội hình cho biến phụ để giữ nguyên đội hình
-                mainteam= (teamBuilderViewModel.MainTeamPlayers);
-                mainsubteam= teamBuilderViewModel.SubTeamPlayers;
-
-
-
-                //team
-                if (teamBuilderViewModel.Team.HINHANHHLV.Length != 0)
-                {
-                    HLVImage.ImageSource = LoadImage(teamBuilderViewModel.Team.HINHANHHLV);
-
-                }
-                HLVname.Text = teamBuilderViewModel.Team.HLV;
-                GTDH.Text = teamBuilderViewModel.Team.GIATRI.ToString();
-                DHChienThuatcbb.Text = teamBuilderViewModel.Team.SODOCHIENTHUAT;
-                id_doi= teamBuilderViewModel.Team.ID;
-                this.DataContext = teamBuilderViewModel;
-                
-            }
-            else
-            {
                     PopUpCustom popUp = new PopUpCustom("Chưa có cầu thủ trong đội");
                     popUp.ShowDialog();
+                }
             }
+            catch (Exception)
+            {
+                this.DataContext = new TeamBuilderViewModel();
+                PopUpCustom popUp = new PopUpCustom("Chưa có cầu thủ trong đội");
+                popUp.ShowDialog();
+                
+            }
+           
           
 
         }
@@ -642,7 +669,20 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
 
         private void GTDH_Loaded(object sender, RoutedEventArgs e)
         {
-            GTDH.Text = String.Format("${0:n0}", teamBuilderViewModel.Team.GIATRI);
+            try
+            {
+                if (teamBuilderViewModel.Team.GIATRI != null)
+                {
+                    GTDH.Text = String.Format("${0:n0}", teamBuilderViewModel.Team.GIATRI);
+
+                }
+            }
+            catch (Exception)
+            {
+
+                return;
+            }
+         
         }
 
         private void addrole(object sender, MouseButtonEventArgs e)

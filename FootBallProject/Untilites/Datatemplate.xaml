@@ -31,4 +31,10 @@
     <DataTemplate DataType="{x:Type vm:TransferConfirmViewModel}">
         <view:TransferAccept />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ListMatchViewModel}">
+        <view:MainMatch />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ListofLeagueViewModel}">
+        <view:MainLeague />
+    </DataTemplate>
 </ResourceDictionary>

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FootBallProject.Usercontrol
+namespace FootBallProject.UserControlBar.ScreenNavigation
 {
     /// <summary>
     /// Interaction logic for MainMatch.xaml

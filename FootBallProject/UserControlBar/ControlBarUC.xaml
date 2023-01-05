@@ -146,49 +146,49 @@
                                                         <!--<Setter Property="HorizontalAlignment" Value="Center" />-->
                                                         <Setter Property="VerticalAlignment" Value="Center" />
                                                         <Setter Property="FontSize" Value="25" />
-                                                       <Setter Property="Background" Value="Orange" />
+                                                        <Setter Property="Background" Value="Orange" />
                                                         <Setter Property="Foreground" Value="White" />
                                                         <Setter Property="IsHitTestVisible" Value="False" />
 
                                                     </Style>
                                                 </GridViewColumn.HeaderContainerStyle>
-                                             
+
                                             </GridViewColumn>
                                         </GridView>
                                     </ListView.View>
                                     <ListView.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.ContainerStyle>
-                        <Style TargetType="{x:Type GroupItem}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <Expander IsExpanded="true">
-                                            <Expander.Header>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Red" FontSize="18" VerticalAlignment="Bottom" />
-                                                     <TextBlock Text=" (" FontSize="18" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom"></TextBlock>
-                                                    <TextBlock Text= "{Binding ItemCount}" FontSize="20" Foreground="Green" FontWeight="Bold" FontStyle="Italic" Margin="0,0,0,0" VerticalAlignment="Bottom" />
-                                                     <TextBlock Text=")" FontSize="18" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom"></TextBlock>
-                                                           </StackPanel>
-                                            </Expander.Header>
-                                            <ItemsPresenter />
-                                        </Expander>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </GroupStyle.ContainerStyle>
-                </GroupStyle>
-            </ListView.GroupStyle>
+                                        <GroupStyle>
+                                            <GroupStyle.ContainerStyle>
+                                                <Style TargetType="{x:Type GroupItem}">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate>
+                                                                <Expander IsExpanded="true">
+                                                                    <Expander.Header>
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Red" FontSize="18" VerticalAlignment="Bottom" />
+                                                                            <TextBlock Text=" (" FontSize="18" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom"></TextBlock>
+                                                                            <TextBlock Text= "{Binding ItemCount}" FontSize="20" Foreground="Green" FontWeight="Bold" FontStyle="Italic" Margin="0,0,0,0" VerticalAlignment="Bottom" />
+                                                                            <TextBlock Text=")" FontSize="18" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom"></TextBlock>
+                                                                        </StackPanel>
+                                                                    </Expander.Header>
+                                                                    <ItemsPresenter />
+                                                                </Expander>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </GroupStyle.ContainerStyle>
+                                        </GroupStyle>
+                                    </ListView.GroupStyle>
                                 </ListView>
                             </materialDesign:PopupBox>
                             <materialDesign:Badged Badge="3" x:Name="numberofnotifies" BadgeForeground="White" BadgeBackground="Red"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 10 14 10">
                             </materialDesign:Badged>
-                        
+
                         </Grid>
-                       
-                       
+
+
                         <Border CornerRadius="50" BorderThickness="1" Background="Aqua" BorderBrush="Gray" Height="30" Width="33">
                             <!--<Border.Background>
                                 <ImageBrush Stretch="Fill" ImageSource="/images/7.jpg"></ImageBrush>
@@ -198,16 +198,18 @@
                         <ComboBox x:Name="Accountcbb" HorizontalAlignment="Center" VerticalAlignment="Center" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" Width="17"  BorderThickness="0 0 0 0" BorderBrush="Gray" Background="Transparent" SelectionChanged="Accountcbb_SelectionChanged">
                             <ComboBoxItem Content="Thông tin tài khoản"></ComboBoxItem>
                             <ComboBoxItem Content="Đăng xuất"></ComboBoxItem>
-                            
+
                         </ComboBox>
                     </StackPanel>
-                    <StackPanel
+                    <!--<StackPanel
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     Margin="150 0 0 0"
                     materialDesign:RippleAssist.IsCentered="True">
-                        <!--<ToggleButton
+                        -->
+                    <!--<ToggleButton
                         Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />-->
+                    <!--
                         <materialDesign:ColorZone
                             VerticalAlignment="Center"
                            
@@ -246,6 +248,30 @@
                             </Grid>
                         </materialDesign:ColorZone>
 
+                    </StackPanel>-->
+                    <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="230 0 0 0">
+                        <Label x:Name="FamousFootballQuotelb" FontFamily="VNI-Commerce" Width="700" Foreground="White" FontSize="17" FontWeight="Bold" Content='"If you do not believe you can do it then you have no chance at all" – Arsene Wenger' HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                            <Label.Triggers>
+                                <EventTrigger RoutedEvent="Loaded" >
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation 
+                                            Storyboard.TargetName="FamousFootballQuotelb"
+                                            Storyboard.TargetProperty="(TextBlock.Width)"
+                                            To="0"
+                                            Duration="0:0:20"
+                                            AutoReverse="True"
+                                            RepeatBehavior="Forever"    
+                                            >
+
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Label.Triggers>
+                        </Label>
                     </StackPanel>
                 </DockPanel>
             </materialDesign:ColorZone>
