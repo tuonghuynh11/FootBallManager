@@ -6,21 +6,37 @@
         xmlns:local="clr-namespace:FootBallProject"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-
-        Title="AddPlayerForm" Height="750" Width="900"
+       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        
+        WindowStyle="None"
+        Background="#d3ffce"
+       
+        Title="AddPlayerForm" Height="780" Width="900"
         DataContext="{StaticResource TeamPlayersVM}"
         Name="AddPlayerForm"
-                WindowStartupLocation="CenterOwner">
+                WindowStartupLocation="CenterScreen" Loaded="AddPlayerForm_Loaded">
+    <Window.Resources>
+        <Style TargetType="TextBox">
 
+            <Setter Property="Background" Value="White">
+
+            </Setter>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="White">
+
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition Width="450"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Border Margin="100 10 100 450" Grid.ColumnSpan="2">
-            <TextBlock FontSize="50" HorizontalAlignment="Center" Foreground="#ff3a12" FontFamily="{StaticResource MaterialDesignFont}">ADD PLAYER HERE</TextBlock>
-            
-        </Border>        
+            <TextBlock FontSize="50" HorizontalAlignment="Center"  FontFamily="Comic Sans MS">ADD PLAYER HERE</TextBlock>
+
+        </Border>
         <Grid Grid.Column="0">
             <!-- Height = 550 Width = 450-->
             <Border Margin="100 100 50 50">
@@ -44,18 +60,25 @@
 
                 </StackPanel>
             </Border>
-                
-            
+
+
         </Grid>
         <Grid Grid.Column="1">
+            <Button x:Name="Close_but" Height="20" Width="20" VerticalAlignment="Top"
+                        HorizontalAlignment="Right" Margin="0 0 5 0" BorderBrush="{x:Null}" Click="Close_but_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/x_icon.png"/>
+                </Button.Background>
+
+            </Button>
             <Border Margin="100 100 50 50">
                 <StackPanel>
                     <TextBox FontSize="28" Height="40" Name="txbName"></TextBox>
                     <TextBox FontSize="28" Height="40" Name="txbAge"></TextBox>
-                    <ComboBox FontSize="28" Height="40" Name="txbclub" IsEditable="True" SelectedValuePath="Content" ItemsSource="{Binding ClubsNames}"></ComboBox>
+                    <ComboBox SelectedItem="{Binding CurrentClub}" FontSize="28" Height="40" Name="txbclub" IsEditable="True" SelectedValuePath="Content" ItemsSource="{Binding ClubsNames}"></ComboBox>
                     <TextBox FontSize="28" Height="40" Name="txbHeight"></TextBox>
 
-                    
+
                     <TextBox FontSize="28" Height="40" Name="txbWeight"></TextBox>
 
                     <ComboBox  FontSize="28" Height="40" Name="txbFoot" SelectedItem="{Binding Path=Trái}" SelectedValuePath="Content">
@@ -73,17 +96,17 @@
                     <TextBox FontSize="28" Height="40" Name="txbImage" IsReadOnly="True"></TextBox>
 
                     <Button Width="50" Background="LightGray" HorizontalAlignment="Right" Command="{Binding LoadImageCommand}" CommandParameter="{Binding ElementName=AddPlayerForm}">...</Button>
-                   
+
 
 
                 </StackPanel>
             </Border>
-            
+
         </Grid>
-        
+
 
         <Button Grid.Column="1" Margin="30,578,230,34" Command="{Binding AddPlayerCommand2}" CommandParameter="{Binding ElementName=AddPlayerForm}" IsEnabled="True">Add</Button>
-        
+
         <Button Grid.Column="1" Margin="250 578 40 34" Click="Button_Click">Cancel</Button>
 
 

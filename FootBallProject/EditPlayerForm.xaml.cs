@@ -30,5 +30,16 @@ namespace FootBallProject
             this.Close();
         }
 
+        private void Close_but_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void editPlayerForm1_Loaded(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Chân thuận đang trống!!\n Nếu cẩn thận, bạn nhớ check chân thuận trên profile trước");
+        }
+
+
     }
 }

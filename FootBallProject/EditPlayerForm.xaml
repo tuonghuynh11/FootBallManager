@@ -9,16 +9,32 @@
         Title="EditPlayerForm" Height="780" Width="900"
         DataContext="{StaticResource TeamPlayersVM}"
         Name="editPlayerForm1"
-        WindowStartupLocation="CenterOwner"
-        >
+        WindowStyle="None"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen"
+                Background="#d3ffce" Loaded="editPlayerForm1_Loaded"
 
+        >
+    <Window.Resources>
+        <Style TargetType="TextBox">
+
+            <Setter Property="Background" Value="White">
+
+            </Setter>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="White">
+
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition Width="450"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Border Margin="100 10 100 450" Grid.ColumnSpan="2">
-            <TextBlock FontSize="50" HorizontalAlignment="Center" Foreground="#ff3a12" FontFamily="{StaticResource MaterialDesignFont}">EDIT PLAYER HERE</TextBlock>
+            <TextBlock FontSize="50" HorizontalAlignment="Center"  FontFamily="Comic Sans MS">EDIT PLAYER HERE</TextBlock>
 
         </Border>
         <Grid Grid.Column="0">
@@ -49,23 +65,30 @@
 
         </Grid>
         <Grid Grid.Column="1">
+            <Button x:Name="Close_but" Height="20" Width="20" VerticalAlignment="Top"
+                        HorizontalAlignment="Right" Margin="0 0 5 0" BorderBrush="{x:Null}" Click="Close_but_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/x_icon.png"/>
+                </Button.Background>
+
+            </Button>
             <Border Margin="100 100 50 50">
                 <StackPanel>
                     <TextBox Text="{Binding SelectedPlayer.Name}" FontSize="28" Height="40" Name="txbName"></TextBox>
                     <TextBox FontSize="28" Height="40" Name="txbAge" Text="{Binding SelectedPlayer.Age}"></TextBox>
 
-                    <ComboBox SelectedValue="{Binding SelectedPlayer.Club}" IsEditable="False" IsReadOnly="True" FontSize="28" Height="40" Name="txbclub" ItemsSource="{Binding ClubsNames}"></ComboBox>
+                    <ComboBox SelectedValue="{Binding SelectedPlayer.Club}" IsEditable="False" IsEnabled="False" IsReadOnly="True" FontSize="28" Height="40" Name="txbclub" ItemsSource="{Binding ClubsNames}"></ComboBox>
 
                     <TextBox Text ="{Binding SelectedPlayer.Height}" FontSize="28" Height="40" Name="txbHeight"></TextBox>
 
                     <TextBox Text ="{Binding SelectedPlayer.Weight}"  FontSize="28" Height="40" Name="txbWeight"></TextBox>
 
 
-                    <ComboBox  FontSize="28" Height="40" Name="txbFoot"  SelectedValue="{Binding SelectedPlayer.Foot}"   >
+                    <ComboBox  FontSize="28" Height="40" Name="txbFoot"  SelectedItem="{Binding SelectedPlayer.Foot}">
                         <ComboBoxItem>
                             Trái
                         </ComboBoxItem>
-                        <ComboBoxItem IsSelected="True">Phải</ComboBoxItem>
+                        <ComboBoxItem>Phải</ComboBoxItem>
                     </ComboBox>
 
                     <TextBox FontSize="28" Height="40" Name="txbPhysyque" Text="{Binding SelectedPlayer.Physique}"></TextBox>
@@ -82,10 +105,9 @@
 
         </Grid>
 
-        <Button Grid.Column="1" Margin="30 450 230 10" Command="{Binding UpdatePlayerCommand}" CommandParameter="{Binding ElementName=editPlayerForm1}" IsEnabled="True">Edit</Button>
+        <Button Grid.Column="1" Margin="200 600 60 10" Command="{Binding UpdatePlayerCommand}" CommandParameter="{Binding ElementName=editPlayerForm1}" IsEnabled="True" Height="32">Edit</Button>
 
 
-        <Button Grid.Column="1" Margin="250 450 40 10" Click="Button_Click">Cancel</Button>
 
     </Grid>
 </Window>
