@@ -43,6 +43,9 @@ namespace FootBallProject.ViewModel
         public ICommand AddPlayerCommand2 { get; set; }
         private DataTable dataTable;
         BitmapImage bitmap = new BitmapImage();
+
+        public ICommand AddLoaded { get; set; }
+
         public ICommand EditLoaded { get; set; }
         public ICommand AddPlayerCommand { get; set; }
         public ICommand DeletePlayerCommand { get; set; }
@@ -121,7 +124,7 @@ namespace FootBallProject.ViewModel
         }
         private List<string> nationID = new List<string>();
         private List<string> clubID = new List<string>();
-
+        private string EdgePath = "";
         Player selectedPlayer = new Player();
         public Player SelectedPlayer
         {
@@ -175,6 +178,16 @@ namespace FootBallProject.ViewModel
                 nationalities.Add(nationality);
                 nationID.Add(ID);
             }
+
+            
+            AddLoaded = new RelayCommand<Window1>(
+                (p) => { return true; },
+                (p) =>
+                {
+                    p.txbclub.Text = currentClub;
+                }
+                ); 
+
             EditLoaded = new RelayCommand<EditPlayerForm>(
                 (p) => { return true; },
                 (p) =>
@@ -228,6 +241,8 @@ namespace FootBallProject.ViewModel
                     EditPlayerForm edit = new EditPlayerForm();
 
                     edit.ShowDialog();
+                    EdgePath = "";
+
 
                     x.Players_List.ItemsSource = playerList;
                     x.Players_List.Items.Refresh();
@@ -253,6 +268,8 @@ namespace FootBallProject.ViewModel
                     TeamPlayersUC x = p as TeamPlayersUC;
                     Window1 wd1 = new Window1();
                     wd1.ShowDialog();
+                    EdgePath = "";
+
                     x.Players_List.ItemsSource = playerList;
                     x.Players_List.Items.Refresh();
 
@@ -341,9 +358,11 @@ namespace FootBallProject.ViewModel
                                 break;
                             }
                         }
+                        bitmap = new BitmapImage();
+
                         bitmap.BeginInit();
 
-                        bitmap.UriSource = wd1.txbImage.Text == "" ? new Uri(@"..\..\Images\default.png", UriKind.Relative) : new Uri(wd1.txbImage.Text, UriKind.RelativeOrAbsolute);
+                        bitmap.UriSource = EdgePath == "" ? new Uri(@"..\..\Images\default.png", UriKind.Relative) : new Uri(EdgePath, UriKind.RelativeOrAbsolute);
 
                         bitmap.EndInit();
                         byte[] bites = ConvertBitmaptoByteArray(bitmap);
@@ -373,6 +392,7 @@ namespace FootBallProject.ViewModel
                                 PutDataTolist();
                             }
                             wd1.Close();
+                            EdgePath = "";
                         }
                         catch (Exception e)
                         {
@@ -484,7 +504,7 @@ namespace FootBallProject.ViewModel
                                 " CDM, CM, LM, RM, LW, RW, ST", "Vị trí", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return;
                         }
-                        string query = edit.txbImage.Text == "" ?
+                        string query = EdgePath == "" ?
                         "UPDATE CAUTHU SET HOTEN = @hoten, IDQUOCTICH=@idquoctich, TUOI =@tuoi, CHANTHUAN = @chanthuan, " +
                         "THETRANG = @Thetrang, VITRI = '" + edit.txbPos.Text + "', SOAO = " + edit.txbNumber.Text + ", CHIEUCAO = '" + edit.txbHeight.Text + "', CANNANG = '" + edit.txbWeight.Text + "' WHERE ID = @id" :
                         "UPDATE CAUTHU SET HOTEN = @hoten, IDQUOCTICH=@idquoctich, TUOI =@tuoi, HINHANH = @hinhanh, CHANTHUAN = @chanthuan, " +
@@ -511,10 +531,11 @@ namespace FootBallProject.ViewModel
                             }
                         }
                         byte[] bites;
-                        if (File.Exists(edit.txbImage.Text))
+                        bitmap = new BitmapImage();
+                        if (File.Exists(EdgePath))
                         {
                             bitmap.BeginInit();
-                            bitmap.UriSource = new Uri(edit.txbImage.Text, UriKind.RelativeOrAbsolute);
+                            bitmap.UriSource = new Uri(EdgePath, UriKind.RelativeOrAbsolute);
 
                             bitmap.EndInit();
                             bites = ConvertBitmaptoByteArray(bitmap);
@@ -547,6 +568,7 @@ namespace FootBallProject.ViewModel
                                 PutDataTolist();
                             }
                             edit.Close();
+                            EdgePath = "";
                         }
                         catch (Exception e)
                         {
@@ -717,13 +739,17 @@ namespace FootBallProject.ViewModel
                         {
                             Window1 x = p as Window1;
                             x.cthimage.Source = new BitmapImage(new Uri(openfile.FileName));
-                            x.txbImage.Text = openfile.FileName;
+
+                            EdgePath = openfile.FileName;
+
+
                         }
                         else
                         {
                             EditPlayerForm x = p as EditPlayerForm;
                             x.cthimage.Source = new BitmapImage(new Uri(openfile.FileName));
-                            x.txbImage.Text = openfile.FileName;
+                            EdgePath = openfile.FileName;
+
                             
                         }
 
