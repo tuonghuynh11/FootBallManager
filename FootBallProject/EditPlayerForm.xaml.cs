@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using FootBallProject.PopUp;
 namespace FootBallProject
 {
     /// <summary>
@@ -37,9 +37,10 @@ namespace FootBallProject
 
         private void editPlayerForm1_Loaded(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Chân thuận đang trống!!\n Nếu cẩn thận, bạn nhớ check chân thuận trên profile trước");
+            //MessageBox.Show("Chân thuận đang trống!!\n Nếu cẩn thận, bạn nhớ check chân thuận trên profile trước");
+           
         }
 
-
+       
     }
 }
