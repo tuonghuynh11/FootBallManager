@@ -24,5 +24,10 @@ namespace FootBallProject.Component.Login
         {
             InitializeComponent();
         }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
