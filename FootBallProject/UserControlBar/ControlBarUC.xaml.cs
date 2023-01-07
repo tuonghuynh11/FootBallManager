@@ -65,7 +65,9 @@ namespace FootBallProject.UserControlBar
             numberofnotifies.Badge = uncheck;
             notifipopup.ToolTip = $"Bạn có {uncheck} thông báo mới";
 
+
             Notifies = new ObservableCollection<Notification>(DataProvider.ins.DB.Notifications.Where(p => p.IDHLV == AccessUser.userLogin.IDNHANSU).OrderByDescending(p => p.CHECKED).OrderByDescending(p => p.ID));
+
             //Notifies = new ObservableCollection<Notification>(DataProvider.ins.DB.Database.SqlQuery<Notification>($"SELECT  * FROM Notification WHERE IDHLV = {AccessUser.userLogin.IDNHANSU} order by  checked asc,id desc"));
 
             lvUsers.ItemsSource = Notifies;

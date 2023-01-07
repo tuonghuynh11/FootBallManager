@@ -8,27 +8,34 @@
              xmlns:rightbar="clr-namespace:FootBallProject.Component.RightBar"
              xmlns:view="clr-namespace:FootBallProject.View"
              DataContext="{StaticResource ListMatchRightSideBarVM}"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="300">
-    <Grid>
-        <ContentControl Content="{Binding RightSideBarItemViewModel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-            <ContentControl.Resources>
-                <DataTemplate DataType="{x:Type viewmodel:EmptyRightSideBarViewModel}">
-                    <rightbar:EmptyMatchInfo></rightbar:EmptyMatchInfo>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewmodel:ListMatchRightSideBarInfo}">
-                    <rightbar:MatchInfoUC></rightbar:MatchInfoUC>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewmodel:CreateNewMatchViewModel}">
-                    <rightbar:NewMatch></rightbar:NewMatch>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewmodel:ListMatchRightSideBarInfo2}">
-                    <rightbar:MatchInfomation></rightbar:MatchInfomation>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewmodel:MatchResultViewModel}">
-                    <view:MatchResult2></view:MatchResult2>
-                </DataTemplate>
-            </ContentControl.Resources>
-        </ContentControl>
-    </Grid>
+             d:DesignHeight="800" d:DesignWidth="400">
+    <materialDesign:Card Margin="0 0 0 0" Width="355" Height="690" UniformCornerRadius="2">
+        <Grid>
+            <ContentControl Content="{Binding RightSideBarItemViewModel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type viewmodel:EmptyRightSideBarViewModel}">
+                        <rightbar:EmptyMatchInfo></rightbar:EmptyMatchInfo>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodel:ListMatchRightSideBarInfo}">
+                        <rightbar:MatchInfoUC></rightbar:MatchInfoUC>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodel:CreateNewMatchViewModel}">
+                        <rightbar:NewMatch></rightbar:NewMatch>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodel:ListMatchRightSideBarInfo2}">
+                        <rightbar:MatchInfomation></rightbar:MatchInfomation>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodel:MatchResultViewModel}">
+                        <view:MatchResult2></view:MatchResult2>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodel:MatchNoDisPlayViewModel}">
+                        <rightbar:MatchNoDisPlay></rightbar:MatchNoDisPlay>
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+        </Grid>
+
+    </materialDesign:Card>
 </UserControl>

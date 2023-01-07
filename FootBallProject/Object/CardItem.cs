@@ -7,6 +7,8 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace FootBallProject.Object
 {
@@ -48,16 +50,20 @@ namespace FootBallProject.Object
             get { return _listPlayers; }
             set { _listPlayers = value; OnPropertyChanged(); }
         }
+        public ICommand DeleteCard { get; set; }
         public CardItem()
         {
         }
-        public CardItem(ITEM item, ObservableCollection<CAUTHU> list)
+        private MatchResultViewModel matchResultViewModel;
+        public CardItem(ITEM item, ObservableCollection<CAUTHU> list, MatchResultViewModel matchresultviewmodel)
         {
             Id = item.ID;
             Player = item.CAUTHU;
             Time = item.THOIGIAN;
             Type = item.ITEMTYPE;
             ListPlayers = list;
+            matchResultViewModel = matchresultviewmodel;
+            DeleteCard = new RelayCommand<object>((x) => { return true; }, (x) => { DeleteMySelfFuntion(); });
         }
         public void SaveCardItem()
         {
@@ -70,6 +76,9 @@ namespace FootBallProject.Object
             DataProvider.Instance.Database.ITEMs.AddOrUpdate(item);
             DataProvider.Instance.Database.SaveChanges();
         }
+        private void DeleteMySelfFuntion()
+        {
+            matchResultViewModel.DeleteItemCard(this);
+        }
     }
-
 }

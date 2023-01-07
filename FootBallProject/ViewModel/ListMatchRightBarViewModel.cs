@@ -1,4 +1,5 @@
-﻿using FootBallProject.Object;
+﻿using DevExpress.Xpf.Editors.Helpers;
+using FootBallProject.Object;
 using FootBallProject.View;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,15 @@ namespace FootBallProject.ViewModel
         private object _adminListMatchSideBarInfo;
         private object _rightSideBarItemViewModel;
         private FootballMatchCard _selectedMatchCard;
+        private bool _enable;
+        public bool Enable
+        {
+            get { return _enable; }
+            set
+            {
+                _enable = value; OnPropertyChanged(nameof(Enable));
+            }
+        }
         public static ListMatchRightBarViewModel Instance
         {
             get => s_instance ?? (s_instance = new ListMatchRightBarViewModel());
@@ -102,11 +112,29 @@ namespace FootBallProject.ViewModel
             ShowInfo2 = new RelayCommand<UserControl>((p) => true, (p) => { ShowInfomation(p); });
             SettingDetail = new RelayCommand<UserControl>((p) => true, (p) => { ShowDetail(p); });
             SettingResult = new RelayCommand<UserControl>((p) => true, (p) => { SetResult(p); });
+            Enable = true;
+        }
+        public void Refresh()
+        {
+            RightSideBarItemViewModel = new EmptyRightSideBarViewModel();
+        }
+        private bool Check(FootballMatchCard x)
+        {
+            if (x.TeamA == null || x.TeamB == null && x.InfoTeamA == null
+                || x.InfoTeamB == null) return false;
+            return true;
         }
         private void SetResult(UserControl userControl)
         {
             var x = userControl.DataContext as FootballMatchCard;
-            RightSideBarItemViewModel = new MatchResultViewModel(userControl);
+              
+            if (Check(x) == true && x.DisplayDay != null && DateTime.Compare(x.TryConvertToDateTime(), DateTime.Now) < 0) {
+
+                Enable = true;
+                RightSideBarItemViewModel = new MatchResultViewModel(userControl); }
+            else {
+                RightSideBarItemViewModel = new MatchNoDisPlayViewModel();
+            }
         }
         private void ShowDetail(UserControl p)
         {

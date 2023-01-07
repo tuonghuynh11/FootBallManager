@@ -14,6 +14,11 @@ namespace FootBallProject.ViewModel
     public class ConfigVongLoai1ViewModel: BaseViewModel
     {
         public int numofTeam;
+        public string CurrentTeam
+        {
+            get { return numofTeam.ToString(); }
+            set { totalTeam = value; OnPropertyChanged(); }
+        }
         private static ConfigVongLoai1ViewModel _instance;
         public static ConfigVongLoai1ViewModel Instance
         {
@@ -46,18 +51,22 @@ namespace FootBallProject.ViewModel
             {
                 if ((item as TeamItem).Selected == true)
                 {
-                    count++;
+                    count++;                
                 }
             }
+
             TotalTeam = count.ToString();
-            if (count == numofTeam) Enable = true; 
+            numofTeam = Convert.ToInt32(CreateNewLeague.Instance.SelectedSoluong);
+            CurrentTeam = numofTeam.ToString();
+            if (count == numofTeam) Enable = true;
+            else Enable = false;
         }
         public ICommand CountinueCommand { get; set; }
-
+        public ICommand GoBackCommand { get; set; }
         public ConfigVongLoai1ViewModel(ListofLeagueViewModel ins)
         {
-            numofTeam = Convert.ToInt32(CreateNewLeague.Instance.SelectedSoluong);
             Instance = this;
+
             var list = DataProvider.ins.DB.DOIBONGs.ToList();
             foreach (var item in list)
             {
@@ -65,24 +74,15 @@ namespace FootBallProject.ViewModel
             }
             Teams = teams;
             TotalTeam = "0";
+            CurrentTeam = numofTeam.ToString();
             Enable = false;
-            CountinueCommand = new RelayCommand<object>((p) => { return true; }, (p) => {ListofLeagueViewModel.Instance.ContinueFuntion(); });
+            CurrentTeam = CreateNewLeague.Instance.SelectedSoluong;
+            CountinueCommand = new RelayCommand<object>((p) => { return true; }, (p) => { ContinueFuntion(); ListofLeagueViewModel.Instance.ContinueFuntion(); });
+            GoBackCommand = new RelayCommand<object>((p) => { return true; }, (p) => { ListofLeagueViewModel.Instance.ReturnCreate(); });
         }
         public void ContinueFuntion()
         {
-            foreach(var item in Teams)
-            {
-                if (item.Selected == true)
-                {
-                    TEAMOFLEAGUE temp = new TEAMOFLEAGUE()
-                    {
-                        IDDOIBONG = item.Team.ID,
-                        IDGIAIDAU = CreateNewLeague.Instance.League.ID
-                    };
-                    DataProvider.ins.DB.TEAMOFLEAGUEs.Add(temp);
-                }
-            }
-            DataProvider.ins.DB.SaveChanges();
+
         }
     }
 }

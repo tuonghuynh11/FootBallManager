@@ -68,7 +68,7 @@
                         Grid.Column="1"
                         Style="{StaticResource textbox_item}"
                         materialDesign:HintAssist.Hint="Nhập tên vòng đấu"
-                        Text="{Binding TENVONGDAU, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}">
+                        Text="{Binding NameOfRound, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                         </TextBox>
                     </Grid> 
 
@@ -94,7 +94,7 @@
                         <DatePicker Grid.Column="1"
                                 Style="{StaticResource datepicker_item}"
                                 materialDesign:HintAssist.Hint="Thời gian bắt đầu"
-                               SelectedDate="{Binding StartTime, Mode=OneWayToSource}"
+                               SelectedDate="{Binding StartTime, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
 
                                 ></DatePicker>
                     </Grid>

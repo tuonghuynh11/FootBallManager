@@ -14,16 +14,18 @@
             Style="{StaticResource CardContainer}">
         <DockPanel LastChildFill="True">
             <TextBlock
+                    Visibility="{Binding Enable, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}"
                     Margin="10"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
-                    DockPanel.Dock="Bottom">
+                    DockPanel.Dock="Bottom"
+                    Foreground="Red">
                     <Run
-                        Text="Số đội đã chọn: " />
+                        Text="Lỗi: thời gian bắt đầu phải nằm trong khoảng: " />
                     <Run
-                        Text="{Binding SelectedCount, FallbackValue=0}" />
+                        Text="{Binding StartTime, FallbackValue=Ngày bắt đầu}" />
                     <Run Text="/"></Run>
-                    <Run Text="{Binding TotalTeam, FallbackValue=0}"></Run>
+                    <Run Text="{Binding EndTime, FallbackValue=Ngày kết thúc}"></Run>
             </TextBlock>
             <Grid Grid.Row="3">
                 <Grid.RowDefinitions>
@@ -45,18 +47,29 @@
                         Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                         Text="Danh sách các vòng đấu" />
                     <Button
+                Grid.Column="1"
+                Background="{StaticResource DarkGray}"
+                Content="Trở lại"
+                FontSize="16"
+                        VerticalAlignment="Center"
+                        Width="120"
+                        Height="40"
+                Command="{Binding GoBack}"
+                Foreground="White"
+                Style="{StaticResource rounded_btn}" Margin="4,0,4,0" />
+                    <Button
                         Grid.Column="1"
                         Width="120"
                         Height="40"
-                        Margin="16,16,16,16"
-                        HorizontalAlignment="Right"
+                        Margin="300,16,16,16"
                         VerticalAlignment="Center"
                         materialDesign:ButtonAssist.CornerRadius="8"
                         Background="#8FD14F"
                         BorderBrush="Transparent"
                         Command="{Binding Complete}"
                         Content="Hoàn thành"
-                        Style="{StaticResource PrimaryButton}" />
+                        Style="{StaticResource rounded_btn}"
+ />
                 </Grid>
                 <Grid Grid.Row="1">
                     <!--<component:SearchBar
@@ -107,7 +120,7 @@
                     Background="#8FD14F"
                     Content="Tiếp" />-->
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <ItemsControl ItemsSource="{Binding ListRound}">
+                        <ItemsControl ItemsSource="{Binding ListRoundObjects}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel x:Name="Container" HorizontalAlignment="Center" />

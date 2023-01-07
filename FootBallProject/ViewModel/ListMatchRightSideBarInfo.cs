@@ -1,4 +1,5 @@
-﻿using FootBallProject.Object;
+﻿using FootBallProject.Model;
+using FootBallProject.Object;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace FootBallProject.ViewModel
         public ListMatchRightSideBarInfo(FootballMatchCard card, bool isCreateNew = false)
         {
             card.InitListTeam();
-            CurrentCard = new FootballMatchCard(card.ID, card.DisplayName, card.DisplayPlace, card.DisplayDay);
+            CurrentCard = new FootballMatchCard(card.ID, card.DisplayName, card.DisplayPlace, card.DisplayDay, card.CurrentMatch);
             CurrentCard.InitListTeam();
             //CurrentCard.InitListTeam();
             ActualCard = card;
@@ -62,6 +63,8 @@ namespace FootBallProject.ViewModel
 
             {
                 CurrentCard.UpdateFootballMatch();
+
+                
             }
         }
     }

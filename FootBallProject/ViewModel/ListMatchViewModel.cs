@@ -11,7 +11,6 @@ using System.Windows.Input;
 namespace FootBallProject.ViewModel
 {
     class ListMatchViewModel : BaseViewModel
-
     {
         private static ListMatchViewModel s_instance;
         public static ListMatchViewModel Instance
@@ -102,7 +101,11 @@ namespace FootBallProject.ViewModel
         }
         public void LoadRound()
         {
-            Rounds = new ObservableCollection<ROUND>(DataProvider.Instance.Database.ROUNDs.Where(x => x.IDGIAIDAU == SelectedLeague.ID));
+            try
+            {
+                Rounds = new ObservableCollection<ROUND>(DataProvider.Instance.Database.ROUNDs.Where(x => x.IDGIAIDAU == SelectedLeague.ID));
+            }
+            catch { }
         }
         public void LoadMatchlistbyRound()
         {
@@ -114,12 +117,7 @@ namespace FootBallProject.ViewModel
             {
                 if (item.ROUND == SelectedRound || SelectedRound == null)
                 {
-                    string temp = "";
-                    if (item.DIADIEM1 != null)
-                    {
-                        temp = item.DIADIEM1.TENDIADIEM;
-                    }
-                    FootballMatchCard1.Add(new FootballMatchCard(item.ID, item.TENTRANDAU, temp, item.THOIGIAN));
+                    FootballMatchCard1.Add(new FootballMatchCard(item.ID, item.TENTRANDAU, item.DIADIEM1 , item.THOIGIAN, item));
                     FootballMatchCards.Add(item);
                 }
             }

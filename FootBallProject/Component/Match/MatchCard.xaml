@@ -172,10 +172,11 @@
                         <Button
                             Grid.Column="1"
                             Foreground="DarkGreen"
+                            Content="Thiết lập chi tiết"
+                            Visibility="{Binding Enable, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            DataContext="{StaticResource ListMatchRightSideBarVM}"
                             Command="{Binding SettingResult}"
                             CommandParameter="{Binding ElementName=FootballMatchCardComponent}"
-                            Content="Thiết lập chi tiết"
-                            DataContext="{StaticResource ListMatchRightSideBarVM}"
                             FontSize="10"
                             Style="{StaticResource MaterialDesignFlatDarkButton}" />
                     </Grid>
