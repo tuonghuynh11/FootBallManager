@@ -827,6 +827,7 @@
     <Resource Include="Images\default.png" />
     <Resource Include="Images\1.jpg" />
     <Resource Include="Icons\feedback.png" />
+    <Resource Include="Icons\appicon.png" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

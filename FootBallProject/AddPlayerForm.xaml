@@ -12,8 +12,8 @@
         
         WindowStyle="None"
         Background="Transparent"
-       
-        Title="AddPlayerForm" Height="680" Width="1400"
+       AllowsTransparency="True"
+        Title="AddPlayerForm" Height="650" Width="1000"
         DataContext="{StaticResource TeamPlayersVM}"
         Name="AddPlayerForm"
                 WindowStartupLocation="CenterScreen" Loaded="AddPlayerForm_Loaded">
@@ -35,26 +35,26 @@
     </Window.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-        <i:InvokeCommandAction Command="{Binding AddLoaded}" CommandParameter="{Binding ElementName =AddPlayerForm}">
+            <i:InvokeCommandAction Command="{Binding AddLoaded}" CommandParameter="{Binding ElementName =AddPlayerForm}">
 
-        </i:InvokeCommandAction>
-    </i:EventTrigger>
+            </i:InvokeCommandAction>
+        </i:EventTrigger>
     </i:Interaction.Triggers>
     <Border CornerRadius="20" Padding="6" BorderBrush="#fbc42d" BorderThickness="2" Background="#d3ffce">
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="450"></ColumnDefinition>
-                <ColumnDefinition Width="450"></ColumnDefinition>
+                <ColumnDefinition Width="300"></ColumnDefinition>
+                <ColumnDefinition Width="350"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Border Margin="100 10 100 450" Grid.ColumnSpan="2">
-                <TextBlock FontSize="50" HorizontalAlignment="Center"  FontFamily="Comic Sans MS">ADD PLAYER HERE</TextBlock>
+            <Border Margin="300 10 0 450" Grid.ColumnSpan="3">
+                <TextBlock FontSize="50" HorizontalAlignment="Left"  FontFamily="Comic Sans MS" Margin="-49,0,0,0">ADD PLAYER HERE</TextBlock>
 
             </Border>
             <Grid Grid.Column="0">
                 <!-- Height = 550 Width = 450-->
-                <Border Margin="100 100 50 50">
+                <Border Margin="50 100 50 0">
                     <StackPanel>
                         <TextBlock FontSize="30">Tên</TextBlock>
                         <Separator></Separator>
@@ -93,7 +93,7 @@
 
             </Grid>
             <Grid Grid.Column="1">
-                <Border Margin="100 100 50 50">
+                <Border Margin="0 100 50 0">
                     <StackPanel>
                         <TextBox FontSize="28" Height="40" Name="txbName"></TextBox>
                         <Separator></Separator>
@@ -126,29 +126,31 @@
 
                         <ComboBox FontSize="28" Height="40" Name="txbNationality"   ItemsSource="{Binding Nationalities}" ></ComboBox>
                         <Separator ></Separator>
-                        
+
 
                     </StackPanel>
                 </Border>
 
             </Grid>
             <Grid Grid.Column="2">
-                <Button x:Name="Close_but" Height="50" Width="50" VerticalAlignment="Top"
+                <StackPanel Orientation="Vertical">
+                    <Button x:Name="Close_but" Height="50" Width="50" VerticalAlignment="Top"
                         HorizontalAlignment="Right" Margin="0 10 5 0" BorderBrush="{x:Null}" Click="Close_but_Click">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Images/x_icon.png"/>
-                    </Button.Background>
+                        <Button.Background>
+                            <ImageBrush ImageSource="/Images/x_icon.png"/>
+                        </Button.Background>
 
-                </Button>
-                <Image x:Name = "cthimage" HorizontalAlignment="Center" Height="300"  
-                       VerticalAlignment="Top" Width="300" Source="Images\default.png"/>
-                <Button  Background="Orange"  Foreground="DarkRed" FontSize="22" Grid.Column="2" Margin="60 200 100 100" Width="200" Height="90" Command="{Binding LoadImageCommand}" CommandParameter="{Binding ElementName=AddPlayerForm}">Upload</Button>
+                    </Button>
+                    <Image x:Name = "cthimage"  Margin="0 0 0 50" HorizontalAlignment="Center" Height="200"  VerticalAlignment="Top" Width="200" Source="Images\default.png"/>
+                    <Button  Background="Orange"  Margin="0 0 0 50" Foreground="DarkRed" FontSize="22"  Width="200" Height="90" Command="{Binding LoadImageCommand}" CommandParameter="{Binding ElementName=AddPlayerForm}">Upload</Button>
+                    <Button Background="LightBlue"  Foreground="DarkRed" FontSize="22" Grid.Column="2"  Width="200" Height="90" Command="{Binding AddPlayerCommand2}" CommandParameter="{Binding ElementName=AddPlayerForm}" IsEnabled="True">Add</Button>
 
+                </StackPanel>
+               
             </Grid>
 
-        
 
-            <Button Background="LightBlue"  Foreground="DarkRed" FontSize="22" Grid.Column="2" Margin="60 500 100 00" Width="200" Height="90" Command="{Binding AddPlayerCommand2}" CommandParameter="{Binding ElementName=AddPlayerForm}" IsEnabled="True">Add</Button>
+
 
 
 
