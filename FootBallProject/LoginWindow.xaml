@@ -7,14 +7,11 @@
         xmlns:component="clr-namespace:FootBallProject.Component.Login"
         d:DataContext="{StaticResource LoginViewM}"
         WindowStartupLocation="CenterScreen"
-                        WindowStyle="None"
-        ResizeMode="NoResize"
-
+        WindowStyle="None"
+        AllowDrop="True"
         mc:Ignorable="d"
-        
-        Title="LoginWindow" Height="450" Width="380">
+         Height="450" Width="380">
     <Grid>
-        
         <Grid.Resources>
             <component:Login x:Key="Default"></component:Login>
         </Grid.Resources>
