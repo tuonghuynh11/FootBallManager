@@ -24,11 +24,12 @@ namespace FootBallProject
         {
             InitializeComponent();
             this.DataContext = new LoginViewModel();
+            if(btnClose.Click() == true) 
         }
-
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+
     }
 }
