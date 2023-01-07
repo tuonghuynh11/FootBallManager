@@ -806,6 +806,7 @@
     <Resource Include="Icons\confirm.png" />
     <Resource Include="Images\bldavt.png" />
     <Resource Include="Icons\match.png" />
+    <Resource Include="Images\default.png" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

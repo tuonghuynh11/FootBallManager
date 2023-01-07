@@ -33,12 +33,13 @@ namespace FootBallProject
 
         private void AddPlayerForm_Loaded(object sender, RoutedEventArgs e)
         {
-            if (USER.ROLE == "Admin")
+            if (USER.ROLE != "Admin")
             {
                 txbclub.IsReadOnly = true;
                 txbclub.IsHitTestVisible = false;
                 txbclub.Focusable = false;
             }
+            
         }
 
         private void Close_but_Click(object sender, RoutedEventArgs e)
