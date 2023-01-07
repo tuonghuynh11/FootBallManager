@@ -57,6 +57,8 @@ namespace FootBallProject.ViewModel
         public ICommand LoadImageCommand { get; set; }
         public ICommand GoToEdit { get; set; }
         public ICommand ChangeCmbSelection { get; set; }
+        public ICommand TeamLoaded { get; set; }
+        
 
         private List<Player> playerList = new List<Player>();
         private List<Player> transferPlayers = new List<Player>();
@@ -178,8 +180,22 @@ namespace FootBallProject.ViewModel
                 nationalities.Add(nationality);
                 nationID.Add(ID);
             }
+            TeamLoaded = new RelayCommand<TeamPlayersUC>(
+               (p) => { return true; },
+               (p) =>
+               {
+                   PullClub();
+                   PullData();
+                   PutDataTolist();
 
-            
+                   p.Players_List.ItemsSource = this.PlayerList;
+                   p.Players_List.Items.Refresh();
+
+
+
+               }
+               );
+
             AddLoaded = new RelayCommand<Window1>(
                 (p) => { return true; },
                 (p) =>
