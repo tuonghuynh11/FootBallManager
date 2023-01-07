@@ -1,4 +1,5 @@
 ﻿using DevExpress.Mvvm.Native;
+using FootBallProject.Class;
 using FootBallProject.Model;
 using FootBallProject.Object;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
 
@@ -67,6 +69,12 @@ namespace FootBallProject.ViewModel
                 DOIBONG = teamplayer
             };
         }
+        private bool _createLeagueButton;
+        public bool CreateLeagueButton
+        {
+            get => _createLeagueButton;
+            set => _createLeagueButton = value;
+        }
         public ICommand AddtemofLeague { get; set; }
         public object configAutoViewModel;
         public object config1;
@@ -91,6 +99,15 @@ namespace FootBallProject.ViewModel
             CurrentAhihi = configAutoViewModel;
             AddLeague = new RelayCommand<object>((p) => { return true; }, (p) => { AddLeagueFuntion(); } );
             //AddTeamofLeague = new RelayCommand<object>((p) => true, (p) => AddTeamofLeague(1, teams[0]));
+            CheckVisibility();
+        }
+        private void CheckVisibility()
+        {
+            if (AccessUser.userLogin.USERROLE.ID == 2)
+            {
+                CreateLeagueButton = true;
+            }
+            else CreateLeagueButton = false;
         }
         public void Refresh(LeagueCardOb p) 
         {

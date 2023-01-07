@@ -154,7 +154,8 @@
                             <Run Text="{Binding DisplayPlace, FallbackValue='Địa điểm thi đấu'}" />
                         </TextBlock>
                     </StackPanel>
-                    <Grid Grid.Row="3" Width="{Binding ActualWidth, ElementName=CardImage}">
+                    <Grid Grid.Row="3" Width="{Binding ActualWidth, ElementName=CardImage}"
+                          Visibility="{Binding Enable, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
