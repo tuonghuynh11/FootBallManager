@@ -43,7 +43,9 @@ namespace FootBallProject.ViewModel
         public ICommand AddPlayerCommand2 { get; set; }
         private DataTable dataTable;
         BitmapImage bitmap = new BitmapImage();
+
         public ICommand AddLoaded { get; set; }
+
         public ICommand EditLoaded { get; set; }
         public ICommand AddPlayerCommand { get; set; }
         public ICommand DeletePlayerCommand { get; set; }
@@ -176,6 +178,7 @@ namespace FootBallProject.ViewModel
                 nationalities.Add(nationality);
                 nationID.Add(ID);
             }
+
             
             AddLoaded = new RelayCommand<Window1>(
                 (p) => { return true; },
@@ -184,6 +187,7 @@ namespace FootBallProject.ViewModel
                     p.txbclub.Text = currentClub;
                 }
                 ); 
+
             EditLoaded = new RelayCommand<EditPlayerForm>(
                 (p) => { return true; },
                 (p) =>
@@ -239,6 +243,7 @@ namespace FootBallProject.ViewModel
                     edit.ShowDialog();
                     EdgePath = "";
 
+
                     x.Players_List.ItemsSource = playerList;
                     x.Players_List.Items.Refresh();
                 }
@@ -264,6 +269,7 @@ namespace FootBallProject.ViewModel
                     Window1 wd1 = new Window1();
                     wd1.ShowDialog();
                     EdgePath = "";
+
                     x.Players_List.ItemsSource = playerList;
                     x.Players_List.Items.Refresh();
 
@@ -733,7 +739,9 @@ namespace FootBallProject.ViewModel
                         {
                             Window1 x = p as Window1;
                             x.cthimage.Source = new BitmapImage(new Uri(openfile.FileName));
+
                             EdgePath = openfile.FileName;
+
 
                         }
                         else
@@ -741,6 +749,7 @@ namespace FootBallProject.ViewModel
                             EditPlayerForm x = p as EditPlayerForm;
                             x.cthimage.Source = new BitmapImage(new Uri(openfile.FileName));
                             EdgePath = openfile.FileName;
+
                             
                         }
 

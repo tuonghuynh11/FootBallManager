@@ -74,6 +74,7 @@
                         <TextBlock FontSize="30">Chân thuận</TextBlock>
                         <Separator></Separator>
 
+
                         <TextBlock FontSize="30">Thể trạng</TextBlock>
                         <Separator></Separator>
                         <TextBlock FontSize="30">Vị trí</TextBlock>
@@ -84,8 +85,10 @@
                         <TextBlock FontSize="30">Quốc tịch</TextBlock>
                         <Separator></Separator>
 
+
                     </StackPanel>
                 </Border>
+
 
 
             </Grid>
@@ -120,6 +123,7 @@
                         <TextBox FontSize="28" Height="40" Name="txbNumber" ></TextBox>
                         <Separator></Separator>
 
+
                         <ComboBox FontSize="28" Height="40" Name="txbNationality"   ItemsSource="{Binding Nationalities}" ></ComboBox>
                         <Separator ></Separator>
                         
@@ -142,8 +146,10 @@
 
             </Grid>
 
+        
 
             <Button Background="LightBlue"  Foreground="DarkRed" FontSize="22" Grid.Column="2" Margin="60 500 100 00" Width="200" Height="90" Command="{Binding AddPlayerCommand2}" CommandParameter="{Binding ElementName=AddPlayerForm}" IsEnabled="True">Add</Button>
+
 
 
 
