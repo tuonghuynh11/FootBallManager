@@ -11,36 +11,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using FootBallProject.PopUp;
+
 namespace FootBallProject
 {
     /// <summary>
-    /// Interaction logic for EditPlayerForm.xaml
+    /// Interaction logic for FeedBack.xaml
     /// </summary>
-    public partial class EditPlayerForm : Window
+    public partial class FeedBack : Window
     {
-        public EditPlayerForm()
+        public FeedBack()
         {
             InitializeComponent();
         }
-
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
+        
         private void Close_but_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
-        private void editPlayerForm1_Loaded(object sender, RoutedEventArgs e)
-        {
-            //MessageBox.Show("Chân thuận đang trống!!\n Nếu cẩn thận, bạn nhớ check chân thuận trên profile trước");
-           
-        }
-
-       
     }
 }

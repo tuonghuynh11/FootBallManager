@@ -14,16 +14,29 @@ using System.Collections;
 using System.IO;
 using System.Drawing;
 using System.Windows.Media.Imaging;
-
 using System.Net;
 using System.Net.Mail;
 using System.Configuration;
 using FootBallProject.UserControlBar;
+using FootBallProject.Model;
 
 namespace FootBallProject.ViewModel
 {
-    public class TransferPlayersViewModel:BaseViewModel
+    public class TransferPlayersViewModel : BaseViewModel
     {
+        private string currentClub;
+        public string CurrentClub
+        {
+            get { return currentClub; }
+            set { currentClub = value; OnPropertyChanged(); }
+        }
+        private string currentclubID;
+        public string CurrentclubID
+        {
+            get { return currentclubID; }
+            set { currentclubID = value; OnPropertyChanged(); }
+        }
+        public byte[] DefaultImage { get => GetDefaultImage(); }
         public ICommand RowDoubleClickCommand { get; set; }
         public ICommand AddPlayerCommand2 { get; set; }
         private DataTable dataTable;
@@ -35,8 +48,10 @@ namespace FootBallProject.ViewModel
         public ICommand OpenUpdateCommand { get; set; }
         public ICommand TransferCommand { get; set; }
         public ICommand BuyCommand { get; set; }
+        public ICommand RetrieveCommand { get; set; }
         public ICommand LoadImageCommand { get; set; }
         public ICommand GoToEdit { get; set; }
+        public ICommand ChangeCmbSelection { get; set; }
 
         private List<Player> playerList = new List<Player>();
         private List<Player> transferPlayers = new List<Player>();
@@ -69,7 +84,16 @@ namespace FootBallProject.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        private List<Player> soldplayers = new List<Player>();
+        public List<Player> Soldplayers
+        {
+            get { return soldplayers; }
+            set
+            {
+                soldplayers = value;
+                OnPropertyChanged();
+            }
+        }
         private List<string> clubsNames = new List<string>();
         public List<string> ClubsNames
         {
@@ -108,22 +132,28 @@ namespace FootBallProject.ViewModel
         }
 
 
-        // string connString = @"Data Source=DESKTOP-GUE0JS7\SQLEXPRESS;Initial Catalog=FOOTBALLMANAGERDEMO;Integrated Security=true;";
-        string connString = @"Data Source=LAPTOP-37LM0CEF\SQLEXPRESS;Initial Catalog=officialleague;Integrated Security=true;";
+        string connString = ConfigurationManager.ConnectionStrings["connectstr"].ConnectionString;
+        //string connString = @"Data Source=LAPTOP-37LM0CEF\SQLEXPRESS;Initial Catalog=officialleague;Integrated Security=true;";
 
 
 
         public TransferPlayersViewModel()
         {
             //dataTable = new DataTable();
-
+            CurrentClub = "AC Milan";
+            CurrentclubID = "acm";
+            PullClub();
             PullData();
             PutDataTolist();
+
             PullTransferData();
             PutTransfertoList();
 
             PullClubData();
             PutClubDataToList();
+
+            PullSoldPlData();
+            PutSoldDataToList();
 
             PullClub();
             foreach (DataRow dr in dataTable.Rows)
@@ -142,25 +172,41 @@ namespace FootBallProject.ViewModel
                 nationID.Add(ID);
             }
 
+            //ChangeCmbSelection = new RelayCommand<object>
+            //(
+            //    (p) =>
+            //    {
+            //        return true;
+            //    },
+            //    (p) =>
+            //    {
+            //        TeamPlayersUC tp = p as TeamPlayersUC;
+            //        currentClub = tp.teamCMB.SelectedItem as string;
+            //        PullData();
+            //        PutDataTolist();
+            //        tp.Players_List.ItemsSource = playerList;
+            //        tp.Players_List.Items.Refresh();
 
-            GoToEdit = new RelayCommand<object>(
-                (p) => {
-                    if (p as TeamPlayersUC == null)
-                        return false;
-                    return true;
-                },
-                (p) =>
-                {
-                    TeamPlayersUC x = p as TeamPlayersUC;
-                    if (x.Players_List.SelectedItems.Count == 0)
-                    {
-                        return;
-                    }
-                    EditPlayerForm edit = new EditPlayerForm();
+            //    }
+            //);
+            //GoToEdit = new RelayCommand<object>(
+            //    (p) => {
+            //        if (p as TeamPlayersUC == null)
+            //            return false;
+            //        return true;
+            //    },
+            //    (p) =>
+            //    {
+            //        TeamPlayersUC x = p as TeamPlayersUC;
+            //        if (x.Players_List.SelectedItems.Count == 0)
+            //        {
+            //            return;
+            //        }
+            //        EditPlayerForm edit = new EditPlayerForm();
 
-                    edit.ShowDialog();
-                }
-                );
+            //        edit.ShowDialog();
+            //    }
+            //    );
 
             RowDoubleClickCommand = new RelayCommand<object>((p) => { if (p as TeamPlayersUC == null) return false; return true; }, (p) =>
             {
@@ -174,285 +220,293 @@ namespace FootBallProject.ViewModel
 
             );
             //Command nut add
-            AddPlayerCommand = new RelayCommand<object>(
-                (p) => { if (p as TeamPlayersUC == null) return false; return true; },
-                (p) =>
-                {
-                    TeamPlayersUC x = p as TeamPlayersUC;
-                    Window1 wd1 = new Window1();
-                    wd1.ShowDialog();
-                    x.Players_List.ItemsSource = null;
-                    x.Players_List.ItemsSource = playerList;
+            //AddPlayerCommand = new RelayCommand<object>(
+            //    (p) => { if (p as TeamPlayersUC == null) return false; return true; },
+            //    (p) =>
+            //    {
+            //        TeamPlayersUC x = p as TeamPlayersUC;
+            //        Window1 wd1 = new Window1();
 
-                }
-
-
-                );
-            //Command add
-            AddPlayerCommand2 = new RelayCommand<object>(
-                (p) => { if (p as Window1 == null) return false; return true; },
-                (p) =>
-                {
+            //        wd1.ShowDialog();
+            //        x.Players_List.ItemsSource = null;
+            //        x.Players_List.ItemsSource = playerList;
 
 
-                    Window1 wd1 = p as Window1;
-
-                    if ((wd1.txbName.Text == "") || wd1.txbImage.Text == ""
-                    || wd1.txbHeight.Text == "" || wd1.txbclub.Text == ""
-                    || wd1.txbWeight.Text == "" || wd1.txbPos.Text == ""
-                    || wd1.txbNumber.Text == "" || wd1.txbNationality.Text == ""
-                    || wd1.txbAge.Text == "" || wd1.txbPhysyque.Text == "" || wd1.txbFoot.Text == "")
-                    {
-                        System.Windows.Forms.MessageBox.Show("Bạn chưa nhập đầy đủ thông tin", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
-                    else
-                    {
-                        int parsevalue;
-                        string position = wd1.txbPos.Text.Trim();
-                        if (!int.TryParse(wd1.txbAge.Text, out parsevalue))
-                        {
-                            System.Windows.Forms.MessageBox.Show("Tuổi phải nhập số", "Nhập lại tuổi đi!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
-                        }
-                        if (!int.TryParse(wd1.txbHeight.Text, out parsevalue))
-                        {
-                            System.Windows.Forms.MessageBox.Show("Chiều cao phải nhập số", "Nhập lại chiều cao đi!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
-                        }
-                        if (!int.TryParse(wd1.txbWeight.Text, out parsevalue))
-                        {
-                            System.Windows.Forms.MessageBox.Show("Cân nặng phải nhập số", "Nhập lại cân nặng đi!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
-                        }
-                        string[] arrString = { "GK", "CB", "LB", "RB", "CDM", "CM", "LM", "RM", "LW", "RW", "ST" };
-
-                        if (!arrString.Contains(position, StringComparer.OrdinalIgnoreCase))
-                        {
-
-                            System.Windows.Forms.MessageBox.Show("Bạn nhập vị trí không dúng\nCác vị trí là: GK, CB, LB, RB," +
-                                " CDM, CM, LM, RM, LW, RW, ST", "Vị trí", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
-                        }
-
-                        string query = "INSERT CAUTHU values(@teamid, @idquoctich, @hoten, @tuoi, 0, 0, @hinhanh, @chanthuan, @Thetrang, @vitri, @soao, '" + wd1.txbHeight.Text + "cm', '" + wd1.txbWeight.Text + "', 0)";
-                        PullClub();
-                        string IDDoiBong = "";
-                        foreach (DataRow dr in dataTable.Rows)
-                        {
-                            if (dr["TEN"].ToString() == wd1.txbclub.Text)
-                            {
-                                IDDoiBong = dr["ID"].ToString();
-                                break;
-                            }
-                        }
-                        PullNationalities();
-                        string IdQG = "";
-                        foreach (DataRow dr in dataTable.Rows)
-                        {
-                            if (dr["TENQUOCGIA"].ToString() == wd1.txbNationality.Text)
-                            {
-                                IdQG = dr["ID"].ToString();
-                                break;
-                            }
-                        }
-                        bitmap.BeginInit();
-                        bitmap.UriSource = new Uri(wd1.txbImage.Text, UriKind.RelativeOrAbsolute);
-
-                        bitmap.EndInit();
-                        byte[] bites = ConvertBitmaptoByteArray(bitmap);
-
-                        try
-                        {
-                            using (SqlConnection conn = new SqlConnection(connString))
-                            {
-                                using (SqlCommand cmd = new SqlCommand(query, conn))
-                                {
-                                    cmd.Parameters.AddWithValue("@teamid", IDDoiBong); //THIS IS WRONG
-                                    cmd.Parameters.AddWithValue("@idquoctich", IdQG);
-                                    cmd.Parameters.AddWithValue("@hoten", wd1.txbName.Text);
-                                    cmd.Parameters.AddWithValue("@tuoi", Convert.ToInt32(wd1.txbAge.Text));
-                                    cmd.Parameters.AddWithValue("@hinhanh", bites);
-                                    cmd.Parameters.AddWithValue("@chanthuan", wd1.txbFoot.SelectedValue.ToString());
-                                    cmd.Parameters.AddWithValue("@Thetrang", wd1.txbPhysyque.Text);
-                                    cmd.Parameters.AddWithValue("@vitri", wd1.txbPos.Text);
-                                    cmd.Parameters.AddWithValue("@soao", wd1.txbNumber.Text);
-                                    cmd.Parameters.AddWithValue("@height", wd1.txbHeight.Text);
-                                    cmd.Parameters.AddWithValue("@weight", wd1.txbWeight.Text);
-                                    conn.Open();
-                                    cmd.ExecuteNonQuery();
-                                    conn.Close();
-                                }
-                                PullData();
-                                PutDataTolist();
-                            }
-                            wd1.Close();
-                        }
-                        catch (Exception e)
-                        {
-                            System.Windows.Forms.MessageBox.Show(e.Message);
-                            return;
-                        }
-                        try
-                        {
-                            RandomSquad(IDDoiBong);
-                        }
-                        catch (Exception e)
-                        {
-                            System.Windows.Forms.MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
+            //    }
 
 
-                }
-
-                );
-            DeletePlayerCommand = new RelayCommand<object>(
-                (p) => { if (p as TeamPlayersUC == null) return false; return true; },
-                (p) =>
-                {
-                    TeamPlayersUC x = p as TeamPlayersUC;
-                    string query = "DELETE FROM CAUTHU WHERE ID = @id";
-                    string id = SelectedPlayer.Id;
-                    using (SqlConnection sqlConnection = new SqlConnection(connString))
-                    {
-                        sqlConnection.Open();
-
-                        try
-                        {
-                            using (SqlCommand sqlquery = new SqlCommand(query, sqlConnection))
-                            {
-                                sqlquery.Parameters.AddWithValue("@id", id);
-                                sqlquery.ExecuteNonQuery();
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            System.Windows.Forms.MessageBox.Show(e.Message);
-                        }
-                        sqlConnection.Close();
-                    }
-                    PlayerList.Remove(SelectedPlayer);
-                    //PullData();
-                    //PutDataTolist();
-                    x.Players_List.ItemsSource = null;
-                    x.Players_List.ItemsSource = playerList;
+            //    );
+            ////Command add
+            //AddPlayerCommand2 = new RelayCommand<object>(
+            //    (p) => { if (p == null) return false; return true; },
+            //    (p) =>
+            //    {
 
 
-                }
-                );
-            UpdatePlayerCommand = new RelayCommand<object>(
-                (p) => { if (p as EditPlayerForm == null) return false; return true; },
-                (p) =>
-                {
+            //        Window1 wd1 = p as Window1;
+
+            //        if ((wd1.txbName.Text == "")
+            //        || wd1.txbHeight.Text == "" || wd1.txbclub.Text == ""
+            //        || wd1.txbWeight.Text == "" || wd1.txbPos.Text == ""
+            //        || wd1.txbNumber.Text == "" || wd1.txbNationality.Text == ""
+            //        || wd1.txbAge.Text == "" || wd1.txbPhysyque.Text == "" || wd1.txbFoot.Text == "")
+            //        {
+            //            System.Windows.Forms.MessageBox.Show("Bạn chưa nhập đầy đủ thông tin", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //        }
+            //        else
+            //        {
+            //            int parsevalue;
+            //            string position = wd1.txbPos.Text.Trim();
+            //            if (!int.TryParse(wd1.txbAge.Text, out parsevalue))
+            //            {
+            //                System.Windows.Forms.MessageBox.Show("Tuổi phải nhập số", "Nhập lại tuổi đi!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //                return;
+            //            }
+            //            if (!int.TryParse(wd1.txbHeight.Text, out parsevalue))
+            //            {
+            //                System.Windows.Forms.MessageBox.Show("Chiều cao phải nhập số", "Nhập lại chiều cao đi!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //                return;
+            //            }
+            //            if (!int.TryParse(wd1.txbWeight.Text, out parsevalue))
+            //            {
+            //                System.Windows.Forms.MessageBox.Show("Cân nặng phải nhập số", "Nhập lại cân nặng đi!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //                return;
+            //            }
+            //            string[] arrString = { "GK", "CB", "LB", "RB", "CDM", "CM", "LM", "RM", "LW", "RW", "ST" };
+
+            //            if (!arrString.Contains(position, StringComparer.OrdinalIgnoreCase))
+            //            {
+
+            //                System.Windows.Forms.MessageBox.Show("Bạn nhập vị trí không dúng\nCác vị trí là: GK, CB, LB, RB," +
+            //                    " CDM, CM, LM, RM, LW, RW, ST", "Vị trí", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //                return;
+            //            }
+
+            //            string query = "INSERT CAUTHU values(@teamid, @idquoctich, @hoten, @tuoi, 0, 0, @hinhanh, @chanthuan, @Thetrang, @vitri, @soao, '" + wd1.txbHeight.Text + "cm', '" + wd1.txbWeight.Text + "', 0)";
+            //            PullClub();
+            //            string IDDoiBong = currentclubID;
+
+            //            PullNationalities();
+            //            string IdQG = "";
+            //            foreach (DataRow dr in dataTable.Rows)
+            //            {
+            //                if (dr["TENQUOCGIA"].ToString() == wd1.txbNationality.Text)
+            //                {
+            //                    IdQG = dr["ID"].ToString();
+            //                    break;
+            //                }
+            //            }
+            //            bitmap.BeginInit();
+            //            if (wd1.txbImage.Text != "")
+            //                bitmap.UriSource = new Uri(wd1.txbImage.Text, UriKind.RelativeOrAbsolute);
+            //            else
+            //                bitmap.UriSource = new Uri("Images/default.png", UriKind.Relative);
+            //            bitmap.EndInit();
+            //            byte[] bites = ConvertBitmaptoByteArray(bitmap);
+
+            //            try
+            //            {
+            //                using (SqlConnection conn = new SqlConnection(connString))
+            //                {
+            //                    using (SqlCommand cmd = new SqlCommand(query, conn))
+            //                    {
+            //                        cmd.Parameters.AddWithValue("@teamid", IDDoiBong); //THIS IS WRONG
+            //                        cmd.Parameters.AddWithValue("@idquoctich", IdQG);
+            //                        cmd.Parameters.AddWithValue("@hoten", wd1.txbName.Text);
+            //                        cmd.Parameters.AddWithValue("@tuoi", Convert.ToInt32(wd1.txbAge.Text));
+            //                        cmd.Parameters.AddWithValue("@hinhanh", bites);
+            //                        cmd.Parameters.AddWithValue("@chanthuan", wd1.txbFoot.SelectedValue.ToString());
+            //                        cmd.Parameters.AddWithValue("@Thetrang", wd1.txbPhysyque.Text);
+            //                        cmd.Parameters.AddWithValue("@vitri", wd1.txbPos.Text);
+            //                        cmd.Parameters.AddWithValue("@soao", wd1.txbNumber.Text);
+            //                        cmd.Parameters.AddWithValue("@height", wd1.txbHeight.Text);
+            //                        cmd.Parameters.AddWithValue("@weight", wd1.txbWeight.Text);
+            //                        conn.Open();
+            //                        cmd.ExecuteNonQuery();
+            //                        conn.Close();
+            //                    }
+            //                    PullData();
+            //                    PutDataTolist();
+            //                }
+            //                wd1.Close();
+            //            }
+            //            catch (Exception e)
+            //            {
+            //                System.Windows.Forms.MessageBox.Show(e.Message);
+            //                return;
+            //            }
+            //            try
+            //            {
+            //                RandomSquad(IDDoiBong);
+            //            }
+            //            catch (Exception e)
+            //            {
+            //                System.Windows.Forms.MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //            }
+            //        }
 
 
-                    EditPlayerForm edit = p as EditPlayerForm;
-                    edit.txbNationality.SelectedItem = (ComboBoxItem)edit.txbNationality.FindName(SelectedPlayer.Nationality);
-                    if ((edit.txbName.Text == "") || edit.txbImage.Text == ""
-                    || edit.txbHeight.Text == "" || edit.txbclub.Text == ""
-                    || edit.txbWeight.Text == "" || edit.txbPos.Text == ""
-                    || edit.txbNumber.Text == "" || edit.txbNationality.Text == ""
-                    || edit.txbAge.Text == "" || edit.txbPhysyque.Text == "" || edit.txbFoot.Text == "")
-                    {
-                        System.Windows.Forms.MessageBox.Show("Bạn chưa nhập đầy đủ thông tin", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
-                    else
-                    {
-                        int parsevalue;
-                        string position = edit.txbPos.Text.Trim();
-                        if (!int.TryParse(edit.txbAge.Text, out parsevalue))
-                        {
-                            System.Windows.Forms.MessageBox.Show("Tuổi phải nhập số", "Nhập lại tuổi đi!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
-                        }
-                        if (!int.TryParse(edit.txbHeight.Text, out parsevalue))
-                        {
-                            System.Windows.Forms.MessageBox.Show("Chiều cao phải nhập số", "Nhập lại chiều cao đi!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
-                        }
-                        if (!int.TryParse(edit.txbWeight.Text, out parsevalue))
-                        {
-                            System.Windows.Forms.MessageBox.Show("Cân nặng phải nhập số", "Nhập lại cân nặng đi!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
-                        }
-                        string[] arrString = { "GK", "CB", "LB", "RB", "CDM", "CM", "LM", "RM", "LW", "RW", "ST" };
+            //    }
 
-                        if (!arrString.Contains(position, StringComparer.OrdinalIgnoreCase))
-                        {
+            //    );
+            //DeletePlayerCommand = new RelayCommand<object>(
+            //    (p) => { if (p as TeamPlayersUC == null) return false; return true; },
+            //    (p) =>
+            //    {
+            //        TeamPlayersUC x = p as TeamPlayersUC;
+            //        string query = "DELETE FROM CAUTHU WHERE ID = @id";
+            //        string id = SelectedPlayer.Id;
+            //        using (SqlConnection sqlConnection = new SqlConnection(connString))
+            //        {
+            //            sqlConnection.Open();
 
-                            System.Windows.Forms.MessageBox.Show("Bạn nhập vị trí không dúng\nCác vị trí là: GK, CB, LB, RB," +
-                                " CDM, CM, LM, RM, LW, RW, ST", "Vị trí", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
-                        }
-                        string query = "UPDATE CAUTHU SET HOTEN = @hoten, IDQUOCTICH=@idquoctich, TUOI =@tuoi, HINHANH = @hinhanh, CHANTHUAN = @chanthuan, " +
-                        "THETRANG = @Thetrang, VITRI = '" + edit.txbPos.Text + "', SOAO = " + edit.txbNumber.Text + ", CHIEUCAO =@height, CANNANG = @weight WHERE ID = @id";
-                        PullClub();
-                        string IDDoiBong = "";
-                        foreach (DataRow dr in dataTable.Rows)
-                        {
-                            if (dr["TEN"].ToString() == edit.txbclub.Text)
-                            {
-                                IDDoiBong = dr["ID"].ToString();
-                                break;
-                            }
-                        }
-                        PullNationalities();
-                        string IdQG = "";
-                        foreach (DataRow dr in dataTable.Rows)
-                        {
-                            if (dr["TENQUOCGIA"].ToString() == edit.txbNationality.Text)
-                            {
-                                IdQG = dr["ID"].ToString();
-                                break;
-                            }
-                        }
-
-                        bitmap.BeginInit();
-                        bitmap.UriSource = new Uri(edit.txbImage.Text, UriKind.RelativeOrAbsolute);
-
-                        bitmap.EndInit();
-                        byte[] bites = ConvertBitmaptoByteArray(bitmap);
-                        try
-                        {
-                            using (SqlConnection conn = new SqlConnection(connString))
-                            {
-                                using (SqlCommand cmd = new SqlCommand(query, conn))
-                                {
-                                    cmd.Parameters.AddWithValue("@idquoctich", IdQG);
-                                    cmd.Parameters.AddWithValue("@hoten", edit.txbName.Text);
-                                    cmd.Parameters.AddWithValue("@tuoi", Convert.ToInt32(edit.txbAge.Text));
-                                    cmd.Parameters.AddWithValue("@chanthuan", edit.txbFoot.SelectedValue.ToString());
-                                    cmd.Parameters.AddWithValue("@Thetrang", edit.txbPhysyque.Text);
-                                    cmd.Parameters.AddWithValue("@height", edit.txbHeight.Text);
-                                    cmd.Parameters.AddWithValue("@weight", edit.txbWeight.Text);
-                                    cmd.Parameters.AddWithValue("@hinhanh", bites);
-
-                                    conn.Open();
-                                    cmd.ExecuteNonQuery();
-                                    conn.Close();
-                                }
-                                PullData();
-                                PutDataTolist();
-                            }
-                            edit.Close();
-                        }
-                        catch (Exception e)
-                        {
-                            System.Windows.Forms.MessageBox.Show(e.Message);
-                        }
-                    }
+            //            try
+            //            {
+            //                using (SqlCommand sqlquery = new SqlCommand(query, sqlConnection))
+            //                {
+            //                    sqlquery.Parameters.AddWithValue("@id", id);
+            //                    sqlquery.ExecuteNonQuery();
+            //                }
+            //            }
+            //            catch (Exception e)
+            //            {
+            //                System.Windows.Forms.MessageBox.Show(e.Message);
+            //            }
+            //            sqlConnection.Close();
+            //        }
+            //        PlayerList.Remove(SelectedPlayer);
+            //        //PullData();
+            //        //PutDataTolist();
+            //        x.Players_List.ItemsSource = null;
+            //        x.Players_List.ItemsSource = playerList;
 
 
-                }
+            //    }
+            //    );
+            //UpdatePlayerCommand = new RelayCommand<object>(
+            //    (p) => { if (p as EditPlayerForm == null) return false; return true; },
+            //    (p) =>
+            //    {
 
-                );
+
+            //        EditPlayerForm edit = p as EditPlayerForm;
+            //        if ((edit.txbName.Text == "") ||
+            //         edit.txbHeight.Text == "" || edit.txbclub.Text == ""
+            //        || edit.txbWeight.Text == "" || edit.txbPos.Text == ""
+            //        || edit.txbNumber.Text == "" || edit.txbNationality.Text == ""
+            //        || edit.txbPhysyque.Text == "" || edit.txbFoot.Text == "")
+            //        {
+            //            System.Windows.Forms.MessageBox.Show("Bạn chưa nhập đầy đủ thông tin", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //        }
+            //        else
+            //        {
+            //            int parsevalue;
+            //            string position = edit.txbPos.Text.Trim();
+            //            if (!int.TryParse(edit.txbAge.Text, out parsevalue))
+            //            {
+            //                System.Windows.Forms.MessageBox.Show("Tuổi phải nhập số", "Nhập lại tuổi đi!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //                return;
+            //            }
+            //            if (!int.TryParse(edit.txbHeight.Text, out parsevalue))
+            //            {
+            //                System.Windows.Forms.MessageBox.Show("Chiều cao phải nhập số", "Nhập lại chiều cao đi!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //                return;
+            //            }
+            //            if (!int.TryParse(edit.txbWeight.Text, out parsevalue))
+            //            {
+            //                System.Windows.Forms.MessageBox.Show("Cân nặng phải nhập số", "Nhập lại cân nặng đi!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //                return;
+            //            }
+            //            string[] arrString = { "GK", "CB", "LB", "RB", "CDM", "CM", "LM", "RM", "LW", "RW", "ST" };
+
+            //            if (!arrString.Contains(position, StringComparer.OrdinalIgnoreCase))
+            //            {
+
+            //                System.Windows.Forms.MessageBox.Show("Bạn nhập vị trí không dúng\nCác vị trí là: GK, CB, LB, RB," +
+            //                    " CDM, CM, LM, RM, LW, RW, ST", "Vị trí", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //                return;
+            //            }
+            //            string query = edit.txbImage.Text == "" ?
+            //            "UPDATE CAUTHU SET HOTEN = @hoten, IDQUOCTICH=@idquoctich, TUOI =@tuoi, CHANTHUAN = @chanthuan, " +
+            //            "THETRANG = @Thetrang, VITRI = '" + edit.txbPos.Text + "', SOAO = " + edit.txbNumber.Text + ", CHIEUCAO = '" + edit.txbHeight.Text + "cm', CANNANG = '" + edit.txbWeight.Text + "kg' WHERE ID = @id" :
+            //            "UPDATE CAUTHU SET HOTEN = @hoten, IDQUOCTICH=@idquoctich, TUOI =@tuoi, HINHANH = @hinhanh, CHANTHUAN = @chanthuan, " +
+            //            "THETRANG = @Thetrang, VITRI = '" + edit.txbPos.Text + "', SOAO = " + edit.txbNumber.Text + ", CHIEUCAO = '" + edit.txbHeight.Text + "cm', CANNANG = '" + edit.txbWeight.Text + "'kg' WHERE ID = @id";
+
+            //            PullClub();
+            //            string IDDoiBong = "";
+            //            foreach (DataRow dr in dataTable.Rows)
+            //            {
+            //                if (dr["TEN"].ToString() == edit.txbclub.Text)
+            //                {
+            //                    IDDoiBong = dr["ID"].ToString();
+            //                    break;
+            //                }
+            //            }
+            //            PullNationalities();
+            //            string IdQG = "";
+            //            foreach (DataRow dr in dataTable.Rows)
+            //            {
+            //                if (dr["TENQUOCGIA"].ToString() == edit.txbNationality.Text)
+            //                {
+            //                    IdQG = dr["ID"].ToString();
+            //                    break;
+            //                }
+            //            }
+            //            byte[] bites;
+            //            if (File.Exists(edit.txbImage.Text))
+            //            {
+            //                bitmap.BeginInit();
+            //                bitmap.UriSource = new Uri(edit.txbImage.Text, UriKind.RelativeOrAbsolute);
+
+            //                bitmap.EndInit();
+            //                bites = ConvertBitmaptoByteArray(bitmap);
+
+
+            //            }
+            //            else
+            //                bites = SelectedPlayer.Image;
+
+            //            try
+            //            {
+            //                using (SqlConnection conn = new SqlConnection(connString))
+            //                {
+            //                    using (SqlCommand cmd = new SqlCommand(query, conn))
+            //                    {
+            //                        cmd.Parameters.AddWithValue("@idquoctich", IdQG);
+            //                        cmd.Parameters.AddWithValue("@hoten", edit.txbName.Text);
+            //                        cmd.Parameters.AddWithValue("@tuoi", Convert.ToInt32(edit.txbAge.Text));
+            //                        cmd.Parameters.AddWithValue("@chanthuan", edit.txbFoot.Text); System.Windows.Forms.MessageBox.Show(edit.txbFoot.Text);
+            //                        cmd.Parameters.AddWithValue("@Thetrang", edit.txbPhysyque.Text);
+            //                        cmd.Parameters.AddWithValue("@height", edit.txbHeight.Text);
+            //                        cmd.Parameters.AddWithValue("@weight", edit.txbWeight.Text);
+            //                        cmd.Parameters.AddWithValue("@hinhanh", bites);
+            //                        cmd.Parameters.AddWithValue("@id", SelectedPlayer.Id);
+            //                        conn.Open();
+            //                        cmd.ExecuteNonQuery();
+            //                        conn.Close();
+            //                    }
+            //                    PullData();
+            //                    PutDataTolist();
+            //                }
+            //                edit.Close();
+            //            }
+            //            catch (Exception e)
+            //            {
+            //                System.Windows.Forms.MessageBox.Show(e.Message);
+            //            }
+            //        }
+
+
+            //    }
+
+            //    );
             // Command nut Sell
             TransferCommand = new RelayCommand<TransferWindowUC>(
                 (p) => { if (p == null) return false; return true; },
                 (p) =>
                 {
                     TransferWindowUC tw = p;
-                    string query = "INSERT CHUYENNHUONG VALUES (@idcauthu)";
+                    string query = "INSERT CHUYENNHUONG VALUES (@idcauthu, NULL)";
                     string id = SelectedPlayer.Id;
 
                     //System.Windows.Forms.MessageBox.Show(id);
@@ -476,58 +530,111 @@ namespace FootBallProject.ViewModel
                         }
                         sqlConnection.Close();
                     }
-
-                    tw.dgrid1.ItemsSource = null;
-                    tw.dgrid2.ItemsSource = null;
+                    PullClubData();
+                    PutClubDataToList();
+                    PullSoldPlData();
+                    PutSoldDataToList();
+                    PullTransferData();
+                    PutTransfertoList();
                     tw.dgrid1.ItemsSource = clubPlayerList;
-
+                    tw.dgrid3.ItemsSource = soldplayers;
                     tw.dgrid2.ItemsSource = TransferPlayers;
+                    tw.dgrid1.Items.Refresh();
+                    tw.dgrid2.Items.Refresh();
+                    tw.dgrid3.Items.Refresh();
+
                 }
                 );
-            BuyCommand = new RelayCommand<object>(
-                (p) => { if (p as TransferWindowUC == null) return false; return true; },
+            RetrieveCommand = new RelayCommand<object>(
+                (p) => { return true; },
                 (p) =>
                 {
                     TransferWindowUC tp = p as TransferWindowUC;
-                    string query1 = "UPDATE CAUTHU SET IDDOIBONG = @iddoibong where ID = @id";
-                    string query2 = "DELETE FROM CHUYENNHUONG WHERE IDCAUTHU = @id";
+                    string query = "DELETE FROM CHUYENNHUONG WHERE IDCAUTHU =" + selectedPlayer.Id + "and IDDOIMUA is NULL";
+                    using (SqlConnection sqlConnection = new SqlConnection(connString))
+                    {
+                        sqlConnection.Open();
+
+                        try
+                        {
+                            using (SqlCommand sqlquery = new SqlCommand(query, sqlConnection))
+                            {
+                                sqlquery.ExecuteNonQuery();
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            System.Windows.Forms.MessageBox.Show(e.Message);
+
+                        }
+                        sqlConnection.Close();
+                    }
+                    PullClubData();
+                    PutClubDataToList();
+                    PullSoldPlData();
+                    PutSoldDataToList();
+                    tp.dgrid1.ItemsSource = clubPlayerList;
+                    tp.dgrid3.ItemsSource = soldplayers;
+                    tp.dgrid1.Items.Refresh();
+                    tp.dgrid3.Items.Refresh();
+
+                }
+
+                );
+            BuyCommand = new RelayCommand<object>(
+                (p) => { return true; },
+                (p) =>
+                {
+                    TransferWindowUC tp = p as TransferWindowUC;
+                    //string query1 = "UPDATE CAUTHU SET IDDOIBONG = @iddoibong where ID = @id";
+                    string query2 = "UPDATE CHuYENNHUONG SET IDDOIMUA = '" + currentclubID + "' WHERE IDCAUTHU = @id AND IDDOIMUA is NULL ";
+                    string query3 = "INSERT NOTIFICATION values(85, N'" + currentClub + " đăng ký mua " + SelectedPlayer.Name + "', 'Chưa xem')";
                     string id = SelectedPlayer.Id;
 
                     //System.Windows.Forms.MessageBox.Show(id);
 
 
-                    string selectedclubid = "mu";
+                    string selectedclubid = currentclubID;
 
                     using (SqlConnection conn = new SqlConnection(connString))
                     {
                         conn.Open();
                         try
                         {
-                            using (SqlCommand sqlquery = new SqlCommand(query1, conn))
-                            {
-                                sqlquery.Parameters.AddWithValue("@iddoibong", selectedclubid);
-                                sqlquery.Parameters.AddWithValue("@id", id);
-                                sqlquery.ExecuteNonQuery();
-                            }
+                            //using (SqlCommand sqlquery = new SqlCommand(query1, conn))
+                            //{
+                            //    sqlquery.Parameters.AddWithValue("@iddoibong", selectedclubid);
+                            //    sqlquery.Parameters.AddWithValue("@id", id);
+                            //    sqlquery.ExecuteNonQuery();
+                            //}
                             using (SqlCommand sqlquery2 = new SqlCommand(query2, conn))
                             {
                                 sqlquery2.Parameters.AddWithValue("@id", id);
                                 sqlquery2.ExecuteNonQuery();
 
                             }
+                            using (SqlCommand sqlquery3 = new SqlCommand(query3, conn))
+                            {
+                                sqlquery3.ExecuteNonQuery();
+                            }
                         }
-                        catch (Exception)
+                        catch (Exception e)
                         {
 
-                            System.Windows.Forms.MessageBox.Show("Hiện tại chưa có cầu thủ trên thị trường chuyển nhượng");
+                            System.Windows.Forms.MessageBox.Show(e.Message);
 
                         }
                     }
-                    TransferPlayers.Remove(SelectedPlayer);
-                    tp.dgrid1.ItemsSource = null;
-                    tp.dgrid2.ItemsSource = null;
-                    tp.dgrid1.ItemsSource = PlayerList;
+                    PullData();
+                    PutDataTolist();
+                    PullClubData();
+                    PutClubDataToList();
+                    PullTransferData();
+                    PutTransfertoList();
+                    tp.dgrid1.ItemsSource = clubPlayerList;
                     tp.dgrid2.ItemsSource = TransferPlayers;
+                    tp.dgrid1.Items.Refresh();
+                    tp.dgrid2.Items.Refresh();
 
                 }
                 );
@@ -557,12 +664,12 @@ namespace FootBallProject.ViewModel
                         if (p as Window1 != null)
                         {
                             Window1 x = p as Window1;
-                            x.txbImage.Text = openfile.FileName;
+                            //x.txbImage.Text = openfile.FileName;
                         }
                         else
                         {
                             EditPlayerForm x = p as EditPlayerForm;
-                            x.txbImage.Text = openfile.FileName;
+                            //x.txbImage.Text = openfile.FileName;
 
                         }
 
@@ -632,6 +739,10 @@ namespace FootBallProject.ViewModel
         }
         private byte[] ConvertBitmaptoByteArray(BitmapImage bitmapImage)
         {
+            if (bitmapImage == null)
+            {
+                return null;
+            }
 
             byte[] data;
             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
@@ -663,7 +774,7 @@ namespace FootBallProject.ViewModel
         void PullData()
         {
 
-            string query = "SELECT ct.*, qt.TENQUOCGIA, db.TEN TenDoi FROM CAUTHU ct join QUOCTICH QT on ct.IDQUOCTICH = qt.ID join DOIBONG db on ct.IDDOIBONG = db.ID";
+            string query = "SELECT ct.*, qt.TENQUOCGIA, db.TEN TenDoi FROM CAUTHU ct join QUOCTICH QT on ct.IDQUOCTICH = qt.ID join DOIBONG db on ct.IDDOIBONG = db.ID where db.ID = '" + this.CurrentclubID + "'";
 
             dataTable = new DataTable();
 
@@ -684,7 +795,9 @@ namespace FootBallProject.ViewModel
         void PullTransferData()
         {
 
-            string query = "SELECT cn.*, ct.*, qt.TENQUOCGIA, db.TEN TenDoi FROM CHUYENNHUONG cn join CAUTHU ct on cn.IDCAUTHU = ct.ID join  QUOCTICH qt on ct.IDQUOCTICH = qt.ID JOIN DOIBONG db on ct.IDDOIBONG = db.ID where ct.IDDOIBONG <> 'MU'";
+            string query = USER.ROLE != "Admin" ?
+                "SELECT cn.*, ct.*, qt.TENQUOCGIA, db.TEN TenDoi FROM CHUYENNHUONG cn join CAUTHU ct on cn.IDCAUTHU = ct.ID join  QUOCTICH qt on ct.IDQUOCTICH = qt.ID JOIN DOIBONG db on ct.IDDOIBONG = db.ID where ct.IDDOIBONG <> '" + currentclubID + "' AND IDDOIMUA IS NULL" :
+                "SELECT cn.*, ct.*, qt.TENQUOCGIA, db.TEN TenDoi FROM CHUYENNHUONG cn join CAUTHU ct on cn.IDCAUTHU = ct.ID join  QUOCTICH qt on ct.IDQUOCTICH = qt.ID JOIN DOIBONG db on ct.IDDOIBONG = db.ID where IDDOIMUA IS NULL";
 
             dataTable = new DataTable();
             SqlConnection conn = new SqlConnection(connString);
@@ -699,7 +812,7 @@ namespace FootBallProject.ViewModel
 
         void PullClubData()
         {
-            string query = "SELECT ct.*, qt.TENQUOCGIA, db.TEN TenDoi FROM CAUTHU ct join QUOCTICH QT on ct.IDQUOCTICH = qt.ID join DOIBONG db on ct.IDDOIBONG = db.ID WHERE IDDOIBONG = 'mu'";
+            string query = "SELECT ct.*, qt.TENQUOCGIA, db.TEN TenDoi FROM CAUTHU ct join QUOCTICH QT on ct.IDQUOCTICH = qt.ID join DOIBONG db on ct.IDDOIBONG = db.ID WHERE db.ID = '" + currentclubID + "' AND ct.ID not in\r\n(SELECT Idcauthu\r\nfrom CHUYENNHUONG cn join CAUTHU ct1 on\r\ncn.IDcAUTHU = ct1.ID\r\nwhere ct.IDDOIBONG = ct1.IDDOIBONG \r\n)";
             dataTable = new DataTable();
             SqlConnection conn = new SqlConnection(connString);
 
@@ -709,6 +822,47 @@ namespace FootBallProject.ViewModel
             conn.Close();
             da.Dispose();
             clubPlayerList.Clear();
+        }
+        void PullSoldPlData()
+        {
+            string query = "SELECT ct.*, qt.TENQUOCGIA, db.TEN TenDoi FROM CAUTHU ct join QUOCTICH QT on ct.IDQUOCTICH = qt.ID join DOIBONG db on ct.IDDOIBONG = db.ID WHERE db.ID = '" + currentclubID + "' AND ct.ID  in\r\n(SELECT Idcauthu\r\nfrom CHUYENNHUONG cn join CAUTHU ct1 on\r\ncn.IDcAUTHU = ct1.ID\r\nwhere ct.IDDOIBONG = ct1.IDDOIBONG \r\n)";
+            dataTable = new DataTable();
+            SqlConnection conn = new SqlConnection(connString);
+
+            conn.Open();
+            SqlDataAdapter da = new SqlDataAdapter(query, conn);
+            da.Fill(dataTable);
+            conn.Close();
+            da.Dispose();
+            soldplayers.Clear();
+        }
+        void PutSoldDataToList()
+        {
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                Player player = new Player();
+                player.Id = dr["ID"].ToString();
+                player.ClubID = dr["IDDOIBONG"].ToString();
+                player.Club = dr["TenDoi"].ToString();
+                player.Nationality = dr["TENQUOCGIA"].ToString();
+                player.Name = dr["HOTEN"].ToString();
+                player.Age = Convert.ToInt32(dr["TUOI"]);
+                player.LeaguesNum = Convert.ToInt32(dr["SOGIAI"]);
+                player.Goals = Convert.ToInt32(dr["SOBANTHANG"]);
+                player.Foot = dr["CHANTHUAN"].ToString();
+                player.Physique = dr["THETRANG"].ToString();
+                player.Height = dr["CHIEUCAO"].ToString();
+                player.Weight = dr["CANNANG"].ToString();
+                player.Price = dr["GIATRICAUTHU"].ToString();
+                player.Position = dr["VITRI"].ToString();
+                int n;
+                if (int.TryParse(dr["SOAO"].ToString(), out n))
+                    player.KitNumber = Convert.ToInt32(dr["SOAO"]);
+                if (!Convert.IsDBNull(dr["HINHANH"]))
+                    player.Image = (byte[])dr["HINHANH"];
+                soldplayers.Add(player);
+
+            }
         }
         void PutClubDataToList()
         {
@@ -821,6 +975,24 @@ namespace FootBallProject.ViewModel
             da.Dispose();
 
 
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                if (USER.ROLE != "Admin")
+                {
+                    currentclubID = USER.IDDB;
+                    if (dr["ID"].ToString() == currentclubID)
+                    {
+                        currentClub = dr["TEN"].ToString();
+                    }
+                }
+                else
+                if (dr["TEN"].ToString() == currentClub)
+                {
+                    currentclubID = dr["ID"].ToString();
+                }
+            }
+
+
         }
         void PullNationalities()
         {
@@ -838,9 +1010,15 @@ namespace FootBallProject.ViewModel
             conn.Close();
             da.Dispose();
         }
+        byte[] GetDefaultImage()
+        {
+            PullData();
+            return (byte[])dataTable.Rows[0]["HINHANH"];
+
+        }
 
 
     }
-   
-    }
+
+}
 

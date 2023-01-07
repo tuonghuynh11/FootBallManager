@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FootBallProject.Model;
+using FootBallProject.UserControlBar.ScreenNavigation;
+using FootBallProject.ViewModel;
 
 namespace FootBallProject
 {
@@ -29,5 +32,20 @@ namespace FootBallProject
             this.Close();
         }
 
+        private void AddPlayerForm_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (USER.ROLE != "Admin")
+            {
+                txbclub.IsReadOnly = true;
+                txbclub.IsHitTestVisible = false;
+                txbclub.Focusable = false;
+            }
+            
+        }
+
+        private void Close_but_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

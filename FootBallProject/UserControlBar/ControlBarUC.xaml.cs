@@ -65,7 +65,9 @@ namespace FootBallProject.UserControlBar
             numberofnotifies.Badge = uncheck;
             notifipopup.ToolTip = $"Bạn có {uncheck} thông báo mới";
 
-             Notifies = new ObservableCollection<Notification>(DataProvider.ins.DB.Notifications.Where(p=>p.IDHLV==AccessUser.userLogin.IDNHANSU).OrderByDescending(p => p.CHECKED).OrderByDescending(p => p.ID));
+
+            Notifies = new ObservableCollection<Notification>(DataProvider.ins.DB.Notifications.Where(p => p.IDHLV == AccessUser.userLogin.IDNHANSU).OrderByDescending(p => p.CHECKED).OrderByDescending(p => p.ID));
+
             //Notifies = new ObservableCollection<Notification>(DataProvider.ins.DB.Database.SqlQuery<Notification>($"SELECT  * FROM Notification WHERE IDHLV = {AccessUser.userLogin.IDNHANSU} order by  checked asc,id desc"));
 
             lvUsers.ItemsSource = Notifies;
@@ -91,12 +93,23 @@ namespace FootBallProject.UserControlBar
         {
             Random r = new Random();
             Random fontran = new Random();
-            SolidColorBrush brush = new SolidColorBrush(System.Windows.Media.Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233)));
             string quote = FamousFootBallQuotes.Dequeue();
             string nextquote = FamousFootBallQuotes.Peek();
             FamousFootBallQuotes.Enqueue(quote);
             FamousFootballQuotelb.Content = nextquote;
-            FamousFootballQuotelb.Foreground = brush;
+            switch (fontran.Next(1, 4))
+            {
+                case 1:
+                    FamousFootballQuotelb.Foreground = new SolidColorBrush() {Color=Colors.Red};
+                    break;
+                case 2:
+                    FamousFootballQuotelb.Foreground = new SolidColorBrush() { Color = Colors.Yellow };
+                    break;
+                case 3:
+                    FamousFootballQuotelb.Foreground = new SolidColorBrush() { Color = Colors.White };
+                    break;
+
+            }
             switch (fontran.Next(1, 4))
             {
                 case 1:

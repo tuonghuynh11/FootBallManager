@@ -36,7 +36,7 @@
                    FontSize="15" FontWeight="Bold" Height="40" Margin="0,0,0,260">
                     Thêm thành viên
                 </Label>
-                <Label x:Name="nncname" Margin="60,29,445,246" Height="25">
+                <Label x:Name="nncname" Margin="60,27,445,248" Height="25">
                     ID Đội Bóng
                 </Label>
                 <Label x:Name="htname" Margin="60,66,445,208" Height="25">
@@ -76,7 +76,7 @@
                        Height="25" Background="White" Margin="0,150,0,125"/>
                 <TextBox x:Name="tbdc" Width="250" 
                        HorizontalAlignment="Center"
-                       Height="25" Background="White" Margin="0,189,0,86"/>
+                       Height="25" Background="White" Margin="0,199,0,76"/>
                 <!--<TextBox x:Name="tbqt" Width="250" 
                        HorizontalAlignment="Center"
                        Height="25" Background="White" Margin="0,229,0,46"/>-->

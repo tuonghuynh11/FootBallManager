@@ -144,6 +144,16 @@
                     <TextBlock Text="Xác nhận" Margin="15 0 0 0" Foreground="White" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </menu:Btn>
+            <Separator Background="Transparent" Foreground="Transparent" BorderBrush="Transparent" BorderThickness="0"></Separator>
+
+            <menu:Btn Width="130"  HorizontalAlignment="Left" Background="Transparent" VerticalAlignment="Center" Command="{Binding FeedBackCommand}" BorderThickness="0" Height="45" Style="{StaticResource BtnStyle}">
+                <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+                    <Border Background="White" Height="30" Width="30" CornerRadius="2" >
+                        <Image Source="/Icons/feedback.png" Height="30" VerticalAlignment="Center"  ></Image>
+                    </Border>
+                    <TextBlock Text="Feedback" Margin="15 0 0 0" Foreground="White" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </menu:Btn>
         </StackPanel>
     </Grid>
 
