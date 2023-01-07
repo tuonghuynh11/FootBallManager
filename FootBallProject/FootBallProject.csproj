@@ -180,6 +180,9 @@
     <Compile Include="DS_GiaiDau.xaml.cs">
       <DependentUpon>DS_GiaiDau.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FeedBack.xaml.cs">
+      <DependentUpon>FeedBack.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MatchInfomation.xaml.cs">
       <DependentUpon>MatchInfomation.xaml</DependentUpon>
     </Compile>
@@ -416,6 +419,7 @@
     <Compile Include="UserControlBar\ScreenNavigation\MainMatch.xaml.cs">
       <DependentUpon>MainMatch.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\EmailValidator.cs" />
     <Compile Include="ViewModel\AdminScreenViewModel.cs" />
     <Compile Include="UserControlBar\UserControl_Calendar.xaml.cs">
       <DependentUpon>UserControl_Calendar.xaml</DependentUpon>
@@ -441,6 +445,7 @@
     <Compile Include="ViewModel\DH433VIewModel.cs" />
     <Compile Include="ViewModel\DSCLBViewModel.cs" />
     <Compile Include="ViewModel\DS_GiaiDauViewModel.cs" />
+    <Compile Include="ViewModel\FeedBackViewModel.cs" />
     <Compile Include="ViewModel\FootballTeamListViewModel.cs" />
     <Compile Include="ViewModel\LeaderListViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -599,6 +604,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Error.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FeedBack.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -807,6 +816,8 @@
     <Resource Include="Images\bldavt.png" />
     <Resource Include="Icons\match.png" />
     <Resource Include="Images\default.png" />
+    <Resource Include="Images\1.jpg" />
+    <Resource Include="Icons\feedback.png" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -851,7 +862,6 @@
     <Resource Include="Icons\tournament.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\1.jpg" />
     <Resource Include="Images\2.jpg" />
   </ItemGroup>
   <ItemGroup>

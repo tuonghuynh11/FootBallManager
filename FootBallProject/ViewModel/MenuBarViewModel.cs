@@ -38,6 +38,7 @@ namespace FootBallProject.ViewModel
         public ICommand LeagueCommand { get; set; }
 
         public ICommand MatchCommand { get; set; }
+        public ICommand FeedBackCommand { get; set; }
 
         private void Home() => CurrentView = new AdminScreenViewModel();
         private void Tactic() => CurrentView = new TeamBuilderViewModel(USER.IDDB);
@@ -76,6 +77,11 @@ namespace FootBallProject.ViewModel
             TransferConfirmCommand = new RelayCommand<object>((p) => {return true; }, (p) => { TransferConfirm(); });
             MatchCommand = new RelayCommand<object>((p) => {return true; }, (p) => { Match(); });
             LeagueCommand = new RelayCommand<object>((p) => {return true; }, (p) => { League(); });
+
+            FeedBackCommand = new RelayCommand<object>((p) => {return true; }, (p) => { 
+                FeedBack feedBack = new FeedBack();
+                feedBack.Show();
+            });
 
 
             // Startup Page

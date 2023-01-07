@@ -10,7 +10,7 @@
    	 xmlns:uc="clr-namespace:FootBallProject.UserControlBar"
  	    xmlns:convert="clr-namespace:FootBallProject.Class"
    	 
- 
+  Style="{StaticResource Page_Style}" 
    	 mc:Ignorable="d"
     Height="720" Width="1290"
    	 DataContext="{StaticResource TrainsferPlayersVM}"
