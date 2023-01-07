@@ -1,5 +1,4 @@
-﻿using FootBallProject.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FootBallProject.Component.League
+namespace FootBallProject.Component.RightBar
 {
     /// <summary>
-    /// Interaction logic for NewLeague.xaml
+    /// Interaction logic for MatchNoDisPlay.xaml
     /// </summary>
-    public partial class NewLeague : UserControl
+    public partial class MatchNoDisPlay : UserControl
     {
-        public NewLeague()
+        public MatchNoDisPlay()
         {
             InitializeComponent();
         }

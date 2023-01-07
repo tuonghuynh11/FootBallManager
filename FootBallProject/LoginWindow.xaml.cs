@@ -24,6 +24,8 @@ namespace FootBallProject
         {
             InitializeComponent();
             this.DataContext = new LoginViewModel();
+            if(btnClose.Click() == true) 
         }
+        
     }
 }

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:FootBallProject.Component.League"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="300">
+             d:DesignHeight="690" d:DesignWidth="355">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="609*" />

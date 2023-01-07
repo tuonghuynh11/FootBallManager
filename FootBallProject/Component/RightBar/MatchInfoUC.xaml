@@ -6,114 +6,125 @@
              xmlns:local="clr-namespace:FootBallProject.Component.RightBar"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="300">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="60" />
-        </Grid.RowDefinitions>
-        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
-            <StackPanel Margin="8">
-                <TextBlock
+             d:DesignHeight="690" d:DesignWidth="355">
+    <materialDesign:Card Width="355" Height="690" UniformCornerRadius="2">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
+            <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="8">
+                    <TextBlock
                     Margin="0,0,0,16"
                     FontWeight="Bold"
                     Style="{StaticResource MaterialDesignHeadline6TextBlock}"
                     Text="Cập nhật thông tin"
                     TextWrapping="Wrap" />
-                <Grid Style="{StaticResource text_grid_item}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
+                    <Grid Style="{StaticResource text_grid_item}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
 
-                    <TextBlock
+                        <TextBlock
                         Grid.Row="0"
                         FontWeight="Bold"
                         Style="{StaticResource textblock_item}"
                         Text="Tên trận đấu" />
 
-                    <TextBox
+                        <TextBox
                         Grid.Row="1"
                         materialDesign:HintAssist.Hint="Nhập tên trận đấu"
                         Style="{StaticResource textbox_item}"
                         Text="{Binding CurrentCard.DisplayName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,NotifyOnValidationError=True}" />
-                </Grid>
-                <Grid Style="{StaticResource text_grid_item}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
+                    </Grid>
+                    <Grid Style="{StaticResource text_grid_item}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
 
-                    <TextBlock
+                        <TextBlock
                         Grid.Row="0"
                         FontWeight="Bold"
                         Style="{StaticResource textblock_item}"
                         Text="Ngày diễn ra" />
 
-                    <DatePicker
+                        <DatePicker
                         Name="dpStart"
                         Grid.Row="1"
                         Grid.Column="0"
                         materialDesign:HintAssist.Hint="Ngày diễn ra"
-                        SelectedDate="{Binding CurrentCard.DisplayDay, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,ValidatesOnDataErrors=True}"
+                        SelectedDate="{Binding CurrentCard.DisplayDay, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         Style="{StaticResource datepicker_item}" />
 
-                </Grid>
-                <Grid Style="{StaticResource text_grid_item}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
+                    </Grid>
+                    <Grid Style="{StaticResource text_grid_item}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
 
-                    <TextBlock
+                        <TextBlock
                         Grid.Row="0"
                         FontWeight="Bold"
                         Style="{StaticResource textblock_item}"
                         Text="Thời gian" />
-                    <materialDesign:TimePicker
+                        <materialDesign:TimePicker
                         Grid.Row="1"
                         materialDesign:HintAssist.Hint="Thời gian diễn ra"
                         SelectedTime="{Binding CurrentCard.DisplayTime, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                       
                         BorderBrush="{StaticResource Black}"
                         BorderThickness="2"
                         Style="{StaticResource MaterialDesignOutlinedTimePicker}"
                         >
-                    </materialDesign:TimePicker>
+                        </materialDesign:TimePicker>
 
-                </Grid>
-                <Grid Style="{StaticResource text_grid_item}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
+                    </Grid>
+                    <Grid Style="{StaticResource text_grid_item}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
 
-                    <TextBlock
+                        <TextBlock
                         Grid.Row="0"
                         FontWeight="Bold"
                         Style="{StaticResource textblock_item}"
                         Text="Địa điểm" />
-                    <TextBox
-                        Grid.Row="1"
-                        materialDesign:HintAssist.Hint="Nhập tên trận đấu"
-                        Style="{StaticResource textbox_item}"
-                        Text="{Binding CurrentCard.DisplayName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <ComboBox
+                            Grid.Row="1"
+                            Margin="4,4,4,4"
+                            materialDesign:HintAssist.Hint="Chọn tên đội 1"
+                            ItemsSource="{Binding CurrentCard.DisplayPlaces, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            SelectedItem="{Binding CurrentCard.DisplayPlace, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource combobox_item}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TENDIADIEM }"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
 
-                </Grid>
+                    </Grid>
 
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
 
-                    <TextBlock
+                        <TextBlock
                         Grid.Row="0"
                         FontWeight="Bold"
                         Style="{StaticResource textblock_item}"
                         Text="Tên đội 1" />
-                    <ComboBox
+                        <ComboBox
                             Grid.Row="1"
                             x:Name="RemainingTraingFormsComboBox"
                             Margin="4,4,4,4"
@@ -121,19 +132,19 @@
                             SelectedItem="{Binding CurrentCard.TeamA, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                             ItemsSource="{Binding CurrentCard.TeamListDisPlayA, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource combobox_item}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding TEN}"/>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                    <TextBlock
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TEN}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBlock
    
                         Grid.Row="2"
                         FontWeight="Bold"
                         Style="{StaticResource textblock_item}"
                         Text="Tên đội 2" />
-                    <ComboBox
+                        <ComboBox
                             Grid.Row="3"
                             x:Name="RemainingTraingFormsComboBox2"
                             materialDesign:HintAssist.Hint="Chọn tên đội 2"
@@ -141,34 +152,34 @@
                             SelectedItem="{Binding CurrentCard.TeamB, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                             ItemsSource="{Binding CurrentCard.TeamListDisPlayB, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource combobox_item}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding TEN}" />
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                </Grid>
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TEN}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
 
 
-            </StackPanel>
-        </ScrollViewer>
-        <Grid
+                </StackPanel>
+            </ScrollViewer>
+            <Grid
             Grid.Row="1"
             Margin="8"
             Style="{StaticResource text_grid_item}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Button
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button
                 Grid.Column="2"
                 Command="{Binding ConfirmEditMatchInfo}"
                 Content="Lưu"
                 FontSize="16"
                 Style="{StaticResource rounded_btn}"
                 Background="green"/>
-            <Button
+                <Button
                 Grid.Column="1"
                 Background="{StaticResource DarkGray}"
                 Command="{Binding CancelEditMatchInfo}"
@@ -176,7 +187,8 @@
                 FontSize="16"
                 Foreground="White"
                 Style="{StaticResource rounded_btn}" />
+            </Grid>
         </Grid>
-    </Grid>
+    </materialDesign:Card>
 </UserControl>
 

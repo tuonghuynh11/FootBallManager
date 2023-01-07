@@ -11,11 +11,14 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Data.Entity.Migrations;
+using DevExpress.Xpf.Core.ReflectionExtensions;
+using FootBallProject.Component.RightBar;
 
 namespace FootBallProject.ViewModel
 {
     public class MatchResultViewModel : BaseViewModel
     {
+        public MatchResultViewModel CurrentMatchResultViewModel;
         private FootballMatchCard _footballMatchCard;
         public FootballMatchCard FootballMatchCard
         {
@@ -39,6 +42,12 @@ namespace FootBallProject.ViewModel
         {
             get => _matchTeamInfoTeamB;
             set { _matchTeamInfoTeamB = value; OnPropertyChanged(); }
+        }
+        private bool _enable;
+        public bool Enable
+        {
+            get => _enable;
+            set { _enable = value; OnPropertyChanged(); }
         }
         public ObservableCollection<CardItem> CardTeamAs
         {
@@ -81,29 +90,55 @@ namespace FootBallProject.ViewModel
                 OnPropertyChanged();
             }
         }
+        private ObservableCollection<int?> _cacTisoLuanLuuDoiA;
+        public ObservableCollection<int?> CacTiSoLuanLuuDoiA
+        {
+            get => _cacTisoLuanLuuDoiA;
+            set { _cacTisoLuanLuuDoiA = value; OnPropertyChanged(); }
+        }
+        private ObservableCollection<int?> _cacTisoLuanLuudoiB;
+        public ObservableCollection<int?> CacTiSoLuanLuuDoiB
+        {
+            get => _cacTisoLuanLuudoiB;
+            set { _cacTisoLuanLuudoiB = value; OnPropertyChanged(); }
+        }
+
+        private int? _tisoLuanLuuDoiA;
+        private int? _tisoLuanLuuDoiB;
+        public int? TiSoLuanLuuDoiA
+        {
+            get { return _tisoLuanLuuDoiA; }
+            set
+            {
+                _tisoLuanLuuDoiA = value;
+                _errorBaseViewModel.ClearAllErrors();
+                if (TiSoLuanLuuDoiA == TiSoLuanLuuDoiB)
+                {
+                    _errorBaseViewModel.AddError(nameof(TiSoLuanLuuDoiB), "Tỉ số luân lưu giống!");
+                }
+                OnPropertyChanged();
+            }
+        }
+        public int? TiSoLuanLuuDoiB
+        {
+            get { return _tisoLuanLuuDoiB; }
+            set
+            {
+                _tisoLuanLuuDoiB = value; OnPropertyChanged();
+                _errorBaseViewModel.ClearAllErrors();
+                if (TiSoLuanLuuDoiA == TiSoLuanLuuDoiB)
+                {
+                    _errorBaseViewModel.AddError(nameof(TiSoLuanLuuDoiB), "Tỉ số luân lưu giống!");
+                }
+            }
+        }
+
         public string ScoreTeamA
         {
             get => _scoreTeamA;
             set
             {
                 _scoreTeamA = value;
-                _errorBaseViewModel.ClearAllErrors();
-                if (!IsValid(ScoreTeamA))
-                {
-                    _errorBaseViewModel.AddError(nameof(ScoreTeamA), "Vui lòng nhập lại mật khẩu mới!");
-                }
-                if (IsValid(ScoreTeamA))
-                {
-                    int result = 0;
-                    if (!int.TryParse(ScoreTeamA, out result))
-                    {
-                        _errorBaseViewModel.AddError(nameof(ScoreTeamA), "Tỉ số phải là số nguyên không âm");
-                    }
-                    else
-                    {
-                        if (result < 0) { _errorBaseViewModel.AddError(nameof(ScoreTeamA), "Tỉ số phải là số nguyên dương"); }
-                    }
-                }
                 OnPropertyChanged();
             }
         }
@@ -112,23 +147,6 @@ namespace FootBallProject.ViewModel
             get => _scoreTeamB; set
             {
                 _scoreTeamB = value;
-                _errorBaseViewModel.ClearAllErrors();
-                if (!IsValid(ScoreTeamA))
-                {
-                    _errorBaseViewModel.AddError(nameof(ScoreTeamA), "Vui lòng nhập lại mật khẩu mới!");
-                }
-                if (IsValid(ScoreTeamA))
-                {
-                    int result = 0;
-                    if (!int.TryParse(ScoreTeamA, out result))
-                    {
-                        _errorBaseViewModel.AddError(nameof(ScoreTeamA), "Tỉ số phải là số nguyên không âm");
-                    }
-                    else
-                    {
-                        if (result < 0) { _errorBaseViewModel.AddError(nameof(ScoreTeamA), "Tỉ số phải là số nguyên dương"); }
-                    }
-                }
                 OnPropertyChanged();
             }
         }
@@ -136,7 +154,6 @@ namespace FootBallProject.ViewModel
         public ICommand CreateNewCard1 { get; set; }
         public ICommand CreateNewCard2 { get; set; }
         public ICommand SaveCommand { get; set; }
-        public ICommand DeleteCard { get; set; }
         public ICommand CancelCommand { get; set; }
         private bool IsValid(string propertyName)
         {
@@ -146,37 +163,69 @@ namespace FootBallProject.ViewModel
         {
             FootballMatchCard = null;
         }
+
         public MatchResultViewModel(UserControl p)
         {
-            _errorBaseViewModel = new ErrorBaseViewModel();
-            _errorBaseViewModel.ErrorsChanged += ErrorBaseViewModel_ErrorsChanged;
-            FootballMatchCard card = p.DataContext as FootballMatchCard;
-            FootballMatchCard = card;
-            PlayerTeamAs = new ObservableCollection<CAUTHU>(DataProvider.Instance.Database.CAUTHUs.Where(x => x.IDDOIBONG == FootballMatchCard.TeamA.ID));
-            PlayerTeamBs = new ObservableCollection<CAUTHU>(DataProvider.Instance.Database.CAUTHUs.Where(x => x.IDDOIBONG == FootballMatchCard.TeamB.ID));
-            MatchTeamInfoTeamA = FootballMatchCard.InfoTeamA;
-            MatchTeamInfoTeamB = FootballMatchCard.InfoTeamB;
-            CardTeamAs = new ObservableCollection<CardItem>();
-            var itemAs = DataProvider.Instance.Database.ITEMs.Where(x => x.IDTHONGTINTRANDAU == MatchTeamInfoTeamA.ID).ToList();
-            foreach (var item in itemAs)
-            {
-                CardTeamAs.Add(new CardItem(item, PlayerTeamAs));
-            }
-            CardTeamBs = new ObservableCollection<CardItem>();
-            var itemBs = DataProvider.Instance.Database.ITEMs.Where(x => x.IDTHONGTINTRANDAU == MatchTeamInfoTeamB.ID).ToList();
-            foreach (var item in itemBs)
-            {
-                CardTeamBs.Add(new CardItem(item, PlayerTeamBs));
-            }
-            CardTeamADisplays = new ObservableCollection<CardItem>(CardTeamAs);
-            CardTeamBDisplays = new ObservableCollection<CardItem>(CardTeamBs);
-            ScoreTeamA = MatchTeamInfoTeamA.DIEM.ToString();
-            ScoreTeamB = MatchTeamInfoTeamB.DIEM.ToString();
-            CreateNewCard1 = new RelayCommand<object>((x) => { return true; }, (x) => { CreateNewItemCard1(); });
-            CreateNewCard2 = new RelayCommand<object>((x) => { return true; }, (x) => { CreateNewItemCard2(); });
-            DeleteCard = new RelayCommand<UserControl>((x) => { return true; }, (x) => { DeleteItemCard(x); });
-            SaveCommand = new RelayCommand<object>((x) => { return true; }, (x) => { SaveFuntion(); });
-            CancelCommand = new RelayCommand<object>((x) => { return true; }, (x) => { CancelFuntion(); });
+            
+                _errorBaseViewModel = new ErrorBaseViewModel();
+                _errorBaseViewModel.ErrorsChanged += ErrorBaseViewModel_ErrorsChanged;
+                FootballMatchCard card = p.DataContext as FootballMatchCard;
+                FootballMatchCard = card;
+                PlayerTeamAs = new ObservableCollection<CAUTHU>(DataProvider.Instance.Database.CAUTHUs.Where(x => x.IDDOIBONG == FootballMatchCard.TeamA.ID));
+                PlayerTeamBs = new ObservableCollection<CAUTHU>(DataProvider.Instance.Database.CAUTHUs.Where(x => x.IDDOIBONG == FootballMatchCard.TeamB.ID));
+                MatchTeamInfoTeamA = FootballMatchCard.InfoTeamA;
+                MatchTeamInfoTeamB = FootballMatchCard.InfoTeamB;
+                CardTeamAs = new ObservableCollection<CardItem>();
+                var itemAs = DataProvider.Instance.Database.ITEMs.Where(x => x.IDTHONGTINTRANDAU == MatchTeamInfoTeamA.ID).ToList();
+                foreach (var item in itemAs)
+                {
+                    CardTeamAs.Add(new CardItem(item, PlayerTeamAs, this));
+                }
+                CardTeamBs = new ObservableCollection<CardItem>();
+                var itemBs = DataProvider.Instance.Database.ITEMs.Where(x => x.IDTHONGTINTRANDAU == MatchTeamInfoTeamB.ID).ToList();
+                foreach (var item in itemBs)
+                {
+                    CardTeamBs.Add(new CardItem(item, PlayerTeamBs, this));
+                }
+                CardTeamADisplays = new ObservableCollection<CardItem>(CardTeamAs);
+                CardTeamBDisplays = new ObservableCollection<CardItem>(CardTeamBs);
+                if (MatchTeamInfoTeamA.DIEM == null)
+                {
+                    MatchTeamInfoTeamA.DIEM = 0;
+                    DataProvider.ins.DB.THONGTINTRANDAUs.AddOrUpdate(MatchTeamInfoTeamA);
+                    DataProvider.ins.DB.SaveChanges();
+                }
+                if (MatchTeamInfoTeamB.DIEM == null)
+                {
+                    MatchTeamInfoTeamB.DIEM = 0;
+                    DataProvider.ins.DB.THONGTINTRANDAUs.AddOrUpdate(MatchTeamInfoTeamB);
+                    DataProvider.ins.DB.SaveChanges();
+                }
+
+                ScoreTeamA = MatchTeamInfoTeamA.DIEM.ToString();
+                ScoreTeamB = MatchTeamInfoTeamB.DIEM.ToString();
+                CreateNewCard1 = new RelayCommand<object>((x) => { return true; }, (x) => { CreateNewItemCard1(); });
+                CreateNewCard2 = new RelayCommand<object>((x) => { return true; }, (x) => { CreateNewItemCard2(); });
+                SaveCommand = new RelayCommand<object>((x) => { return true; }, (x) => { SaveFuntion(); });
+                CancelCommand = new RelayCommand<object>((x) => { return true; }, (x) => { CancelFuntion(); });
+                //CurrentMatchResultViewModel = this;
+                TiSoLuanLuuDoiA = MatchTeamInfoTeamA.THEDO;
+                TiSoLuanLuuDoiB = MatchTeamInfoTeamB.THEDO;
+                IsEnable();
+                Refresh();
+            
+            
+        }
+        private void Refresh()
+        {
+            var list = new ObservableCollection<int?>() { 0, 1, 2, 3, 4, 5 };
+            CacTiSoLuanLuuDoiA = new ObservableCollection<int?>(list);
+            CacTiSoLuanLuuDoiB = new ObservableCollection<int?>(list);
+        }
+        private void IsEnable()
+        {
+            if (CardTeamADisplays.Count == CardTeamBDisplays.Count) Enable = true;
+            else Enable = false;
         }
         private void CancelFuntion()
         {
@@ -187,17 +236,18 @@ namespace FootBallProject.ViewModel
         }
         private void SaveFuntion()
         {
+            if (TiSoLuanLuuDoiA!= null && TiSoLuanLuuDoiB!=null && TiSoLuanLuuDoiA == TiSoLuanLuuDoiB) return;
             CardTeamAs = new ObservableCollection<CardItem>();
             var itemAs = DataProvider.Instance.Database.ITEMs.Where(x => x.IDTHONGTINTRANDAU == MatchTeamInfoTeamA.ID).ToList();
             foreach (var item in itemAs)
             {
-                CardTeamAs.Add(new CardItem(item, PlayerTeamAs));
+                CardTeamAs.Add(new CardItem(item, PlayerTeamAs,this));
             }
             CardTeamBs = new ObservableCollection<CardItem>();
             var itemBs = DataProvider.Instance.Database.ITEMs.Where(x => x.IDTHONGTINTRANDAU == MatchTeamInfoTeamB.ID).ToList();
             foreach (var item in itemBs)
             {
-                CardTeamBs.Add(new CardItem(item, PlayerTeamBs));
+                CardTeamBs.Add(new CardItem(item, PlayerTeamBs,this));
             }
 
             var oldlist = DataProvider.Instance.Database.ITEMs.Where(x => x.IDTHONGTINTRANDAU == MatchTeamInfoTeamA.ID).ToList();
@@ -212,32 +262,39 @@ namespace FootBallProject.ViewModel
             }
             foreach (var card in CardTeamADisplays)
             {
-                ITEM temp = new ITEM
                 {
-                    IDITEMTYPE = 1,
-                    THOIGIAN = card.Time,
-                    CAUTHU = card.Player,
-                    THONGTINTRANDAU = MatchTeamInfoTeamA
-                };
-                DataProvider.Instance.Database.ITEMs.AddOrUpdate(temp);
+                    ITEM temp = new ITEM
+                    {
+                        IDITEMTYPE = 1,
+                        THOIGIAN = card.Time,
+                        CAUTHU = card.Player,
+                        THONGTINTRANDAU = MatchTeamInfoTeamA
+                    };
+                    DataProvider.Instance.Database.ITEMs.AddOrUpdate(temp);
+                }
             }
             foreach (var card in CardTeamBDisplays)
             {
-                ITEM temp = new ITEM
                 {
-                    IDITEMTYPE = 1,
-                    THOIGIAN = card.Time,
-                    CAUTHU = card.Player,
-                    THONGTINTRANDAU = MatchTeamInfoTeamB
-                };
-                DataProvider.Instance.Database.ITEMs.AddOrUpdate(temp);
+                    ITEM temp = new ITEM
+                    {
+                        IDITEMTYPE = 1,
+                        THOIGIAN = card.Time,
+                        CAUTHU = card.Player,
+                        THONGTINTRANDAU = MatchTeamInfoTeamB
+                    };
+                    DataProvider.Instance.Database.ITEMs.AddOrUpdate(temp);
+                }
             }
             MatchTeamInfoTeamA.DIEM = Convert.ToInt16(ScoreTeamA);
             MatchTeamInfoTeamB.DIEM = Convert.ToInt16(ScoreTeamB);
+            MatchTeamInfoTeamA.THEDO = TiSoLuanLuuDoiA;
+            MatchTeamInfoTeamB.THEDO = TiSoLuanLuuDoiB;
             DataProvider.Instance.Database.SaveChanges();
             LEAGUE thisLeague = FootballMatchCard.CurrentMatch.ROUND.LEAGUE;
             ROUND thisRound = FootballMatchCard.CurrentMatch.ROUND;
             MainViewModel2.Instance.ContentViewModel = new ListMatchViewModel(thisLeague, thisRound);
+
 
         }
         private void CreateNewItemCard1()
@@ -246,9 +303,10 @@ namespace FootBallProject.ViewModel
             {
                 IDITEMTYPE = 1
             };
-            CardItem item = new CardItem(item1, PlayerTeamAs);
+            CardItem item = new CardItem(item1, PlayerTeamAs, this);
             CardTeamADisplays.Add(item);
             ScoreTeamA = CardTeamADisplays.Count().ToString();
+            IsEnable();
         }
         private void CreateNewItemCard2()
         {
@@ -256,13 +314,23 @@ namespace FootBallProject.ViewModel
             {
                 IDITEMTYPE = 1
             };
-            CardItem item = new CardItem(item1, PlayerTeamBs);
+            CardItem item = new CardItem(item1, PlayerTeamBs, this);
             CardTeamBDisplays.Add(item);
-            ScoreTeamB = CardTeamADisplays.Count().ToString();
+            ScoreTeamB = CardTeamBDisplays.Count().ToString();
+            IsEnable();
         }
-        private void DeleteItemCard(UserControl x)
+        public void DeleteItemCard(CardItem x)
         {
-            x = null;
+            if (CardTeamADisplays.Contains(x))
+            {
+                CardTeamADisplays.Remove(x);
+                ScoreTeamA = CardTeamADisplays.Count().ToString();
+            }
+            else if (CardTeamBDisplays.Contains(x))
+            {
+                CardTeamBDisplays.Remove(x);
+                ScoreTeamB = CardTeamBDisplays.Count().ToString();
+            }
         }
         #region error
         public bool HasErrors => _errorBaseViewModel.HasErrors;

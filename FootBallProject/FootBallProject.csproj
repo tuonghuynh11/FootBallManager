@@ -171,6 +171,9 @@
     <Compile Include="Component\League\SearchBar.xaml.cs">
       <DependentUpon>SearchBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Component\RightBar\MatchNoDisPlay.xaml.cs">
+      <DependentUpon>MatchNoDisPlay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DragAndDrop\DraggableExtender.cs" />
     <Compile Include="DS_CLB.xaml.cs">
       <DependentUpon>DS_CLB.xaml</DependentUpon>
@@ -335,6 +338,7 @@
     <Compile Include="Object\FootballMatchCard.cs" />
     <Compile Include="Object\LeagueCardOb.cs" />
     <Compile Include="Object\Navigation.cs" />
+    <Compile Include="Object\RoundObject.cs" />
     <Compile Include="Object\TeamItem.cs" />
     <Compile Include="PlayerProfile.xaml.cs">
       <DependentUpon>PlayerProfile.xaml</DependentUpon>
@@ -445,6 +449,7 @@
     <Compile Include="ViewModel\LeaderListViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MatchInformationViewModel.cs" />
+    <Compile Include="ViewModel\MatchNoDisPlayViewModel.cs" />
     <Compile Include="ViewModel\MenuBarViewModel.cs" />
     <Compile Include="ViewModel\StatisticalChartViewModel.cs" />
     <Compile Include="ViewModel\TeamBuilderViewModel.cs" />
@@ -511,6 +516,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Component\League\SearchBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Component\RightBar\MatchNoDisPlay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -9,35 +9,33 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="609*" />
-            <RowDefinition Height="31*"/>
+            <RowDefinition Height="370" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-            <ScrollViewer Grid.Row="0" Grid.RowSpan="2">
-                <StackPanel Margin="3">
-                    <TextBlock
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0" Grid.RowSpan="2">
+                <TextBlock
                     Margin="0,0,0,16"
                     FontWeight="Bold"
                     Style="{StaticResource MaterialDesignHeadline6TextBlock}"
                     Text="Thêm giải đấu"
                     TextWrapping="Wrap" />
-                    <Grid Style="{StaticResource text_grid_item}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
+                <Grid Style="{StaticResource text_grid_item}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
 
-                        <TextBlock
+                    <TextBlock
                         Grid.Row="0"
                         FontWeight="Bold"
                         Style="{StaticResource textblock_item}"
                         Text="Tên giải đấu" />
-                        <!--<ComboBox
+                    <!--<ComboBox
                         Grid.Row="1"
                         Style="{StaticResource combobox_item}"
                         materialDesign:HintAssist.Hint="Chọn tên giải đấu"
@@ -46,58 +44,58 @@
                         DisplayMemberPath="name"
                         SelectedValuePath="name">
                     </ComboBox>-->
-                        <TextBox
+                    <TextBox
                         Grid.Row="1"
                         Style="{StaticResource textbox_item}"
                         materialDesign:HintAssist.Hint="Nhập tên giải đấu"
                         Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                        </TextBox>
-                    </Grid>
-                    <Grid Style="{StaticResource text_grid_item}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <TextBlock
+                    </TextBox>
+                </Grid>
+                <Grid Style="{StaticResource text_grid_item}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock
                         Grid.Row="0"
                         FontWeight="Bold"
                         Style="{StaticResource textblock_item}"
                         Text="Tên quốc gia" />
-                        <ComboBox
+                    <ComboBox
                         Grid.Row="1"
                         Style="{StaticResource combobox_item}"
                         materialDesign:HintAssist.Hint="Chọn tên quốc gia"
-                        SelectedItem="{Binding Path = QuocTich, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"
+                        SelectedItem="{Binding Path = QuocTich, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         ItemsSource="{Binding Path = QuocGiaList,UpdateSourceTrigger=PropertyChanged}"
                         DisplayMemberPath="TENQUOCGIA"
                         SelectedValuePath="TENQUOCGIA">
-                        </ComboBox>
-                    </Grid>
-                    <Grid Style="{StaticResource text_grid_item}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
+                    </ComboBox>
+                </Grid>
+                <Grid Style="{StaticResource text_grid_item}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
 
-                        <TextBlock
+                    <TextBlock
                         Grid.Row="0"
                         FontWeight="Bold"
                         Style="{StaticResource textblock_item}"
                         Text="Thời gian bắt đầu" />
-                        <!--<TextBox
+                    <!--<TextBox
                         Grid.Row="1"
                         Style="{StaticResource textbox_item}"
                         materialDesign:HintAssist.Hint="Chọn thời gian bắt đầu"
                         Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
 
                     </TextBox>-->
-                        <DatePicker Grid.Row="1"
+                    <DatePicker Grid.Row="1"
                                 Style="{StaticResource datepicker_item}"
-                                SelectedDate="{Binding StartTime, Mode=OneWayToSource}"
+                                SelectedDate="{Binding StartTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 materialDesign:HintAssist.Hint="Thời gian bắt đầu"
                                 ></DatePicker>
-                    </Grid>
-                    <!--<ItemsControl ItemsSource="{Binding FootballMatchCard1}">
+                </Grid>
+                <!--<ItemsControl ItemsSource="{Binding FootballMatchCard1}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel x:Name="Container" HorizontalAlignment="Center" />
@@ -109,49 +107,46 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>-->
-                </StackPanel>
-            </ScrollViewer>
-            
-            <ScrollViewer Grid.Column="1" Margin="0 40">
-                <StackPanel Orientation="Vertical">
-                    <Grid Style="{StaticResource text_grid_item}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
+            </StackPanel>
 
-                        <TextBlock
+            <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0 40">
+                <Grid Style="{StaticResource text_grid_item}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
                         Grid.Row="0"
                         FontWeight="Bold"
                         Style="{StaticResource textblock_item}"
                         Text="Thời gian kết thúc" />
-                        <!--<TextBox
+                    <!--<TextBox
                         Grid.Row="1"
                         Style="{StaticResource textbox_item}"
                         materialDesign:HintAssist.Hint="Chọn thời gian bắt đầu"
                         Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
 
                     </TextBox>-->
-                        <DatePicker Grid.Row="1"
+                    <DatePicker Grid.Row="1"
                                 Style="{StaticResource datepicker_item}"
                                 materialDesign:HintAssist.Hint="Thời gian kết thúc"
-                               SelectedDate="{Binding StartTime, Mode=OneWayToSource}"
-
+                               SelectedDate="{Binding EndTime, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                 ></DatePicker>
-                    </Grid>
+                </Grid>
 
-                    <Grid Style="{StaticResource text_grid_item}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
+                <Grid Style="{StaticResource text_grid_item}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
 
-                        <TextBlock
+                    <TextBlock
                         Grid.Row="0"
                         FontWeight="Bold"
                         Style="{StaticResource textblock_item}"
                         Text="Địa điểm tổ chức" />
-                        <!--<ComboBox
+                    <!--<ComboBox
                         Grid.Row="1"
                         Style="{StaticResource combobox_item}"
                         materialDesign:HintAssist.Hint="Chọn tên giải đấu"
@@ -162,28 +157,28 @@
 
 
                     </ComboBox>-->
-                        <ComboBox
+                    <ComboBox
                         Grid.Row="1"
                         Style="{StaticResource combobox_item}"
                         materialDesign:HintAssist.Hint="Chọn địa điểm"
-                        SelectedItem="{Binding Path = Diadiem, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"
+                        SelectedItem="{Binding Path = Diadiem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         ItemsSource="{Binding Path = DiaDiemList,UpdateSourceTrigger=PropertyChanged}"
                         DisplayMemberPath="TENDIADIEM"
                         SelectedValuePath="TENDIADIEM">
-                        </ComboBox>
-                    </Grid>
-                    <Grid Style="{StaticResource text_grid_item}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
+                    </ComboBox>
+                </Grid>
+                <Grid Style="{StaticResource text_grid_item}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
 
-                        <TextBlock
+                    <TextBlock
                         Grid.Row="0"
                         FontWeight="Bold"
                         Style="{StaticResource textblock_item}"
                         Text="Số đội tham gia" />
-                        <!--<ComboBox
+                    <!--<ComboBox
                         Grid.Row="1"
                         Style="{StaticResource combobox_item}"
                         materialDesign:HintAssist.Hint="Chọn tên giải đấu"
@@ -194,41 +189,43 @@
 
 
                     </ComboBox>-->
-                        <ComboBox
+                    <ComboBox
                         Grid.Row="1"
                         Style="{StaticResource combobox_item}"
                         materialDesign:HintAssist.Hint="Chọn số đội"
-                        ItemsSource="{Binding soluong}"
+                        ItemsSource="{Binding SoluongDois, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedSoluong, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                        >
-                        </ComboBox>
-                    </Grid>
-                </StackPanel>
-            </ScrollViewer>
+                    </ComboBox>
+                </Grid>
+            </StackPanel>
         </Grid>
         <Grid
-            Grid.Row="2"
+            Grid.Row="1"
             Margin="8,8,8,8"
             Style="{StaticResource text_grid_item}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="0.2*" />
-                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="387*" />
+                <ColumnDefinition Width="173*"/>
+                <ColumnDefinition Width="112*" />
+                <ColumnDefinition Width="112*" />
             </Grid.ColumnDefinitions>
             <Button
-                Grid.Column="2"
+                Grid.Column="3"
+                IsEnabled="{Binding Enable,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                 Command="{Binding Next}"
                 Content="Tiếp theo"
                 FontSize="16"
                 Style="{StaticResource rounded_btn}"
-                Background="green"/>
+                Background="green" Margin="4,0,4,0"/>
             <Button
-                Grid.Column="1"
+                Grid.Column="2"
                 Background="{StaticResource DarkGray}"
                 Content="Hủy"
                 FontSize="16"
                 Command="{Binding Return}"
                 Foreground="White"
-                Style="{StaticResource rounded_btn}" />
+                Style="{StaticResource rounded_btn}" Margin="4,0,4,0" />
         </Grid>
     </Grid>
 </UserControl>

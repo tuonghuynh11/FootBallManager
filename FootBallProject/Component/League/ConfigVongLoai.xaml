@@ -23,7 +23,7 @@
                     <Run
                         Text="{Binding TotalTeam, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, FallbackValue=0}" />
                     <Run Text="/"></Run>
-                    <Run Text="{Binding TotalTeam, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, FallbackValue=0}"></Run>
+                    <Run Text="{Binding CurrentTeam, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, FallbackValue=0}"></Run>
             </TextBlock>
             <Grid Grid.Row="3">
                 <Grid.RowDefinitions>
@@ -46,19 +46,30 @@
                         Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                         Text="Danh sách các đội thi đấu" />
                     <Button
+                Grid.Column="1"
+                Background="{StaticResource DarkGray}"
+                Content="Trở lại"
+                FontSize="16"
+                        VerticalAlignment="Center"
+                        Width="120"
+                        Height="40"
+                Command="{Binding GoBackCommand}"
+                Foreground="White"
+                Style="{StaticResource rounded_btn}" Margin="4,0,4,0" />
+                    <Button
                         Grid.Column="1"
                         Width="120"
                         Height="40"
-                        Margin="16,16,16,16"
-                        HorizontalAlignment="Right"
+                        Margin="300,16,16,16"
                         VerticalAlignment="Center"
                         materialDesign:ButtonAssist.CornerRadius="8"
                         Background="#8FD14F"
-                        IsEnabled="{Binding Enable, UpdateSourceTrigger=PropertyChanged}"
                         BorderBrush="Transparent"
+                        IsEnabled="{Binding Enable, UpdateSourceTrigger=PropertyChanged}"
                         Command="{Binding CountinueCommand}"
                         Content="Tiếp tục"
-                        Style="{StaticResource PrimaryButton}" />
+                        Style="{StaticResource rounded_btn}"
+ />
                 </Grid>
                 <Grid Grid.Row="1">
                     <!--<component:SearchBar

@@ -3,13 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:FootBallProject.Component.Match"
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="270">
     <Grid>
-        <StackPanel Background="#fcfffa" Orientation="Horizontal">
-            <ComboBox Width="150" Height="50" ItemsSource="{Binding ListPlayers }"
+        <StackPanel Orientation="Horizontal">
+            <ComboBox Width="150" ItemsSource="{Binding ListPlayers }"
                       SelectedItem="{Binding Player, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                      Style="{StaticResource combobox_item}"
+                      materialDesign:HintAssist.Hint="Tên cầu thủ"
                       >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -17,8 +20,16 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <TextBox Margin="6 0 0 0" Width="80" Height="50" Text="{Binding Time,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
-            <Button Command="{Binding }" Background="Green">
+            <TextBox Width="80" Text="{Binding Time,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Style="{StaticResource textbox_item}"
+                     materialDesign:HintAssist.Hint="Ghi chú"></TextBox>
+
+            <Button Command="{Binding DeleteCard}"
+                    Style="{StaticResource grid_button_item}"
+                    Width="30"
+                    Height="30"
+                    >
+                <materialDesign:PackIcon Kind="EraseOutline"></materialDesign:PackIcon>
             </Button>
         </StackPanel>
     </Grid>

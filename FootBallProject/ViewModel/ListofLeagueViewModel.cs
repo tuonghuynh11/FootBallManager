@@ -72,9 +72,10 @@ namespace FootBallProject.ViewModel
         public object config1;
         public object config2;
         public object createnewleague;
+        public LeagueCardOb first;
         public ListofLeagueViewModel()
         {
-            Instance = this;
+            Instance= this;
             var currentleague = DataProvider.Instance.Database.LEAGUEs.FirstOrDefault();
             Currentleague = new LeagueCardOb(currentleague);
             ObservableCollection<LeagueCardOb> list3 = new ObservableCollection<LeagueCardOb>();
@@ -86,7 +87,6 @@ namespace FootBallProject.ViewModel
             Leagues = list3;
             configAutoViewModel = new ConfigAutoViewModel(this);
             config1 = new ConfigVongLoai1ViewModel(this);
-            config2 = new ConfigVongLoai2ViewModel(this);
             createnewleague = new CreateNewLeague();
             CurrentAhihi = configAutoViewModel;
             AddLeague = new RelayCommand<object>((p) => { return true; }, (p) => { AddLeagueFuntion(); } );
@@ -99,10 +99,13 @@ namespace FootBallProject.ViewModel
         }
         public void AddLeagueFuntion() 
         {
+            createnewleague = new CreateNewLeague();
+            config1 = new ConfigVongLoai1ViewModel(this);
             CurrentAhihi = createnewleague;
         }
         public void ContinueFuntion()
         {
+            config2 = new ConfigVongLoai2ViewModel(this);
             CurrentAhihi = config2;
         }
         public void GoNext()
@@ -112,6 +115,14 @@ namespace FootBallProject.ViewModel
         public void Return()
         {
             CurrentAhihi = configAutoViewModel;
+        }
+        public void ReturnConfig1()
+        {
+            CurrentAhihi = config1;
+        }
+        public void ReturnCreate()
+        {
+            CurrentAhihi = createnewleague;
         }
     }
 
