@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FootBallProject.Model;
-
+using FootBallProject.ViewModel;
 
 namespace FootBallProject.UserControlBar
 {
@@ -22,7 +22,7 @@ namespace FootBallProject.UserControlBar
     /// </summary>
     public partial class TeamPlayersUC : UserControl
     {
-
+       
         public TeamPlayersUC()
         {
             InitializeComponent();

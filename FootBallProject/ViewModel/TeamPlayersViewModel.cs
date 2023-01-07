@@ -127,6 +127,7 @@ namespace FootBallProject.ViewModel
         private List<string> nationID = new List<string>();
         private List<string> clubID = new List<string>();
         private string EdgePath = "";
+        private string extension = ".png";
         Player selectedPlayer = new Player();
         public Player SelectedPlayer
         {
@@ -220,6 +221,17 @@ namespace FootBallProject.ViewModel
                             e.txbFoot.SelectedItem = i;
                         }
                     }
+                    foreach(var i in e.txbPos.Items)
+                    {
+                        if (i == null)
+                            continue;
+                        ComboBoxItem item = (ComboBoxItem)i;
+
+                        if (item.Content.ToString() == SelectedPlayer.Position)
+                        {
+                            e.txbPos.SelectedItem = i;
+                        }
+                    }
                     
                 }
                 );
@@ -285,7 +297,7 @@ namespace FootBallProject.ViewModel
                     Window1 wd1 = new Window1();
                     wd1.ShowDialog();
                     EdgePath = "";
-
+                    extension = ".png";
                     x.Players_List.ItemsSource = playerList;
                     x.Players_List.Items.Refresh();
 
@@ -309,7 +321,14 @@ namespace FootBallProject.ViewModel
                     || wd1.txbNumber.Text == "" || wd1.txbNationality.Text == ""
                     || wd1.txbAge.Text == "" || wd1.txbPhysyque.Text == "" || wd1.txbFoot.Text == "")
                     {
-                        System.Windows.Forms.MessageBox.Show("Bạn chưa nhập đầy đủ thông tin", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        OKCancelPopUp oK = new OKCancelPopUp();
+                        oK.Height = 200;
+                        oK.Width = 390;
+                        oK.titletxbl.Text = "Chưa nhập đậy đủ thông tin";
+                        oK.content.Text = "Bạn chưa nhập đủ thông tin cầu thủ";
+                        oK.ShowDialog();
+                        return;
+                        //System.Windows.Forms.MessageBox.Show("Bạn chưa nhập đầy đủ thông tin", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                     else
                     {
@@ -317,7 +336,12 @@ namespace FootBallProject.ViewModel
                         string position = wd1.txbPos.Text.Trim();
                         if (!int.TryParse(wd1.txbAge.Text, out parsevalue))
                         {
-                            System.Windows.Forms.MessageBox.Show("Tuổi phải nhập số", "Nhập lại tuổi đi!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập tuổi không đúng";
+                            oK.content.Text = "Bạn phải nhập tuổi bằng số nguyên";
+                            oK.ShowDialog();
                             return;
                         }
                         //if (!int.TryParse(wd1.txbHeight.Text, out parsevalue))
@@ -332,13 +356,34 @@ namespace FootBallProject.ViewModel
                         //}
                         if (!Regex.IsMatch(wd1.txbHeight.Text, @"^\d+cm$"))
                         {
-                            System.Windows.Forms.MessageBox.Show("Nhập theo [số]cm", "Nhập lại tuổi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            OKCancelPopUp oK = new OKCancelPopUp(); 
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập lại chiều cao";
+                            oK.content.Text = "Nhập theo [số]cm";
+                            oK.ShowDialog();
+                            //System.Windows.Forms.MessageBox.Show("Nhập theo [số]cm", "Nhập lại tuổi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return;
                         }
                         if (!Regex.IsMatch(wd1.txbWeight.Text, @"^\d+kg$"))
                         {
-                            System.Windows.Forms.MessageBox.Show("Nhập theo [số]kg", "Nhập lại cân nagwj", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập lại cân nặng";
+                            oK.content.Text = "Nhập theo [số]kg";
+                            oK.ShowDialog();
+                            //System.Windows.Forms.MessageBox.Show("Nhập theo [số]kg", "Nhập lại cân nagwj", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return;
+                        }
+                        if (!int.TryParse(wd1.txbNumber.Text, out parsevalue))
+                        {
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập số áo không đúng";
+                            oK.content.Text = "Xin nhập lại số áo";
+                            oK.ShowDialog(); return;
                         }
                         string[] arrString = { "GK", "CB", "LB", "RB", "CDM", "CM", "LM", "RM", "LW", "RW", "ST" };
 
@@ -417,7 +462,8 @@ namespace FootBallProject.ViewModel
                         }
                         try
                         {
-                            RandomSquad(IDDoiBong);
+                            if(PlayerList.Count >= 10)
+                                RandomSquad(IDDoiBong);
       
                         }
                         catch (Exception e)
@@ -480,7 +526,13 @@ namespace FootBallProject.ViewModel
                     || edit.txbNumber.Text == "" || edit.txbNationality.Text == ""
                     || edit.txbPhysyque.Text == "" || edit.txbFoot.Text == "")
                     {
-                        System.Windows.Forms.MessageBox.Show("Bạn chưa nhập đầy đủ thông tin", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        OKCancelPopUp oK = new OKCancelPopUp();
+                        oK.Height = 200;
+                        oK.Width = 390;
+                        oK.titletxbl.Text = "Chưa nhập đậy đủ thông tin";
+                        oK.content.Text = "Bạn chưa nhập đủ thông tin cầu thủ";
+                        oK.ShowDialog();
+                        return;
                     }
                     else
                     {
@@ -488,22 +540,43 @@ namespace FootBallProject.ViewModel
                         string position = edit.txbPos.Text.Trim();
                         if (!int.TryParse(edit.txbAge.Text, out parsevalue))
                         {
-                            System.Windows.Forms.MessageBox.Show("Tuổi phải nhập số", "Nhập lại tuổi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập tuổi không đúng";
+                            oK.content.Text = "Bạn phải nhập tuổi bằng số nguyên";
+                            oK.ShowDialog();
+
+                            //System.Windows.Forms.MessageBox.Show("Tuổi phải nhập số", "Nhập lại tuổi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return;
                         }
-                        //if (!int.TryParse(edit.txbHeight.Text, out parsevalue))
-                        //{
-                        //    System.Windows.Forms.MessageBox.Show("Chiều cao phải nhập số", "Nhập lại chiều cao", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        //    return;
-                        //}
+                        if (!int.TryParse(edit.txbNumber.Text, out parsevalue))
+                        {
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập số áo không đúng";
+                            oK.content.Text = "Xin nhập lại số áo";
+                            oK.ShowDialog(); return;
+                        }
                         if (!Regex.IsMatch(edit.txbHeight.Text, @"^\d+cm$"))
                         {
-                            System.Windows.Forms.MessageBox.Show("Nhập theo [số]cm", "Nhập lại tuổi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.titletxbl.Text = "Nhập lại chiều cao";
+                            oK.content.Text = "Nhập theo [số]cm";
+                            oK.ShowDialog();
+
+                            //System.Windows.Forms.MessageBox.Show("Nhập theo [số]cm", "Nhập lại tuổi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return;
                         }
                         if (!Regex.IsMatch(edit.txbWeight.Text, @"^\d+kg$"))
                         {
-                            System.Windows.Forms.MessageBox.Show("Nhập theo [số]cm", "Nhập lại tuổi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.titletxbl.Text = "Nhập lại cân nặng";
+                            oK.content.Text = "Nhập theo [số]kg";
+                            oK.ShowDialog();
+
+                            //System.Windows.Forms.MessageBox.Show("Nhập theo [số]cm", "Nhập lại tuổi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return;
                         }
                         //if (!int.TryParse(edit.txbWeight.Text, out parsevalue))
@@ -738,7 +811,7 @@ namespace FootBallProject.ViewModel
 
 
                     OpenFileDialog openfile = new OpenFileDialog();
-                    openfile.Filter = "Image file |*.img; *.bmp; *.png; *.jpg; *.jpeg ";
+                    openfile.Filter = "Image file |*.bmp; *.png; *.jpg; *.jpeg |JPEG|*.jpg; *.jpeg| BMP|*.bmp|PNG|*.png";
                     string path = @"...\FootballProject\Images";
                     try
                     {
@@ -751,6 +824,7 @@ namespace FootBallProject.ViewModel
                     openfile.FileOk += Openfile_FileOk;
                     if (openfile.ShowDialog() == DialogResult.OK)
                     {
+                        extension = Path.GetExtension(openfile.FileName);
                         if (p as Window1 != null)
                         {
                             Window1 x = p as Window1;
@@ -828,7 +902,15 @@ namespace FootBallProject.ViewModel
             }
 
             byte[] data;
-            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            BitmapEncoder encoder = new PngBitmapEncoder();
+            switch (extension)
+            {
+                case ".png":
+                    encoder = new PngBitmapEncoder(); break;
+                case ".jpg": case ".jpeg": encoder = new JpegBitmapEncoder(); break;
+                case ".bmp": encoder = new BmpBitmapEncoder(); break;
+                default: break;
+            }
             encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
             using (MemoryStream ms = new MemoryStream())
             {
