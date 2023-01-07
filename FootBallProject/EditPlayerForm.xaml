@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FootBallProject"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-
+        xmlns:converter="clr-namespace:FootBallProject.Class"
         mc:Ignorable="d"
 
         Title="EditPlayerForm" Height="780" Width="1400"
@@ -14,10 +14,11 @@
         WindowStyle="None"
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen"
-                Background="#d3ffce" Loaded="editPlayerForm1_Loaded"
+                Background="Transparent" Loaded="editPlayerForm1_Loaded"
 
         >
     <Window.Resources>
+        <converter:ConvertByteArrToImage x:Name="binaryconverter" x:Key="byteToImageConverter"/>
         <Style TargetType="TextBox">
 
             <Setter Property="Background" Value="White">
@@ -40,117 +41,117 @@
             </i:InvokeCommandAction>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="450"></ColumnDefinition>
-            <ColumnDefinition Width="450"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Border Margin="100 10 100 450" Grid.ColumnSpan="2">
-            <TextBlock FontSize="50" HorizontalAlignment="Center"  FontFamily="Comic Sans MS">EDIT PLAYER HERE</TextBlock>
+    <Border CornerRadius="10" Padding="6" BorderBrush="#fbc42d" BorderThickness="2" Background="#d3ffce">
 
-        </Border>
-        <Grid Grid.Column="0">
-            <!-- Height = 550 Width = 450-->
-            <Border Margin="100 100 50 50">
-                <StackPanel>
-                    <TextBlock FontSize="30">Tên</TextBlock>
-                    <Separator></Separator>
-                    <TextBlock FontSize="30">Tuổi</TextBlock>
-                    <Separator></Separator>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="450"></ColumnDefinition>
+                <ColumnDefinition Width="450"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border Margin="100 10 100 450" Grid.ColumnSpan="2">
+                <TextBlock FontSize="50" HorizontalAlignment="Center"  FontFamily="Comic Sans MS">EDIT PLAYER HERE</TextBlock>
 
-                    <TextBlock FontSize="30">CLB</TextBlock>
-                    <Separator></Separator>
-
-                    <TextBlock FontSize="30">Chiều cao</TextBlock>
-                    <Separator></Separator>
-
-                    <TextBlock FontSize="30">Cân nặng</TextBlock>
-                    <Separator></Separator>
-
-                    <TextBlock FontSize="30">Chân thuận</TextBlock>
-                    <Separator></Separator>
-
-                    <TextBlock FontSize="30">Sức khỏe</TextBlock>
-                    <Separator></Separator>
-
-                    <TextBlock FontSize="30">Vị trí</TextBlock>
-                    <Separator></Separator>
-                    <TextBlock FontSize="30">Số áo</TextBlock>
-                    <Separator></Separator>
-
-                    <TextBlock FontSize="30">Quốc tịch</TextBlock>
-                    <Separator></Separator>
-                    <TextBlock FontSize="30">Hình ảnh</TextBlock>
-
-
-                </StackPanel>
             </Border>
+            <Grid Grid.Column="0">
+                <!-- Height = 550 Width = 450-->
+                <Border Margin="100 100 50 50">
+                    <StackPanel>
+                        <TextBlock FontSize="30">Tên</TextBlock>
+                        <Separator></Separator>
+                        <TextBlock FontSize="30">Tuổi</TextBlock>
+                        <Separator></Separator>
+
+                        <TextBlock FontSize="30">CLB</TextBlock>
+                        <Separator></Separator>
+
+                        <TextBlock FontSize="30">Chiều cao</TextBlock>
+                        <Separator></Separator>
+
+                        <TextBlock FontSize="30">Cân nặng</TextBlock>
+                        <Separator></Separator>
+
+                        <TextBlock FontSize="30">Chân thuận</TextBlock>
+                        <Separator></Separator>
+
+                        <TextBlock FontSize="30">Sức khỏe</TextBlock>
+                        <Separator></Separator>
+
+                        <TextBlock FontSize="30">Vị trí</TextBlock>
+                        <Separator></Separator>
+                        <TextBlock FontSize="30">Số áo</TextBlock>
+                        <Separator></Separator>
+
+                        <TextBlock FontSize="30">Quốc tịch</TextBlock>
+                        <Separator></Separator>
 
 
-        </Grid>
-        <Grid Grid.Column="1">
-            
-            <Border Margin="100 100 50 50">
-                <StackPanel>
-                    <TextBox Text="{Binding SelectedPlayer.Name}" FontSize="28" Height="40" Name="txbName"></TextBox>
-                    <Separator></Separator>
-
-                    <TextBox FontSize="28" Height="40" Name="txbAge" Text="{Binding SelectedPlayer.Age}"></TextBox>
-                    <Separator></Separator>
-
-                    <ComboBox SelectedValue="{Binding SelectedPlayer.Club}" IsEditable="False" IsEnabled="False" IsReadOnly="True" FontSize="28" Height="40" Name="txbclub" ItemsSource="{Binding ClubsNames}"></ComboBox>
-                    <Separator></Separator>
-
-                    <TextBox Text ="{Binding SelectedPlayer.Height}" FontSize="28" Height="40" Name="txbHeight"></TextBox>
-                    <Separator></Separator>
-
-                    <TextBox Text ="{Binding SelectedPlayer.Weight}"  FontSize="28" Height="40" Name="txbWeight"></TextBox>
-                    <Separator></Separator>
+                    </StackPanel>
+                </Border>
 
 
-                    <ComboBox  FontSize="28" Height="40" Name="txbFoot"   >
-                        <ComboBoxItem>
-                            Trái
-                        </ComboBoxItem>
-                        <ComboBoxItem>Phải</ComboBoxItem>
-                    </ComboBox>
-                    <Separator></Separator>
+            </Grid>
+            <Grid Grid.Column="1">
 
-                    <TextBox FontSize="28" Height="40" Name="txbPhysyque" Text="{Binding SelectedPlayer.Physique}"></TextBox>
-                    <Separator></Separator>
-                    <TextBox FontSize="28" Height="40" Name="txbPos" Text="{Binding SelectedPlayer.Position}"></TextBox>
-                    <Separator></Separator>
-                    <TextBox FontSize="28" Height="40" Name="txbNumber" Text="{Binding SelectedPlayer.KitNumber}"></TextBox>
-                    <Separator></Separator>
-                    <ComboBox SelectedValue="{Binding SelectedPlayer.Nationality}" FontSize="28" Height="40" Name="txbNationality"  ItemsSource="{Binding Nationalities}" IsSynchronizedWithCurrentItem="False"  ></ComboBox>
-                    <Separator></Separator>
-                    <TextBox FontSize="28" Height="40" Name="txbImage" IsReadOnly="True"></TextBox>
+                <Border Margin="100 100 50 50">
+                    <StackPanel>
+                        <TextBox Text="{Binding SelectedPlayer.Name}" FontSize="28" Height="40" Name="txbName"></TextBox>
+                        <Separator></Separator>
 
-                    <Button Width="50" Background="LightGray" HorizontalAlignment="Right" Command="{Binding LoadImageCommand}" CommandParameter="{Binding ElementName=editPlayerForm1}">...</Button>
+                        <TextBox FontSize="28" Height="40" Name="txbAge" Text="{Binding SelectedPlayer.Age}"></TextBox>
+                        <Separator></Separator>
+
+                        <ComboBox SelectedValue="{Binding SelectedPlayer.Club}" IsEditable="False" IsEnabled="False" IsReadOnly="True" FontSize="28" Height="40" Name="txbclub" ItemsSource="{Binding ClubsNames}"></ComboBox>
+                        <Separator></Separator>
+
+                        <TextBox Text ="{Binding SelectedPlayer.Height}" FontSize="28" Height="40" Name="txbHeight"></TextBox>
+                        <Separator></Separator>
+
+                        <TextBox Text ="{Binding SelectedPlayer.Weight}"  FontSize="28" Height="40" Name="txbWeight"></TextBox>
+                        <Separator></Separator>
 
 
-                </StackPanel>
-            </Border>
+                        <ComboBox  FontSize="28" Height="40" Name="txbFoot"   >
+                            <ComboBoxItem>
+                                Trái
+                            </ComboBoxItem>
+                            <ComboBoxItem>Phải</ComboBoxItem>
+                        </ComboBox>
+                        <Separator></Separator>
 
-        </Grid>
+                        <TextBox FontSize="28" Height="40" Name="txbPhysyque" Text="{Binding SelectedPlayer.Physique}"></TextBox>
+                        <Separator></Separator>
+                        <TextBox FontSize="28" Height="40" Name="txbPos" Text="{Binding SelectedPlayer.Position}"></TextBox>
+                        <Separator></Separator>
+                        <TextBox FontSize="28" Height="40" Name="txbNumber" Text="{Binding SelectedPlayer.KitNumber}"></TextBox>
+                        <Separator></Separator>
+                        <ComboBox SelectedValue="{Binding SelectedPlayer.Nationality}" FontSize="28" Height="40" Name="txbNationality"  ItemsSource="{Binding Nationalities}" IsSynchronizedWithCurrentItem="False"  ></ComboBox>
+                        <Separator></Separator>
 
-        <Grid Grid.Column="2">
-            <Button x:Name="Close_but" Height="50" Width="50" VerticalAlignment="Top"
+
+
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Button x:Name="Close_but" Height="50" Width="50" VerticalAlignment="Top"
                         HorizontalAlignment="Right" Margin="0 10 5 0" BorderBrush="{x:Null}" Click="Close_but_Click">
-                <Button.Background>
-                    <ImageBrush ImageSource="/Images/x_icon.png"/>
-                </Button.Background>
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Images/x_icon.png"/>
+                    </Button.Background>
 
-            </Button>
-            <Image x:Name = "cthimage" HorizontalAlignment="Center" Height="300"  
-                       VerticalAlignment="Top" Width="300" Source="Images\default.png"/>
-            <Button Background="Orange"  Foreground="DarkRed" FontSize="22" Grid.Column="2" Margin="60 200 100 100" Width="200" Height="90" Command="{Binding LoadImageCommand}" CommandParameter="{Binding ElementName=editPlayerForm1}">Upload</Button>
+                </Button>
+                <Image x:Name = "cthimage" HorizontalAlignment="Center" Height="300"  
+                       VerticalAlignment="Top" Width="300" Source="{Binding SelectedPlayer.Image, Converter={StaticResource byteToImageConverter}}"/>
+                <Button Background="Orange"  Foreground="DarkRed" FontSize="22" Grid.Column="2" Margin="60 200 100 100" Width="200" Height="90" Command="{Binding LoadImageCommand}" CommandParameter="{Binding ElementName=editPlayerForm1}">Upload</Button>
+            </Grid>
+
+            <Button Grid.Column="2" Background="LightBlue"  Foreground="DarkRed" FontSize="22" Margin="60 500 100 00" Width="200" Height="90" Command="{Binding UpdatePlayerCommand}" CommandParameter="{Binding ElementName=editPlayerForm1}" IsEnabled="True" >Edit</Button>
+
+
+
         </Grid>
-
-        <Button Grid.Column="2" Background="LightBlue"  Foreground="DarkRed" FontSize="22" Margin="60 500 100 00" Width="200" Height="90" Command="{Binding UpdatePlayerCommand}" CommandParameter="{Binding ElementName=editPlayerForm1}" IsEnabled="True" >Edit</Button>
-
-
-
-    </Grid>
+    </Border>
 </Window>

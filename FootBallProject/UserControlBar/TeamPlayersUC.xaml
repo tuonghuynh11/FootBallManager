@@ -16,7 +16,7 @@
    	 DataContext="{StaticResource TeamPlayersVM}" Loaded="teamPlayersUC1_Loaded">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command=""/>
+            <i:InvokeCommandAction Command="{Binding TeamLoaded}" CommandParameter="{Binding ElementName=teamPlayersUC1}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <UserControl.Resources>
