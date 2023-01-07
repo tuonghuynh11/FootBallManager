@@ -1,4 +1,5 @@
 ﻿using DevExpress.Xpf.Editors.Helpers;
+using FootBallProject.Class;
 using FootBallProject.Model;
 using FootBallProject.ViewModel;
 using System;
@@ -54,6 +55,7 @@ namespace FootBallProject.Object
         private ObservableCollection<DOIBONG> _teamList;
         private bool _enable;
 
+       
         public ObservableCollection<DOIBONG> TeamList
         {
             get => _teamList;
@@ -274,10 +276,15 @@ namespace FootBallProject.Object
                 DisplayPlaces = new ObservableCollection<DIADIEM>(DataProvider.ins.DB.DIADIEMs.Where(x => x.IDQUOCGIA == CurrentLeague.IDQUOCGIA).ToList());
             }
             InitTeamPlayerOfMatch();
-            Enable = false;
-            //IsEnable();
+            IsEnable2();
         }
-
+        private void IsEnable2() {
+            if (AccessUser.userLogin.USERROLE.ID == 2)
+            {
+                Enable = true;
+            }
+            else Enable = false;
+        }
         public void InitListTeam()
         {
             List<DOIBONG> list1 = new List<DOIBONG>();
