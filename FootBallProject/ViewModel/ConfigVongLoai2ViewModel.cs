@@ -3,6 +3,7 @@ using DevExpress.Xpf.Bars.Helpers;
 using DevExpress.Xpf.Editors.Helpers;
 using FootBallProject.Model;
 using FootBallProject.Object;
+using FootBallProject.Usercontrol;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,20 +18,20 @@ using System.Windows.Navigation;
 
 namespace FootBallProject.ViewModel
 {
-    public class ConfigVongLoai2ViewModel: BaseViewModel
+    public class ConfigVongLoai2ViewModel : BaseViewModel
     {
-        
+
         private static ConfigVongLoai2ViewModel _ins;
         public static ConfigVongLoai2ViewModel Instance
         {
             get { if (_ins == null) _ins = new ConfigVongLoai2ViewModel(ListofLeagueViewModel.Instance); return _ins; }
-            set { _ins = value;}
+            set { _ins = value; }
         }
         public ListofLeagueViewModel Ins;
         private ObservableCollection<RoundObject> listRoundObject = new ObservableCollection<RoundObject>();
         public ObservableCollection<RoundObject> ListRoundObjects
         {
-            get=> listRoundObject;
+            get => listRoundObject;
             set => listRoundObject = value;
         }
         private ObservableCollection<ROUND> listRound = new ObservableCollection<ROUND>();
@@ -50,13 +51,13 @@ namespace FootBallProject.ViewModel
         public DateTime? StartTime
         {
             get => _startTime;
-            set  { _startTime = value; OnPropertyChanged(); }
+            set { _startTime = value; OnPropertyChanged(); }
         }
         private DateTime? _endtime;
         public DateTime? EndTime
         {
-            get =>  _endtime;
-            set  { _endtime = value; OnPropertyChanged(); }
+            get => _endtime;
+            set { _endtime = value; OnPropertyChanged(); }
         }
         public ICommand Complete { get; set; }
         public ICommand GoBack { get; set; }
@@ -66,7 +67,7 @@ namespace FootBallProject.ViewModel
             string name = "Vòng số ";
             Ins = ins;
             int k = 1;
-            for (int i = 1; i <= Math.Log(ConfigVongLoai1ViewModel.Instance.numofTeam,2); i++)
+            for (int i = 1; i <= Math.Log(ConfigVongLoai1ViewModel.Instance.numofTeam, 2); i++)
             {
                 ROUND temp = new ROUND()
                 {
@@ -76,7 +77,7 @@ namespace FootBallProject.ViewModel
                 };
                 DataProvider.Instance.Database.ROUNDs.AddOrUpdate(temp);
                 DataProvider.Instance.Database.SaveChanges();
-                for (int j = 0; j < ConfigVongLoai1ViewModel.Instance.numofTeam /(2*k);j++ )
+                for (int j = 0; j < ConfigVongLoai1ViewModel.Instance.numofTeam / (2 * k); j++)
                 {
                     string namematch = "Trận số";
                     FOOTBALLMATCH tempmatch = new FOOTBALLMATCH()
@@ -90,17 +91,18 @@ namespace FootBallProject.ViewModel
                 k *= 2;
             }
             ListRound = listRound;
-            foreach(var item in ListRound)
+            foreach (var item in ListRound)
             {
                 RoundObject temp = new RoundObject(item);
                 ListRoundObjects.Add(temp);
             }
-           
+
             Enable = false;
-            Complete = new RelayCommand<object>((p) => { return true; }, (p) => {  StartTime = CreateNewLeague.Instance.StartTime; EndTime = CreateNewLeague.Instance.EndTime; CompleteFuntion(); });
+            Complete = new RelayCommand<object>((p) => { return true; }, (p) => { StartTime = CreateNewLeague.Instance.StartTime; EndTime = CreateNewLeague.Instance.EndTime; CompleteFuntion(); });
             GoBack = new RelayCommand<object>((p) => { return true; }, (p) => { ListofLeagueViewModel.Instance.ReturnConfig1(); });
         }
-        public bool CheckWithLeague(RoundObject round, LEAGUE league) {
+        public bool CheckWithLeague(RoundObject round, LEAGUE league)
+        {
             DateTime starttime = league.NGAYBATDAU.TryConvertToDateTime();
             DateTime endtime = league.NGAYKETTHUC.TryConvertToDateTime();
             DateTime roundtime = round.StartTime.TryConvertToDateTime();
@@ -112,7 +114,7 @@ namespace FootBallProject.ViewModel
         }
         public bool CheckRound()
         {
-            foreach(var item in ListRoundObjects)
+            foreach (var item in ListRoundObjects)
             {
                 if (CheckWithLeague(item, CreateNewLeague.Instance.League) == false)
                 {
@@ -122,7 +124,7 @@ namespace FootBallProject.ViewModel
                 {
                     continue;
                 }
-                else if (item == ListRoundObjects.Last() )
+                else if (item == ListRoundObjects.Last())
                 {
                     if (DateTime.Compare(item.StartTime.TryConvertToDateTime(), ListRoundObjects[ListRoundObjects.IndexOf(item) - 1].StartTime.TryConvertToDateTime()) < 0)
                         return false;
@@ -166,8 +168,8 @@ namespace FootBallProject.ViewModel
                     DataProvider.ins.Database.FOOTBALLMATCHes.AddOrUpdate(item);
                 }
                 DataProvider.Instance.Database.SaveChanges();
-                Success f = new Success();
-                f.Show();
+                //Success f = new Success();
+                //f.Show();
                 ListofLeagueViewModel.Instance.Refresh(ListofLeagueViewModel.Instance.Currentleague);
 
             }

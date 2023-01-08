@@ -12,8 +12,8 @@
    	xmlns:convert="clr-namespace:FootBallProject.Class"
    	 Height="720" Width="1290"
     	Style="{StaticResource Page_Style}" 
- 
-   	 DataContext="{StaticResource TeamPlayersVM}" Loaded="teamPlayersUC1_Loaded">
+ DataContext="{StaticResource TeamPlayersVM}"
+   	  Loaded="teamPlayersUC1_Loaded">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding TeamLoaded}" CommandParameter="{Binding ElementName=teamPlayersUC1}"/>
@@ -22,96 +22,82 @@
     <UserControl.Resources>
         <convert:ConvertStringToCurrency x:Key="currencyconvert"/>
     </UserControl.Resources>
-    <Border CornerRadius="10" Background="#D0D6DB" Margin="60 15 15 15" Height="690">
+    <Border CornerRadius="10" Margin="60 15 15 15" Height="690">
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <materialDesign:Card Grid.Row="0" UniformCornerRadius="10" Height="650">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"></RowDefinition>
+                        <RowDefinition Height="70"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock  Grid.Row="0" FontSize ="36" Text="Danh sách đội bóng" Margin="20 5 0 0" FontWeight="bold" />
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <TextBlock
+                            Text="Chọn tên đội bóng" Style="{StaticResource textblock_item}" FontSize="20" Margin="50 0 20 10"></TextBlock>
+                        <ComboBox  Width="300" SelectedIndex="0" Name ="teamCMB" SelectedItem="{Binding DataContext.CurrentClub, Mode=TwoWay}"
+                          Background="White" ItemsSource="{Binding ClubsNames}"
+                                   Style="{StaticResource combobox_item}"
+                                   IsReadOnly="True">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding ChangeCmbSelection}" CommandParameter="{Binding ElementName=teamPlayersUC1}"></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
+                        <StackPanel Margin="200 -5 0 0" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button  Width="120" Name="Add"  Background="Green"
+                                Foreground="White" Command="{Binding AddPlayerCommand}" 
+                                CommandParameter="{Binding ElementName=teamPlayersUC1}"
+                                
+                                 Style="{StaticResource PrimaryButton}"
+                                 Content="Thêm">
 
-            <Border Grid.Row="3" Grid.Column="1" Margin="230 10 400 600">
-                <TextBlock  FontSize ="36" HorizontalAlignment="Center" 
-    	 Text="My team's players" Margin="200 0 0 0"	 />
-            </Border>
+                            </Button>
+                            <Button Margin="20 0 0 0" Content="Xóa" Background="ForestGreen" Width="120" Name="Delete"  Foreground="White" 
+                                Style="{StaticResource PrimaryButton}"
+                                Command="{Binding DeletePlayerCommand}" CommandParameter="{Binding ElementName=teamPlayersUC1}">
+                            </Button>
+                            <Button Style="{StaticResource PrimaryButton}" Background="Green" Margin="20 0 0 0" Width="120" Content="Chỉnh sửa" Name="Edit" Command="{Binding GoToEdit}" CommandParameter="{Binding ElementName=teamPlayersUC1}" 
+                         ></Button>
+                        </StackPanel>
+                    </StackPanel>
+                    <Border Grid.Row="2" Background="LightGreen" Height="auto" Margin="50,20,50,86">
 
+                        <DataGrid ItemsSource="{Binding PlayerList,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                               ScrollViewer.VerticalScrollBarVisibility="Visible" Background="Transparent" SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" 
+                               HorizontalAlignment="Center" Style ="{DynamicResource MaterialDesignDataGrid}" IsReadOnly="True" Name ="Players_List" AutoGenerateColumns="False"
+                               FontFamily="Roboto" Margin="0,0,0,10" SelectionMode="Single"  >
 
-            <!--<ToolBarTray Grid.ColumnSpan="3" Grid.RowSpan="2" Background="#89D46F">
-        	<ToolBar  Background ="#89D46F" Style="{DynamicResource MaterialDesignToolBar}" Grid.ColumnSpan="2" ClipToBounds="False" Margin="511,0,0,0">
-            	<Button ToolTip="Copy" >
-                    <materialDesign:PackIcon Kind = "ContentCopy"/>
-                </Button>
-            	<Button ToolTip="Mascara">
-                    <materialDesign:PackIcon Kind="Home"/>
-                </Button>
-            	<Button ToolTip="Jip">
-                    <materialDesign:PackIcon Kind="Abacus"/>
-                </Button>
-            	<Button ToolTip="Help">
-                    <materialDesign:PackIcon Kind="Help"/>
-                </Button>
- 
-        	</ToolBar>
-        </ToolBarTray>-->
-            <!--<Image Grid.Row="3" Grid.Column="1" Margin="100 60 100 420" Source="Resources/haaland-25-1665136294208.webp"/>-->
-            <!-- <ListView Name ="Players_List"  Foreground="#89D46F"  Background="#FF967D27" Grid.Row="3" Grid.Column="1"  MouseDoubleClick="PlayersMouseDoubleClick" Margin="49,290,49,33" BorderBrush="{DynamicResource MaterialDesignSelection}" >
-            <ListView.View >
-            	<GridView >
-                    <GridViewColumn Header="Number" Width="100" DisplayMemberBinding="{Binding Number}"/>
-                    <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
-                    <GridViewColumn Header="Age" Width="50" DisplayMemberBinding="{Binding Age}"/>
-                    <GridViewColumn Header="Nationality" Width="100" DisplayMemberBinding="{Binding Nationality}"/>
-            	    <GridViewColumn Header="Position" Width="100" DisplayMemberBinding="{Binding Position}"/>
-                    <GridViewColumn Header="Button" Width="100">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Click me" VerticalAlignment="Center" Margin="0"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-            	</GridView>
-            </ListView.View>
-    	</ListView> -->
-            <Button Margin="658,625,457,33" Width="100" Name="Add"  Foreground="White" Command="{Binding AddPlayerCommand}" CommandParameter="{Binding ElementName=teamPlayersUC1}">
-                Add
-            </Button>
-            <Button Margin="836,625,279,33" Width="100" Name="Delete"  Foreground="White" Command="{Binding DeletePlayerCommand}" CommandParameter="{Binding ElementName=teamPlayersUC1}">
-                Delete
-            </Button>
+                            <DataGrid.Columns>
 
-            <Button Name="Edit" Command="{Binding GoToEdit}" CommandParameter="{Binding ElementName=teamPlayersUC1}" Margin="1000,625,100,33" >Edit</Button>
-            <ComboBox SelectedIndex="0" Name ="teamCMB" SelectedItem="{Binding DataContext.CurrentClub, Mode=TwoWay}" Margin="100 600 800 10"  Background="White" ItemsSource="{Binding ClubsNames}" IsReadOnly="True">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding ChangeCmbSelection}" CommandParameter="{Binding ElementName=teamPlayersUC1}"></i:InvokeCommandAction>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </ComboBox>
-            <Border Background="Orange" Height="auto" Margin="50,70,50,86">
+                                <DataGridTextColumn Header="ID"  Binding="{Binding Id}"/>
+                                <DataGridTextColumn Header="ClubID" Visibility="Hidden" Binding="{Binding ClubID}"/>
 
-                <DataGrid  ItemsSource="{Binding PlayerList,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="Transparent" SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}"  HorizontalAlignment="Center" Style ="{DynamicResource MaterialDesignDataGrid}" IsReadOnly="True" Name ="Players_List" AutoGenerateColumns="False" FontFamily="Roboto" Margin="0,0,0,10" SelectionMode="Single"  >
+                                <DataGridTextColumn Header="Kit Number" Binding="{Binding KitNumber}"/>
+                                <DataGridTextColumn Header="Name" Width="200" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Age" Width="100" Binding="{Binding Age}"/>
+                                <DataGridTextColumn Header="Club" Width="200" Binding="{Binding Club}"/>
 
-                    <DataGrid.Columns>
+                                <DataGridTextColumn Header="Nationality" Width="150" Binding="{Binding Nationality}"/>
+                                <DataGridTextColumn Header="Position" Width="90" Binding="{Binding Position}"/>
+                                <!--<DataGridTextColumn Header="Appearances" Width="100" Binding="{Binding Appearance}"/>-->
+                                <DataGridTextColumn Header="Goals" Width="80" Binding="{Binding Goals}"/>
+                                <DataGridTextColumn Header="Price" Width="130" Binding="{Binding Price, Converter={StaticResource ResourceKey=currencyconvert}}"/>
+                            </DataGrid.Columns>
 
-                        <DataGridTextColumn Header="ID"  Binding="{Binding Id}"/>
-                        <DataGridTextColumn Header="ClubID" Visibility="Hidden" Binding="{Binding ClubID}"/>
-
-                        <DataGridTextColumn Header="Kit Number" Binding="{Binding KitNumber}"/>
-                        <DataGridTextColumn Header="Name" Width="200" Binding="{Binding Name}"/>
-                        <DataGridTextColumn Header="Age" Width="100" Binding="{Binding Age}"/>
-                        <DataGridTextColumn Header="Club" Width="200" Binding="{Binding Club}"/>
-
-                        <DataGridTextColumn Header="Nationality" Width="150" Binding="{Binding Nationality}"/>
-                        <DataGridTextColumn Header="Position" Width="90" Binding="{Binding Position}"/>
-                        <!--<DataGridTextColumn Header="Appearances" Width="100" Binding="{Binding Appearance}"/>-->
-                        <DataGridTextColumn Header="Goals" Width="80" Binding="{Binding Goals}"/>
-                        <DataGridTextColumn Header="Price" Width="130" Binding="{Binding Price, Converter={StaticResource ResourceKey=currencyconvert}}"/>
-                    </DataGrid.Columns>
-
-                    <DataGrid.ItemContainerStyle>
-                        <Style TargetType="DataGridRow">
-                            <EventSetter Event="MouseDoubleClick" Handler="RowDoubleClick"/>
-                        </Style>
-                    </DataGrid.ItemContainerStyle>
-
-                </DataGrid>
-            </Border>
-
+                            <DataGrid.ItemContainerStyle>
+                                <Style TargetType="DataGridRow">
+                                    <EventSetter Event="MouseDoubleClick" Handler="RowDoubleClick"/>
+                                </Style>
+                            </DataGrid.ItemContainerStyle>
+                        </DataGrid>
+                    </Border>
+                </Grid>
+            </materialDesign:Card>
         </Grid>
     </Border>
 

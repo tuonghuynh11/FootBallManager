@@ -10,36 +10,42 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <materialDesign:Card Grid.Row="1">
-            <TabControl
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock  Grid.Row="0" Margin="20 0 0 0" FontSize="20" FontWeight="Bold" Style="{StaticResource textblock_item}" Text="{Binding Currentleague.DisplayName, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <TabControl Grid.Row="1"
                         Margin="0"
                         HorizontalContentAlignment="Left"
                         Background="Transparent"
                         Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
                         TabStripPlacement="Top">
 
-                <TabItem Margin="4">
-                    <TabItem.Header>
-                        <StackPanel Width="auto" Height="auto">
-                            <materialDesign:PackIcon
+                    <TabItem Margin="4">
+                        <TabItem.Header>
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon
                                         Width="24"
                                         Height="24"
                                         HorizontalAlignment="Center"
                                         Kind="ViewListOutline" />
-                            <TextBlock HorizontalAlignment="Center" Text="Danh sách" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <Grid x:Name="RegisteredGrid" Grid.Row="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="auto" />
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock
+                                <TextBlock HorizontalAlignment="Center" Text="Danh sách" />
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Grid x:Name="RegisteredGrid" Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
                                         Grid.Column="0"
                                         Margin="16,0,0,0"
                                         VerticalAlignment="Center"
@@ -48,7 +54,7 @@
                                         Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                                         Text="Danh sách các đội" />
 
-                            <!--<Button
+                                <!--<Button
                                         Grid.Column="1"
                                         Width="120"
                                         Height="40"
@@ -62,25 +68,42 @@
                                         Content="Hủy đăng ký"
                                         Style="{StaticResource PrimaryButton}" />-->
 
+                            </Grid>
+                            <component:LeagueDataGrid Margin="4" DataContext="{Binding Teams, UpdateSourceTrigger=PropertyChanged}"></component:LeagueDataGrid>
                         </Grid>
-                        <component:LeagueDataGrid Margin="4" DataContext="{Binding Teams, UpdateSourceTrigger=PropertyChanged}"></component:LeagueDataGrid>
-                    </Grid>
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Width="auto" Height="auto">
-                            <materialDesign:PackIcon
+                    </TabItem>
+                    <TabItem>
+                        <TabItem.Header>
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon
                                         Width="24"
                                         Height="24"
                                         HorizontalAlignment="Center"
                                         Kind="Information" />
-                            <TextBlock HorizontalAlignment="Center" Text="Cấu hình" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <Grid>
-                    </Grid>
-                </TabItem>
-            </TabControl>
+                                <TextBlock HorizontalAlignment="Center" Text="Cấu hình" />
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Grid>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <ItemsControl ItemsSource="{Binding RoundList, UpdateSourceTrigger=PropertyChanged}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel x:Name="Container" HorizontalAlignment="Center" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <component:RoundCard2 Margin="
+                                                                      5"></component:RoundCard2>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+
+            </Grid>
         </materialDesign:Card>
 
     </Grid>

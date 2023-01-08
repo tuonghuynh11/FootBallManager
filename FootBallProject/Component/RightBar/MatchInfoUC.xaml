@@ -75,7 +75,7 @@
                         <materialDesign:TimePicker
                         Grid.Row="1"
                         materialDesign:HintAssist.Hint="Thời gian diễn ra"
-                        SelectedTime="{Binding CurrentCard.DisplayTime, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        SelectedTime="{Binding CurrentCard.DisplayDay, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                        
                         BorderBrush="{StaticResource Black}"
                         BorderThickness="2"
@@ -98,7 +98,7 @@
                         <ComboBox
                             Grid.Row="1"
                             Margin="4,4,4,4"
-                            materialDesign:HintAssist.Hint="Chọn tên đội 1"
+                            materialDesign:HintAssist.Hint="Chọn địa điểm"
                             ItemsSource="{Binding CurrentCard.DisplayPlaces, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                             SelectedItem="{Binding CurrentCard.DisplayPlace, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource combobox_item}">

@@ -168,6 +168,9 @@
     <Compile Include="Component\League\RoundCard.xaml.cs">
       <DependentUpon>RoundCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Component\League\RoundCard2.xaml.cs">
+      <DependentUpon>RoundCard2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Component\League\SearchBar.xaml.cs">
       <DependentUpon>SearchBar.xaml</DependentUpon>
     </Compile>
@@ -517,6 +520,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Component\League\RoundCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Component\League\RoundCard2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

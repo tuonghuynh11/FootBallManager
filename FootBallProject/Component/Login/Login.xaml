@@ -11,7 +11,7 @@
              
             d:DesignHeight="450" d:DesignWidth="370"
             mc:Ignorable="d" >
-    <Border Background="White" CornerRadius="10" BorderThickness="3" BorderBrush="#71DBF8">
+    <Border Background="#e6ffe6" CornerRadius="10">
         <Border.Effect>
             <DropShadowEffect
                 BlurRadius="8"

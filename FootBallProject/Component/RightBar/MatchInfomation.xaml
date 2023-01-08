@@ -45,9 +45,9 @@
                         <TextBlock
                         Grid.Column="1"
                         Style="{StaticResource textblock_item}"
-                        Text="{Binding CurrentCard.DisplayName, FallbackValue='Ten Mon Hoc'}"
+                        Text="{Binding CurrentCard.DisplayName, FallbackValue='Tên trận đấu'}"
                         TextAlignment="Right"
-                        ToolTip="{Binding CurrentCard.DisplayName, FallbackValue='Ten Mon Hoc'}" />
+                        ToolTip="{Binding CurrentCard.DisplayName, FallbackValue='Tên trận đấu'}" />
                     </Grid>
 
                     <!--  Mã môn học  -->
@@ -124,7 +124,7 @@
                         <TextBlock
                         Grid.Column="1"
                         Style="{StaticResource textblock_item}"
-                        Text="{Binding CurrentCard.DisplayPlace, FallbackValue='Code'}"
+                        Text="{Binding CurrentCard.DisplayPlace.TENDIADIEM, FallbackValue='Địa điểm'}"
                         TextAlignment="Right" />
                     </Grid>
 

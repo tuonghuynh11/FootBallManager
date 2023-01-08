@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:uc="clr-namespace:FootBallProject.UserControlBar"
              xmlns:local="clr-namespace:FootBallProject.UserControlBar"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              TextElement.FontWeight="Regular"
              TextElement.FontSize="13"
@@ -14,29 +15,30 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1290">
-    <Border CornerRadius="10" Background="#D0D6DB" Margin="60 15 15 15" Height="690">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0"></RowDefinition>
-                <RowDefinition Height="720"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row = "1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Button 
+    <Border CornerRadius="10" Margin="60 15 15 15" Height="690">
+        <materialDesign:Card Height="690" Width="1290" UniformCornerRadius="10">
+            <Grid Margin="-20 0 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0"></RowDefinition>
+                    <RowDefinition Height="720"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row = "1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button 
                 x:Name="AddNewPerson"
                 VerticalAlignment="Top"
                 Grid.Column="1"
-                Background="#878CF8"
-                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                Width="100"
-                ToolTip="Thêm" 
-                Margin="845,38,275,0" RenderTransformOrigin="-0.3,0.156" Click="AddNewPerson_Click">
-                    _Thêm
-                </Button>
-                <!--<Button
+                Background="#8FD14F"
+                Style="{StaticResource PrimaryButton}"
+                Width="150"
+                ToolTip="Thêm mới" 
+                Margin="850,38,270,0" RenderTransformOrigin="-0.3,0.156" Click="AddNewPerson_Click">
+                        Thêm thảnh viên
+                    </Button>
+                    <!--<Button
                 VerticalAlignment="Top"
                 Grid.Column="1"
                 Background="#17DB4E"
@@ -47,107 +49,110 @@
                 Click="Button_Click_ExportExcel" Margin="755,27,315,0" >
                     Xuất Excel
                 </Button>-->
-                <DataGrid x:Name="DTG" IsReadOnly="True"
+                    <DataGrid x:Name="DTG" IsReadOnly="True"
                       Margin="115,100,115,0" Grid.Column="1"
                       Background="White" RenderTransformOrigin="0.494,0.52"
                       CanUserAddRows="False" ScrollViewer.CanContentScroll="True"
                       AutoGenerateColumns="False" VerticalAlignment="Top"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"  SelectionChanged="DTG_SelectionChanged">
-                    <DataGrid.Resources>
-                        <Style TargetType="{x:Type DataGridColumnHeader}">
-                            <Setter Property="Background" Value="#31AC4C"/>
-                            <Setter Property="Height" Value="33"/>
-                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                        </Style>
-                    </DataGrid.Resources>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Width="100" 
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="#31AC4C"/>
+                                <Setter Property="Height" Value="33"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Width="100" 
                                         Binding="{Binding ID}">
-                            <DataGridTextColumn.ElementStyle>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                        </DataGridTextColumn>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
 
-                        <DataGridTextColumn Header="Họ và tên" Width="155" 
+                            <DataGridTextColumn Header="Họ và tên" Width="155" 
                                         Binding="{Binding Name}">
-                            <DataGridTextColumn.ElementStyle>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                        </DataGridTextColumn>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
 
-                        <DataGridTemplateColumn Header="Ngày sinh" Width="155">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Dateofbirth, StringFormat=d}" 
+                            <DataGridTemplateColumn Header="Ngày sinh" Width="155">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Dateofbirth, StringFormat=d}" 
                                            HorizontalAlignment="Center"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                            <DataGridTemplateColumn.CellEditingTemplate>
-                                <DataTemplate>
-                                    <DatePicker SelectedDate="{Binding Dateofbirth}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellEditingTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Chức vụ" Width="155"
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <DatePicker SelectedDate="{Binding Dateofbirth}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Chức vụ" Width="155"
                                         Binding="{Binding Position}">
-                            <DataGridTextColumn.ElementStyle>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Header="Địa chỉ mail" Width="190"
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Địa chỉ mail" Width="190"
                                         Binding="{Binding Mailcontact}">
-                            <DataGridTextColumn.ElementStyle>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Header="Quốc tịch" Width="155"
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Quốc tịch" Width="155"
                                         Binding="{Binding Nationality}">
-                            <DataGridTextColumn.ElementStyle>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                        </DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <Label Grid.Column="1" Content="Nhập ID đội bóng" 
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Label Grid.Column="1" Content="Chọn đội bóng" 
                    HorizontalAlignment="Left" Margin="115,40,0,0" 
-                   VerticalAlignment="Top" FontSize="15"/>
-                <!--<TextBox x:Name="iddoibong" Grid.Column="1" HorizontalAlignment="Left" Margin="280,32,0,0" 
+               
+                   VerticalAlignment="Top" FontSize="17"/>
+                    <!--<TextBox x:Name="iddoibong" Grid.Column="1" HorizontalAlignment="Left" Margin="280,32,0,0" 
                      TextWrapping="Wrap" VerticalAlignment="Top" 
                      Width="140" Background="White" FontSize="15"/>-->
-                <ComboBox x:Name="cbIDdoibong" Grid.Column="1" HorizontalAlignment="Left"
-                          Margin="275,40,0,0" VerticalAlignment="Top" 
+                    <ComboBox x:Name="cbIDdoibong" Grid.Column="1" HorizontalAlignment="Left"
+                          Margin="275,30,0,0" VerticalAlignment="Top" 
+                          Style="{StaticResource combobox_item}"
+                            materialDesign:HintAssist.Hint="Chọn tên đội bóng"
                           Width="215" Background="White" FontSize="15"/>
-                <Button 
+                    <Button 
                     x:Name="_Load"
                     VerticalAlignment="Top"
                     Grid.Column="1"
-                    Background="Wheat"
-                    Style="{StaticResource MaterialDesignRaisedLightButton}"
-                    Width="100"
-                    ToolTip="Load" 
-                    Margin="990,38,130,0" RenderTransformOrigin="-0.35,0.314" 
-                    Content="_LOAD" Click="_Load_Click"/>
-                <Button 
+                    Background="green"
+                    Style="{StaticResource PrimaryButton}"
+                    Width="120"
+                    ToolTip="Tải lên" 
+                    Margin="1035,38,115,0" RenderTransformOrigin="-0.35,0.314" 
+                    Content="Tải dữ liệu" Click="_Load_Click"/>
+                    <Button 
                     x:Name="AddNewUser"
                     VerticalAlignment="Top"
                     Grid.Column="1" Foreground="White"
-                    Background="#f6546a"
-                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Background="#8FD14F"
+                    Style="{StaticResource PrimaryButton}"
                     Width="150"
-                    ToolTip="Thêm User" 
+                    ToolTip="Thêm" 
                     Margin="675,38,445,0" RenderTransformOrigin="-0.3,0.156" 
-                    Content="_Thêm User" Click="AddNewUser_Click"/>
-                <!--<Button 
+                    Content="Thêm tài khoản" Click="AddNewUser_Click"/>
+                    <!--<Button 
                     x:Name="_Delete"
                     VerticalAlignment="Top"
                     Grid.Column="1"
@@ -157,8 +162,10 @@
                     ToolTip="Xóa" 
                     Margin="835,34,285,0" RenderTransformOrigin="-0.35,0.314" 
                     Content="_Xóa" Click="_Delete_Click"/>-->
+                </Grid>
             </Grid>
-        </Grid>
+        </materialDesign:Card>
+   
 
     </Border>
 </UserControl>

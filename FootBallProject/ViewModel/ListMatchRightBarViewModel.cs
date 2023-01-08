@@ -127,12 +127,15 @@ namespace FootBallProject.ViewModel
         private void SetResult(UserControl userControl)
         {
             var x = userControl.DataContext as FootballMatchCard;
-              
-            if (Check(x) == true && x.DisplayDay != null && DateTime.Compare(x.TryConvertToDateTime(), DateTime.Now) < 0) {
+
+            if (Check(x) == true && x.DisplayDay != null && DateTime.Compare(x.TryConvertToDateTime(), DateTime.Now) < 0)
+            {
 
                 Enable = true;
-                RightSideBarItemViewModel = new MatchResultViewModel(userControl); }
-            else {
+                RightSideBarItemViewModel = new MatchResultViewModel(userControl);
+            }
+            else
+            {
                 RightSideBarItemViewModel = new MatchNoDisPlayViewModel();
             }
         }
