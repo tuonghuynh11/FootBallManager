@@ -125,11 +125,23 @@
 
                         <TextBox FontSize="28" Height="40" Name="txbPhysyque" Text="{Binding SelectedPlayer.Physique}"></TextBox>
                         <Separator></Separator>
-                        <TextBox FontSize="28" Height="40" Name="txbPos" Text="{Binding SelectedPlayer.Position}"></TextBox>
+                        <ComboBox FontSize="28" Height="40" Name="txbPos">
+                            <ComboBoxItem>GK</ComboBoxItem>
+                            <ComboBoxItem>CB</ComboBoxItem>
+                            <ComboBoxItem>LB</ComboBoxItem>
+                            <ComboBoxItem>RB</ComboBoxItem>
+                            <ComboBoxItem>CDM</ComboBoxItem>
+                            <ComboBoxItem>CM</ComboBoxItem>
+                            <ComboBoxItem>LM</ComboBoxItem>
+                            <ComboBoxItem>RM</ComboBoxItem>
+                            <ComboBoxItem>LW</ComboBoxItem>
+                            <ComboBoxItem>RW</ComboBoxItem>
+                            <ComboBoxItem>ST</ComboBoxItem>
+                        </ComboBox>
                         <Separator></Separator>
                         <TextBox FontSize="28" Height="40" Name="txbNumber" Text="{Binding SelectedPlayer.KitNumber}"></TextBox>
                         <Separator></Separator>
-                        <ComboBox SelectedValue="{Binding SelectedPlayer.Nationality}" FontSize="28" Height="40" Name="txbNationality"  ItemsSource="{Binding Nationalities}" IsSynchronizedWithCurrentItem="False"  ></ComboBox>
+                        <ComboBox SelectedValue="{Binding SelectedPlayer.Nationality}" IsEditable="True" FontSize="28" Height="40" Name="txbNationality"  ItemsSource="{Binding Nationalities}" IsSynchronizedWithCurrentItem="False"  ></ComboBox>
                         <Separator></Separator>
 
                     </StackPanel>

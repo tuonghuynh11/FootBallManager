@@ -118,13 +118,25 @@
 
                         <TextBox FontSize="28" Height="40" Name="txbPhysyque"></TextBox>
                         <Separator></Separator>
-                        <TextBox FontSize="28" Height="40" Name="txbPos" ></TextBox>
+                        <ComboBox FontSize="28" Height="40" Name="txbPos" >
+                            <ComboBoxItem>GK</ComboBoxItem>
+                            <ComboBoxItem>CB</ComboBoxItem>
+                            <ComboBoxItem>LB</ComboBoxItem>
+                            <ComboBoxItem>RB</ComboBoxItem>
+                            <ComboBoxItem>CDM</ComboBoxItem>
+                            <ComboBoxItem>CM</ComboBoxItem>
+                            <ComboBoxItem>LM</ComboBoxItem>
+                            <ComboBoxItem>RM</ComboBoxItem>
+                            <ComboBoxItem>LW</ComboBoxItem>
+                            <ComboBoxItem>RW</ComboBoxItem>
+                            <ComboBoxItem>ST</ComboBoxItem>
+                        </ComboBox>
                         <Separator></Separator>
                         <TextBox FontSize="28" Height="40" Name="txbNumber" ></TextBox>
                         <Separator></Separator>
 
 
-                        <ComboBox FontSize="28" Height="40" Name="txbNationality"   ItemsSource="{Binding Nationalities}" ></ComboBox>
+                        <ComboBox FontSize="28" Height="40" Name="txbNationality"   ItemsSource="{Binding Nationalities}" IsEditable="True" ></ComboBox>
                         <Separator ></Separator>
 
 

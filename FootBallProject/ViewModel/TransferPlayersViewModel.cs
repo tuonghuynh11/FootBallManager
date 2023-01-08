@@ -52,6 +52,7 @@ namespace FootBallProject.ViewModel
         public ICommand LoadImageCommand { get; set; }
         public ICommand GoToEdit { get; set; }
         public ICommand ChangeCmbSelection { get; set; }
+        public ICommand TransferLoaded { get; set; }
 
         private List<Player> playerList = new List<Player>();
         private List<Player> transferPlayers = new List<Player>();
@@ -219,6 +220,24 @@ namespace FootBallProject.ViewModel
             }
 
             );
+            TransferLoaded = new RelayCommand<TransferWindowUC>(
+                (p) => { return true; },
+                (p) =>
+                {
+                    PullClub();
+                    PullClubData();
+                    PutClubDataToList();
+                    p.dgrid1.ItemsSource = this.clubPlayerList;
+                    p.dgrid1.Items.Refresh();
+                    PullSoldPlData();
+                    PutSoldDataToList();
+                    p.dgrid3.ItemsSource = this.soldplayers;
+                    PullTransferData();
+                    PutTransfertoList();
+                    p.dgrid2.ItemsSource = this.transferPlayers;
+                }
+
+                );
             //Command nut add
             //AddPlayerCommand = new RelayCommand<object>(
             //    (p) => { if (p as TeamPlayersUC == null) return false; return true; },
@@ -825,7 +844,7 @@ namespace FootBallProject.ViewModel
         }
         void PullSoldPlData()
         {
-            string query = "SELECT ct.*, qt.TENQUOCGIA, db.TEN TenDoi FROM CAUTHU ct join QUOCTICH QT on ct.IDQUOCTICH = qt.ID join DOIBONG db on ct.IDDOIBONG = db.ID WHERE db.ID = '" + currentclubID + "' AND ct.ID  in\r\n(SELECT Idcauthu\r\nfrom CHUYENNHUONG cn join CAUTHU ct1 on\r\ncn.IDcAUTHU = ct1.ID\r\nwhere ct.IDDOIBONG = ct1.IDDOIBONG \r\n)";
+            string query = "SELECT ct.*, qt.TENQUOCGIA, db.TEN TenDoi FROM CAUTHU ct join QUOCTICH QT on ct.IDQUOCTICH = qt.ID join DOIBONG db on ct.IDDOIBONG = db.ID WHERE db.ID = '" + currentclubID + "' AND ct.ID  in\r\n(SELECT Idcauthu\r\nfrom CHUYENNHUONG cn join CAUTHU ct1 on\r\ncn.IDcAUTHU = ct1.ID\r\nwhere ct.IDDOIBONG = ct1.IDDOIBONG AND cn.IDDOIMUA is null)";
             dataTable = new DataTable();
             SqlConnection conn = new SqlConnection(connString);
 

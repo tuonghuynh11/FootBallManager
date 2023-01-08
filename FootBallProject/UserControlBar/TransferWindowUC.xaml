@@ -17,7 +17,7 @@
    	 Name="transferWindow1" Loaded="transferWindow1_Loaded">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command=""/>
+            <i:InvokeCommandAction Command="{Binding TransferLoaded}" CommandParameter="{Binding ElementName=transferWindow1}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <UserControl.Resources>
