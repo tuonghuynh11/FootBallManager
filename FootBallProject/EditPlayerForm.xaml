@@ -123,7 +123,11 @@
                         </ComboBox>
                         <Separator></Separator>
 
-                        <TextBox FontSize="28" Height="40" Name="txbPhysyque" Text="{Binding SelectedPlayer.Physique}"></TextBox>
+                        <ComboBox FontSize="28" Height="40" Name="txbPhysyque" Text="{Binding SelectedPlayer.Physique}">
+                            <ComboBoxItem>Tốt</ComboBoxItem>
+                            <ComboBoxItem>Trung bình</ComboBoxItem>
+                            <ComboBoxItem>Yếu</ComboBoxItem>
+                        </ComboBox>
                         <Separator></Separator>
                         <ComboBox FontSize="28" Height="40" Name="txbPos">
                             <ComboBoxItem>GK</ComboBoxItem>
