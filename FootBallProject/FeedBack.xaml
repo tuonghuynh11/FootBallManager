@@ -19,7 +19,7 @@
          Height="600" 
         Width="500" 
         ResizeMode="NoResize" 
-        Title="FeedBack" >
+        Title="FeedBack" Icon="/Icons/appicon.png" >
    
     <!--<Border CornerRadius="10" Padding="6" BorderBrush="#fbc42d" BorderThickness="2" Background="White">
         <Grid>

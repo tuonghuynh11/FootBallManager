@@ -15,7 +15,7 @@
         
         DataContext="{StaticResource MainVM}"
         mc:Ignorable="d"
-        Title="ChangePass" Height="400" Width="600">
+        Title="ChangePass" Height="400" Width="600" Icon="/Icons/appicon.png">
     <Border CornerRadius="20" Padding="6" BorderBrush="#fbc42d" BorderThickness="2" Background="#bfe7bf">
         <Grid>
             <Grid.RowDefinitions>

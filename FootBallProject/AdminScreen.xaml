@@ -28,7 +28,7 @@
         Width="1300" 
         AllowsTransparency="True"
         Background="Transparent" 
-        WindowStartupLocation="CenterScreen" >
+        WindowStartupLocation="CenterScreen" Icon="/Icons/appicon.png" >
     <Window.Resources>
         <Style TargetType="ListViewItem">
             <Style.Resources>

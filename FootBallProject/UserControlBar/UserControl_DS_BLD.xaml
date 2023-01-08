@@ -16,7 +16,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1290">
     <Border CornerRadius="10" Margin="60 15 15 15" Height="690">
-        <materialDesign:Card Height="690" Width="1290" UniformCornerRadius="10">
+        <materialDesign:Card Height="690" Width="1200" UniformCornerRadius="10">
             <Grid Margin="-20 0 0 0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0"></RowDefinition>

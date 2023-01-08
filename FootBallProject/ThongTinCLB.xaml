@@ -28,7 +28,7 @@
         AllowsTransparency="True"
         Background="Transparent" 
         WindowStartupLocation="CenterScreen"
-        Title="ThongTinGiaiDau" Height="660" Width="1000" Loaded="Window_Loaded">
+        Title="ThongTinGiaiDau" Height="660" Width="1000" Loaded="Window_Loaded" Icon="/Icons/appicon.png">
     <Window.Resources>
         <convert:ConvertByteArrToImage x:Key="imageconvert"></convert:ConvertByteArrToImage>
     </Window.Resources>

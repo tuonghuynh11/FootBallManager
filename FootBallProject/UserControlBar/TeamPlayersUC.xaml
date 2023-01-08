@@ -27,7 +27,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <materialDesign:Card Grid.Row="0" UniformCornerRadius="10" Height="650">
+            <materialDesign:Card Grid.Row="0" UniformCornerRadius="10" Height="690">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="70"></RowDefinition>
@@ -65,7 +65,7 @@
                          ></Button>
                         </StackPanel>
                     </StackPanel>
-                    <Border Grid.Row="2" Background="LightGreen" Height="auto" Margin="50,20,50,86">
+                    <Border Grid.Row="2" Background="LightGreen" Height="auto" Margin="50,20,50,40">
 
                         <DataGrid ItemsSource="{Binding PlayerList,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
                                ScrollViewer.VerticalScrollBarVisibility="Visible" Background="Transparent" SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" 

@@ -15,7 +15,7 @@
         WindowStyle="None"
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen"
-         Background="Transparent" Loaded="editPlayerForm1_Loaded"
+         Background="Transparent" Loaded="editPlayerForm1_Loaded" Icon="/Icons/appicon.png"
 
         >
     <Window.Resources>
