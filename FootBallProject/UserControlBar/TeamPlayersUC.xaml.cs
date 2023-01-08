@@ -46,7 +46,7 @@ namespace FootBallProject.UserControlBar
         {
             if (USER.ROLE != "Admin")
             {
-                teamCMB.Visibility = Visibility.Collapsed;
+                teamCMB.IsEditable = teamCMB.IsEnabled = teamCMB.IsReadOnly = false;
     
             }
         }

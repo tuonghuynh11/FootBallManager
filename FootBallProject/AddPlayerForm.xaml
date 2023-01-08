@@ -116,7 +116,11 @@
                         </ComboBox>
                         <Separator></Separator>
 
-                        <TextBox FontSize="28" Height="40" Name="txbPhysyque"></TextBox>
+                        <ComboBox FontSize="28" Height="40" Name="txbPhysyque">
+                            <ComboBoxItem>Tốt</ComboBoxItem>
+                            <ComboBoxItem>Trung bình</ComboBoxItem>
+                            <ComboBoxItem>Yếu</ComboBoxItem>
+                        </ComboBox>
                         <Separator></Separator>
                         <ComboBox FontSize="28" Height="40" Name="txbPos" >
                             <ComboBoxItem>GK</ComboBoxItem>

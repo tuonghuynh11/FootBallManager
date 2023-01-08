@@ -58,7 +58,7 @@ namespace FootBallProject.ViewModel
         public ICommand GoToEdit { get; set; }
         public ICommand ChangeCmbSelection { get; set; }
         public ICommand TeamLoaded { get; set; }
-        
+
 
         private List<Player> playerList = new List<Player>();
         private List<Player> transferPlayers = new List<Player>();
@@ -186,11 +186,13 @@ namespace FootBallProject.ViewModel
                (p) =>
                {
                    PullClub();
+                   p.teamCMB.SelectedValue = CurrentClub;
                    PullData();
                    PutDataTolist();
 
                    p.Players_List.ItemsSource = this.PlayerList;
                    p.Players_List.Items.Refresh();
+                   
 
 
 
@@ -203,25 +205,25 @@ namespace FootBallProject.ViewModel
                 {
                     p.txbclub.Text = currentClub;
                 }
-                ); 
+                );
 
             EditLoaded = new RelayCommand<EditPlayerForm>(
                 (p) => { return true; },
                 (p) =>
                 {
                     EditPlayerForm e = p;
-                    foreach(var i in e.txbFoot.Items)
+                    foreach (var i in e.txbFoot.Items)
                     {
                         if (i == null)
                             continue;
                         ComboBoxItem item = (ComboBoxItem)i;
-                        
+
                         if (item.Content.ToString() == SelectedPlayer.Foot)
                         {
                             e.txbFoot.SelectedItem = i;
                         }
                     }
-                    foreach(var i in e.txbPos.Items)
+                    foreach (var i in e.txbPos.Items)
                     {
                         if (i == null)
                             continue;
@@ -232,7 +234,22 @@ namespace FootBallProject.ViewModel
                             e.txbPos.SelectedItem = i;
                         }
                     }
-                    
+                    foreach (var i in e.txbPhysyque.Items)
+                    {
+                        if (i == null)
+                            continue;
+                        ComboBoxItem item = (ComboBoxItem)i;
+
+                        if (item.Content.ToString() == SelectedPlayer.Physique)
+                        {
+                            e.txbPhysyque.SelectedItem = i;
+                        }
+                    }
+                    int hpos = SelectedPlayer.Height.IndexOf("cm");
+                    e.txbHeight.Text = SelectedPlayer.Height.Substring(0, hpos);
+                    int wpos = SelectedPlayer.Weight.IndexOf("kg");
+                    e.txbWeight.Text = SelectedPlayer.Weight.Substring(0, wpos);
+
                 }
                 );
 
@@ -344,39 +361,77 @@ namespace FootBallProject.ViewModel
                             oK.ShowDialog();
                             return;
                         }
-                        //if (!int.TryParse(wd1.txbHeight.Text, out parsevalue))
-                        //{
-                        //    System.Windows.Forms.MessageBox.Show("Chiều cao phải nhập số", "Nhập lại chiều cao đi!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        //    return;
-                        //}
-                        //if (!int.TryParse(wd1.txbWeight.Text, out parsevalue))
-                        //{
-                        //    System.Windows.Forms.MessageBox.Show("Cân nặng phải nhập số", "Nhập lại cân nặng đi!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        //    return;
-                        //}
-                        if (!Regex.IsMatch(wd1.txbHeight.Text, @"^\d+cm$"))
+                        else if (int.Parse(wd1.txbAge.Text) < 0)
                         {
-                            OKCancelPopUp oK = new OKCancelPopUp(); 
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập tuổi không đúng";
+                            oK.content.Text = "Bạn phải nhập tuổi bằng số nguyên";
+                            oK.ShowDialog();
+                            return;
+                        }
+                        if (!int.TryParse(wd1.txbHeight.Text, out parsevalue))
+                        {
+                            OKCancelPopUp oK = new OKCancelPopUp();
                             oK.Height = 200;
                             oK.Width = 390;
                             oK.titletxbl.Text = "Nhập lại chiều cao";
-                            oK.content.Text = "Nhập theo [số]cm";
+                            oK.content.Text = "Nhập theo số nguyên dương";
                             oK.ShowDialog();
-                            //System.Windows.Forms.MessageBox.Show("Nhập theo [số]cm", "Nhập lại tuổi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return;
                         }
-                        if (!Regex.IsMatch(wd1.txbWeight.Text, @"^\d+kg$"))
+                        else if (int.Parse(wd1.txbHeight.Text) < 0)
+                        {
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập lại chiều cao";
+                            oK.content.Text = "Nhập theo số nguyên dương";
+                            oK.ShowDialog();
+                            return;
+                        }
+                        if (!int.TryParse(wd1.txbWeight.Text, out parsevalue))
                         {
                             OKCancelPopUp oK = new OKCancelPopUp();
                             oK.Height = 200;
                             oK.Width = 390;
                             oK.titletxbl.Text = "Nhập lại cân nặng";
-                            oK.content.Text = "Nhập theo [số]kg";
-                            oK.ShowDialog();
-                            //System.Windows.Forms.MessageBox.Show("Nhập theo [số]kg", "Nhập lại cân nagwj", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
+                            oK.content.Text = "Nhập theo số nguyên dương";
+                            oK.ShowDialog(); return;
                         }
-                        if (!int.TryParse(wd1.txbNumber.Text, out parsevalue))
+                        else if (int.Parse(wd1.txbWeight.Text) < 0)
+                        {
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập lại cân nặng";
+                            oK.content.Text = "Nhập theo số nguyên dương";
+                            oK.ShowDialog(); return;
+                        }
+                        //if (!Regex.IsMatch(wd1.txbHeight.Text, @"^\d+cm$"))
+                        //{
+                        //    OKCancelPopUp oK = new OKCancelPopUp(); 
+                        //    oK.Height = 200;
+                        //    oK.Width = 390;
+                        //    oK.titletxbl.Text = "Nhập lại chiều cao";
+                        //    oK.content.Text = "Nhập theo [số]cm";
+                        //    oK.ShowDialog();
+                        //    //System.Windows.Forms.MessageBox.Show("Nhập theo [số]cm", "Nhập lại tuổi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        //    return;
+                        //}
+                        //if (!Regex.IsMatch(wd1.txbWeight.Text, @"^\d+kg$"))
+                        //{
+                        //    OKCancelPopUp oK = new OKCancelPopUp();
+                        //    oK.Height = 200;
+                        //    oK.Width = 390;
+                        //    oK.titletxbl.Text = "Nhập lại cân nặng";
+                        //    oK.content.Text = "Nhập theo [số]kg";
+                        //    oK.ShowDialog();
+                        //    //System.Windows.Forms.MessageBox.Show("Nhập theo [số]kg", "Nhập lại cân nagwj", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        //    return;
+                        //}
+                        if (!int.TryParse(wd1.txbNumber.Text, out parsevalue) || int.Parse(wd1.txbNumber.Text) < 0)
                         {
                             OKCancelPopUp oK = new OKCancelPopUp();
                             oK.Height = 200;
@@ -385,6 +440,17 @@ namespace FootBallProject.ViewModel
                             oK.content.Text = "Xin nhập lại số áo";
                             oK.ShowDialog(); return;
                         }
+                        else if (int.Parse(wd1.txbNumber.Text) < 0)
+                        {
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập số áo không đúng";
+                            oK.content.Text = "Xin nhập lại số áo";
+                            oK.ShowDialog(); return;
+                        }
+                        wd1.txbHeight.Text = wd1.txbHeight.Text + "cm";
+                        wd1.txbWeight.Text = wd1.txbWeight.Text + "kg";
                         string[] arrString = { "GK", "CB", "LB", "RB", "CDM", "CM", "LM", "RM", "LW", "RW", "ST" };
 
                         if (!arrString.Contains(position, StringComparer.OrdinalIgnoreCase))
@@ -398,9 +464,9 @@ namespace FootBallProject.ViewModel
                         string query = "INSERT CAUTHU values(@teamid, @idquoctich, @hoten, @tuoi, 0, 0, @hinhanh, @chanthuan, @Thetrang, @vitri, @soao, '" + wd1.txbHeight.Text + "', '" + wd1.txbWeight.Text + "', 0)";
                         PullClub();
                         string IDDoiBong = "";
-                        if(USER.ROLE != "Admin")
+                        if (USER.ROLE != "Admin")
                             IDDoiBong = currentclubID;
-                        else foreach(DataRow dr in dataTable.Rows)
+                        else foreach (DataRow dr in dataTable.Rows)
                             {
                                 if (dr["TEN"].ToString() == wd1.txbclub.Text)
                                 {
@@ -462,9 +528,9 @@ namespace FootBallProject.ViewModel
                         }
                         try
                         {
-                            if(PlayerList.Count >= 10)
+                            if (PlayerList.Count == 10)
                                 RandomSquad(IDDoiBong);
-      
+
                         }
                         catch (Exception e)
                         {
@@ -484,7 +550,7 @@ namespace FootBallProject.ViewModel
                     OKCancelPopUp oKCancelPopUp = new OKCancelPopUp();
                     oKCancelPopUp.content.Text = "Bạn có thực sự muốn xoá " + selectedPlayer.Name + " không?";
                     oKCancelPopUp.ShowDialog();
-                    if(oKCancelPopUp.Ok == 0) { return; }
+                    if (oKCancelPopUp.Ok == 0) { return; }
                     string query = "DELETE FROM CAUTHU WHERE ID = @id";
                     string id = SelectedPlayer.Id;
                     using (SqlConnection sqlConnection = new SqlConnection(connString))
@@ -544,7 +610,19 @@ namespace FootBallProject.ViewModel
                             oK.Height = 200;
                             oK.Width = 390;
                             oK.titletxbl.Text = "Nhập tuổi không đúng";
-                            oK.content.Text = "Bạn phải nhập tuổi bằng số nguyên";
+                            oK.content.Text = "Bạn phải nhập tuổi bằng số nguyên dương";
+                            oK.ShowDialog();
+
+                            //System.Windows.Forms.MessageBox.Show("Tuổi phải nhập số", "Nhập lại tuổi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        }
+                        else if (int.Parse(edit.txbAge.Text) < 0)
+                        {
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập tuổi không đúng";
+                            oK.content.Text = "Bạn phải nhập tuổi bằng số nguyên dương";
                             oK.ShowDialog();
 
                             //System.Windows.Forms.MessageBox.Show("Tuổi phải nhập số", "Nhập lại tuổi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -559,31 +637,79 @@ namespace FootBallProject.ViewModel
                             oK.content.Text = "Xin nhập lại số áo";
                             oK.ShowDialog(); return;
                         }
-                        if (!Regex.IsMatch(edit.txbHeight.Text, @"^\d+cm$"))
+                        else if (int.Parse(edit.txbNumber.Text) < 0)
                         {
                             OKCancelPopUp oK = new OKCancelPopUp();
-                            oK.titletxbl.Text = "Nhập lại chiều cao";
-                            oK.content.Text = "Nhập theo [số]cm";
-                            oK.ShowDialog();
-
-                            //System.Windows.Forms.MessageBox.Show("Nhập theo [số]cm", "Nhập lại tuổi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập số áo không đúng";
+                            oK.content.Text = "Xin nhập lại số áo";
+                            oK.ShowDialog(); return;
                         }
-                        if (!Regex.IsMatch(edit.txbWeight.Text, @"^\d+kg$"))
-                        {
-                            OKCancelPopUp oK = new OKCancelPopUp();
-                            oK.titletxbl.Text = "Nhập lại cân nặng";
-                            oK.content.Text = "Nhập theo [số]kg";
-                            oK.ShowDialog();
-
-                            //System.Windows.Forms.MessageBox.Show("Nhập theo [số]cm", "Nhập lại tuổi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
-                        }
-                        //if (!int.TryParse(edit.txbWeight.Text, out parsevalue))
+                        //if (!Regex.IsMatch(edit.txbHeight.Text, @"^\d+cm$"))
                         //{
-                        //    System.Windows.Forms.MessageBox.Show("Cân nặng phải nhập số", "Nhập lại cân nặng", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        //    OKCancelPopUp oK = new OKCancelPopUp();
+                        //    oK.Height = 200;
+                        //    oK.Width = 390;
+                        //    oK.titletxbl.Text = "Nhập lại chiều cao";
+                        //    oK.content.Text = "Nhập theo [số]cm";
+                        //    oK.ShowDialog();
+
+                        //    //System.Windows.Forms.MessageBox.Show("Nhập theo [số]cm", "Nhập lại tuổi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         //    return;
                         //}
+                        //if (!Regex.IsMatch(edit.txbWeight.Text, @"^\d+kg$"))
+                        //{
+                        //    OKCancelPopUp oK = new OKCancelPopUp();
+                        //    oK.Height = 200;
+                        //    oK.Width = 390;
+                        //    oK.titletxbl.Text = "Nhập lại cân nặng";
+                        //    oK.content.Text = "Nhập theo [số]kg";
+                        //    oK.ShowDialog();
+
+                        //    //System.Windows.Forms.MessageBox.Show("Nhập theo [số]cm", "Nhập lại tuổi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        //    return;
+                        //}
+                        if (!int.TryParse(edit.txbHeight.Text, out parsevalue))
+                        {
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập lại chiều cao";
+                            oK.content.Text = "Nhập theo số nguyên dương";
+                            oK.ShowDialog();
+                            return;
+                        }
+                        else if (int.Parse(edit.txbHeight.Text) < 0)
+                        {
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập lại chiều cao";
+                            oK.content.Text = "Nhập theo số nguyên dương";
+                            oK.ShowDialog();
+                            return;
+                        }
+                        if (!int.TryParse(edit.txbWeight.Text, out parsevalue))
+                        {
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập lại cân nặng";
+                            oK.content.Text = "Nhập theo số nguyên dương";
+                            oK.ShowDialog();
+                            return;
+                        }
+                        else if (int.Parse(edit.txbWeight.Text) < 0)
+                        {
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập lại cân nặng";
+                            oK.content.Text = "Nhập theo số nguyên dương";
+                            oK.ShowDialog();
+                            return;
+                        }
                         string[] arrString = { "GK", "CB", "LB", "RB", "CDM", "CM", "LM", "RM", "LW", "RW", "ST" };
 
                         if (!arrString.Contains(position, StringComparer.OrdinalIgnoreCase))
@@ -593,6 +719,8 @@ namespace FootBallProject.ViewModel
                                 " CDM, CM, LM, RM, LW, RW, ST", "Vị trí", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return;
                         }
+                        edit.txbHeight.Text = edit.txbHeight.Text + "cm";
+                        edit.txbWeight.Text = edit.txbWeight.Text + "kg";
                         string query = EdgePath == "" ?
                         "UPDATE CAUTHU SET HOTEN = @hoten, IDQUOCTICH=@idquoctich, TUOI =@tuoi, CHANTHUAN = @chanthuan, " +
                         "THETRANG = @Thetrang, VITRI = '" + edit.txbPos.Text + "', SOAO = " + edit.txbNumber.Text + ", CHIEUCAO = '" + edit.txbHeight.Text + "', CANNANG = '" + edit.txbWeight.Text + "' WHERE ID = @id" :
@@ -840,7 +968,7 @@ namespace FootBallProject.ViewModel
                             x.cthimage.Source = new BitmapImage(new Uri(openfile.FileName));
                             EdgePath = openfile.FileName;
 
-                            
+
                         }
 
                     }
@@ -1220,4 +1348,3 @@ namespace FootBallProject.ViewModel
         public byte[] Image { get { return image; } set { image = value; OnPropertyChanged(); } }
     }
 }
-

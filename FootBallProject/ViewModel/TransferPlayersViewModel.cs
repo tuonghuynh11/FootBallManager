@@ -607,7 +607,7 @@ namespace FootBallProject.ViewModel
                     TransferWindowUC tp = p as TransferWindowUC;
                     //string query1 = "UPDATE CAUTHU SET IDDOIBONG = @iddoibong where ID = @id";
                     string query2 = "UPDATE CHuYENNHUONG SET IDDOIMUA = '" + currentclubID + "' WHERE IDCAUTHU = @id AND IDDOIMUA is NULL ";
-                    string query3 = "INSERT NOTIFICATION values(85, N'" + currentClub + " đăng ký mua " + SelectedPlayer.Name + "', 'Chưa xem')";
+                    string query3 = "INSERT NOTIFICATION values(85, N'" + currentClub + " đăng ký mua " + SelectedPlayer.Name + "', N'Chưa xem')";
                     string id = SelectedPlayer.Id;
 
                     //System.Windows.Forms.MessageBox.Show(id);
