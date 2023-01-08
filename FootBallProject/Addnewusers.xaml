@@ -61,7 +61,7 @@
                     Background="#fbc42d"
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Width="100" ToolTip="Xác nhận" RenderTransformOrigin="-0.3,0.156" 
-                    Content="_Xác nhận" Margin="339,279,49,0" Click="ok_Click" />
+                    Content="_Xác nhận" Margin="327,280,57,0" Click="ok_Click" />
             </Grid>
         </Grid>
     </Border>

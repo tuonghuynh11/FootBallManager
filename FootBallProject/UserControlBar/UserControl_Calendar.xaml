@@ -194,7 +194,7 @@
             TextWrapping="Wrap" VerticalAlignment="Top" 
             Width="140" Background="Wheat" FontSize="15" Grid.Row="1"/>-->
             <ComboBox x:Name="cbID" HorizontalAlignment="Left" Margin="625,43,0,0" 
-                        VerticalAlignment="Top" Width="200" 
+                        VerticalAlignment="Top" Width="220" 
                         Height="50"
                         Grid.Row="1"
                         Style="{StaticResource combobox_item}"/>

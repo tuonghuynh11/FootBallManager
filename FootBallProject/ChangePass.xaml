@@ -58,7 +58,7 @@
                 <PasswordBox x:Name="xacnhan" HorizontalAlignment="Left" 
                          Margin="219,176,0,0" VerticalAlignment="Top" 
                          Width="330" FontSize="20" Background="#e9f7e9"/>
-                <Button Width="100" Margin="399,312,89,-24" Background="#f6546a" 
+                <Button Width="100" Margin="399,312,85,-24" Background="#f6546a" 
                         BorderBrush="{x:Null}" Content="OKAY" Click="Button_Click"/>
                 <Label Content="Xác nhận OTP" HorizontalAlignment="Left" 
                     Margin="17,256,0,0" VerticalAlignment="Top"
@@ -66,7 +66,7 @@
                 <TextBox x:Name="tbOTP" HorizontalAlignment="Left" 
                          Margin="219,256,0,0" VerticalAlignment="Top" 
                          Width="200" FontSize="20" Background="#e9f7e9"/>
-                <Button x:Name="getOTP" Width="100" Margin="449,256,39,32" Background="#fbc42d" 
+                <Button x:Name="getOTP" Width="100" Margin="449,256,35,32" Background="#fbc42d" 
                     BorderBrush="{x:Null}" Content="Lấy OTP" Click="getOTP_Click" />
             </Grid>
         </Grid>

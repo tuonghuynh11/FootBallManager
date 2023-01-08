@@ -131,7 +131,7 @@
                           Margin="275,30,0,0" VerticalAlignment="Top" 
                           Style="{StaticResource combobox_item}"
                             materialDesign:HintAssist.Hint="Chọn tên đội bóng"
-                          Width="215" Background="White" FontSize="15"/>
+                          Width="250" Background="White" FontSize="15"/>
                     <Button 
                     x:Name="_Load"
                     VerticalAlignment="Top"
