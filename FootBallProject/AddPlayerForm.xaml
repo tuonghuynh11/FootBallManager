@@ -16,7 +16,7 @@
         Title="AddPlayerForm" Height="650" Width="1000"
         DataContext="{StaticResource TeamPlayersVM}"
         Name="AddPlayerForm"
-                WindowStartupLocation="CenterScreen" Loaded="AddPlayerForm_Loaded">
+                WindowStartupLocation="CenterScreen" Loaded="AddPlayerForm_Loaded" Icon="/Icons/appicon.png">
     <Window.Resources>
         <Style TargetType="TextBox">
 

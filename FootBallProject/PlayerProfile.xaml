@@ -13,7 +13,7 @@
         AllowsTransparency="True"
          WindowStyle="None"
         Background="Transparent" 
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterScreen" Icon="/Icons/appicon.png"
         >
     <Window.Resources>
         <Style TargetType="TextBlock">

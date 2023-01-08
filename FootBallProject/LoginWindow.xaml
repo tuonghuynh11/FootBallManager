@@ -12,7 +12,7 @@
         AllowsTransparency="True"
         AllowDrop="True"
         mc:Ignorable="d"
-         Height="450" Width="380">
+         Height="450" Width="380" Icon="/Icons/appicon.png">
     <Grid>
         <Grid.Resources>
             <component:Login x:Key="Default"></component:Login>

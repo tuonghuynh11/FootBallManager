@@ -30,7 +30,7 @@
        
         
         
-        Title="Câu lạc bộ" Height="550" Width="1060" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Title="Câu lạc bộ" Height="550" Width="1060" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/Icons/appicon.png"
   
         >
     <Window.Resources>
