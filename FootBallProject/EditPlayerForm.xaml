@@ -107,10 +107,10 @@
                         <ComboBox SelectedValue="{Binding SelectedPlayer.Club}" IsEditable="False" IsEnabled="False" IsReadOnly="True" FontSize="28" Height="40" Name="txbclub" ItemsSource="{Binding ClubsNames}"></ComboBox>
                         <Separator></Separator>
 
-                        <TextBox Text ="{Binding SelectedPlayer.Height}" FontSize="28" Height="40" Name="txbHeight"></TextBox>
+                        <TextBox  FontSize="28" Height="40" Name="txbHeight"></TextBox>
                         <Separator></Separator>
 
-                        <TextBox Text ="{Binding SelectedPlayer.Weight}"  FontSize="28" Height="40" Name="txbWeight"></TextBox>
+                        <TextBox   FontSize="28" Height="40" Name="txbWeight"></TextBox>
                         <Separator></Separator>
 
 
@@ -123,7 +123,11 @@
                         </ComboBox>
                         <Separator></Separator>
 
-                        <TextBox FontSize="28" Height="40" Name="txbPhysyque" Text="{Binding SelectedPlayer.Physique}"></TextBox>
+                        <ComboBox FontSize="28" Height="40" Name="txbPhysyque">
+                            <ComboBoxItem>Tốt</ComboBoxItem>
+                            <ComboBoxItem>Trung bình</ComboBoxItem>
+                            <ComboBoxItem>Yếu</ComboBoxItem>
+                        </ComboBox>
                         <Separator></Separator>
                         <ComboBox FontSize="28" Height="40" Name="txbPos">
                             <ComboBoxItem>GK</ComboBoxItem>
