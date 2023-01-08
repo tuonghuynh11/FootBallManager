@@ -5,6 +5,7 @@ using FootBallProject.Object;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ using System.Windows.Navigation;
 
 namespace FootBallProject.ViewModel
 {
-    public  class ListofLeagueViewModel : BaseViewModel
+    public class ListofLeagueViewModel : BaseViewModel
     {
         private static ListofLeagueViewModel _instance;
         public static ListofLeagueViewModel Instance
@@ -44,16 +45,33 @@ namespace FootBallProject.ViewModel
             get { return teams; }
             set { teams = value; OnPropertyChanged(); }
         }
+        private ObservableCollection<RoundObject> _roundlist = new ObservableCollection<RoundObject>();
+        public ObservableCollection<RoundObject> RoundList
+        {
+            get { return _roundlist; }
+            set
+            {
+                _roundlist = value;
+                OnPropertyChanged();
+            }
+        }
         public ICommand AddLeague { get; set; }
         private void LoadTeambyLeagueid()
         {
             teams.Clear();
-            List<TEAMOFLEAGUE> list = DataProvider.Instance.Database.TEAMOFLEAGUEs.Where(x=>x.IDGIAIDAU == Currentleague.League.ID).ToList();
+            List<TEAMOFLEAGUE> list = DataProvider.Instance.Database.TEAMOFLEAGUEs.Where(x => x.IDGIAIDAU == Currentleague.League.ID).ToList();
             foreach (var item in list)
             {
                 teams.Add(item);
             }
             Teams = teams;
+            var list1 = DataProvider.ins.DB.ROUNDs.Where(x => x.IDGIAIDAU == Currentleague.League.ID).ToList();
+            _roundlist.Clear();
+            foreach (var item in list1)
+            {
+                _roundlist.Add(new RoundObject(item));
+            }
+            RoundList = _roundlist;
         }
         private object currentAhihi;
         public object CurrentAhihi
@@ -83,7 +101,7 @@ namespace FootBallProject.ViewModel
         public LeagueCardOb first;
         public ListofLeagueViewModel()
         {
-            Instance= this;
+            Instance = this;
             var currentleague = DataProvider.Instance.Database.LEAGUEs.FirstOrDefault();
             Currentleague = new LeagueCardOb(currentleague);
             ObservableCollection<LeagueCardOb> list3 = new ObservableCollection<LeagueCardOb>();
@@ -97,9 +115,19 @@ namespace FootBallProject.ViewModel
             config1 = new ConfigVongLoai1ViewModel(this);
             createnewleague = new CreateNewLeague();
             CurrentAhihi = configAutoViewModel;
-            AddLeague = new RelayCommand<object>((p) => { return true; }, (p) => { AddLeagueFuntion(); } );
+            AddLeague = new RelayCommand<object>((p) => { return true; }, (p) => { AddLeagueFuntion(); });
             //AddTeamofLeague = new RelayCommand<object>((p) => true, (p) => AddTeamofLeague(1, teams[0]));
             CheckVisibility();
+        }
+        private void UpdateLeagues()
+        {
+            ObservableCollection<LeagueCardOb> list3 = new ObservableCollection<LeagueCardOb>();
+            List<LEAGUE> list1 = DataProvider.Instance.Database.LEAGUEs.ToList();
+            foreach (var item in list1)
+            {
+                list3.Add(new LeagueCardOb(item));
+            }
+            Leagues = list3;
         }
         private void CheckVisibility()
         {
@@ -109,12 +137,13 @@ namespace FootBallProject.ViewModel
             }
             else CreateLeagueButton = false;
         }
-        public void Refresh(LeagueCardOb p) 
+        public void Refresh(LeagueCardOb p)
         {
+            UpdateLeagues();
             Currentleague = p;
             CurrentAhihi = configAutoViewModel;
         }
-        public void AddLeagueFuntion() 
+        public void AddLeagueFuntion()
         {
             createnewleague = new CreateNewLeague();
             config1 = new ConfigVongLoai1ViewModel(this);
@@ -127,6 +156,7 @@ namespace FootBallProject.ViewModel
         }
         public void GoNext()
         {
+            if (config1 == null) config1 = new ConfigVongLoai1ViewModel(this);
             CurrentAhihi = config1;
         }
         public void Return()
@@ -135,6 +165,7 @@ namespace FootBallProject.ViewModel
         }
         public void ReturnConfig1()
         {
+            if (config1 == null) config1 = new ConfigVongLoai1ViewModel(this);
             CurrentAhihi = config1;
         }
         public void ReturnCreate()

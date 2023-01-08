@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace FootBallProject.ViewModel
 {
-    public class ConfigVongLoai1ViewModel: BaseViewModel
+    public class ConfigVongLoai1ViewModel : BaseViewModel
     {
         public int numofTeam;
         public string CurrentTeam
@@ -42,16 +42,16 @@ namespace FootBallProject.ViewModel
         public string TotalTeam
         {
             get { return totalTeam; }
-            set { totalTeam = value; OnPropertyChanged();}
+            set { totalTeam = value; OnPropertyChanged(); }
         }
         public void CountTotalTeam()
         {
             int count = 0;
-            foreach(var item in Teams)
+            foreach (var item in Teams)
             {
                 if ((item as TeamItem).Selected == true)
                 {
-                    count++;                
+                    count++;
                 }
             }
 

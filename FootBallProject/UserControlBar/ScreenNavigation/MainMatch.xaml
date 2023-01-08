@@ -12,7 +12,7 @@
  Style="{StaticResource Page_Style}" 
              d:DesignHeight="790" d:DesignWidth="1290">
     <Grid Margin="60,0,15,0" Height="690"  >
-        <Border CornerRadius="10" Background="LightSeaGreen" >
+        <Border CornerRadius="10" Background="Transparent" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
@@ -50,6 +50,6 @@
         </Border>
 
     </Grid>
-   
+
 
 </UserControl>

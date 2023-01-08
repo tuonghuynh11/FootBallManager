@@ -26,77 +26,80 @@
         <convert:ConvertByteArrToImage x:Key="imageconvert"/>
         <convert:ConvertStringToCurrency x:Key="currencyconvert"/>
     </UserControl.Resources>
-    <Grid Margin="60,10,15,0" Height="690"  >
-        <Border CornerRadius="10" Background="#D0D6DB" >
-            <StackPanel Orientation="Vertical" Margin="20">
-                <TextBlock Text="Danh sách đang chờ" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="Red"></TextBlock>
-                <Border Margin="0 30 0 0" >
+    <Grid Margin="60,10,15,0" Height="690" >
+        <Border CornerRadius="10" >
+            <materialDesign:Card UniformCornerRadius="10">
+                <StackPanel Orientation="Vertical" Margin="20">
+                    <TextBlock Text="Danh sách đang chờ" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="30" FontWeight="Bold" ></TextBlock>
+                    <Border Margin="0 30 0 0" >
 
-                    <DataGrid  CanUserAddRows="False" ItemsSource="{Binding TransferPlayers}" BorderBrush="Orange" BorderThickness="1" AutoGenerateColumns="False" Name="AcceptTransferdgrid" Background="#E3F42A" MouseDoubleClick="AcceptTransferdgrid_MouseDoubleClick" SelectionMode="Single" CanUserDeleteRows="False">
-                        <DataGrid.Resources>
-                           
-                        </DataGrid.Resources>
-                        <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Đội mua" Width="200"  IsReadOnly="True">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate >
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="{Binding HINHANHDOIMUA, Converter={StaticResource ResourceKey=imageconvert } }" DockPanel.Dock="Left" Width="30" Height="30"></Image>
-                                            <Separator Background="Transparent" Width="20" Foreground="Transparent" BorderBrush="Transparent" BorderThickness="0"></Separator>
-                                            <TextBlock  Text="{Binding TENDOIMUA}" VerticalAlignment="Center"></TextBlock>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                        <DataGrid  CanUserAddRows="False" ItemsSource="{Binding TransferPlayers}" BorderBrush="Orange" BorderThickness="1" AutoGenerateColumns="False" Name="AcceptTransferdgrid" Background="#E3F42A" MouseDoubleClick="AcceptTransferdgrid_MouseDoubleClick" SelectionMode="Single" CanUserDeleteRows="False">
+                            <DataGrid.Resources>
 
-                            <DataGridTemplateColumn  Header="Đội bán" Width="200"  IsReadOnly="True">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate >
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="{Binding HINHANHDOIBAN, Converter={StaticResource ResourceKey=imageconvert } }" DockPanel.Dock="Left" Width="30" Height="30"></Image>
-                                            <Separator Background="Transparent" Width="20" Foreground="Transparent" BorderBrush="Transparent" BorderThickness="0"></Separator>
-                                            <TextBlock  Text="{Binding TENDOIBAN}" VerticalAlignment="Center"></TextBlock>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            </DataGrid.Resources>
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Đội mua" Width="200"  IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate >
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="{Binding HINHANHDOIMUA, Converter={StaticResource ResourceKey=imageconvert } }" DockPanel.Dock="Left" Width="30" Height="30"></Image>
+                                                <Separator Background="Transparent" Width="20" Foreground="Transparent" BorderBrush="Transparent" BorderThickness="0"></Separator>
+                                                <TextBlock  Text="{Binding TENDOIMUA}" VerticalAlignment="Center"></TextBlock>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn  Header="Cầu thủ" Width="200"  IsReadOnly="True">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate >
-                                        <TextBlock  Text="{Binding TENCAUTHU}" VerticalAlignment="Center"></TextBlock>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn  Header="Giá trị" Width="200"  IsReadOnly="True">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate >
-                                        <TextBlock  Text="{Binding GIATRICAUTHU , Converter={StaticResource ResourceKey=currencyconvert}}"  VerticalAlignment="Center"></TextBlock>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="auto"   IsReadOnly="True">
-                                
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate >
-                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                            <Button  Name="Cancel" Content="Hủy bỏ" Margin="0 0 15 0" Click="Cancel_Click">
-                                            </Button>
-                                            <Button  Name="Confirm" Content="Xác nhận" Click="Confirm_Click" >
-                                            </Button>
-                                        </StackPanel>
-                                  
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn  Header="Đội bán" Width="200"  IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate >
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="{Binding HINHANHDOIBAN, Converter={StaticResource ResourceKey=imageconvert } }" DockPanel.Dock="Left" Width="30" Height="30"></Image>
+                                                <Separator Background="Transparent" Width="20" Foreground="Transparent" BorderBrush="Transparent" BorderThickness="0"></Separator>
+                                                <TextBlock  Text="{Binding TENDOIBAN}" VerticalAlignment="Center"></TextBlock>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
 
-                        </DataGridTemplateColumn>
-                         
+                                <DataGridTemplateColumn  Header="Cầu thủ" Width="200"  IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate >
+                                            <TextBlock  Text="{Binding TENCAUTHU}" VerticalAlignment="Center"></TextBlock>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn  Header="Giá trị" Width="200"  IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate >
+                                            <TextBlock  Text="{Binding GIATRICAUTHU , Converter={StaticResource ResourceKey=currencyconvert}}"  VerticalAlignment="Center"></TextBlock>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="auto"   IsReadOnly="True">
 
-                        </DataGrid.Columns>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate >
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                <Button  Name="Cancel" Content="Hủy bỏ" Margin="0 0 15 0" Click="Cancel_Click">
+                                                </Button>
+                                                <Button  Name="Confirm" Content="Xác nhận" Click="Confirm_Click" >
+                                                </Button>
+                                            </StackPanel>
 
-                </DataGrid>
-            </Border>
-            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+
+                                </DataGridTemplateColumn>
+
+
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+                    </Border>
+                </StackPanel>
+
+            </materialDesign:Card>
         </Border>
 
     </Grid>

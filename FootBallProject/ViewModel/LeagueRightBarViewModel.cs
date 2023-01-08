@@ -50,7 +50,7 @@ namespace FootBallProject.ViewModel
             LeagueCardOb card = p.DataContext as LeagueCardOb;
             ListofLeagueViewModel.Instance.Currentleague = card;
             RightSideBarItemViewModel = new LeagueInfomationViewModel(card);
-            ListofLeagueViewModel.Instance.Refresh(card);
+            //ListofLeagueViewModel.Instance.Refresh(card);
         }
     }
 

@@ -117,7 +117,7 @@ namespace FootBallProject.ViewModel
             {
                 if (item.ROUND == SelectedRound || SelectedRound == null)
                 {
-                    FootballMatchCard1.Add(new FootballMatchCard(item.ID, item.TENTRANDAU, item.DIADIEM1 , item.THOIGIAN, item));
+                    FootballMatchCard1.Add(new FootballMatchCard(item.ID, item.TENTRANDAU, item.DIADIEM1, item.THOIGIAN, item));
                     FootballMatchCards.Add(item);
                 }
             }
