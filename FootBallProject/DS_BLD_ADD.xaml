@@ -76,7 +76,7 @@
                        Height="25" Background="White" Margin="0,150,0,125"/>
                 <TextBox x:Name="tbdc" Width="250" 
                        HorizontalAlignment="Center"
-                       Height="25" Background="White" Margin="0,199,0,76"/>
+                       Height="25" Background="White" Margin="0,189,0,86"/>
                 <!--<TextBox x:Name="tbqt" Width="250" 
                        HorizontalAlignment="Center"
                        Height="25" Background="White" Margin="0,229,0,46"/>-->

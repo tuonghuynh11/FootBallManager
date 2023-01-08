@@ -72,11 +72,11 @@
                 <TextBox x:Name="tbdc" Width="160" 
                            IsReadOnly="True"
                            HorizontalAlignment="Left"
-                           Height="25" Background="White" Margin="420,262,0,64"/>
+                           Height="25" Background="White" Margin="420,262,0,63"/>
                 <TextBox x:Name="tbqt" Width="160" 
                            IsReadOnly="True"
                            HorizontalAlignment="Left"
-                           Height="25" Background="White" Margin="115,262,0,64"/>
+                           Height="25" Background="White" Margin="115,262,0,63"/>
                 <ComboBox x:Name="cbqt" Width="160" Visibility="Hidden"
                            HorizontalAlignment="Left"
                            Height="25" Background="White" Margin="115,262,0,64"/>
