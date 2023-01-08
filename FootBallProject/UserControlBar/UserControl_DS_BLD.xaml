@@ -36,7 +36,7 @@
                 Width="150"
                 ToolTip="Thêm mới" 
                 Margin="850,38,270,0" RenderTransformOrigin="-0.3,0.156" Click="AddNewPerson_Click">
-                        Thêm thảnh viên
+                        Thêm thành viên
                     </Button>
                     <!--<Button
                 VerticalAlignment="Top"
