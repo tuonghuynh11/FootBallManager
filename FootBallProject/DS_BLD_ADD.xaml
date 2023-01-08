@@ -14,7 +14,7 @@
         DataContext="{StaticResource MainVM}"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="DS_BLD_ADD" Height="330" Width="600">
+        Title="DS_BLD_ADD" Height="330" Width="600" Icon="/Icons/appicon.png">
     <Border CornerRadius="10" Padding="6" BorderBrush="#fbc42d" BorderThickness="2" Background="#d3ffce">
         <Grid>
             <Grid.RowDefinitions>

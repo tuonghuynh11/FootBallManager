@@ -125,8 +125,8 @@
             </menu:Btn>
             <Separator Background="Transparent" Foreground="Transparent" BorderBrush="Transparent" BorderThickness="0"></Separator>
 
-            <menu:Btn Width="130" HorizontalAlignment="Left" Background="Transparent" VerticalAlignment="Center" Command="{Binding TransferCommand}" BorderThickness="0" Height="45" Style="{StaticResource BtnStyle}">
-                <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+            <menu:Btn Width="140" HorizontalAlignment="Left" Background="Transparent" VerticalAlignment="Center" Command="{Binding TransferCommand}" BorderThickness="0" Height="45" Style="{StaticResource BtnStyle}">
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
                     <Border Background="White" Height="30" Width="30" CornerRadius="2">
                         <Image Source="/Icons/transfer.png" Height="30" Width="30"  VerticalAlignment="Center"  ></Image>
                     </Border>
@@ -136,8 +136,8 @@
 
             <Separator Background="Transparent" Foreground="Transparent" BorderBrush="Transparent" BorderThickness="0"></Separator>
 
-            <menu:Btn Width="130" HorizontalAlignment="Left" Background="Transparent" VerticalAlignment="Center" Command="{Binding StatisticalChartCommand}" BorderThickness="0" Height="45" Style="{StaticResource BtnStyle}">
-                <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+            <menu:Btn Width="140" HorizontalAlignment="Left" Background="Transparent" VerticalAlignment="Center" Command="{Binding StatisticalChartCommand}" BorderThickness="0" Height="45" Style="{StaticResource BtnStyle}">
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
                     <Border Background="White" Height="30" Width="30" CornerRadius="2" >
                         <Image Source="/Icons/process.png" Height="30" Margin="2" VerticalAlignment="Center"  ></Image>
                     </Border>

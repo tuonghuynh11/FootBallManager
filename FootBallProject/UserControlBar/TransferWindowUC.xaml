@@ -25,7 +25,7 @@
  
     </UserControl.Resources>
     <Border CornerRadius="10" Margin="60 15 15 15" Height="690">
-        <materialDesign:Card UniformCornerRadius="10" Height="690" Width="1290">
+        <materialDesign:Card UniformCornerRadius="10" Height="690" Width="1200">
             <Grid>
                 <TextBlock x:Name="txbDS" Grid.Row="1" Grid.Column="1" Margin="50,20,500,555" Text="Danh sách cầu thủ" FontSize="29" FontWeight="Bold" FontFamily="Microsoft YaHei"/>
                 <Border x:Name="border1" Grid.Column="1" Grid.Row="1" Margin="0 100 10 360" >

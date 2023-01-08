@@ -29,7 +29,7 @@
         AllowsTransparency="True"
         Background="Transparent" 
         
-        Title="DS_GiaiDau" Height="550" Width="1000" WindowStartupLocation="CenterScreen">
+        Title="DS_GiaiDau" Height="550" Width="1000" WindowStartupLocation="CenterScreen" Icon="/Icons/appicon.png">
     <Window.Resources>
 
         <!--thay đổi background cardview-->

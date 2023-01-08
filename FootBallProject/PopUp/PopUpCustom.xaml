@@ -23,7 +23,7 @@
         AllowsTransparency="True"
         Background="Transparent" 
         WindowStartupLocation="CenterScreen"
-        Title="PopUpCustom" Height="170" Width="220">
+        Title="PopUpCustom" Height="170" Width="220" Icon="/Icons/appicon.png">
     <Border Background="White" CornerRadius="10" BorderThickness="1" BorderBrush="Black">
         <Grid>
             <Grid.RowDefinitions>

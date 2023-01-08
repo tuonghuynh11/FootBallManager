@@ -15,7 +15,7 @@
         DataContext="{StaticResource MainVM}"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="Success" Height="300" Width="300">
+        Title="Success" Height="300" Width="300" Icon="/Icons/appicon.png">
     <Border CornerRadius="10" Padding="6" BorderBrush="#fbc42d" BorderThickness="2" Background="White">
         <Grid>
             <Image HorizontalAlignment="Center" Height="119" 
