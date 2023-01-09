@@ -95,7 +95,8 @@
                     _Thêm
                 </Button>
                 <Image x:Name = "bldimage" HorizontalAlignment="Left" Height="100" Margin="459,29,0,0" 
-                       VerticalAlignment="Top" Width="100" Source="Images\bldavt.png"/>
+                       VerticalAlignment="Top" Width="100" 
+                       Source="Images\bldavt.png" Stretch="Fill"/>
                 <Button 
                     x:Name="Upload"
                     VerticalAlignment="Top"

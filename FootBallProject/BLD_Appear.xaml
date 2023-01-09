@@ -94,7 +94,8 @@
                 <Image x:Name="bldimg" HorizontalAlignment="Left" 
                        Height="186" Margin="360,0,0,0" 
                        VerticalAlignment="Top" Width="190"
-                       Source="Images/bldavt.png"/>
+                       Source="Images/bldavt.png"
+                       Stretch="Fill"/>
                 <Button 
                     x:Name="delete"
                     VerticalAlignment="Top"
