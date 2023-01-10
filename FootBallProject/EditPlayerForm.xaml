@@ -86,7 +86,7 @@
 
                         <TextBlock FontSize="30">Quốc tịch</TextBlock>
                         <Separator></Separator>
-
+                        <TextBlock FontSize="30">Giá trị</TextBlock>
 
                     </StackPanel>
                 </Border>
@@ -147,6 +147,8 @@
                         <Separator></Separator>
                         <ComboBox SelectedValue="{Binding SelectedPlayer.Nationality}" IsEditable="True" FontSize="28" Height="40" Name="txbNationality"  ItemsSource="{Binding Nationalities}" IsSynchronizedWithCurrentItem="False"  ></ComboBox>
                         <Separator></Separator>
+                        <TextBox FontSize="28" Height="40" Name="txbPrice" Text="{Binding SelectedPlayer.Price}"></TextBox>
+
 
                     </StackPanel>
                 </Border>
