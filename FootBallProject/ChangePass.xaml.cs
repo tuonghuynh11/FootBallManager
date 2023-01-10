@@ -99,7 +99,7 @@ namespace FootBallProject
             {
 
                 MailMessage msg = new MailMessage();
-                msg.From = new MailAddress("hienle12t1@gmail.com");
+                msg.From = new MailAddress("footballmanagement111@gmail.com");
                 msg.To.Add(getMail);
                 msg.Subject = "Mã OTP xác nhận đổi mật khẩu";
                 msg.Body = otp.ToString() + " là mã dùng để xác nhận việc đổi mật khẩu của bạn.";
@@ -107,8 +107,8 @@ namespace FootBallProject
                 SmtpClient smt = new SmtpClient();
                 smt.Host = "smtp.gmail.com";
                 System.Net.NetworkCredential ntcd = new NetworkCredential();
-                ntcd.UserName = "hienle12t1@gmail.com";
-                ntcd.Password = "uxyelqzebjtlyqzo";
+                ntcd.UserName = "footballmanagement111@gmail.com";
+                ntcd.Password = "upovphfgbfmhacux";
                 smt.Credentials = ntcd;
                 smt.EnableSsl = true;
                 smt.Port = 587;
