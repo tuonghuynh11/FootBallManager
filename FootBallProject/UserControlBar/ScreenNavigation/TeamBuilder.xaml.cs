@@ -693,7 +693,7 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
 
                         }
                         HLVname.Text = teamBuilderViewModel.Team.HLV;
-                        GTDH.Text = teamBuilderViewModel.Team.GIATRI.ToString();
+                       GTDH.Text = teamBuilderViewModel.Team.GIATRI.ToString();
                         DHChienThuatcbb.Text = teamBuilderViewModel.Team.SODOCHIENTHUAT;
                         id_doi = teamBuilderViewModel.Team.ID;
                         this.DataContext = teamBuilderViewModel;
@@ -704,9 +704,19 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
                 }
                 else
                 {
-                    this.DataContext = new TeamBuilderViewModel() ;
-                    PopUpCustom popUp = new PopUpCustom("Đội bóng chưa đủ 11 người");
-                    popUp.ShowDialog();
+                    if (teamBuilderViewModel.MainTeamPlayers.Count==0)
+                    {
+                        this.DataContext = new TeamBuilderViewModel();
+                        PopUpCustom popUp = new PopUpCustom("Chưa có cầu thủ trong đội");
+                        popUp.ShowDialog();
+                    }
+                    else
+                    {
+                        this.DataContext = new TeamBuilderViewModel();
+                        PopUpCustom popUp = new PopUpCustom("Đội bóng chưa đủ 11 người");
+                        popUp.ShowDialog();
+                    }
+                   
                 }
                
             }
@@ -745,7 +755,12 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
             {
                 if (teamBuilderViewModel.Team.GIATRI != null)
                 {
-                    GTDH.Text = String.Format("${0:n0}", teamBuilderViewModel.Team.GIATRI);
+                    
+                   // DOIBONG temp = DataProvider.ins.DB.DOIBONGs.Where(p => p.ID == id_doi).FirstOrDefault();
+                    DOIBONG temp = DataProvider.ins.DB.Database.SqlQuery<DOIBONG>("SELECT * FROM DOIBONG WHERE ID = @ID ", new SqlParameter("@ID", id_doi)).FirstOrDefault<DOIBONG>();
+
+
+                    GTDH.Text = String.Format("${0:n0}", temp.GIATRI);
 
                 }
             }
