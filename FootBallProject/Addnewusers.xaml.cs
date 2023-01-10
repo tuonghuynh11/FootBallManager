@@ -1,4 +1,5 @@
-﻿using FootBallProject.Utils;
+﻿using FootBallProject.Model;
+using FootBallProject.Utils;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,6 +8,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +20,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace FootBallProject
 {
@@ -140,6 +143,21 @@ namespace FootBallProject
                         command.ExecuteNonQuery();
                     }
                 }
+                MailMessage msg = new MailMessage();
+                msg.From = new MailAddress("hienle12t1@gmail.com");
+                msg.To.Add(users[2]);
+                msg.Subject = "Thông báo được cấp tài khoản";
+                msg.Body = "Bạn đã được cấp tài khoản. Tên tài khoản: " + tbuser.Text + " - Mật khẩu: " + tbpass.Text;
+
+                SmtpClient smt = new SmtpClient();
+                smt.Host = "smtp.gmail.com";
+                System.Net.NetworkCredential ntcd = new NetworkCredential();
+                ntcd.UserName = "hienle12t1@gmail.com";
+                ntcd.Password = "uxyelqzebjtlyqzo";
+                smt.Credentials = ntcd;
+                smt.EnableSsl = true;
+                smt.Port = 587;
+                smt.Send(msg);
                 Success success = new Success();
                 success.ShowDialog();
                 this.Close();
