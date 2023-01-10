@@ -106,15 +106,44 @@ namespace FootBallProject
                         command.ExecuteNonQuery();
                     }
                 }
-                Success success = new Success();
-                success.ShowDialog();
-                this.Close();
+                //Success success = new Success();
+                //success.ShowDialog();
+                //this.Close();
             }
             catch (Exception)
             {
                 Error error = new Error("");
                 error.ShowDialog();
+                return;
             }
+            string commandText2 = "DELETE FROM dbo.USERS WHERE IDNHANSU = @id";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectstr))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(commandText2, connection))
+                    {
+
+                        command.Parameters.Add("@id", SqlDbType.VarChar);
+                        command.Parameters["@id"].Value = id;
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+                //Success success = new Success();
+                //success.ShowDialog();
+                //this.Close();
+            }
+            catch (Exception)
+            {
+                Error error = new Error("");
+                error.ShowDialog();
+                return;
+            }
+            Success success = new Success();
+            success.ShowDialog();
+            this.Close();
         }
         private void editbtt_Click(object sender, RoutedEventArgs e)
         {
