@@ -32,6 +32,7 @@ namespace FootBallProject
         public string connectstr = ConfigurationManager.ConnectionStrings["connectstr"].ConnectionString;
         public List<string> users = new List<string>();
         public List<string> signedusers = new List<string>();
+        public List<Int32> idnhansu = new List<int>();
         public Addnewusers()
         {
             InitializeComponent();
@@ -48,10 +49,18 @@ namespace FootBallProject
                 while (reader.Read())
                 {
                     signedusers.Add(reader.GetString(2));
+                    ReadSingleRow((IDataRecord)reader);
                 }
                 reader.Close();
             }
 
+        }
+        private void ReadSingleRow(IDataRecord dataRecord)
+        {
+            if (dataRecord[8].ToString() != "")
+            {
+                idnhansu.Add((Int32)dataRecord[8]);
+            }
         }
 
         public void getID(string id)
@@ -78,6 +87,16 @@ namespace FootBallProject
                 if(tbuser.Text == s)
                 {
                     Error error = new Error("Tên đăng nhập đã tồn tại");
+                    error.ShowDialog();
+                    return;
+                }
+            }
+            string chosenid = cbht.Text.Substring(0, cbht.Text.IndexOf('.'));
+            foreach(Int32 i in idnhansu)
+            {
+                if(Convert.ToInt32(chosenid) == i)
+                {
+                    Error error = new Error("Thành viên đã được cấp tài khoản");
                     error.ShowDialog();
                     return;
                 }
