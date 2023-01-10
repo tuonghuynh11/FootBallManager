@@ -527,7 +527,9 @@ namespace FootBallProject.ViewModel
                     TransferWindowUC tw = p;
                     string query = "INSERT CHUYENNHUONG VALUES (@idcauthu, NULL)";
                     string id = SelectedPlayer.Id;
-
+                    string query2 = "UPDATE DOIHINHCHINH" +
+                    " SET IDCAUTHU = (SELECT TOP 1 ID FROM CAUTHU where IDDOIBONG= '" + currentclubID + "' and ID not in (SELECT IDCAUTHU FROM DOIHINHCHINH)) " +
+                    "WHERE IDCAUTHU = " + id;
                     //System.Windows.Forms.MessageBox.Show(id);
                     using (SqlConnection sqlConnection = new SqlConnection(connString))
                     {
@@ -539,6 +541,10 @@ namespace FootBallProject.ViewModel
                             {
                                 sqlquery.Parameters.AddWithValue("@idcauthu", id);
                                 sqlquery.ExecuteNonQuery();
+                            }
+                            using(SqlCommand sqlquery2 = new SqlCommand(query2, sqlConnection))
+                            {
+                                sqlquery2.ExecuteNonQuery();
                             }
                         }
                         catch (Exception e)
