@@ -84,6 +84,7 @@
 
                         <TextBlock FontSize="30">Quốc tịch</TextBlock>
                         <Separator></Separator>
+                        <TextBlock FontSize="30">Giá trị</TextBlock>
 
 
                     </StackPanel>
@@ -142,6 +143,7 @@
 
                         <ComboBox FontSize="28" Height="40" Name="txbNationality"   ItemsSource="{Binding Nationalities}" IsEditable="True" ></ComboBox>
                         <Separator ></Separator>
+                        <TextBox FontSize="28" Height="40" Name="txbPrice"></TextBox>
 
 
                     </StackPanel>

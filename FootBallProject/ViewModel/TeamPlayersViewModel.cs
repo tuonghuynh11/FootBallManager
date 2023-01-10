@@ -336,7 +336,7 @@ namespace FootBallProject.ViewModel
                     || wd1.txbHeight.Text == "" || wd1.txbclub.Text == ""
                     || wd1.txbWeight.Text == "" || wd1.txbPos.Text == ""
                     || wd1.txbNumber.Text == "" || wd1.txbNationality.Text == ""
-                    || wd1.txbAge.Text == "" || wd1.txbPhysyque.Text == "" || wd1.txbFoot.Text == "")
+                    || wd1.txbAge.Text == "" || wd1.txbPhysyque.Text == "" || wd1.txbFoot.Text == "" || wd1.txbPrice.Text == "")
                     {
                         OKCancelPopUp oK = new OKCancelPopUp();
                         oK.Height = 200;
@@ -431,7 +431,7 @@ namespace FootBallProject.ViewModel
                         //    //System.Windows.Forms.MessageBox.Show("Nhập theo [số]kg", "Nhập lại cân nagwj", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         //    return;
                         //}
-                        if (!int.TryParse(wd1.txbNumber.Text, out parsevalue) || int.Parse(wd1.txbNumber.Text) < 0)
+                        if (!int.TryParse(wd1.txbNumber.Text, out parsevalue))
                         {
                             OKCancelPopUp oK = new OKCancelPopUp();
                             oK.Height = 200;
@@ -449,6 +449,24 @@ namespace FootBallProject.ViewModel
                             oK.content.Text = "Xin nhập lại số áo";
                             oK.ShowDialog(); return;
                         }
+                        if (!int.TryParse(wd1.txbPrice.Text, out parsevalue))
+                        {
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập giá trị không đúng";
+                            oK.content.Text = "Xin nhập lại giá trị bằng số nguyên";
+                            oK.ShowDialog(); return;
+                        }
+                        else if (int.Parse(wd1.txbPrice.Text) < 0)
+                        {
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập giá trị không đúng";
+                            oK.content.Text = "Giá trị phải nhập theo số nguyên dương";
+                            oK.ShowDialog(); return;
+                        }
                         wd1.txbHeight.Text = wd1.txbHeight.Text + "cm";
                         wd1.txbWeight.Text = wd1.txbWeight.Text + "kg";
                         string[] arrString = { "GK", "CB", "LB", "RB", "CDM", "CM", "LM", "RM", "LW", "RW", "ST" };
@@ -461,7 +479,7 @@ namespace FootBallProject.ViewModel
                             return;
                         }
 
-                        string query = "INSERT CAUTHU values(@teamid, @idquoctich, @hoten, @tuoi, 0, 0, @hinhanh, @chanthuan, @Thetrang, @vitri, @soao, '" + wd1.txbHeight.Text + "', '" + wd1.txbWeight.Text + "', 0)";
+                        string query = "INSERT CAUTHU values(@teamid, @idquoctich, @hoten, @tuoi, 0, 0, @hinhanh, @chanthuan, @Thetrang, @vitri, @soao, '" + wd1.txbHeight.Text + "', '" + wd1.txbWeight.Text + "', '"+ wd1.txbPrice.Text+"')";
                         PullClub();
                         string IDDoiBong = "";
                         if (USER.ROLE != "Admin")
@@ -590,7 +608,7 @@ namespace FootBallProject.ViewModel
                      edit.txbHeight.Text == "" || edit.txbclub.Text == ""
                     || edit.txbWeight.Text == "" || edit.txbPos.Text == ""
                     || edit.txbNumber.Text == "" || edit.txbNationality.Text == ""
-                    || edit.txbPhysyque.Text == "" || edit.txbFoot.Text == "")
+                    || edit.txbPhysyque.Text == "" || edit.txbFoot.Text == "" || edit.txbPrice.Text == "")
                     {
                         OKCancelPopUp oK = new OKCancelPopUp();
                         oK.Height = 200;
@@ -710,6 +728,26 @@ namespace FootBallProject.ViewModel
                             oK.ShowDialog();
                             return;
                         }
+                        if (!int.TryParse(edit.txbPrice.Text, out parsevalue))
+                        {
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập lại giá trị cầu thủ";
+                            oK.content.Text = "Nhập theo số nguyên dương";
+                            oK.ShowDialog();
+                            return;
+                        }
+                        else if (int.Parse(edit.txbPrice.Text) < 0)
+                        {
+                            OKCancelPopUp oK = new OKCancelPopUp();
+                            oK.Height = 200;
+                            oK.Width = 390;
+                            oK.titletxbl.Text = "Nhập lại giá trị cầu thủ";
+                            oK.content.Text = "Nhập theo số nguyên dương";
+                            oK.ShowDialog();
+                            return;
+                        }
                         string[] arrString = { "GK", "CB", "LB", "RB", "CDM", "CM", "LM", "RM", "LW", "RW", "ST" };
 
                         if (!arrString.Contains(position, StringComparer.OrdinalIgnoreCase))
@@ -723,9 +761,9 @@ namespace FootBallProject.ViewModel
                         edit.txbWeight.Text = edit.txbWeight.Text + "kg";
                         string query = EdgePath == "" ?
                         "UPDATE CAUTHU SET HOTEN = @hoten, IDQUOCTICH=@idquoctich, TUOI =@tuoi, CHANTHUAN = @chanthuan, " +
-                        "THETRANG = @Thetrang, VITRI = '" + edit.txbPos.Text + "', SOAO = " + edit.txbNumber.Text + ", CHIEUCAO = '" + edit.txbHeight.Text + "', CANNANG = '" + edit.txbWeight.Text + "' WHERE ID = @id" :
+                        "THETRANG = @Thetrang, VITRI = '" + edit.txbPos.Text + "', SOAO = " + edit.txbNumber.Text + ", CHIEUCAO = '" + edit.txbHeight.Text + "', CANNANG = '" + edit.txbWeight.Text + "' ,GIATRICAUTHU = '" + edit.txbPrice.Text  +"' WHERE ID = @id" :
                         "UPDATE CAUTHU SET HOTEN = @hoten, IDQUOCTICH=@idquoctich, TUOI =@tuoi, HINHANH = @hinhanh, CHANTHUAN = @chanthuan, " +
-                        "THETRANG = @Thetrang, VITRI = '" + edit.txbPos.Text + "', SOAO = " + edit.txbNumber.Text + ", CHIEUCAO = '" + edit.txbHeight.Text + "', CANNANG = '" + edit.txbWeight.Text + "' WHERE ID = @id";
+                        "THETRANG = @Thetrang, VITRI = '" + edit.txbPos.Text + "', SOAO = " + edit.txbNumber.Text + ", CHIEUCAO = '" + edit.txbHeight.Text + "', CANNANG = '" + edit.txbWeight.Text + "' ,GIATRICAUTHU = '" + edit.txbPrice.Text + "' WHERE ID = @id" ;
 
                         PullClub();
                         string IDDoiBong = "";
