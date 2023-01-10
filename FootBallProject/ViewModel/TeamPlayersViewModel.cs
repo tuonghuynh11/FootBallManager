@@ -528,7 +528,7 @@ namespace FootBallProject.ViewModel
                         }
                         try
                         {
-                            if (PlayerList.Count == 10)
+                            if (PlayerList.Count == 11)
                                 RandomSquad(IDDoiBong);
 
                         }

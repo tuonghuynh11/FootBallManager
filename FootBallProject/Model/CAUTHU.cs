@@ -12,6 +12,7 @@ namespace FootBallProject.Model
     using System;
     using System.Collections.Generic;
     using System.Windows.Media;
+
     public partial class CAUTHU
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,21 +22,6 @@ namespace FootBallProject.Model
             this.ITEMs = new HashSet<ITEM>();
             this.THAMGIAs = new HashSet<THAMGIA>();
         }
-    
-        public int ID { get; set; }
-        public string IDDOIBONG { get; set; }
-        public Nullable<int> IDQUOCTICH { get; set; }
-        public string HOTEN { get; set; }
-        public Nullable<int> TUOI { get; set; }
-        public Nullable<int> SOGIAI { get; set; }
-        public Nullable<int> SOBANTHANG { get; set; }
-        public byte[] HINHANH { get; set; }
-        public string CHANTHUAN { get; set; }
-        public string THETRANG { get; set; }
-        public string VITRI { get; set; }
-        public Nullable<int> SOAO { get; set; }
-        public string CHIEUCAO { get; set; }
-        public string CANNANG { get; set; }
         public string QUOCGIA
         {
             get
@@ -101,6 +87,20 @@ namespace FootBallProject.Model
             }
             set { }
         }
+        public int ID { get; set; }
+        public string IDDOIBONG { get; set; }
+        public Nullable<int> IDQUOCTICH { get; set; }
+        public string HOTEN { get; set; }
+        public Nullable<int> TUOI { get; set; }
+        public Nullable<int> SOGIAI { get; set; }
+        public Nullable<int> SOBANTHANG { get; set; }
+        public byte[] HINHANH { get; set; }
+        public string CHANTHUAN { get; set; }
+        public string THETRANG { get; set; }
+        public string VITRI { get; set; }
+        public Nullable<int> SOAO { get; set; }
+        public string CHIEUCAO { get; set; }
+        public string CANNANG { get; set; }
         public Nullable<long> GIATRICAUTHU { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -20,6 +20,8 @@ using System.IO;
 using System.Net;
 using static FootBallProject.UserControlBar.UserControl_DS_BLD;
 using System.Text.RegularExpressions;
+using FootBallProject.UserControlBar;
+using FootBallProject.Class;
 
 namespace FootBallProject
 {
@@ -186,8 +188,11 @@ namespace FootBallProject
                         command.Parameters["@avatar"].Value = buffer;
 
                         command.ExecuteNonQuery();
+                       ControlBarUC barUC = new ControlBarUC();
+                        barUC.setNewavatar(buffer);
                     }
                 }
+                
                 Success success = new Success();
                 success.ShowDialog();
                 txbhoten.IsReadOnly = true;

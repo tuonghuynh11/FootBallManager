@@ -11,7 +11,7 @@ namespace FootBallProject.Model
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class USER
     {
         public int ID { get; set; }
@@ -23,6 +23,7 @@ namespace FootBallProject.Model
         public Nullable<int> IDOTP { get; set; }
         public Nullable<int> IDAVATAR { get; set; }
         public Nullable<int> IDNHANSU { get; set; }
+        public byte[] AVATAR { get; set; }
         public static string ROLE = "";
         public static string IDDB = "";
         public static string USERN = "";

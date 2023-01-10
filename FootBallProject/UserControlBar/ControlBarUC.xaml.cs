@@ -19,6 +19,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Diagnostics;
+using System.IO;
+
 namespace FootBallProject.UserControlBar
 {
     /// <summary>
@@ -33,7 +35,8 @@ namespace FootBallProject.UserControlBar
         int newnotifies = 0;
 
         Queue<string> FamousFootBallQuotes;
-
+        public static byte[] Avatar;
+        public   byte[] Avatar1;
         //So sánh sự thay đổi của database
         public ObservableCollection<Notification> Notifies { get; set; }
         public ControlBarViewModel ViewModel { get; set; }
@@ -60,6 +63,11 @@ namespace FootBallProject.UserControlBar
             //FamousFootBallQuotes
 
             UserNamelb.Content = USER.USERN;
+            Avatar1 = DataProvider.ins.DB.USERS.Find(AccessUser.userLogin.ID).AVATAR;
+            if (Avatar1 != null && Avatar1.Length != 0)
+            {
+                avatar.ImageSource = LoadImage(Avatar1);
+            }
 
             int uncheck = DataProvider.ins.DB.Notifications.Where(p => p.IDHLV == AccessUser.userLogin.IDNHANSU && p.CHECKED == "Chưa xem").ToList().Count();
             numberofnotifies.Badge = uncheck;
@@ -86,10 +94,36 @@ namespace FootBallProject.UserControlBar
             FamousFootBallQuotesTimer.Interval = TimeSpan.FromSeconds(60);
             FamousFootBallQuotesTimer.Tick += timer_Tick1;
             FamousFootBallQuotesTimer.Start();
+
+            //Timer for updateavatar
+            DispatcherTimer avatartimer = new DispatcherTimer();
+            avatartimer.Interval = TimeSpan.FromSeconds(3.0);
+            avatartimer.Tick += timer_Tick_avatartimer;
+            avatartimer.Start();
+        }
+        public void setNewavatar(byte[] a){
+
+            Avatar = a;
+         }
+
+        //Timer for updateavatar
+        void timer_Tick_avatartimer(object sender, EventArgs e)
+        {
+           
+            if (Avatar != null && Avatar.Length != 0)
+            {
+                if (Avatar1 != Avatar)
+                {
+                    avatar.ImageSource = LoadImage(Avatar);
+
+                }
+            }
+      
+
         }
 
-        //Timer for FamousFootBallQuotes
-        void timer_Tick1(object sender, EventArgs e)
+            //Timer for FamousFootBallQuotes
+            void timer_Tick1(object sender, EventArgs e)
         {
             Random r = new Random();
             Random fontran = new Random();
@@ -233,6 +267,23 @@ namespace FootBallProject.UserControlBar
             numberofnotifies.Badge = uncheck;
             notifipopup.ToolTip = $"Bạn có {uncheck} thông báo mới";
 
+        }
+        private static BitmapImage LoadImage(byte[] imageData)
+        {
+            if (imageData == null || imageData.Length == 0) return null;
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(imageData))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
         }
     }
 
