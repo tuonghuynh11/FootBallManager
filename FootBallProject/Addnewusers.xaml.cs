@@ -163,7 +163,7 @@ namespace FootBallProject
                     }
                 }
                 MailMessage msg = new MailMessage();
-                msg.From = new MailAddress("hienle12t1@gmail.com");
+                msg.From = new MailAddress("footballmanagement111@gmail.com");
                 msg.To.Add(users[2]);
                 msg.Subject = "Thông báo được cấp tài khoản";
                 msg.Body = "Bạn đã được cấp tài khoản. Tên tài khoản: " + tbuser.Text + " - Mật khẩu: " + tbpass.Text;
@@ -171,8 +171,8 @@ namespace FootBallProject
                 SmtpClient smt = new SmtpClient();
                 smt.Host = "smtp.gmail.com";
                 System.Net.NetworkCredential ntcd = new NetworkCredential();
-                ntcd.UserName = "hienle12t1@gmail.com";
-                ntcd.Password = "uxyelqzebjtlyqzo";
+                ntcd.UserName = "footballmanagement111@gmail.com";
+                ntcd.Password = "upovphfgbfmhacux";
                 smt.Credentials = ntcd;
                 smt.EnableSsl = true;
                 smt.Port = 587;
