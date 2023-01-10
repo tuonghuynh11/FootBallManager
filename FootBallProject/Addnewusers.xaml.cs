@@ -1,4 +1,5 @@
-﻿using FootBallProject.Utils;
+﻿using FootBallProject.Model;
+using FootBallProject.Utils;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,6 +8,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +20,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace FootBallProject
 {
@@ -29,6 +32,7 @@ namespace FootBallProject
         public string connectstr = ConfigurationManager.ConnectionStrings["connectstr"].ConnectionString;
         public List<string> users = new List<string>();
         public List<string> signedusers = new List<string>();
+        public List<Int32> idnhansu = new List<int>();
         public Addnewusers()
         {
             InitializeComponent();
@@ -45,10 +49,18 @@ namespace FootBallProject
                 while (reader.Read())
                 {
                     signedusers.Add(reader.GetString(2));
+                    ReadSingleRow((IDataRecord)reader);
                 }
                 reader.Close();
             }
 
+        }
+        private void ReadSingleRow(IDataRecord dataRecord)
+        {
+            if (dataRecord[8].ToString() != "")
+            {
+                idnhansu.Add((Int32)dataRecord[8]);
+            }
         }
 
         public void getID(string id)
@@ -75,6 +87,16 @@ namespace FootBallProject
                 if(tbuser.Text == s)
                 {
                     Error error = new Error("Tên đăng nhập đã tồn tại");
+                    error.ShowDialog();
+                    return;
+                }
+            }
+            string chosenid = cbht.Text.Substring(0, cbht.Text.IndexOf('.'));
+            foreach(Int32 i in idnhansu)
+            {
+                if(Convert.ToInt32(chosenid) == i)
+                {
+                    Error error = new Error("Thành viên đã được cấp tài khoản");
                     error.ShowDialog();
                     return;
                 }
@@ -140,6 +162,21 @@ namespace FootBallProject
                         command.ExecuteNonQuery();
                     }
                 }
+                MailMessage msg = new MailMessage();
+                msg.From = new MailAddress("footballmanagement111@gmail.com");
+                msg.To.Add(users[2]);
+                msg.Subject = "Thông báo được cấp tài khoản";
+                msg.Body = "Bạn đã được cấp tài khoản. Tên tài khoản: " + tbuser.Text + " - Mật khẩu: " + tbpass.Text;
+
+                SmtpClient smt = new SmtpClient();
+                smt.Host = "smtp.gmail.com";
+                System.Net.NetworkCredential ntcd = new NetworkCredential();
+                ntcd.UserName = "footballmanagement111@gmail.com";
+                ntcd.Password = "upovphfgbfmhacux";
+                smt.Credentials = ntcd;
+                smt.EnableSsl = true;
+                smt.Port = 587;
+                smt.Send(msg);
                 Success success = new Success();
                 success.ShowDialog();
                 this.Close();

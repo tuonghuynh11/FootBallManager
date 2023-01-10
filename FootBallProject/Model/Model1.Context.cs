@@ -47,6 +47,5 @@ namespace FootBallProject.Model
         public virtual DbSet<THAMGIA> THAMGIAs { get; set; }
         public virtual DbSet<THONGTINGIAIDAU> THONGTINGIAIDAUs { get; set; }
         public virtual DbSet<THONGTINTRANDAU> THONGTINTRANDAUs { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

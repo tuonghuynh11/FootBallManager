@@ -470,6 +470,7 @@ namespace FootBallProject.ViewModel
                         //}
                         wd1.txbHeight.Text = int.Parse(wd1.txbHeight.Text) + "cm";
                         wd1.txbWeight.Text = int.Parse(wd1.txbWeight.Text) + "kg";
+
                         string[] arrString = { "GK", "CB", "LB", "RB", "CDM", "CM", "LM", "RM", "LW", "RW", "ST" };
 
                         if (!arrString.Contains(position, StringComparer.OrdinalIgnoreCase))
@@ -481,6 +482,7 @@ namespace FootBallProject.ViewModel
                         }
 
                         string query = "INSERT CAUTHU values(@teamid, @idquoctich, @hoten, @tuoi, 0, 0, @hinhanh, @chanthuan, @Thetrang, @vitri, @soao, '" + wd1.txbHeight.Text + "', '" +wd1.txbWeight.Text + "', '"+ UInt64.Parse(wd1.txbPrice.Text)+"')";
+
                         PullClub();
                         string IDDoiBong = "";
                         if (USER.ROLE != "Admin")
@@ -736,6 +738,7 @@ namespace FootBallProject.ViewModel
                             oK.ShowDialog();
                             return;
                         }
+
                         ulong parsevalue2;
 
                         if (!UInt64.TryParse(edit.txbPrice.Text, out parsevalue2))
@@ -758,6 +761,7 @@ namespace FootBallProject.ViewModel
                         //    oK.ShowDialog();
                         //    return;
                         //}
+
                         string[] arrString = { "GK", "CB", "LB", "RB", "CDM", "CM", "LM", "RM", "LW", "RW", "ST" };
 
                         if (!arrString.Contains(position, StringComparer.OrdinalIgnoreCase))
@@ -774,6 +778,7 @@ namespace FootBallProject.ViewModel
                         "THETRANG = @Thetrang, VITRI = '" + edit.txbPos.Text + "', SOAO = " + int.Parse(edit.txbNumber.Text) + ", CHIEUCAO = '" + edit.txbHeight.Text + "', CANNANG = '" + edit.txbWeight.Text + "' ,GIATRICAUTHU = '" + UInt64.Parse(edit.txbPrice.Text)  +"' WHERE ID = @id" :
                         "UPDATE CAUTHU SET HOTEN = @hoten, IDQUOCTICH=@idquoctich, TUOI =@tuoi, HINHANH = @hinhanh, CHANTHUAN = @chanthuan, " +
                         "THETRANG = @Thetrang, VITRI = '" + edit.txbPos.Text + "', SOAO = " + int.Parse(edit.txbNumber.Text) + ", CHIEUCAO = '" + edit.txbHeight.Text + "', CANNANG = '" + edit.txbWeight.Text + "' ,GIATRICAUTHU = '" + UInt64.Parse(edit.txbPrice.Text) + "' WHERE ID = @id" ;
+
 
                         PullClub();
                         string IDDoiBong = "";

@@ -77,7 +77,7 @@
                                 <!--Giá trị đội hình-->
                                 <StackPanel Orientation="Vertical" Margin="10 0 10 0">
                                     <TextBlock Text="Giá trị đội hình" Foreground="#818591" Margin="10 0 10 10" FontSize="20"></TextBlock>
-                                    <TextBlock  x:Name="GTDH" Text="{Binding Team.GIATRI,Converter={StaticResource ResourceKey=currencyconvert}}" Foreground="White" VerticalAlignment="Center" FontSize="17" Margin="10 0 10 0" Loaded="GTDH_Loaded" ></TextBlock>
+                                    <TextBlock  x:Name="GTDH" Text="{Binding Team.GIATRI,Converter={StaticResource ResourceKey=currencyconvert}, NotifyOnSourceUpdated=True,NotifyOnTargetUpdated=True,UpdateSourceTrigger=PropertyChanged}" Foreground="White" VerticalAlignment="Center" FontSize="17" Margin="10 0 10 0" Loaded="GTDH_Loaded" ></TextBlock>
 
                                 </StackPanel>
 

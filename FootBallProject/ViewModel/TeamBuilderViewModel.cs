@@ -55,6 +55,10 @@ namespace FootBallProject.ViewModel
                     LoadMainteam(id_doi);
 
                 }
+                else
+                {
+                    MainTeamPlayers = DataProvider.ins.DB.CAUTHUs.Where(p=>p.IDDOIBONG==id_doi).ToList();
+                }
             }
             
 
