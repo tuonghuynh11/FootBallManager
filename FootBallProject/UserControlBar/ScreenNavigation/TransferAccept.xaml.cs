@@ -78,8 +78,8 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
             if (teams!=null)
             {
                List<HUANLUYENVIEN> bhldoimua = DataProvider.ins.DB.HUANLUYENVIENs.Where(p => p.IDDOIBONG == teams.IDDOIMUA && (p.CHUCVU == "HLV Trưởng" || p.CHUCVU == "Chủ tịch CLB")).ToList();
-                CAUTHU transfer = DataProvider.ins.DB.CAUTHUs.Find(teams.IDCAUTHU);
-                transfer.IDDOIBONG = teams.IDDOIMUA;
+                //CAUTHU transfer = DataProvider.ins.DB.CAUTHUs.Find(teams.IDCAUTHU);
+                //transfer.IDDOIBONG = teams.IDDOIMUA;
              
                 foreach (HUANLUYENVIEN item in bhldoimua)
                 {

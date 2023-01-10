@@ -314,9 +314,6 @@
     <Compile Include="Model\ROUND.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\TAPLUYEN.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

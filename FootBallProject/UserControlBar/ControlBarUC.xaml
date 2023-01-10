@@ -189,10 +189,10 @@
                         </Grid>
 
 
-                        <Border CornerRadius="50" BorderThickness="1" Background="Aqua" BorderBrush="Gray" Height="30" Width="33">
-                            <!--<Border.Background>
-                                <ImageBrush Stretch="Fill" ImageSource="/images/7.jpg"></ImageBrush>
-                            </Border.Background>-->
+                        <Border CornerRadius="50" BorderThickness="1" BorderBrush="Gray" Height="30" Width="33">
+                            <Border.Background>
+                                <ImageBrush x:Name="avatar" Stretch="Fill" ImageSource="/images/avatar_temp.png"></ImageBrush>
+                            </Border.Background>
                         </Border>
                         <Label x:Name="UserNamelb" Content="User1" VerticalAlignment="Center" Margin="5"></Label>
                         <ComboBox x:Name="Accountcbb" HorizontalAlignment="Center" VerticalAlignment="Center" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" Width="17"  BorderThickness="0 0 0 0" BorderBrush="Gray" Background="Transparent" SelectionChanged="Accountcbb_SelectionChanged">
