@@ -55,7 +55,7 @@
                     </ListView>-->
                             <DataGrid x:Name="DTGGhichu" ScrollViewer.CanContentScroll="True"
                             ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                            AutoGenerateColumns="False"
+                            AutoGenerateColumns="False" Background="#d3ffce"
                             CanUserAddRows="False" 
                             Margin="0 20 0 0" Height="292">
                                 <DataGrid.Resources>
@@ -79,7 +79,7 @@
                         </StackPanel>
                     </StackPanel>
                 </Grid>
-                <materialDesign:Card Grid.Column="2" Background="White" Margin="30 10 0 136" UniformCornerRadius="10">
+                <materialDesign:Card Grid.Column="2" Background="#d3ffce" Margin="30 10 0 136" UniformCornerRadius="10">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
@@ -114,7 +114,7 @@
                                 ScrollViewer.VerticalScrollBarVisibility="Hidden"
                                 AutoGenerateColumns="False"
                                 CanUserAddRows="False"
-                                Margin="15 0 15 0"
+                                Margin="15 0 15 18"
                                 RowBackground="White"
                                 AlternatingRowBackground="#E6EBF0">
                                 <DataGrid.Resources>
@@ -195,7 +195,7 @@
             Width="140" Background="Wheat" FontSize="15" Grid.Row="1"/>-->
             <ComboBox x:Name="cbID" HorizontalAlignment="Left" Margin="625,43,0,0" 
                         VerticalAlignment="Top" Width="220" 
-                        Height="50"
+                        Height="50" Background="White"
                         Grid.Row="1"
                         Style="{StaticResource combobox_item}"/>
         </Grid>
