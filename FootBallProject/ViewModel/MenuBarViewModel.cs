@@ -97,6 +97,7 @@ namespace FootBallProject.ViewModel
             else
             {
                 TaticOfTEAMVisibility = Visibility.Collapsed;
+                
             }
         }
       

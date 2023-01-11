@@ -60,51 +60,59 @@
 
                             </Grid>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 10 0 0">
-                                <Border CornerRadius="90" Width="70" Height="70" BorderBrush="White" BorderThickness="1" Margin="10 0 5 5">
-                                    <Border.Background>
-                                        <ImageBrush x:Name="HLVImage" ImageSource="{Binding Coach.HINHANH,Converter={StaticResource ResourceKey=imageconvert}}" ></ImageBrush>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" CornerRadius="90" Width="70" Height="70" BorderBrush="White" BorderThickness="1" Margin="10 0 5 5">
+                                        <Border.Background>
+                                            <ImageBrush x:Name="HLVImage" ImageSource="{Binding Coach.HINHANH,Converter={StaticResource ResourceKey=imageconvert}}" ></ImageBrush>
 
-                                    </Border.Background>
-                                </Border>
-
-                                <!--Tên HLV-->
-                                <StackPanel Orientation="Vertical" Margin="0 0 10 0">
-                                    <TextBlock Text="HLV" Foreground="#818591" Margin="10 0 10 10" FontSize="20"></TextBlock>
-                                    <TextBlock x:Name="HLVname" Text="{Binding Coach.HOTEN}" Foreground="White" VerticalAlignment="Center" FontSize="17" Margin="10 0 10 0" ></TextBlock>
-
-                                </StackPanel>
-                                <!--Tên HLV-->
-                                <!--Giá trị đội hình-->
-                                <StackPanel Orientation="Vertical" Margin="10 0 10 0">
-                                    <TextBlock Text="Giá trị đội hình" Foreground="#818591" Margin="10 0 10 10" FontSize="20"></TextBlock>
-                                    <TextBlock  x:Name="GTDH" Text="{Binding Team.GIATRI,Converter={StaticResource ResourceKey=currencyconvert}, NotifyOnSourceUpdated=True,NotifyOnTargetUpdated=True,UpdateSourceTrigger=PropertyChanged}" Foreground="White" VerticalAlignment="Center" FontSize="17" Margin="10 0 10 0" Loaded="GTDH_Loaded" ></TextBlock>
-
-                                </StackPanel>
-
-                                <!--Giá trị đội hình-->
-                                <!--Sơ đồ chiến thuật-->
-                                <StackPanel Orientation="Vertical" Margin="0 0 15 0">
-                                    <TextBlock Text="Đội hình" Foreground="#818591" FontSize="20" HorizontalAlignment="Center" Margin="5 0 0 0"></TextBlock>
-                                    <Border Width="160" Background="#363954" CornerRadius="5" Margin="10 5 10 10">
-                                        <!--<TextBlock Text="4-3-3" FontSize="20" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>-->
-                                        <ComboBox x:Name="DHChienThuatcbb" materialDesign:HintAssist.Hint="4-3-3" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" MinHeight="30" Padding="0" BorderBrush="Transparent" BorderThickness="0" Background="#363954" FontSize="20"  Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="20 2 2 2" SelectionChanged="DHChienThuatcbb_SelectionChanged">
-                                            <ComboBox.ItemContainerStyle>
-                                                <Style TargetType="ComboBoxItem">
-                                                    <Setter Property="Background" Value="#363954"/>
-                                                    <Setter Property="BorderBrush" Value="#363954"/>
-                                                </Style>
-                                            </ComboBox.ItemContainerStyle>
-                                            <ComboBoxItem Content="4-3-3">
-                                            </ComboBoxItem>
-                                            <ComboBoxItem Content="4-4-2">
-                                            </ComboBoxItem>
-                                            <ComboBoxItem Content="4-2-3-1">
-                                            </ComboBoxItem>
-                                        </ComboBox>
+                                        </Border.Background>
                                     </Border>
-                                </StackPanel>
 
-                                <!--Sơ đồ chiến thuật-->
+                                    <!--Tên HLV-->
+                                    <StackPanel Grid.Column="1" Orientation="Vertical"  Width="150">
+                                        <TextBlock Text="HLV" Foreground="#818591" Margin="10 0 10 10" FontSize="20"></TextBlock>
+                                        <TextBlock x:Name="HLVname" Text="{Binding Coach.HOTEN}" Foreground="White" VerticalAlignment="Center" FontSize="17" Margin="10 0 10 0" ></TextBlock>
+
+                                    </StackPanel>
+                                    <!--Tên HLV-->
+                                    <!--Giá trị đội hình-->
+                                    <StackPanel Grid.Column="2" Orientation="Vertical" Width="160" >
+                                        <TextBlock Text="Giá trị đội hình" Foreground="#818591" Margin="10 0 10 10" FontSize="20"></TextBlock>
+                                        <TextBlock  x:Name="GTDH" Text="{Binding Team.GIATRI,Converter={StaticResource ResourceKey=currencyconvert}, NotifyOnSourceUpdated=True,NotifyOnTargetUpdated=True,UpdateSourceTrigger=PropertyChanged}" Foreground="White" VerticalAlignment="Center" FontSize="17" Margin="10 0 10 0" Loaded="GTDH_Loaded" ></TextBlock>
+
+                                    </StackPanel>
+
+                                    <!--Giá trị đội hình-->
+                                    <!--Sơ đồ chiến thuật-->
+                                    <StackPanel Grid.Column="3" Orientation="Vertical" Margin="0 0 15 0">
+                                        <TextBlock Text="Đội hình" Foreground="#818591" FontSize="20" HorizontalAlignment="Center" Margin="5 0 0 0"></TextBlock>
+                                        <Border Width="160" Background="#363954" CornerRadius="5" Margin="10 5 10 10">
+                                            <!--<TextBlock Text="4-3-3" FontSize="20" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>-->
+                                            <ComboBox x:Name="DHChienThuatcbb" materialDesign:HintAssist.Hint="4-3-3" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" MinHeight="30" Padding="0" BorderBrush="Transparent" BorderThickness="0" Background="#363954" FontSize="20"  Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="20 2 2 2" SelectionChanged="DHChienThuatcbb_SelectionChanged">
+                                                <ComboBox.ItemContainerStyle>
+                                                    <Style TargetType="ComboBoxItem">
+                                                        <Setter Property="Background" Value="#363954"/>
+                                                        <Setter Property="BorderBrush" Value="#363954"/>
+                                                    </Style>
+                                                </ComboBox.ItemContainerStyle>
+                                                <ComboBoxItem Content="4-3-3">
+                                                </ComboBoxItem>
+                                                <ComboBoxItem Content="4-4-2">
+                                                </ComboBoxItem>
+                                                <ComboBoxItem Content="4-2-3-1">
+                                                </ComboBoxItem>
+                                            </ComboBox>
+                                        </Border>
+                                    </StackPanel>
+                                    <!--Sơ đồ chiến thuật-->
+                                </Grid>
+                               
                             </StackPanel>
                             <Button x:Name="Savebtt" Content="Lưu đội hình" Width="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20 15 0 0" Click="SaveTeam"></Button>
                         </StackPanel>
