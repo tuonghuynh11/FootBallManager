@@ -22,14 +22,12 @@
     </i:Interaction.Triggers>
     <UserControl.Resources>
         <convert:ConvertStringToCurrency x:Key="currencyconvert"/>
- 
+
     </UserControl.Resources>
     <Border CornerRadius="10" Margin="60 15 15 15" Height="690">
         <materialDesign:Card UniformCornerRadius="10" Height="690" Width="1200">
             <Grid>
                 <TextBlock x:Name="txbDS" Grid.Row="1" Grid.Column="1" Margin="50,20,500,555" Text="Danh sách cầu thủ" FontSize="29" FontWeight="Bold" FontFamily="Microsoft YaHei"/>
-                <Button x:Name="Reload" Content="Reload" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 10 150 0" Width="80"
-                        Command="{Binding Reload}" CommandParameter="{Binding ElementName=transferWindow1}"></Button>
                 <Border x:Name="border1" Grid.Column="1" Grid.Row="1" Margin="0 100 10 360" >
                     <TabControl Margin="10 0 10 0" >
                         <TabControl.Resources>
@@ -62,7 +60,7 @@
                                     <DataGridTextColumn Header="Team" Width="200" Binding="{Binding ClubID}"/>
                                     <DataGridTextColumn Header="Nationality" Width="200" Binding="{Binding Nationality}"/>
                                     <DataGridTextColumn Header="Price"  Width="200" Binding="{Binding Price, Converter={StaticResource ResourceKey=currencyconvert}}"/>
-                                    <DataGridTemplateColumn x:Name="Btn" Header="Button">
+                                    <DataGridTemplateColumn x:Name="Btn" >
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate >
                                                 <Button  Name="Sell" Command="{Binding  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.TransferCommand}" CommandParameter="{Binding ElementName=transferWindow1}">
@@ -89,7 +87,7 @@
 
                                     <DataGridTextColumn Header="Nationality" Width="200" Binding="{Binding Nationality}"/>
                                     <DataGridTextColumn Header="Price"  Width="200" Binding="{Binding Price}"/>
-                                    <DataGridTemplateColumn Header="Button">
+                                    <DataGridTemplateColumn >
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate >
                                                 <Button  Name="Restore" Command="{Binding  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RetrieveCommand}" CommandParameter="{Binding ElementName=transferWindow1}">
@@ -121,7 +119,7 @@
 
                             <DataGridTextColumn Header="Nationality" Width="200" Binding="{Binding Nationality}"/>
                             <DataGridTextColumn Header="Price"  Width="200" Binding="{Binding Price, Converter={StaticResource ResourceKey=currencyconvert}}"/>
-                            <DataGridTemplateColumn Header="Button">
+                            <DataGridTemplateColumn >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Name="Buy" Command="{Binding  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.BuyCommand}" CommandParameter="{Binding ElementName=transferWindow1}" >
@@ -162,6 +160,9 @@
  
         </ToolBar>-->
                 <TextBlock x:Name="txblTransfer" Grid.Row="1" Grid.Column="1" Margin="50,345,500,255" Text="Thị trường chuyển nhượng" FontSize="29" FontWeight="Bold" FontFamily="Microsoft YaHei"/>
+                <Button x:Name="Reload" Background="#FF2D53B4"  Content="Reload" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="718,352,0,0" Width="80"
+                        Command="{Binding Reload}" CommandParameter="{Binding ElementName=transferWindow1}"/>
+
             </Grid>
 
         </materialDesign:Card>
