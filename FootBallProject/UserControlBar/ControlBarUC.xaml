@@ -138,7 +138,7 @@
                                 <ListView Name="lvUsers" Width="300" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="lvUsers_SelectionChanged">
                                     <ListView.View>
                                         <GridView >
-                                            <GridViewColumn Header="Thông báo"  Width="300" DisplayMemberBinding="{Binding NOTIFY}" >
+                                            <GridViewColumn Header="Thông báo"  Width="300"  >
                                                 <GridViewColumn.HeaderContainerStyle>
                                                     <Style TargetType="{x:Type GridViewColumnHeader}">
                                                         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -152,7 +152,11 @@
 
                                                     </Style>
                                                 </GridViewColumn.HeaderContainerStyle>
-
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock TextWrapping="Wrap" Text="{Binding NOTIFY}" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
                                         </GridView>
                                     </ListView.View>

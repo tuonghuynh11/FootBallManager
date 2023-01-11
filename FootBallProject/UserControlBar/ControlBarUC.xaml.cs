@@ -242,8 +242,18 @@ namespace FootBallProject.UserControlBar
         {
             ListView listView = (ListView)sender;
             Notification notification = listView.SelectedItem as Notification;
-            notification.CHECKED = "Đã xem";
-            DataProvider.ins.DB.SaveChanges();
+            Notification update = DataProvider.ins.DB.Notifications.Find(notification.ID);
+            try
+            {
+                update.CHECKED = "Đã xem";
+                DataProvider.ins.DB.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                return;
+            }
+            
         }
 
         private void notifipopup_Opened(object sender, RoutedEventArgs e)
