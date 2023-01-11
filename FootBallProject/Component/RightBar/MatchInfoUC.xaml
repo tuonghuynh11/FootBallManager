@@ -108,9 +108,7 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-
                     </Grid>
-
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -159,8 +157,6 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
                     </Grid>
-
-
                 </StackPanel>
             </ScrollViewer>
             <Grid
