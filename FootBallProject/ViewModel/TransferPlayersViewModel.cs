@@ -14,6 +14,7 @@ using System.Collections;
 using System.IO;
 using System.Drawing;
 using System.Windows.Media.Imaging;
+using System.Windows.Media;
 using System.Net;
 using System.Net.Mail;
 using System.Configuration;
@@ -259,13 +260,13 @@ namespace FootBallProject.ViewModel
                     PutTransfertoList();
                     p.dgrid2.ItemsSource = this.transferPlayers;
                     p.dgrid2.Items.Refresh();
-                    if (clubPlayerList.Count <= 11)
+                    if (clubPlayerList.Count <= 11 && USER.ROLE != "Admin" && USER.ROLE != "Assistant")
                     {
-                        OKCancelPopUp oKCancelPopUp = new OKCancelPopUp();
-                        oKCancelPopUp.Height = 300;
-                        oKCancelPopUp.Width = 500;
-                        oKCancelPopUp.titletxbl.Text = "THÔNG BÁO";
-                        oKCancelPopUp.content.Text = "Nếu đội bạn chưa có hơn 11 cầu thủ, bạn không được phép bán cầu thủ";
+                        PopUpCustom oKCancelPopUp = new PopUpCustom("THÔNG BÁO", "Nếu đội bạn chưa có hơn 11 cầu thủ\n Bạn không được phép bán cầu thủ") ;
+                        oKCancelPopUp.Height = 200;
+                        oKCancelPopUp.Width = 300;
+                        oKCancelPopUp.titletxbl.Foreground = System.Windows.Media.Brushes.Red;
+                        oKCancelPopUp.border.Background = System.Windows.Media.Brushes.Yellow;
                         oKCancelPopUp.Show();
                     }
                 }
@@ -651,7 +652,7 @@ namespace FootBallProject.ViewModel
                     TransferWindowUC tp = p as TransferWindowUC;
                     //string query1 = "UPDATE CAUTHU SET IDDOIBONG = @iddoibong where ID = @id";
                     string query2 = "UPDATE CHuYENNHUONG SET IDDOIMUA = '" + currentclubID + "' WHERE IDCAUTHU = @id AND IDDOIMUA is NULL ";
-                    string query3 = "INSERT NOTIFICATION values(85, N'" + currentClub + " đăng ký mua " + SelectedPlayer.Name + "', N'Chưa xem')";
+                    string query3 = "INSERT NOTIFICATION values(86, N'" + "Đội bóng " + currentClub + " đăng ký mua cầu thủ " + SelectedPlayer.Name + "', N'Chưa xem')";
                     string id = SelectedPlayer.Id;
 
                     //System.Windows.Forms.MessageBox.Show(id);

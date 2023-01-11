@@ -39,10 +39,15 @@ namespace FootBallProject.UserControlBar
                     border2.Margin = new Thickness(0, 50, 10, 0);
                     txblTransfer.Margin = txbDS.Margin;
                     dgrid2.Height = border2.Height = 600;
+                    Reload.Margin= new Thickness(718, 25, 10, 0);
                 }
-                var i1 = dgrid1.Columns.Single(c => c.Header.ToString() == "Button").DisplayIndex;
-                var i2 = dgrid2.Columns.Single(c => c.Header.ToString() == "Button").DisplayIndex;
-                var i3 = dgrid3.Columns.Single(c => c.Header.ToString() == "Button").DisplayIndex;
+                //var i1 = dgrid1.Columns.Single(c => c.Header.ToString() == "Button").DisplayIndex;
+                //var i2 = dgrid2.Columns.Single(c => c.Header.ToString() == "Button").DisplayIndex;
+                //var i3 = dgrid3.Columns.Single(c => c.Header.ToString() == "Button").DisplayIndex;
+
+                var i1 = 4;
+                var i2 = 5;
+                var i3 = -1;
                 dgrid1.Columns[i1].Visibility = dgrid2.Columns[i2].Visibility = dgrid3.Columns[i1].Visibility = Visibility.Hidden;
 
             }

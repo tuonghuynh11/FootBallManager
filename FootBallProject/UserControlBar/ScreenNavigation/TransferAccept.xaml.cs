@@ -85,6 +85,12 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
                 {
                     DataProvider.ins.DB.Notifications.Add(new Notification() { IDHLV = item.ID, NOTIFY = $"Mua cầu thủ {teams.TENCAUTHU} không thành công", CHECKED = "Chưa xem" });
                 }
+
+                Notification rmnotify = DataProvider.ins.DB.Notifications.Where(p => p.NOTIFY.Contains(teams.CAUTHU.HOTEN.ToString()) && p.NOTIFY.Contains(teams.DOIBONG.TEN.ToString())).FirstOrDefault();
+
+                DataProvider.ins.DB.Notifications.Remove(rmnotify);
+
+
                 DataProvider.ins.DB.CHUYENNHUONGs.Remove(teams);
                 DataProvider.ins.DB.SaveChanges();
 
@@ -119,6 +125,10 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
                 {
                     DataProvider.ins.DB.Notifications.Add(new Notification() { IDHLV = item.ID, NOTIFY = $"Đã mua thành công cầu thủ {teams.TENCAUTHU}", CHECKED = "Chưa xem" });
                 }
+
+                Notification rmnotify = DataProvider.ins.DB.Notifications.Where(p => p.NOTIFY.Contains(teams.CAUTHU.HOTEN.ToString()) && p.NOTIFY.Contains(teams.DOIBONG.TEN.ToString())).FirstOrDefault();
+
+                DataProvider.ins.DB.Notifications.Remove(rmnotify);
                 DataProvider.ins.DB.CHUYENNHUONGs.Remove(teams);
                 DataProvider.ins.DB.SaveChanges();
 
