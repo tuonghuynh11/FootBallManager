@@ -418,7 +418,7 @@ namespace FootBallProject.Object
                 noticehlvB = DataProvider.Instance.Database.HUANLUYENVIENs.Where(x => x.IDDOIBONG == TeamB.ID).ToList();
                 foreach (var notice in noticehlvA)
                 {
-                    DataProvider.Instance.Database.Notifications.Add(new Notification() { IDHLV = notice.ID, NOTIFY = $"Bạn có l-ịch đấu với {TeamB.TEN} vào {DisplayDay}", CHECKED = "Chưa xem" });
+                    DataProvider.Instance.Database.Notifications.Add(new Notification() { IDHLV = notice.ID, NOTIFY = $"Bạn có lịch đấu với {TeamB.TEN} vào {DisplayDay}", CHECKED = "Chưa xem" });
                 }
                 foreach (var notice in noticehlvB)
                 {
