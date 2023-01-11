@@ -13,7 +13,7 @@
              TextOptions.TextRenderingMode="Auto"
           Style="{StaticResource Page_Style}" 
              FontFamily="{DynamicResource MaterialDesignFont}"
-             mc:Ignorable="d" 
+             mc:Ignorable="d" Loaded="UserControl_Loaded"
              d:DesignHeight="720" d:DesignWidth="1290">
     <Border CornerRadius="10" Margin="60 15 15 15" Height="690">
         <materialDesign:Card Height="690" Width="1200" UniformCornerRadius="10">
@@ -131,7 +131,7 @@
                           Margin="275,30,0,0" VerticalAlignment="Top" 
                           Style="{StaticResource combobox_item}"
                             materialDesign:HintAssist.Hint="Chọn tên đội bóng"
-                          Width="250" Background="White" FontSize="15"/>
+                          Width="250" Background="White" FontSize="15" DropDownClosed="cbIDdoibong_DropDownClosed"/>
                     <Button 
                     x:Name="_Load"
                     VerticalAlignment="Top"

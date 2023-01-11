@@ -78,6 +78,27 @@ namespace FootBallProject.UserControlBar
             }
         }
 
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (cbIDdoibong.Text != "")
+            {
+                ReadOrderData(connectstr);
+                DTG.ItemsSource = bLDs;
+                DTG.Items.Refresh();
+            }
+        }
+
+        private void cbIDdoibong_DropDownClosed(object sender, EventArgs e)
+        {
+            if (cbIDdoibong.Text != "")
+            {
+                ReadOrderData(connectstr);
+                DTG.ItemsSource = bLDs;
+                DTG.Items.Refresh();
+            }
+        }
+
+
         public class BLD
         {
             public string ID { get; set; }
@@ -169,6 +190,8 @@ namespace FootBallProject.UserControlBar
             DTG.Items.Refresh();
         }
 
+
+
         private void DTG_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataGrid dg = sender as DataGrid;
@@ -231,6 +254,26 @@ namespace FootBallProject.UserControlBar
             addnewusers.getID(cbIDdoibong.Text);
             addnewusers.ShowDialog();
         }
+
+        //private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    if(cbIDdoibong.Text != "")
+        //    {
+        //        ReadOrderData(connectstr);
+        //        DTG.ItemsSource = bLDs;
+        //        DTG.Items.Refresh();
+        //    }
+        //}
+
+        //private void cbIDdoibong_DropDownClosed(object sender, EventArgs e)
+        //{
+        //    if (cbIDdoibong.Text != "")
+        //    {
+        //        ReadOrderData(connectstr);
+        //        DTG.ItemsSource = bLDs;
+        //        DTG.Items.Refresh();
+        //    }
+        //}
 
         //private void _Delete_Click(object sender, RoutedEventArgs e)
         //{
