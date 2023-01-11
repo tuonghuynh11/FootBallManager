@@ -1,6 +1,7 @@
 ﻿using DevExpress.Data.Extensions;
 using DevExpress.Xpf.Bars.Helpers;
 using DevExpress.Xpf.Editors.Helpers;
+using DevExpress.Xpf.Printing.PreviewControl.Bars;
 using FootBallProject.Model;
 using FootBallProject.Object;
 using FootBallProject.Usercontrol;
@@ -9,11 +10,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 
 namespace FootBallProject.ViewModel
@@ -136,11 +139,37 @@ namespace FootBallProject.ViewModel
             }
             return true;
         }
+        private byte[] ConvertBitmaptoByteArray(BitmapImage bitmapImage)
+        {
+            if (bitmapImage == null)
+            {
+                return null;
+            }
+            byte[] data;
+            BitmapEncoder encoder = new PngBitmapEncoder();
+            var extension = Path.GetExtension(CreateNewLeague.Instance.LinkAvatar);
+            switch (extension)
+            {
+                case ".png":
+                    encoder = new PngBitmapEncoder(); break;
+                case ".jpg": case ".jpeg": encoder = new JpegBitmapEncoder(); break;
+                case ".bmp": encoder = new BmpBitmapEncoder(); break;
+                default: break;
+            }
+            encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+            using (MemoryStream ms = new MemoryStream())
+            {
+                encoder.Save(ms);
+                data = ms.ToArray();
+            }
+            return data;
+        }
         public void CompleteFuntion()
         {
             if (CheckRound() == true)
             {
                 Enable = false;
+                CreateNewLeague.Instance.League.HINHANH = ConvertBitmaptoByteArray(CreateNewLeague.Instance.avatarimg);
                 DataProvider.ins.DB.LEAGUEs.Add(CreateNewLeague.Instance.League);
                 DataProvider.ins.DB.SaveChanges();
                 foreach (var item in ConfigVongLoai1ViewModel.Instance.Teams)

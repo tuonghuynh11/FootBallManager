@@ -37,11 +37,11 @@ namespace FootBallProject.ViewModel
         public ListMatchRightSideBarInfo() { CurrentCard = null; }
         public ListMatchRightSideBarInfo(FootballMatchCard card, bool isCreateNew = false)
         {
-            card.InitListTeam();
+            //card.InitListTeam();
             CurrentCard = new FootballMatchCard(card.ID, card.DisplayName, card.DisplayPlace, card.DisplayDay, card.CurrentMatch);
-            CurrentCard.InitListTeam();
             //CurrentCard.InitListTeam();
-            ActualCard = card;
+            //CurrentCard.InitListTeam();
+            ActualCard = new FootballMatchCard(card.ID, card.DisplayName, card.DisplayPlace, card.DisplayDay, card.CurrentMatch);
             InitCommand();
         }
         private void InitCommand()

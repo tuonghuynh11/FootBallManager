@@ -558,10 +558,7 @@ namespace FootBallProject.ViewModel
                             System.Windows.Forms.MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-
-
                 }
-
                 );
             DeletePlayerCommand = new RelayCommand<object>(
                 (p) => { return true; },
@@ -1020,8 +1017,6 @@ namespace FootBallProject.ViewModel
                             EditPlayerForm x = p as EditPlayerForm;
                             x.cthimage.Source = new BitmapImage(new Uri(openfile.FileName));
                             EdgePath = openfile.FileName;
-
-
                         }
 
                     }
