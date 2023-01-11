@@ -89,19 +89,26 @@
             </StackPanel>
             <StackPanel Orientation="Vertical" Visibility="{Binding Enable, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TextBlock Text="Tỉ số luân lưu"></TextBlock>
-                <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
-                    <ComboBox Width="150" ItemsSource="{Binding CacTiSoLuanLuuDoiA }"
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="130"></ColumnDefinition>
+                            <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                            <ColumnDefinition Width="130"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Text="{Binding MatchTeamInfoTeamA.DOIBONG.TEN,FallbackValue='Tên đội A'}"></TextBlock>
+                        <ComboBox Grid.Column="1" Width="50" ItemsSource="{Binding CacTiSoLuanLuuDoiA }"
                       SelectedItem="{Binding TiSoLuanLuuDoiA, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                       Style="{StaticResource combobox_item}"
                       materialDesign:HintAssist.Hint="{Binding MatchTeamInfoTeamA.DOIBONG.TEN}"
                       >
-                    </ComboBox>
-                    <ComboBox Width="150" ItemsSource="{Binding CacTiSoLuanLuuDoiB}"
-                      SelectedItem="{Binding TiSoLuanLuuDoiB , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                      Style="{StaticResource combobox_item}"
-                      materialDesign:HintAssist.Hint="{Binding MatchTeamInfoTeamB.DOIBONG.TEN}"
-                      >
-                    </ComboBox>
+                        </ComboBox>
+                        <TextBlock Grid.Column="2" Style="{StaticResource textblock_item}" Text="{Binding MatchTeamInfoTeamB.DOIBONG.TEN,FallbackValue='Tên đội B'}"></TextBlock>
+                        <TextBlock Grid.Column="3" Style="{StaticResource textblock_item}" Text="{Binding TiSoLuanLuuDoiB,FallbackValue='0', UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></TextBlock>
+
+                    </Grid>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

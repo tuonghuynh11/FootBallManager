@@ -45,9 +45,9 @@
                         <TextBlock
                         Grid.Column="1"
                         Style="{StaticResource textblock_item}"
-                        Text="{Binding CurrentCard.DisplayName, FallbackValue='Tên trận đấu'}"
+                        Text="{Binding CurrentCard.DisplayName, FallbackValue='Chưa cập nhật'}"
                         TextAlignment="Right"
-                        ToolTip="{Binding CurrentCard.DisplayName, FallbackValue='Tên trận đấu'}" />
+                        ToolTip="{Binding CurrentCard.DisplayName, FallbackValue='Chưa cập nhật'}" />
                     </Grid>
 
                     <!--  Mã môn học  -->
@@ -65,7 +65,7 @@
                         <TextBlock
                         Grid.Column="1"
                         Style="{StaticResource textblock_item}"
-                        Text="{Binding CurrentCard.TeamA.name, FallbackValue='Tên đội một'}"
+                        Text="{Binding CurrentCard.TeamA.name, FallbackValue='Chưa cập nhật'}"
                         TextAlignment="Right" />
                     </Grid>
 
@@ -84,7 +84,7 @@
                         <TextBlock
                         Grid.Column="1"
                         Style="{StaticResource textblock_item}"
-                        Text="{Binding CurrentCard.TeamB.name, FallbackValue='Tên đội hai'}"
+                        Text="{Binding CurrentCard.TeamB.name, FallbackValue='Chưa cập nhật'}"
                         TextAlignment="Right" />
                     </Grid>
 
@@ -104,7 +104,7 @@
                         Grid.Column="1"
                         Style="{StaticResource textblock_item}"
                         TextAlignment="Right"
-                        Text="{Binding CurrentCard.DisplayDay}">
+                        Text="{Binding CurrentCard.DisplayDay, FallbackValue='Chưa cập nhật'}">
 
                         </TextBlock>
                     </Grid>
@@ -124,7 +124,7 @@
                         <TextBlock
                         Grid.Column="1"
                         Style="{StaticResource textblock_item}"
-                        Text="{Binding CurrentCard.DisplayPlace.TENDIADIEM, FallbackValue='Địa điểm'}"
+                        Text="{Binding CurrentCard.DisplayPlace.TENDIADIEM, FallbackValue='Chưa cập nhật'}"
                         TextAlignment="Right" />
                     </Grid>
 
@@ -248,7 +248,7 @@
 
                 </StackPanel>
             </ScrollViewer>
-            <Grid
+            <!--<Grid
             Grid.Row="1"
             Margin="8"
             Style="{StaticResource text_grid_item}">
@@ -276,7 +276,7 @@
                 FontSize="16"
                 Foreground="White"
                 Style="{StaticResource rounded_btn}" />
-            </Grid>
+            </Grid>-->
         </Grid>
     </materialDesign:Card>
 </UserControl>

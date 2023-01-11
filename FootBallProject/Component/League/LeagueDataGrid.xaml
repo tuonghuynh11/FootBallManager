@@ -80,15 +80,15 @@
                             Header="Tên đội bóng" />
                     <materialDesign:DataGridTextColumn
                             Width="*"
-                            Binding="{Binding DOIBONG.SOLUONGCAUTHU}"
+                            Binding="{Binding DOIBONG.SOLUONGTHANHVIEN}"
                             Header="Số lượng cầu thủ" />
                     <materialDesign:DataGridTextColumn
                             Width="*"
-                            Binding="{Binding NumberOfStudents,FallbackValue='0'}"
+                            Binding="{Binding SoTranThang,FallbackValue='0'}"
                             Header="Tỉ lệ thắng" />
                     <materialDesign:DataGridTextColumn
                             Width="*"
-                            Binding="{Binding CacHeDaoTao,FallbackValue='0'}"
+                            Binding="{Binding SoBanThang,FallbackValue='0'}"
                             Header="Số bàn thắng" />
                 </DataGrid.Columns>
             </DataGrid>

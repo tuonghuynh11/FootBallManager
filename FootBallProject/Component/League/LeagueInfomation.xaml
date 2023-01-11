@@ -254,7 +254,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button
+            <!--<Button
                 Grid.Column="2"
                 Command="{Binding EditSubjectClassCardInfo}"
                 CommandParameter="{Binding ElementName=SubjectClassRightSideBar, Path=DataContext.CurrentCard}"
@@ -272,7 +272,7 @@
                 DataContext="{DynamicResource AdminSubjectClassRightSideBarVM}"
                 FontSize="16"
                 Foreground="White"
-                Style="{StaticResource rounded_btn}" />
+                Style="{StaticResource rounded_btn}" />-->
         </Grid>
     </Grid>
 </UserControl>

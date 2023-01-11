@@ -70,7 +70,7 @@
                         SelectedValuePath="TENQUOCGIA">
                     </ComboBox>
                 </Grid>
-                <Grid Style="{StaticResource text_grid_item}">
+                <!--<Grid Style="{StaticResource text_grid_item}">
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition />
@@ -81,13 +81,13 @@
                         FontWeight="Bold"
                         Style="{StaticResource textblock_item}"
                         Text="Thời gian bắt đầu" />
-                    <!--<TextBox
+                    --><!--<TextBox
                         Grid.Row="1"
                         Style="{StaticResource textbox_item}"
                         materialDesign:HintAssist.Hint="Chọn thời gian bắt đầu"
                         Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
 
-                    </TextBox>-->
+                    </TextBox>--><!--
                     <DatePicker Grid.Row="1"
                                 Style="{StaticResource datepicker_item}"
                                 materialDesign:HintAssist.Hint="Thời gian bắt đầu"
@@ -105,19 +105,19 @@
                         FontWeight="Bold"
                         Style="{StaticResource textblock_item}"
                         Text="Thời gian kết thúc" />
-                    <!--<TextBox
+                    --><!--<TextBox
                         Grid.Row="1"
                         Style="{StaticResource textbox_item}"
                         materialDesign:HintAssist.Hint="Chọn thời gian bắt đầu"
                         Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
 
-                    </TextBox>-->
+                    </TextBox>--><!--
                     <DatePicker Grid.Row="1"
                                 Style="{StaticResource datepicker_item}"
                                 materialDesign:HintAssist.Hint="Thời gian kết thúc"
                                 Text="{Binding SelectedLeague.EndTime}"
                                 ></DatePicker>
-                </Grid>
+                </Grid>-->
                 <!--<ItemsControl ItemsSource="{Binding FootballMatchCard1}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -135,7 +135,8 @@
         <Grid
             Grid.Row="2"
             Margin="8,8,8,8"
-            Style="{StaticResource text_grid_item}">
+            Style="{StaticResource text_grid_item}"
+            Visibility="{Binding Enable, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -143,7 +144,7 @@
             </Grid.ColumnDefinitions>
             <Button
                 Grid.Column="2"
-                Command="{Binding CreateNewMatch}"
+                Command="{Binding SaveInfo}"
                 Content="Lưu"
                 FontSize="16"
                 Style="{StaticResource rounded_btn}"
@@ -153,6 +154,7 @@
                 Background="{StaticResource DarkGray}"
                 Content="Hủy"
                 FontSize="16"
+                Command="{Binding CancelInfo}"
                 Foreground="White"
                 Style="{StaticResource rounded_btn}" />
         </Grid>

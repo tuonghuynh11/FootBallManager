@@ -1,4 +1,5 @@
-﻿using FootBallProject.Model;
+﻿using FootBallProject.Class;
+using FootBallProject.Model;
 using FootBallProject.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -60,6 +61,12 @@ namespace FootBallProject.Object
             get { return selectedSoluong; }
             set { selectedSoluong = value; OnPropertyChanged(); }
         }
+        private bool enable;
+        public bool Enable
+        {
+            get { return enable; }
+            set { enable = value; OnPropertyChanged(); }
+        }
         public LeagueCardOb(LEAGUE p)
         {
             DisplayName = p.TENGIAIDAU;
@@ -68,6 +75,20 @@ namespace FootBallProject.Object
             EndTime = p.NGAYKETTHUC.ToString().Split(' ')[0];
             SoDoi = DataProvider.Instance.Database.TEAMOFLEAGUEs.Where(x => x.IDGIAIDAU == p.ID).Count();
             League = p;
+            if (AccessUser.userLogin.USERROLE.ID == 2)
+            {
+                Enable = true;
+            }
+            else Enable = false;
+        }
+        public void SaveLeague()
+        {
+            if (DisplayName != "" && QuocTich != null)
+            {
+                League.TENGIAIDAU = DisplayName;
+                League.QUOCGIA = QuocTich.ToString();
+                DataProvider.ins.Database.SaveChanges();
+            }
         }
     }
 

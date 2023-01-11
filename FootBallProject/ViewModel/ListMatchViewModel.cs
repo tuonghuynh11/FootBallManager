@@ -60,6 +60,7 @@ namespace FootBallProject.ViewModel
             {
                 _selectedLeague = value;
                 OnPropertyChanged();
+                SelectedRound = null; 
                 LoadRound();
 
             }
@@ -83,39 +84,52 @@ namespace FootBallProject.ViewModel
         {
             SelectedLeague = DataProvider.Instance.Database.LEAGUEs.Where(x => x.ID == 1).FirstOrDefault();
             SelectedRound = null;
-            LoadMatchlistbyRound();
-            LoadRound();
             LoadLeague();
+            LoadRound();
+            LoadMatchlistbyRound();
         }
         public ListMatchViewModel(LEAGUE selectedleague, ROUND selectedround)
         {
             SelectedLeague = selectedleague;
             SelectedRound = selectedround;
-            LoadMatchlistbyRound();
-            LoadRound();
             LoadLeague();
+            LoadRound();
+            LoadMatchlistbyRound();
+
         }
         public void LoadLeague()
         {
-            Leagues = new ObservableCollection<LEAGUE>(DataProvider.Instance.Database.LEAGUEs);
+            Leagues = new ObservableCollection<LEAGUE>(DataProvider.Instance.Database.LEAGUEs.Where(x=>x.NGAYBATDAU != null).ToList());
         }
         public void LoadRound()
         {
-            try
-            {
+
+                FootballMatchCards.Clear();
+                StoredFootballMatchCards.Clear();
+                FootballMatchCard1.Clear();
+
                 Rounds = new ObservableCollection<ROUND>(DataProvider.Instance.Database.ROUNDs.Where(x => x.IDGIAIDAU == SelectedLeague.ID));
-            }
-            catch { }
+                foreach(var item1 in Rounds)
+                {
+                    StoredFootballMatchCards = new ObservableCollection<FOOTBALLMATCH>(DataProvider.Instance.Database.FOOTBALLMATCHes.Where(x => x.ROUND.ID == item1.ID));
+                    foreach(var item in StoredFootballMatchCards)
+                    {
+                        FootballMatchCard1.Add(new FootballMatchCard(item.ID, item.TENTRANDAU, item.DIADIEM1, item.THOIGIAN, item));
+                        FootballMatchCards.Add(item);
+                    }
+                }
+
         }
         public void LoadMatchlistbyRound()
         {
+            if (SelectedRound == null) return;
             FootballMatchCards.Clear();
             StoredFootballMatchCards.Clear();
             FootballMatchCard1.Clear();
             StoredFootballMatchCards = new ObservableCollection<FOOTBALLMATCH>(DataProvider.Instance.Database.FOOTBALLMATCHes.Where(x => x.ROUND.LEAGUE.ID == SelectedLeague.ID));
             foreach (var item in StoredFootballMatchCards)
             {
-                if (item.ROUND == SelectedRound || SelectedRound == null)
+                if (item.ROUND == SelectedRound)
                 {
                     FootballMatchCard1.Add(new FootballMatchCard(item.ID, item.TENTRANDAU, item.DIADIEM1, item.THOIGIAN, item));
                     FootballMatchCards.Add(item);
