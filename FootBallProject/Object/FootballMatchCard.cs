@@ -412,18 +412,18 @@ namespace FootBallProject.Object
         {
             if (CheckTime() == true && DisplayName != "" && DisplayPlace != null)
             {
-                List<HUANLUYENVIEN> noticehlvA = new List<HUANLUYENVIEN>();
-                List<HUANLUYENVIEN> noticehlvB = new List<HUANLUYENVIEN>();
-                noticehlvA = DataProvider.Instance.Database.HUANLUYENVIENs.Where(x => x.IDDOIBONG == TeamA.ID).ToList();
-                noticehlvB = DataProvider.Instance.Database.HUANLUYENVIENs.Where(x => x.IDDOIBONG == TeamB.ID).ToList();
-                foreach (var notice in noticehlvA)
-                {
-                    DataProvider.Instance.Database.Notifications.Add(new Notification() { IDHLV = notice.ID, NOTIFY = $"Bạn có l-ịch đấu với {TeamB.TEN} vào {DisplayDay}", CHECKED = "Chưa xem" });
-                }
-                foreach (var notice in noticehlvB)
-                {
-                    DataProvider.Instance.Database.Notifications.Add(new Notification() { IDHLV = notice.ID, NOTIFY = $"Bạn có lịch đấu với {TeamA.TEN} vào {DisplayDay}", CHECKED = "Chưa xem" });
-                }
+                //List<HUANLUYENVIEN> noticehlvA = new List<HUANLUYENVIEN>();
+                //List<HUANLUYENVIEN> noticehlvB = new List<HUANLUYENVIEN>();
+                //noticehlvA = DataProvider.Instance.Database.HUANLUYENVIENs.Where(x => x.IDDOIBONG == TeamA.ID).ToList();
+                //noticehlvB = DataProvider.Instance.Database.HUANLUYENVIENs.Where(x => x.IDDOIBONG == TeamB.ID).ToList();
+                //foreach (var notice in noticehlvA)
+                //{
+                //    DataProvider.Instance.Database.Notifications.Add(new Notification() { IDHLV = notice.ID, NOTIFY = $"Bạn có lịch đấu với {TeamB.TEN} vào {DisplayDay}" });
+                //}
+                //foreach (var notice in noticehlvB)
+                //{
+                //    DataProvider.Instance.Database.Notifications.Add(new Notification() { IDHLV = notice.ID, NOTIFY = $"Bạn có lịch đấu với {TeamA.TEN} vào {  DisplayDay}" });
+                //}
                 CurrentMatch.THOIGIAN = DisplayDay;
                 //CurrentMatch.DIADIEM1.TENDIADIEM = DisplayPlace;
                 CurrentMatch.TENTRANDAU = DisplayName;
