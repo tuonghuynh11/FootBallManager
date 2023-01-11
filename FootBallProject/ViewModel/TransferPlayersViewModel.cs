@@ -19,6 +19,7 @@ using System.Net.Mail;
 using System.Configuration;
 using FootBallProject.UserControlBar;
 using FootBallProject.Model;
+using FootBallProject.PopUp;
 
 namespace FootBallProject.ViewModel
 {
@@ -41,7 +42,7 @@ namespace FootBallProject.ViewModel
         public ICommand AddPlayerCommand2 { get; set; }
         private DataTable dataTable;
         BitmapImage bitmap = new BitmapImage();
-
+        public ICommand Reload { get; set; }
         public ICommand AddPlayerCommand { get; set; }
         public ICommand DeletePlayerCommand { get; set; }
         public ICommand UpdatePlayerCommand { get; set; }
@@ -208,7 +209,28 @@ namespace FootBallProject.ViewModel
             //        edit.ShowDialog();
             //    }
             //    );
-
+            Reload = new RelayCommand<object>(
+                (p) =>
+                {
+                    return true;
+                },
+                (p) =>
+                {
+                    TransferWindowUC tw = p as TransferWindowUC;
+                    PullClubData();
+                    PutClubDataToList();
+                    PullSoldPlData();
+                    PutSoldDataToList();
+                    PullTransferData();
+                    PutTransfertoList();
+                    tw.dgrid1.ItemsSource = clubPlayerList;
+                    tw.dgrid3.ItemsSource = soldplayers;
+                    tw.dgrid2.ItemsSource = TransferPlayers;
+                    tw.dgrid1.Items.Refresh();
+                    tw.dgrid2.Items.Refresh();
+                    tw.dgrid3.Items.Refresh();
+                }
+                );
             RowDoubleClickCommand = new RelayCommand<object>((p) => { if (p as TeamPlayersUC == null) return false; return true; }, (p) =>
             {
                 TeamPlayersUC tp = p as TeamPlayersUC;
@@ -223,7 +245,7 @@ namespace FootBallProject.ViewModel
             TransferLoaded = new RelayCommand<TransferWindowUC>(
                 (p) => { return true; },
                 (p) =>
-                {
+                {                    
                     PullClub();
                     PullClubData();
                     PutClubDataToList();
@@ -232,9 +254,20 @@ namespace FootBallProject.ViewModel
                     PullSoldPlData();
                     PutSoldDataToList();
                     p.dgrid3.ItemsSource = this.soldplayers;
+                    p.dgrid3.Items.Refresh();
                     PullTransferData();
                     PutTransfertoList();
                     p.dgrid2.ItemsSource = this.transferPlayers;
+                    p.dgrid2.Items.Refresh();
+                    if (clubPlayerList.Count <= 11)
+                    {
+                        OKCancelPopUp oKCancelPopUp = new OKCancelPopUp();
+                        oKCancelPopUp.Height = 300;
+                        oKCancelPopUp.Width = 500;
+                        oKCancelPopUp.titletxbl.Text = "THÔNG BÁO";
+                        oKCancelPopUp.content.Text = "Nếu đội bạn chưa có hơn 11 cầu thủ, bạn không được phép bán cầu thủ";
+                        oKCancelPopUp.Show();
+                    }
                 }
 
                 );
@@ -521,9 +554,10 @@ namespace FootBallProject.ViewModel
             //    );
             // Command nut Sell
             TransferCommand = new RelayCommand<TransferWindowUC>(
-                (p) => { if (p == null) return false; return true; },
+                (p) => { if (clubPlayerList.Count <= 11) return false; return true; },
                 (p) =>
                 {
+
                     TransferWindowUC tw = p;
                     string query = "INSERT CHUYENNHUONG VALUES (@idcauthu, NULL)";
                     string id = SelectedPlayer.Id;
@@ -542,7 +576,7 @@ namespace FootBallProject.ViewModel
                                 sqlquery.Parameters.AddWithValue("@idcauthu", id);
                                 sqlquery.ExecuteNonQuery();
                             }
-                            using(SqlCommand sqlquery2 = new SqlCommand(query2, sqlConnection))
+                            using (SqlCommand sqlquery2 = new SqlCommand(query2, sqlConnection))
                             {
                                 sqlquery2.ExecuteNonQuery();
                             }
@@ -598,10 +632,14 @@ namespace FootBallProject.ViewModel
                     PutClubDataToList();
                     PullSoldPlData();
                     PutSoldDataToList();
+                    PullTransferData();
+                    PutTransfertoList();
                     tp.dgrid1.ItemsSource = clubPlayerList;
                     tp.dgrid3.ItemsSource = soldplayers;
+                    tp.dgrid2.ItemsSource = transferPlayers;
                     tp.dgrid1.Items.Refresh();
                     tp.dgrid3.Items.Refresh();
+                    tp.dgrid2.Items.Refresh();
 
                 }
 
@@ -658,8 +696,10 @@ namespace FootBallProject.ViewModel
                     PutTransfertoList();
                     tp.dgrid1.ItemsSource = clubPlayerList;
                     tp.dgrid2.ItemsSource = TransferPlayers;
+                    tp.dgrid3.ItemsSource = soldplayers;
                     tp.dgrid1.Items.Refresh();
                     tp.dgrid2.Items.Refresh();
+                    tp.dgrid3.Items.Refresh();
 
                 }
                 );

@@ -850,138 +850,138 @@ namespace FootBallProject.ViewModel
                 }
 
                 );
-            // Command nut Sell
-            TransferCommand = new RelayCommand<TransferWindowUC>(
-                (p) => { if (p == null) return false; return true; },
-                (p) =>
-                {
-                    TransferWindowUC tw = p;
-                    string query = "INSERT CHUYENNHUONG VALUES (@idcauthu)";
-                    string id = SelectedPlayer.Id;
+            //// Command nut Sell
+            //TransferCommand = new RelayCommand<TransferWindowUC>(
+            //    (p) => { if (p == null) return false; return true; },
+            //    (p) =>
+            //    {
+            //        TransferWindowUC tw = p;
+            //        string query = "INSERT CHUYENNHUONG VALUES (@idcauthu)";
+            //        string id = SelectedPlayer.Id;
 
-                    //System.Windows.Forms.MessageBox.Show(id);
-                    using (SqlConnection sqlConnection = new SqlConnection(connString))
-                    {
-                        sqlConnection.Open();
+            //        //System.Windows.Forms.MessageBox.Show(id);
+            //        using (SqlConnection sqlConnection = new SqlConnection(connString))
+            //        {
+            //            sqlConnection.Open();
 
-                        try
-                        {
-                            using (SqlCommand sqlquery = new SqlCommand(query, sqlConnection))
-                            {
-                                sqlquery.Parameters.AddWithValue("@idcauthu", id);
-                                sqlquery.ExecuteNonQuery();
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            System.Windows.Forms.MessageBox.Show(e.Message);
+            //            try
+            //            {
+            //                using (SqlCommand sqlquery = new SqlCommand(query, sqlConnection))
+            //                {
+            //                    sqlquery.Parameters.AddWithValue("@idcauthu", id);
+            //                    sqlquery.ExecuteNonQuery();
+            //                }
+            //            }
+            //            catch (Exception e)
+            //            {
+            //                System.Windows.Forms.MessageBox.Show(e.Message);
 
-                            System.Windows.Forms.MessageBox.Show("Cầu thủ đã được bán", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        }
-                        sqlConnection.Close();
-                    }
-                    PullClubData();
-                    PutClubDataToList();
-                    PullSoldPlData();
-                    PutSoldDataToList();
-                    PullTransferData();
-                    PutTransfertoList();
-                    tw.dgrid1.ItemsSource = clubPlayerList;
-                    tw.dgrid3.ItemsSource = soldplayers;
-                    tw.dgrid2.ItemsSource = TransferPlayers;
-                    tw.dgrid1.Items.Refresh();
-                    tw.dgrid2.Items.Refresh();
+            //                System.Windows.Forms.MessageBox.Show("Cầu thủ đã được bán", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //            }
+            //            sqlConnection.Close();
+            //        }
+            //        PullClubData();
+            //        PutClubDataToList();
+            //        PullSoldPlData();
+            //        PutSoldDataToList();
+            //        PullTransferData();
+            //        PutTransfertoList();
+            //        tw.dgrid1.ItemsSource = clubPlayerList;
+            //        tw.dgrid3.ItemsSource = soldplayers;
+            //        tw.dgrid2.ItemsSource = TransferPlayers;
+            //        tw.dgrid1.Items.Refresh();
+            //        tw.dgrid2.Items.Refresh();
 
-                }
-                );
-            RetrieveCommand = new RelayCommand<object>(
-                (p) => { return true; },
-                (p) =>
-                {
-                    TransferWindowUC tp = p as TransferWindowUC;
-                    string query = "DELETE FROM CHUYENNHUONG WHERE IDCAUTHU =" + selectedPlayer.Id;
-                    using (SqlConnection sqlConnection = new SqlConnection(connString))
-                    {
-                        sqlConnection.Open();
+            //    }
+            //    );
+            //RetrieveCommand = new RelayCommand<object>(
+            //    (p) => { return true; },
+            //    (p) =>
+            //    {
+            //        TransferWindowUC tp = p as TransferWindowUC;
+            //        string query = "DELETE FROM CHUYENNHUONG WHERE IDCAUTHU =" + selectedPlayer.Id;
+            //        using (SqlConnection sqlConnection = new SqlConnection(connString))
+            //        {
+            //            sqlConnection.Open();
 
-                        try
-                        {
-                            using (SqlCommand sqlquery = new SqlCommand(query, sqlConnection))
-                            {
-                                sqlquery.ExecuteNonQuery();
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            System.Windows.Forms.MessageBox.Show(e.Message);
+            //            try
+            //            {
+            //                using (SqlCommand sqlquery = new SqlCommand(query, sqlConnection))
+            //                {
+            //                    sqlquery.ExecuteNonQuery();
+            //                }
+            //            }
+            //            catch (Exception e)
+            //            {
+            //                System.Windows.Forms.MessageBox.Show(e.Message);
 
-                        }
-                        sqlConnection.Close();
-                    }
-                    PullClubData();
-                    PutClubDataToList();
-                    PullSoldPlData();
-                    PutSoldDataToList();
-                    tp.dgrid1.ItemsSource = clubPlayerList;
-                    tp.dgrid3.ItemsSource = soldplayers;
-                    tp.dgrid1.Items.Refresh();
-                    tp.dgrid3.Items.Refresh();
+            //            }
+            //            sqlConnection.Close();
+            //        }
+            //        PullClubData();
+            //        PutClubDataToList();
+            //        PullSoldPlData();
+            //        PutSoldDataToList();
+            //        tp.dgrid1.ItemsSource = clubPlayerList;
+            //        tp.dgrid3.ItemsSource = soldplayers;
+            //        tp.dgrid1.Items.Refresh();
+            //        tp.dgrid3.Items.Refresh();
 
-                }
+            //    }
 
-                );
-            BuyCommand = new RelayCommand<object>(
-                (p) => { return true; },
-                (p) =>
-                {
-                    TransferWindowUC tp = p as TransferWindowUC;
-                    string query1 = "UPDATE CAUTHU SET IDDOIBONG = @iddoibong where ID = @id";
-                    string query2 = "DELETE FROM CHUYENNHUONG WHERE IDCAUTHU = @id";
-                    string id = SelectedPlayer.Id;
+            //    );
+            //BuyCommand = new RelayCommand<object>(
+            //    (p) => { return true; },
+            //    (p) =>
+            //    {
+            //        TransferWindowUC tp = p as TransferWindowUC;
+            //        string query1 = "UPDATE CAUTHU SET IDDOIBONG = @iddoibong where ID = @id";
+            //        string query2 = "DELETE FROM CHUYENNHUONG WHERE IDCAUTHU = @id";
+            //        string id = SelectedPlayer.Id;
 
-                    //System.Windows.Forms.MessageBox.Show(id);
+            //        //System.Windows.Forms.MessageBox.Show(id);
 
 
-                    string selectedclubid = currentclubID;
+            //        string selectedclubid = currentclubID;
 
-                    using (SqlConnection conn = new SqlConnection(connString))
-                    {
-                        conn.Open();
-                        try
-                        {
-                            using (SqlCommand sqlquery = new SqlCommand(query1, conn))
-                            {
-                                sqlquery.Parameters.AddWithValue("@iddoibong", selectedclubid);
-                                sqlquery.Parameters.AddWithValue("@id", id);
-                                sqlquery.ExecuteNonQuery();
-                            }
-                            using (SqlCommand sqlquery2 = new SqlCommand(query2, conn))
-                            {
-                                sqlquery2.Parameters.AddWithValue("@id", id);
-                                sqlquery2.ExecuteNonQuery();
+            //        using (SqlConnection conn = new SqlConnection(connString))
+            //        {
+            //            conn.Open();
+            //            try
+            //            {
+            //                using (SqlCommand sqlquery = new SqlCommand(query1, conn))
+            //                {
+            //                    sqlquery.Parameters.AddWithValue("@iddoibong", selectedclubid);
+            //                    sqlquery.Parameters.AddWithValue("@id", id);
+            //                    sqlquery.ExecuteNonQuery();
+            //                }
+            //                using (SqlCommand sqlquery2 = new SqlCommand(query2, conn))
+            //                {
+            //                    sqlquery2.Parameters.AddWithValue("@id", id);
+            //                    sqlquery2.ExecuteNonQuery();
 
-                            }
-                        }
-                        catch (Exception)
-                        {
+            //                }
+            //            }
+            //            catch (Exception)
+            //            {
 
-                            System.Windows.Forms.MessageBox.Show("Hiện tại chưa có cầu thủ trên thị trường chuyển nhượng");
+            //                System.Windows.Forms.MessageBox.Show("Hiện tại chưa có cầu thủ trên thị trường chuyển nhượng");
 
-                        }
-                    }
-                    PullData();
-                    PutDataTolist();
-                    PullClubData();
-                    PutClubDataToList();
-                    PullTransferData();
-                    PutTransfertoList();
-                    tp.dgrid1.ItemsSource = clubPlayerList;
-                    tp.dgrid2.ItemsSource = TransferPlayers;
-                    tp.dgrid1.Items.Refresh();
-                    tp.dgrid2.Items.Refresh();
+            //            }
+            //        }
+            //        PullData();
+            //        PutDataTolist();
+            //        PullClubData();
+            //        PutClubDataToList();
+            //        PullTransferData();
+            //        PutTransfertoList();
+            //        tp.dgrid1.ItemsSource = clubPlayerList;
+            //        tp.dgrid2.ItemsSource = TransferPlayers;
+            //        tp.dgrid1.Items.Refresh();
+            //        tp.dgrid2.Items.Refresh();
 
-                }
-                );
+            //    }
+            //    );
             LoadImageCommand = new RelayCommand<object>(
                 (p) =>
                 {
