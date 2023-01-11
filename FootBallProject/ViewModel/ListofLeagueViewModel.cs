@@ -1,4 +1,5 @@
 ﻿using DevExpress.Mvvm.Native;
+using DevExpress.Xpf.Editors.Helpers;
 using FootBallProject.Class;
 using FootBallProject.Model;
 using FootBallProject.Object;
@@ -102,10 +103,10 @@ namespace FootBallProject.ViewModel
         public ListofLeagueViewModel()
         {
             Instance = this;
-            var currentleague = DataProvider.Instance.Database.LEAGUEs.FirstOrDefault();
+            var currentleague = DataProvider.Instance.Database.LEAGUEs.Where(x=>x.NGAYBATDAU!= null).FirstOrDefault();
             Currentleague = new LeagueCardOb(currentleague);
             ObservableCollection<LeagueCardOb> list3 = new ObservableCollection<LeagueCardOb>();
-            List<LEAGUE> list1 = DataProvider.Instance.Database.LEAGUEs.ToList();
+            List<LEAGUE> list1 = DataProvider.Instance.Database.LEAGUEs.Where(x => x.NGAYBATDAU!= null).ToList();
             foreach (var item in list1)
             {
                 list3.Add(new LeagueCardOb(item));
@@ -119,15 +120,18 @@ namespace FootBallProject.ViewModel
             //AddTeamofLeague = new RelayCommand<object>((p) => true, (p) => AddTeamofLeague(1, teams[0]));
             CheckVisibility();
         }
-        private void UpdateLeagues()
+        public void UpdateLeagues()
         {
+            var currentleague = DataProvider.Instance.Database.LEAGUEs.Where(x => x.NGAYBATDAU != null).FirstOrDefault();
+            Currentleague = new LeagueCardOb(currentleague);
             ObservableCollection<LeagueCardOb> list3 = new ObservableCollection<LeagueCardOb>();
-            List<LEAGUE> list1 = DataProvider.Instance.Database.LEAGUEs.ToList();
+            List<LEAGUE> list1 = DataProvider.Instance.Database.LEAGUEs.Where(x => x.NGAYBATDAU!= null).ToList();
             foreach (var item in list1)
             {
                 list3.Add(new LeagueCardOb(item));
             }
             Leagues = list3;
+            if (ConfigAutoViewModel.Instance != null) ConfigAutoViewModel.Instance.Update();
         }
         private void CheckVisibility()
         {

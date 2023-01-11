@@ -1,4 +1,5 @@
-﻿using DevExpress.Xpf.Editors.Helpers;
+﻿using DevExpress.Xpf.Charts;
+using DevExpress.Xpf.Editors.Helpers;
 using FootBallProject.Class;
 using FootBallProject.Model;
 using FootBallProject.ViewModel;
@@ -12,6 +13,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace FootBallProject.Object
 {
@@ -54,8 +56,12 @@ namespace FootBallProject.Object
         private string _displayName;
         private ObservableCollection<DOIBONG> _teamList;
         private bool _enable;
-
-       
+        private bool _isFirstRoundofLeague;
+        public bool IsFirstRoundofLeague
+        {
+            get { return _isFirstRoundofLeague; }
+            set { _isFirstRoundofLeague = value; OnPropertyChanged(); }
+        }
         public ObservableCollection<DOIBONG> TeamList
         {
             get => _teamList;
@@ -95,6 +101,12 @@ namespace FootBallProject.Object
         {
             get => _selectedRound;
             set { _selectedRound = value; OnPropertyChanged(); }
+        }
+        private DateTime? chanTime;
+        public DateTime? ChanTime {
+            get => chanTime;
+            set { chanTime = value; OnPropertyChanged(); }
+   
         }
         public string DisplayName
         {
@@ -145,24 +157,11 @@ namespace FootBallProject.Object
             get => _enable;
             set { _enable = value; OnPropertyChanged(); }
         }
-        public TimeSpan DisPlayTime
-        {
-            get { return _displayTime; }
-            set { _displayTime = value; OnPropertyChanged(); }
-        }
         public string NameTeamA
         {
             get => _nameTeamA; set
             {
                 _nameTeamA = value;
-
-                // Validation
-                //_errorBaseViewModel.ClearErrors();
-
-                //if (!IsValid(_nameTeamA))
-                //{
-                //    _errorBaseViewModel.AddError(nameof(_nameTeamA), "Vui lòng chọn đội 1!");
-                //}
             }
         }
 
@@ -171,14 +170,6 @@ namespace FootBallProject.Object
             get => _nameTeamB; set
             {
                 _nameTeamB = value;
-
-                // Validation
-                //_errorBaseViewModel.ClearErrors();
-
-                //if (!IsValid(_nameTeamB))
-                //{
-                //    _errorBaseViewModel.AddError(nameof(_nameTeamB), "Vui lòng chọn đội 2!");
-                //}
             }
         }
         public DIADIEM DisplayPlace
@@ -187,7 +178,6 @@ namespace FootBallProject.Object
             {
                 _displayPlace = value;
                 _errorBaseViewModel.ClearErrors();
-
                 if (DisplayPlace == null)
                 {
                     _errorBaseViewModel.AddError(nameof(_displayPlace), "Vui lòng chọn địa điểm!");
@@ -199,7 +189,7 @@ namespace FootBallProject.Object
         public ObservableCollection<DIADIEM> DisplayPlaces
         {
             get => _displayplaces;
-            set { _displayplaces = value; }
+            set { _displayplaces = value; OnPropertyChanged(); }
         }
         public DateTime? DisplayDay
         {
@@ -216,7 +206,7 @@ namespace FootBallProject.Object
                 }
                 else if (CheckTime() == false)
                 {
-                    _errorBaseViewModel.AddError(nameof(DisplayDay), "Ngày diễn ra không hợp lệ");
+                    _errorBaseViewModel.AddError(nameof(DisplayDay), $"Ngày phải thuộc {CurrentMatch.ROUND.NGAYBATDAU.ToString() } và {ChanTime.ToString()}");
                 }
                 OnPropertyChanged();
             }
@@ -255,15 +245,19 @@ namespace FootBallProject.Object
             get { return _infoTeamB; }
             set { _infoTeamB = value; }
         }
+        private bool _checkTimeValue;
+        public bool CheckTimeValue
+        {
+            get { return _checkTimeValue; }
+            set { _checkTimeValue = value;}
+        }
         public FootballMatchCard(int id, string displayName, DIADIEM displayPlace, DateTime? displayTime, FOOTBALLMATCH currentMatch)
         {
             _errorBaseViewModel = new ErrorBaseViewModel();
             _errorBaseViewModel.ErrorsChanged += ErrorBaseViewModel_ErrorsChanged;
-            InitListTeam();
             ID = id;
             CurrentMatch = currentMatch;
             DisplayName = displayName;
-            if (displayName != null ) DisplayDay = displayTime;
             if (currentMatch.DIADIEM != null)
             {
                 int vari =(int)currentMatch.DIADIEM;
@@ -272,10 +266,12 @@ namespace FootBallProject.Object
             if (CurrentMatch.ROUND != null)
             {
                 LEAGUE CurrentLeague = CurrentMatch.ROUND.LEAGUE;
-                Rounds = new ObservableCollection<ROUND>(DataProvider.ins.DB.ROUNDs.Where(x => x.IDGIAIDAU == CurrentLeague.ID));
-                DisplayPlaces = new ObservableCollection<DIADIEM>(DataProvider.ins.DB.DIADIEMs.Where(x => x.IDQUOCGIA == CurrentLeague.IDQUOCGIA).ToList());
+                Rounds = new ObservableCollection<ROUND>(DataProvider.ins.DB.ROUNDs.Where(x => x.IDGIAIDAU == CurrentLeague.ID).ToList());
+                DisplayPlaces = new ObservableCollection<DIADIEM>(DataProvider.ins.DB.DIADIEMs.Where(x => x.IDQUOCGIA == CurrentLeague.IDQUOCGIA));
+                InitListTeam();
+                InitTeamPlayerOfMatch();
             }
-            InitTeamPlayerOfMatch();
+            if (displayTime != null) DisplayDay = displayTime;
             IsEnable2();
         }
         private void IsEnable2() {
@@ -287,29 +283,79 @@ namespace FootBallProject.Object
         }
         public void InitListTeam()
         {
-            List<DOIBONG> list1 = new List<DOIBONG>();
-            if (CurrentMatch.ROUND != null)
+            if (CurrentMatch.ROUND == null)
             {
-                var list2 = DataProvider.Instance.Database.TEAMOFLEAGUEs.Where(x => x.IDGIAIDAU == CurrentMatch.ROUND.LEAGUE.ID).ToList();
-                foreach (var item in list2)
+                return;
+            }
+            else {      
+                if (CurrentMatch.ROUND.ID == Rounds[0].ID)
                 {
-                    list1.Add(item.DOIBONG);
+                    List<DOIBONG> list1 = new List<DOIBONG>();
+                        var list2 = DataProvider.Instance.Database.TEAMOFLEAGUEs.Where(x => x.IDGIAIDAU == CurrentMatch.ROUND.LEAGUE.ID).ToList();
+                        foreach (var item in list2)
+                        {
+                            list1.Add(item.DOIBONG);
+                        }
+                    TeamList = new ObservableCollection<DOIBONG>(list1);
+                    var list3 = DataProvider.ins.Database.FOOTBALLMATCHes.Where(x => x.IDVONG == CurrentMatch.ROUND.ID && x.ID != CurrentMatch.ID).ToList();
+                    foreach (var item1 in list3)
+                    {
+                        var list4 = DataProvider.ins.Database.THONGTINTRANDAUs.Where(x => x.IDTRANDAU == item1.ID).ToList();
+                        foreach (var item in list4)
+                        {
+                            if (item.DOIBONG != null)
+                                TeamList.Remove(TeamList.Where(x=>x.ID == item.DOIBONG.ID).FirstOrDefault());
+                        }
+                    }
+                    if (TeamA != null) TeamListDisPlayB = new ObservableCollection<DOIBONG>(TeamList.Where(x => x != TeamA));
+                    if (TeamB != null) TeamListDisPlayA = new ObservableCollection<DOIBONG>(TeamList.Where(x => x != TeamB));
+                }
+                else
+                {
+                    TeamList = new ObservableCollection<DOIBONG>();
+                    int idx = Rounds[ Convert.ToInt16(CurrentMatch.ROUND.IDDISPLAY) -2 ].ID;
+                    var list1 = DataProvider.Instance.Database.FOOTBALLMATCHes.Where(x => x.IDVONG == idx).ToList();
+                    foreach (var item1 in list1)
+                    {
+                        var list2 = DataProvider.ins.Database.THONGTINTRANDAUs.Where(x => x.IDTRANDAU == item1.ID && x.KETQUA == 1).ToList();
+                        foreach (var item in list2)
+                        {
+                            if (item.DOIBONG != null)
+                                TeamList.Add(item.DOIBONG);
+                        }
+                    }
+                    var list3 = DataProvider.ins.Database.FOOTBALLMATCHes.Where(x => x.IDVONG == CurrentMatch.ROUND.ID && x.ID != CurrentMatch.ID).ToList();
+                    foreach (var item1 in list3)
+                    {
+                        var list4 = DataProvider.ins.Database.THONGTINTRANDAUs.Where(x => x.IDTRANDAU == item1.ID).ToList();
+                        foreach (var item in list4)
+                        {
+                            if (item.DOIBONG != null)
+                                TeamList.Remove(TeamList.Where(x => x.ID == item.DOIBONG.ID).FirstOrDefault());
+                        }
+                    }
+                    if (TeamA != null) TeamListDisPlayB = new ObservableCollection<DOIBONG>(TeamList.Where(x => x != TeamA));
+                    else TeamListDisPlayB = new ObservableCollection<DOIBONG>(TeamList);
+                    if (TeamB != null) TeamListDisPlayA = new ObservableCollection<DOIBONG>(TeamList.Where(x => x != TeamB));
+                    else TeamListDisPlayA = new ObservableCollection<DOIBONG> (TeamList);
                 }
             }
-            else { list1 = DataProvider.Instance.Database.DOIBONGs.ToList(); }
-            TeamList = new ObservableCollection<DOIBONG>(list1);
-            TeamListDisPlayB = new ObservableCollection<DOIBONG>(list1.Where(x => x != TeamA));
-            TeamListDisPlayA = new ObservableCollection<DOIBONG>(list1.Where(x => x != TeamB));
         }
         private void UpdateListTeamA()
         {
-            var temp = TeamList.Where(x => x != TeamA);
-            TeamListDisPlayB = new ObservableCollection<DOIBONG>(temp);
+            if (TeamA != null)
+            {
+                var temp = TeamList.Where(x => x != TeamA);
+                TeamListDisPlayB = new ObservableCollection<DOIBONG>(temp);
+            }
         }
         private void UpdateListTeamB()
         {
-            var temp1 = TeamList.Where(x => x != TeamB);
-            TeamListDisPlayA = new ObservableCollection<DOIBONG>(temp1);
+            if (TeamB != null)
+            {
+                var temp1 = TeamList.Where(x => x != TeamB);
+                TeamListDisPlayA = new ObservableCollection<DOIBONG>(temp1);
+            }
         }
         public void InitTeamPlayerOfMatch()
         {
@@ -323,31 +369,44 @@ namespace FootBallProject.Object
                 TeamA = InfoTeamA.DOIBONG;
                 TeamB = InfoTeamB.DOIBONG;
             }
-            catch { }
+            catch {
+                if (InfoTeamA == null)
+                {
+                    InfoTeamA = new THONGTINTRANDAU() { IDTRANDAU = ID  };
+                    TeamA = null;
+                }
+                if (InfoTeamB == null)
+                {
+                    InfoTeamB = new THONGTINTRANDAU() { IDTRANDAU = ID };
+                    TeamB = null;
+                }
+            }
         }
         public bool CheckTime()
         {
-            try
+
+            if (DisplayDay != null && Rounds != null)
             {
-                if (DisplayDay == null) return false;
+                if (CurrentMatch.ROUND.ID == Rounds.Last().ID)
                 {
-                    if (CurrentMatch.ROUND == Rounds.Last())
+                    if (DateTime.Compare(CurrentMatch.ROUND.NGAYBATDAU.TryConvertToDateTime(), DisplayDay.TryConvertToDateTime()) <= 0)
+                        return true;
+                    else
                     {
-                        if (DateTime.Compare(CurrentMatch.ROUND.NGAYBATDAU.TryConvertToDateTime(), DisplayDay.TryConvertToDateTime()) <= 0)
-                            return true;
-                        else return false;
-                    }
-                    else if (DateTime.Compare(CurrentMatch.ROUND.NGAYBATDAU.TryConvertToDateTime(), DisplayDay.TryConvertToDateTime()) > 0 ||
-                        DateTime.Compare(DisplayDay.TryConvertToDateTime(), Rounds[Convert.ToInt16(CurrentMatch.ROUND.IDDISPLAY)].NGAYBATDAU.TryConvertToDateTime()) > 0
-                        )
-                    {
+                        ChanTime = CurrentMatch.ROUND.LEAGUE.NGAYKETTHUC;
                         return false;
                     }
                 }
-                return true;
+                else if (DateTime.Compare(CurrentMatch.ROUND.NGAYBATDAU.TryConvertToDateTime(), DisplayDay.TryConvertToDateTime()) > 0 ||
+                    DateTime.Compare(DisplayDay.TryConvertToDateTime(), Rounds[Convert.ToInt16(CurrentMatch.ROUND.IDDISPLAY)].NGAYBATDAU.TryConvertToDateTime()) > 0)
+                {
+                    ChanTime = Rounds[Convert.ToInt16(CurrentMatch.ROUND.IDDISPLAY)].NGAYBATDAU;
+                    return false;
+                }
+                else return true;
             }
-            catch { return false; }
-            }
+                    else return false;
+        }
         
         public void UpdateFootballMatch()
         {
@@ -385,6 +444,7 @@ namespace FootBallProject.Object
             }
         }
     }
+    
     public interface IBaseCard
     {
     }

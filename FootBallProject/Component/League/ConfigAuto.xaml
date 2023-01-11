@@ -15,7 +15,11 @@
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock  Grid.Row="0" Margin="20 0 0 0" FontSize="20" FontWeight="Bold" Style="{StaticResource textblock_item}" Text="{Binding Currentleague.DisplayName, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <TextBlock  Grid.Row="0" Margin="20 0 0 0" FontSize="20" 
+                            FontWeight="Bold" Style="{StaticResource textblock_item}" 
+                            DataContext="{StaticResource ListofLeaguevm}"
+                            Text="{Binding Currentleague.DisplayName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    ></TextBlock>
                 <TabControl Grid.Row="1"
                         Margin="0"
                         HorizontalContentAlignment="Left"

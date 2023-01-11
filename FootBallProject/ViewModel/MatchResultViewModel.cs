@@ -113,10 +113,8 @@ namespace FootBallProject.ViewModel
                 _tisoLuanLuuDoiA = value;
                 _errorBaseViewModel.ClearAllErrors();
                 if (TiSoLuanLuuDoiA == TiSoLuanLuuDoiB)
-                {
-                    _errorBaseViewModel.AddError(nameof(TiSoLuanLuuDoiB), "Tỉ số luân lưu giống!");
-                }
                 OnPropertyChanged();
+                TiSoLuanLuuDoiB = 5 - TiSoLuanLuuDoiA;
             }
         }
         public int? TiSoLuanLuuDoiB
@@ -125,11 +123,6 @@ namespace FootBallProject.ViewModel
             set
             {
                 _tisoLuanLuuDoiB = value; OnPropertyChanged();
-                _errorBaseViewModel.ClearAllErrors();
-                if (TiSoLuanLuuDoiA == TiSoLuanLuuDoiB)
-                {
-                    _errorBaseViewModel.AddError(nameof(TiSoLuanLuuDoiB), "Tỉ số luân lưu giống!");
-                }
             }
         }
 
@@ -290,12 +283,20 @@ namespace FootBallProject.ViewModel
             MatchTeamInfoTeamB.DIEM = Convert.ToInt16(ScoreTeamB);
             MatchTeamInfoTeamA.THEDO = TiSoLuanLuuDoiA;
             MatchTeamInfoTeamB.THEDO = TiSoLuanLuuDoiB;
+            if (MatchTeamInfoTeamA.DIEM > MatchTeamInfoTeamB.DIEM || MatchTeamInfoTeamA.THEDO > MatchTeamInfoTeamB.THEDO )
+            {
+                MatchTeamInfoTeamA.KETQUA = 1;
+                MatchTeamInfoTeamB.KETQUA = 0;
+            }
+            else if (MatchTeamInfoTeamA.DIEM < MatchTeamInfoTeamB.DIEM || MatchTeamInfoTeamA.THEDO < MatchTeamInfoTeamB.THEDO)
+            {
+                MatchTeamInfoTeamA.KETQUA = 0;
+                MatchTeamInfoTeamB.KETQUA = 1;
+            }
             DataProvider.Instance.Database.SaveChanges();
             LEAGUE thisLeague = FootballMatchCard.CurrentMatch.ROUND.LEAGUE;
             ROUND thisRound = FootballMatchCard.CurrentMatch.ROUND;
             MainViewModel2.Instance.ContentViewModel = new ListMatchViewModel(thisLeague, thisRound);
-
-
         }
         private void CreateNewItemCard1()
         {

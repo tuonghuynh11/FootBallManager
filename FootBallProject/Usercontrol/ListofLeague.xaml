@@ -14,23 +14,26 @@
              d:DesignHeight="700" d:DesignWidth="809">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="250"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <materialDesign:Card
             Grid.Row="0"
             Margin="4,4,4,16"
             Style="{StaticResource CardContainer}">
-            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                    <TextBlock
                         Margin="16,16,16,0"
                         FontWeight="Bold"
                         FontSize="22"
                         Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                         Text="Danh sách giải đấu" />
-                        <Button
+                    <Button
                         Width="140"
                         Height="40"
                         Margin="310,16,16,16"
@@ -43,52 +46,12 @@
                         Command="{Binding AddLeague}"
                         Content="Thêm giải đấu"
                         Style="{StaticResource PrimaryButton}" />
-                    </StackPanel>
+                </StackPanel>
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" Grid.Row="1">
                     <ItemsControl ItemsSource="{Binding Leagues}">
                         <ItemsControl.Resources>
                             <DataTemplate DataType="{x:Type object:LeagueCardOb}">
                                 <league:LeagueCard Margin="8"/>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type object:EmptyCard}">
-                                <Border
-                                    x:Name="MyBorderedButton"
-                                    Width="200"
-                                    Height="96"
-                                    Margin="12"
-                                    BorderThickness="1"
-                                    CornerRadius="8">
-                                    <Button
-                                        Width="170"
-                                        Height="100"
-                                        Margin="0"
-                                        Padding="0"
-                                        materialDesign:ButtonAssist.CornerRadius="8"
-                                        materialDesign:RippleAssist.Feedback="White"
-                                        materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                                        BorderBrush="Transparent"
-                                        FontWeight="Normal"
-                                        Foreground="Black">
-                                        <Button.Style>
-                                            <Style BasedOn="{StaticResource OverrideBackgroundButton}" TargetType="Button">
-                                                <Setter Property="Background" Value="{StaticResource DarkGray}" />
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Background" Value="Gray" />
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Button.Style>
-                                        <StackPanel>
-                                            <materialDesign:PackIcon
-                                                Width="30"
-                                                Height="30"
-                                                Margin="8"
-                                                HorizontalAlignment="Center"
-                                                Kind="PlusCircle" />
-                                            <TextBlock Text="Thêm giải đấu" />
-                                        </StackPanel>
-                                    </Button>
-                                </Border>
                             </DataTemplate>
                         </ItemsControl.Resources>
                         <ItemsControl.ItemsPanel>
@@ -100,10 +63,11 @@
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
-                </StackPanel>
-            </ScrollViewer>
+                </ScrollViewer>
+
+            </Grid>
         </materialDesign:Card>
-        <materialDesign:Card Grid.Row="1">
+        <materialDesign:Card Grid.Row="2">
             <ContentControl Content="{Binding CurrentAhihi, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                 <ContentControl.Resources>
                     <DataTemplate DataType="{x:Type viewmodel:CreateNewLeague}">

@@ -103,10 +103,7 @@ namespace FootBallProject.Model
                         THANHPHO = dd.ID;
 
                     }
-
                 }
-
-
             }
 
         }

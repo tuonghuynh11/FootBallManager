@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,12 +71,27 @@ namespace FootBallProject.Object
                 }
                 OnPropertyChanged(nameof(StartTime));}
         }
+        private int? soluong;
+        public int? SoLuong
+        {
+            get { return soluong; }
+            set
+            {
+                soluong = value;
+                _errorBaseViewModel.ClearErrors();
+
+                
+                OnPropertyChanged();
+            }
+        }
         public RoundObject(ROUND round)
         {
             _errorBaseViewModel= new ErrorBaseViewModel();
             _errorBaseViewModel.ErrorsChanged += ErrorBaseViewModel_ErrorsChanged;
             CurrentRound = round;
             NameOfRound = round.TENVONGDAU;
+            StartTime = round.NGAYBATDAU;
+            SoLuong = round.SOLUONGDOI;
         }
     }
 }

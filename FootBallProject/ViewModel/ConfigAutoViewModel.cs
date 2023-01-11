@@ -8,11 +8,18 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 
 namespace FootBallProject.ViewModel
 {
     public class ConfigAutoViewModel : BaseViewModel
     {
+        private static ConfigAutoViewModel ins;
+        public static ConfigAutoViewModel Instance
+        {
+            get { return ins; }
+            set { ins = value; }
+        }
         private LeagueCardOb _currentleague;
         public LeagueCardOb Currentleague
         {
@@ -40,13 +47,17 @@ namespace FootBallProject.ViewModel
             get { return teams; }
             set { teams = value; OnPropertyChanged(); }
         }
-
         public ConfigAutoViewModel(ListofLeagueViewModel ins)
         {
+            Instance = this;
             Ins = ListofLeagueViewModel.Instance;
             Currentleague = ins.Currentleague;
             Teams = Ins.Teams;
             RoundList = Ins.RoundList;
+        }
+        public void Update()
+        {
+            Currentleague = ins.Currentleague;
         }
     }
 }

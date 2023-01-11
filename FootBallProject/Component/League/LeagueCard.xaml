@@ -31,19 +31,27 @@
                         <RowDefinition Height="0.5*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <TextBlock Grid.Row="0" Text="{Binding DisplayName, FallbackValue='Tên giải đấu'}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                        <materialDesign:PopupBox HorizontalAlignment="Right">
-                            <StackPanel>
-                                <Button 
-                        Content="Xem thông tin">
-                                </Button>
-                                <Button Content="Chỉnh sửa"
+                        <Grid Width="170">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"></ColumnDefinition>
+                                <ColumnDefinition Width="50"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding DisplayName, FallbackValue='Tên giải đấu'}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                            <materialDesign:PopupBox Grid.Column="1" HorizontalAlignment="left"
+                             Visibility="{Binding Enable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <StackPanel>
+                                    <Button Content="Chỉnh sửa"
                                         Command="{Binding EditLeague,Source={StaticResource LeagueRightBarVM}}"
                                         CommandParameter="{Binding ElementName=LeagueCard1, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                                         ></Button>
-                                <Button Content="Xóa"></Button>
-                            </StackPanel>
-                        </materialDesign:PopupBox>
+                                    <Button Content="Xóa"
+                                        Command="{Binding DeleteLeague,Source={StaticResource LeagueRightBarVM}}"
+                                        CommandParameter="{Binding ElementName=LeagueCard1, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+></Button>
+                                </StackPanel>
+                            </materialDesign:PopupBox>
+                        </Grid>
+                       
                         <!--<materialDesign:PopupBox
                             Grid.Column="1"
                             Padding="2,0,2,0"

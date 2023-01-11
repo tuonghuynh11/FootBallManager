@@ -99,8 +99,8 @@
                             Grid.Row="1"
                             Margin="4,4,4,4"
                             materialDesign:HintAssist.Hint="Chọn địa điểm"
-                            ItemsSource="{Binding CurrentCard.DisplayPlaces, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                            SelectedItem="{Binding CurrentCard.DisplayPlace, UpdateSourceTrigger=PropertyChanged}"
+                            ItemsSource="{Binding CurrentCard.DisplayPlaces, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedItem="{Binding CurrentCard.DisplayPlace, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                             Style="{StaticResource combobox_item}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>

@@ -151,6 +151,7 @@
                 Content="Hủy"
                 FontSize="16"
                 Foreground="White"
+                Command="{Binding CancelInfo}"
                 Style="{StaticResource rounded_btn}" />
         </Grid>
     </Grid>
