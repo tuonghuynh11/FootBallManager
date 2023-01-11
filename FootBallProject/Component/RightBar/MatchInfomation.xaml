@@ -53,8 +53,8 @@
                     <!--  Mã môn học  -->
                     <Grid Style="{StaticResource text_grid_item}">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
+                            <ColumnDefinition  Width="0.7*"/>
+                            <ColumnDefinition Width="1.3*"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock
@@ -65,15 +65,15 @@
                         <TextBlock
                         Grid.Column="1"
                         Style="{StaticResource textblock_item}"
-                        Text="{Binding CurrentCard.TeamA.name, FallbackValue='Chưa cập nhật'}"
+                        Text="{Binding CurrentCard.TeamA.TEN, FallbackValue='Chưa cập nhật'}"
                         TextAlignment="Right" />
                     </Grid>
 
                     <!--  Hệ đào tạo  -->
                     <Grid Style="{StaticResource text_grid_item}">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
+                            <ColumnDefinition Width="0.7*" />
+                            <ColumnDefinition Width="1.3*" />
                         </Grid.ColumnDefinitions>
 
                         <TextBlock
@@ -84,7 +84,7 @@
                         <TextBlock
                         Grid.Column="1"
                         Style="{StaticResource textblock_item}"
-                        Text="{Binding CurrentCard.TeamB.name, FallbackValue='Chưa cập nhật'}"
+                        Text="{Binding CurrentCard.TeamB.TEN, FallbackValue='Chưa cập nhật'}"
                         TextAlignment="Right" />
                     </Grid>
 
