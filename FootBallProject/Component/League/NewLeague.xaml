@@ -202,24 +202,14 @@
         </Grid>
         <Grid
             Grid.Row="1"
-            Margin="0"
+            Margin="8,8,8,8"
             Style="{StaticResource text_grid_item}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50*" />
-                <ColumnDefinition Width="373*"/>
+                <ColumnDefinition Width="387*" />
+                <ColumnDefinition Width="173*"/>
                 <ColumnDefinition Width="112*" />
                 <ColumnDefinition Width="112*" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="1" Margin="0  20 0 0" Text="{Binding LinkAvatar, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBlock>
-            <Button Grid.Column="0"
-                    Style="{StaticResource grid_button_item}"
-                    Width="60"
-                    Height="60"
-                    Command="{Binding AddImage}"
-                    HorizontalAlignment="Left"
-                    >
-                <materialDesign:PackIcon Width="50" Height="40" Kind="Image"></materialDesign:PackIcon>
-            </Button>
             <Button
                 Grid.Column="3"
                 IsEnabled="{Binding Enable,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"

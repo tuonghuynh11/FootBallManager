@@ -34,6 +34,7 @@ namespace FootBallProject.ViewModel
         public ListMatchRightSideBarInfo2() { CurrentCard = null; }
         public ListMatchRightSideBarInfo2(FootballMatchCard card, bool isCreateNew = false)
         {
+            card.InitListTeam();
             CurrentCard = new FootballMatchCard(card.ID, card.DisplayName, card.DisplayPlace, card.DisplayDay, card.CurrentMatch);
             CurrentCard.InitListTeam();
             //CurrentCard.InitListTeam();

@@ -65,8 +65,6 @@
                         <TextBlock
                         Grid.Column="1"
                         Style="{StaticResource textblock_item}"
-                        Text="{Binding CurrentCard.TeamA.TEN, FallbackValue='Chưa cập nhật', UpdateSourceTrigger=PropertyChanged}"
-
                         Text="{Binding CurrentCard.TeamA.TEN, FallbackValue='Chưa cập nhật'}"
                         TextAlignment="Right" />
                     </Grid>
@@ -86,8 +84,7 @@
                         <TextBlock
                         Grid.Column="1"
                         Style="{StaticResource textblock_item}"
-                        Text="{Binding CurrentCard.TeamB.TEN, FallbackValue='Chưa cập nhật',UpdateSourceTrigger=PropertyChanged}"
-
+                        Text="{Binding CurrentCard.TeamB.TEN, FallbackValue='Chưa cập nhật'}"
                         TextAlignment="Right" />
                     </Grid>
 

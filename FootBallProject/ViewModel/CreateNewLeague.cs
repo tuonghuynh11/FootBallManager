@@ -6,16 +6,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Interop;
-using System.Windows.Media.Imaging;
 
 namespace FootBallProject.ViewModel
 {
@@ -174,7 +169,6 @@ namespace FootBallProject.ViewModel
 
         public ICommand Next { get; set; }
         public ICommand Return { get; set; }
-        public ICommand AddImage { get; set; }
         public CreateNewLeague()
         {
             Instance= this;
@@ -197,7 +191,6 @@ namespace FootBallProject.ViewModel
             QuocGiaList = quocgialist;
             Next = new RelayCommand<object>((p) => { return CanGoNext(); }, (p) => { GoNext(); ListofLeagueViewModel.Instance.GoNext(); });
             Return = new RelayCommand<object>((p) => { return true; }, (p) => { ListofLeagueViewModel.Instance.Return(); });
-            AddImage = new RelayCommand<object>(p => { return true; }, p => { AddImageFuntion(); });
         }
         private bool enable;
         public bool Enable
@@ -205,32 +198,12 @@ namespace FootBallProject.ViewModel
             get { return enable; }
             set { enable = value; OnPropertyChanged(); }
         }
-        private string linkAvatar;
-        public string LinkAvatar
-        {
-            get { return linkAvatar; }
-            set { linkAvatar = value; OnPropertyChanged();}
-        }
-        public BitmapImage avatarimg;
-        public void AddImageFuntion()
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files|*.bmp;*.jpg;*.png";
-            openFileDialog.FilterIndex = 1;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                avatarimg = new BitmapImage(new Uri(openFileDialog.FileName));
-                LinkAvatar = openFileDialog.FileName;
-            }
-        }
         public bool CanGoNext()
         {
             int x = DateTime.Compare(StartTime.TryConvertToDateTime(), EndTime.TryConvertToDateTime());
             if (DisplayName != "" && QuocTich != null && x < 0 && Diadiem != null && StartTime != null && EndTime != null && SelectedSoluong != null) { Enable = true; return true; }
             return false;
         }
-        public string extension;
-        
         public void GoNext()
         {
             Instance = this;
