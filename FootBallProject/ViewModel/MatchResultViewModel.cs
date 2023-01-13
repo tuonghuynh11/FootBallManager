@@ -111,10 +111,8 @@ namespace FootBallProject.ViewModel
             set
             {
                 _tisoLuanLuuDoiA = value;
-                _errorBaseViewModel.ClearAllErrors();
-                if (TiSoLuanLuuDoiA == TiSoLuanLuuDoiB)
                 OnPropertyChanged();
-                TiSoLuanLuuDoiB = 5 - TiSoLuanLuuDoiA;
+                RefreshTeamB();
             }
         }
         public int? TiSoLuanLuuDoiB
@@ -123,6 +121,7 @@ namespace FootBallProject.ViewModel
             set
             {
                 _tisoLuanLuuDoiB = value; OnPropertyChanged();
+                RefreshTeamA();
             }
         }
 
@@ -201,22 +200,29 @@ namespace FootBallProject.ViewModel
                 CreateNewCard2 = new RelayCommand<object>((x) => { return true; }, (x) => { CreateNewItemCard2(); });
                 SaveCommand = new RelayCommand<object>((x) => { return true; }, (x) => { SaveFuntion(); });
                 CancelCommand = new RelayCommand<object>((x) => { return true; }, (x) => { CancelFuntion(); });
-                //CurrentMatchResultViewModel = this;
-                TiSoLuanLuuDoiA = MatchTeamInfoTeamA.THEDO;
-                TiSoLuanLuuDoiB = MatchTeamInfoTeamB.THEDO;
+            //CurrentMatchResultViewModel = this;
+                listTiSo = new ObservableCollection<int?>() { 0, 1, 2, 3, 4, 5 };
+                TiSoLuanLuuDoiA = (int?) MatchTeamInfoTeamA.THEDO;
+                TiSoLuanLuuDoiB =(int?) MatchTeamInfoTeamB.THEDO;
                 IsEnable();
-                Refresh();
-            
-            
         }
-        private void Refresh()
+        public ObservableCollection<int?> listTiSo;
+        private void RefreshTeamA()
         {
-            var list = new ObservableCollection<int?>() { 0, 1, 2, 3, 4, 5 };
-            CacTiSoLuanLuuDoiA = new ObservableCollection<int?>(list);
-            CacTiSoLuanLuuDoiB = new ObservableCollection<int?>(list);
+            if (listTiSo == null) return;
+            if (TiSoLuanLuuDoiB != null) CacTiSoLuanLuuDoiA = new ObservableCollection<int?>(listTiSo.Where(x => x != TiSoLuanLuuDoiB));
+            else CacTiSoLuanLuuDoiA = new ObservableCollection<int?>(listTiSo);
+        }
+        private void RefreshTeamB()
+        {
+            if (listTiSo == null) return;
+            if (TiSoLuanLuuDoiA != null) CacTiSoLuanLuuDoiB = new ObservableCollection<int?>(listTiSo.Where(x => x != TiSoLuanLuuDoiA));
+            else CacTiSoLuanLuuDoiB = new ObservableCollection<int?>(listTiSo);
+
         }
         private void IsEnable()
         {
+            if (ScoreTeamA == ScoreTeamB) Enable = true;
             if (CardTeamADisplays.Count == CardTeamBDisplays.Count) Enable = true;
             else Enable = false;
         }
@@ -253,6 +259,7 @@ namespace FootBallProject.ViewModel
             {
                 DataProvider.Instance.Database.ITEMs.Remove(item);
             }
+            Dictionary<int, int> sobanthang = new Dictionary<int, int>();
             foreach (var card in CardTeamADisplays)
             {
                 {
@@ -264,6 +271,9 @@ namespace FootBallProject.ViewModel
                         THONGTINTRANDAU = MatchTeamInfoTeamA
                     };
                     DataProvider.Instance.Database.ITEMs.AddOrUpdate(temp);
+                    if (!sobanthang.ContainsKey(card.Player.ID)) sobanthang.Add(card.Player.ID, 0);
+                    sobanthang[card.Player.ID] =0+ sobanthang[card.Player.ID] + 1;
+                    
                 }
             }
             foreach (var card in CardTeamBDisplays)
@@ -275,9 +285,22 @@ namespace FootBallProject.ViewModel
                         THOIGIAN = card.Time,
                         CAUTHU = card.Player,
                         THONGTINTRANDAU = MatchTeamInfoTeamB
-                    };
+                };
+                  if(!sobanthang.ContainsKey(card.Player.ID))  sobanthang.Add(card.Player.ID, 0);
+                    sobanthang[card.Player.ID] =0+ sobanthang[card.Player.ID] + 1;
                     DataProvider.Instance.Database.ITEMs.AddOrUpdate(temp);
                 }
+            }
+            foreach (var banthang in sobanthang)
+            {
+                THAMGIA thamgia = new THAMGIA()
+                {
+                    IDCAUTHU = banthang.Key,
+                    IDTRAN = (int)MatchTeamInfoTeamA.IDTRANDAU,
+                    SOBANTHANG = banthang.Value
+                };
+                DataProvider.ins.DB.THAMGIAs.AddOrUpdate(thamgia);
+                DataProvider.ins.DB.SaveChanges();
             }
             MatchTeamInfoTeamA.DIEM = Convert.ToInt16(ScoreTeamA);
             MatchTeamInfoTeamB.DIEM = Convert.ToInt16(ScoreTeamB);
@@ -296,7 +319,8 @@ namespace FootBallProject.ViewModel
             DataProvider.Instance.Database.SaveChanges();
             LEAGUE thisLeague = FootballMatchCard.CurrentMatch.ROUND.LEAGUE;
             ROUND thisRound = FootballMatchCard.CurrentMatch.ROUND;
-            MainViewModel2.Instance.ContentViewModel = new ListMatchViewModel(thisLeague, thisRound);
+            ListMatchViewModel.Instance.SelectedRound = thisRound;
+            ListMatchRightBarViewModel.Instance.RightSideBarItemViewModel = new ListMatchRightSideBarInfo2(FootballMatchCard);
         }
         private void CreateNewItemCard1()
         {
@@ -326,12 +350,14 @@ namespace FootBallProject.ViewModel
             {
                 CardTeamADisplays.Remove(x);
                 ScoreTeamA = CardTeamADisplays.Count().ToString();
+               
             }
             else if (CardTeamBDisplays.Contains(x))
             {
                 CardTeamBDisplays.Remove(x);
                 ScoreTeamB = CardTeamBDisplays.Count().ToString();
             }
+            IsEnable();
         }
         #region error
         public bool HasErrors => _errorBaseViewModel.HasErrors;

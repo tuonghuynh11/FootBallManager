@@ -6,6 +6,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:FootBallProject.Usercontrol"
              mc:Ignorable="d" 
+             DataContext="{StaticResource ListofLeaguevm}"
              xmlns:model="clr-namespace:FootBallProject.Model"
              xmlns:object="clr-namespace:FootBallProject.Object"
              xmlns:league="clr-namespace:FootBallProject.Component.League"
@@ -39,10 +40,10 @@
                         Margin="310,16,16,16"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
+                        x:Name="btnEnable"
                         materialDesign:ButtonAssist.CornerRadius="8"
                         Background="#8FD14F"
                         BorderBrush="Transparent"
-                        Visibility="{Binding CreateLeagueButton, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Command="{Binding AddLeague}"
                         Content="Thêm giải đấu"
                         Style="{StaticResource PrimaryButton}" />
@@ -81,6 +82,9 @@
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type viewmodel:ConfigVongLoai2ViewModel}">
                         <component:ConfigVongLoai2></component:ConfigVongLoai2>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodel:ConfigThanhCong}">
+                        <component:ConfigSuccess></component:ConfigSuccess>
                     </DataTemplate>
                 </ContentControl.Resources>
             </ContentControl>

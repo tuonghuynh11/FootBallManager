@@ -1,5 +1,6 @@
 ﻿using FootBallProject.Model;
 using FootBallProject.Object;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,13 +36,10 @@ namespace FootBallProject.ViewModel
         #endregion
 
         public ListMatchRightSideBarInfo() { CurrentCard = null; }
-        public ListMatchRightSideBarInfo(FootballMatchCard card, bool isCreateNew = false)
+        public ListMatchRightSideBarInfo(FootballMatchCard card)
         {
-            card.InitListTeam();
-            CurrentCard = new FootballMatchCard(card.ID, card.DisplayName, card.DisplayPlace, card.DisplayDay, card.CurrentMatch);
-            CurrentCard.InitListTeam();
-            //CurrentCard.InitListTeam();
             ActualCard = card;
+            CurrentCard = new FootballMatchCard(card.ID, card.DisplayName, card.DisplayPlace, card.DisplayDay, card.CurrentMatch);
             InitCommand();
         }
         private void InitCommand()
@@ -52,17 +50,18 @@ namespace FootBallProject.ViewModel
         }
         private void CancelFuntion()
         {
-            CurrentCard = ActualCard;
+            CurrentCard = new FootballMatchCard(ActualCard.ID, ActualCard.DisplayName, ActualCard.DisplayPlace, ActualCard.DisplayDay, ActualCard.CurrentMatch);
             //AdminSubjectClassRightSideBarViewModel adminSubjectClassRightSideBarViewModel = AdminSubjectClassRightSideBarViewModel.Instance;
             //adminSubjectClassRightSideBarViewModel.RightSideBarItemViewModel = new AdminSubjectClassRightSideBarItemViewModel(ActualCard);
             ListMatchRightBarViewModel ad = new ListMatchRightBarViewModel();
-            ad.RightSideBarItemViewModel = new ListMatchRightSideBarInfo(CurrentCard);
+            ad.RightSideBarItemViewModel = new ListMatchRightSideBarInfo2(CurrentCard);
         }
         private void ConfirmFuntion()
         {
 
             {
                 CurrentCard.UpdateFootballMatch();
+                ListMatchRightBarViewModel.Instance.RightSideBarItemViewModel = new ListMatchRightSideBarInfo2(CurrentCard);
             }
         }
     }

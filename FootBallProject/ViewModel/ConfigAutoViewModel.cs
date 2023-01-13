@@ -50,14 +50,16 @@ namespace FootBallProject.ViewModel
         public ConfigAutoViewModel(ListofLeagueViewModel ins)
         {
             Instance = this;
+            Currentleague = new LeagueCardOb(ins.Currentleague.League);
             Ins = ListofLeagueViewModel.Instance;
-            Currentleague = ins.Currentleague;
-            Teams = Ins.Teams;
-            RoundList = Ins.RoundList;
+            Teams = new ObservableCollection<TEAMOFLEAGUE>( ins.Teams);
+            RoundList = new ObservableCollection<RoundObject>( ins.RoundList);
         }
         public void Update()
         {
-            Currentleague = ins.Currentleague;
+            Currentleague = new LeagueCardOb(Ins.Currentleague.League);
+            Teams = new ObservableCollection<TEAMOFLEAGUE>(Ins.Teams);
+            RoundList = new ObservableCollection<RoundObject>(Ins.RoundList);
         }
     }
 }

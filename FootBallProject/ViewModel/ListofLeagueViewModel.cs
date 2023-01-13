@@ -1,4 +1,5 @@
 ﻿using DevExpress.Mvvm.Native;
+using DevExpress.Mvvm.POCO;
 using DevExpress.Xpf.Editors.Helpers;
 using FootBallProject.Class;
 using FootBallProject.Model;
@@ -21,7 +22,7 @@ namespace FootBallProject.ViewModel
         private static ListofLeagueViewModel _instance;
         public static ListofLeagueViewModel Instance
         {
-            get { if (_instance == null) _instance = new ListofLeagueViewModel(); return _instance; }
+            get { return _instance; }
             set { _instance = value; }
         }
         private LeagueCardOb _currentleague;
@@ -59,6 +60,7 @@ namespace FootBallProject.ViewModel
         public ICommand AddLeague { get; set; }
         private void LoadTeambyLeagueid()
         {
+            CurrentAhihi = configAutoViewModel;
             teams.Clear();
             List<TEAMOFLEAGUE> list = DataProvider.Instance.Database.TEAMOFLEAGUEs.Where(x => x.IDGIAIDAU == Currentleague.League.ID).ToList();
             foreach (var item in list)
@@ -73,6 +75,7 @@ namespace FootBallProject.ViewModel
                 _roundlist.Add(new RoundObject(item));
             }
             RoundList = _roundlist;
+            CurrentAhihi = new ConfigAutoViewModel(this);
         }
         private object currentAhihi;
         public object CurrentAhihi
@@ -80,19 +83,11 @@ namespace FootBallProject.ViewModel
             get => currentAhihi;
             set { currentAhihi = value; OnPropertyChanged(); }
         }
-        private void AddTeamofLeague(int idleague, DOIBONG teamplayer)
-        {
-            TEAMOFLEAGUE teamofleague = new TEAMOFLEAGUE()
-            {
-                IDGIAIDAU = idleague,
-                DOIBONG = teamplayer
-            };
-        }
         private bool _createLeagueButton;
         public bool CreateLeagueButton
         {
             get => _createLeagueButton;
-            set => _createLeagueButton = value;
+            set { _createLeagueButton = value; OnPropertyChanged(); }
         }
         public ICommand AddtemofLeague { get; set; }
         public object configAutoViewModel;
@@ -103,8 +98,6 @@ namespace FootBallProject.ViewModel
         public ListofLeagueViewModel()
         {
             Instance = this;
-            var currentleague = DataProvider.Instance.Database.LEAGUEs.Where(x=>x.NGAYBATDAU!= null).FirstOrDefault();
-            Currentleague = new LeagueCardOb(currentleague);
             ObservableCollection<LeagueCardOb> list3 = new ObservableCollection<LeagueCardOb>();
             List<LEAGUE> list1 = DataProvider.Instance.Database.LEAGUEs.Where(x => x.NGAYBATDAU!= null).ToList();
             foreach (var item in list1)
@@ -112,26 +105,24 @@ namespace FootBallProject.ViewModel
                 list3.Add(new LeagueCardOb(item));
             }
             Leagues = list3;
-            configAutoViewModel = new ConfigAutoViewModel(this);
+            Currentleague = Leagues.First();
             config1 = new ConfigVongLoai1ViewModel(this);
             createnewleague = new CreateNewLeague();
-            CurrentAhihi = configAutoViewModel;
+            CurrentAhihi = new ConfigAutoViewModel(this);
             AddLeague = new RelayCommand<object>((p) => { return true; }, (p) => { AddLeagueFuntion(); });
-            //AddTeamofLeague = new RelayCommand<object>((p) => true, (p) => AddTeamofLeague(1, teams[0]));
             CheckVisibility();
         }
         public void UpdateLeagues()
         {
-            var currentleague = DataProvider.Instance.Database.LEAGUEs.Where(x => x.NGAYBATDAU != null).FirstOrDefault();
-            Currentleague = new LeagueCardOb(currentleague);
             ObservableCollection<LeagueCardOb> list3 = new ObservableCollection<LeagueCardOb>();
-            List<LEAGUE> list1 = DataProvider.Instance.Database.LEAGUEs.Where(x => x.NGAYBATDAU!= null).ToList();
+            List<LEAGUE> list1 = DataProvider.Instance.Database.LEAGUEs.Where(x => x.NGAYBATDAU != null).ToList();
             foreach (var item in list1)
             {
                 list3.Add(new LeagueCardOb(item));
             }
             Leagues = list3;
-            if (ConfigAutoViewModel.Instance != null) ConfigAutoViewModel.Instance.Update();
+            Currentleague = Leagues.First();
+            CurrentAhihi = new ConfigAutoViewModel(this);
         }
         private void CheckVisibility()
         {
@@ -141,11 +132,9 @@ namespace FootBallProject.ViewModel
             }
             else CreateLeagueButton = false;
         }
-        public void Refresh(LeagueCardOb p)
+        public void Refresh()
         {
             UpdateLeagues();
-            Currentleague = p;
-            CurrentAhihi = configAutoViewModel;
         }
         public void AddLeagueFuntion()
         {
@@ -158,18 +147,22 @@ namespace FootBallProject.ViewModel
             config2 = new ConfigVongLoai2ViewModel(this);
             CurrentAhihi = config2;
         }
+        public void GoSuccess()
+        {
+            CurrentAhihi = new ConfigThanhCong("Thêm giải đấu thành công, vui lòng chọn thông tin để hiển thị");
+        }
         public void GoNext()
         {
-            if (config1 == null) config1 = new ConfigVongLoai1ViewModel(this);
+            config1 = new ConfigVongLoai1ViewModel(this);
             CurrentAhihi = config1;
         }
         public void Return()
         {
-            CurrentAhihi = configAutoViewModel;
+            CurrentAhihi = new ConfigAutoViewModel(this);
         }
         public void ReturnConfig1()
         {
-            if (config1 == null) config1 = new ConfigVongLoai1ViewModel(this);
+            if (config1 == null)  config1 = new ConfigVongLoai1ViewModel(this);
             CurrentAhihi = config1;
         }
         public void ReturnCreate()
@@ -177,5 +170,4 @@ namespace FootBallProject.ViewModel
             CurrentAhihi = createnewleague;
         }
     }
-
 }

@@ -65,7 +65,7 @@
                         <TextBlock
                         Grid.Column="1"
                         Style="{StaticResource textblock_item}"
-                        Text="{Binding CurrentCard.TeamA.name, FallbackValue='Chưa cập nhật'}"
+                        Text="{Binding CurrentCard.TeamA.TEN, FallbackValue='Chưa cập nhật'}"
                         TextAlignment="Right" />
                     </Grid>
 
@@ -84,7 +84,7 @@
                         <TextBlock
                         Grid.Column="1"
                         Style="{StaticResource textblock_item}"
-                        Text="{Binding CurrentCard.TeamB.name, FallbackValue='Chưa cập nhật'}"
+                        Text="{Binding CurrentCard.TeamB.TEN, FallbackValue='Chưa cập nhật'}"
                         TextAlignment="Right" />
                     </Grid>
 
@@ -126,6 +126,26 @@
                         Style="{StaticResource textblock_item}"
                         Text="{Binding CurrentCard.DisplayPlace.TENDIADIEM, FallbackValue='Chưa cập nhật'}"
                         TextAlignment="Right" />
+                    </Grid>
+                    <Grid Style="{StaticResource text_grid_item}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock
+                        Grid.Column="0"
+                        FontWeight="Bold"
+                        Style="{StaticResource textblock_item}"
+                        Text="Tỉ số:" />
+                        <TextBlock
+                        Grid.Column="1"
+                        Style="{StaticResource textblock_item}"                         
+                        TextAlignment="Right" >
+                            <Run Text="{Binding CurrentCard.ScoreTeamA}"></Run>
+                            <Run Text=" "></Run>
+                            <Run Text="{Binding CurrentCard.ScoreTeamB}"></Run>
+                        </TextBlock>
                     </Grid>
 
                     <!--  Lịch học  -->

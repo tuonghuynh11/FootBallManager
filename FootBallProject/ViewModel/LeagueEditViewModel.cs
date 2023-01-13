@@ -15,6 +15,12 @@ namespace FootBallProject.ViewModel
 {
     public class LeagueEditViewModel : BaseViewModel
     {
+        private LeagueCardOb _actualCard;
+        public LeagueCardOb ActualCard
+        {
+            get => _actualCard;
+            set => _actualCard = value;
+        }
         private LeagueCardOb _selectedLeague;
         public LeagueCardOb SelectedLeague
         {
@@ -37,7 +43,8 @@ namespace FootBallProject.ViewModel
         public ICommand CancelInfo { get; set; }
         public LeagueEditViewModel(LeagueCardOb card)
         {
-            SelectedLeague = card;
+            ActualCard = card;
+            SelectedLeague = new LeagueCardOb(card.League);
             var temp = DataProvider.Instance.Database.QUOCTICHes.ToList();
             QuocTichs = new ObservableCollection<QUOCTICH>(temp);
             SaveInfo = new RelayCommand<object>(p => { return true; }, p => { SaveInfoFuntion(); });
@@ -49,11 +56,14 @@ namespace FootBallProject.ViewModel
             else Enable = false;
         }
         public void SaveInfoFuntion() {
-            SelectedLeague.SaveLeague();
+            ActualCard.DisplayName = SelectedLeague.DisplayName;
+            ActualCard.QuocTich = SelectedLeague.QuocTich;
+            ActualCard.SaveLeague();
+            LeagueRightBarViewModel.Instance.ShowInfoFuntion2(SelectedLeague);
         }
         public void CancelFuntion() {
+            SelectedLeague = ActualCard;
             LeagueRightBarViewModel.Instance.ShowInfoFuntion2(SelectedLeague);
         } 
     }
-
 }

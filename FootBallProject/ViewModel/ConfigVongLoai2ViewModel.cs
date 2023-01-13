@@ -9,11 +9,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 
 namespace FootBallProject.ViewModel
@@ -24,7 +26,7 @@ namespace FootBallProject.ViewModel
         private static ConfigVongLoai2ViewModel _ins;
         public static ConfigVongLoai2ViewModel Instance
         {
-            get { if (_ins == null) _ins = new ConfigVongLoai2ViewModel(ListofLeagueViewModel.Instance); return _ins; }
+            get { return _ins; }
             set { _ins = value; }
         }
         public ListofLeagueViewModel Ins;
@@ -40,7 +42,12 @@ namespace FootBallProject.ViewModel
             get => listRound;
             set { listRound = value; OnPropertyChanged(); }
         }
-        public ObservableCollection<FOOTBALLMATCH> ListMatchs = new ObservableCollection<FOOTBALLMATCH>();
+        private ObservableCollection<FOOTBALLMATCH> listMatchs = new ObservableCollection<FOOTBALLMATCH>();
+        public ObservableCollection<FOOTBALLMATCH> ListMatchs
+        {
+            get => listMatchs;
+            set { listMatchs = value; OnPropertyChanged(); }
+        }
         private bool _enable;
         public bool Enable
         {
@@ -63,6 +70,7 @@ namespace FootBallProject.ViewModel
         public ICommand GoBack { get; set; }
         public ConfigVongLoai2ViewModel(ListofLeagueViewModel ins)
         {
+
             Instance = this;
             string name = "Vòng số ";
             Ins = ins;
@@ -75,31 +83,57 @@ namespace FootBallProject.ViewModel
                     IDDISPLAY = i.ToString(),
                     SOLUONGDOI = ConfigVongLoai1ViewModel.Instance.numofTeam / k
                 };
-                DataProvider.Instance.Database.ROUNDs.AddOrUpdate(temp);
-                DataProvider.Instance.Database.SaveChanges();
+                //DataProvider.Instance.Database.ROUNDs.AddOrUpdate(temp);
+                //DataProvider.Instance.Database.SaveChanges();
                 for (int j = 0; j < ConfigVongLoai1ViewModel.Instance.numofTeam / (2 * k); j++)
                 {
-                    string namematch = "Trận số";
+                    string namematch = "Trận số ";
                     FOOTBALLMATCH tempmatch = new FOOTBALLMATCH()
                     {
                         ROUND = temp,
                         TENTRANDAU = namematch + (j + 1).ToString()
                     };
-                    ListMatchs.Add(tempmatch);
+                    listMatchs.Add(tempmatch);
                 }
                 listRound.Add(temp);
                 k *= 2;
             }
             ListRound = listRound;
+            ListMatchs = ListMatchs;
             foreach (var item in ListRound)
             {
                 RoundObject temp = new RoundObject(item);
                 ListRoundObjects.Add(temp);
             }
-
             Enable = false;
             Complete = new RelayCommand<object>((p) => { return true; }, (p) => { StartTime = CreateNewLeague.Instance.StartTime; EndTime = CreateNewLeague.Instance.EndTime; CompleteFuntion(); });
             GoBack = new RelayCommand<object>((p) => { return true; }, (p) => { ListofLeagueViewModel.Instance.ReturnConfig1(); });
+        }
+        private byte[] ConvertBitmaptoByteArray(BitmapImage bitmapImage)
+        {
+            if (bitmapImage == null)
+            {
+                return null;
+            }
+
+            byte[] data;
+            BitmapEncoder encoder = new PngBitmapEncoder();
+            var extension = Path.GetExtension( CreateNewLeague.Instance.LinkAvatar);
+            switch (extension)
+            {
+                case ".png":
+                    encoder = new PngBitmapEncoder(); break;
+                case ".jpg": case ".jpeg": encoder = new JpegBitmapEncoder(); break;
+                case ".bmp": encoder = new BmpBitmapEncoder(); break;
+                default: break;
+            }
+            encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+            using (MemoryStream ms = new MemoryStream())
+            {
+                encoder.Save(ms);
+                data = ms.ToArray();
+            }
+            return data;
         }
         public bool CheckWithLeague(RoundObject round, LEAGUE league)
         {
@@ -141,8 +175,9 @@ namespace FootBallProject.ViewModel
             if (CheckRound() == true)
             {
                 Enable = false;
-                DataProvider.ins.DB.LEAGUEs.Add(CreateNewLeague.Instance.League);
-                DataProvider.ins.DB.SaveChanges();
+                CreateNewLeague.Instance.League.HINHANH = ConvertBitmaptoByteArray(CreateNewLeague.Instance.img);
+                DataProvider.Instance.Database.LEAGUEs.Add(CreateNewLeague.Instance.League);
+                DataProvider.Instance.Database.SaveChanges();
                 foreach (var item in ConfigVongLoai1ViewModel.Instance.Teams)
                 {
                     if (item.Selected == true)
@@ -152,26 +187,27 @@ namespace FootBallProject.ViewModel
                             IDDOIBONG = item.Team.ID,
                             IDGIAIDAU = CreateNewLeague.Instance.League.ID
                         };
-                        DataProvider.ins.DB.TEAMOFLEAGUEs.Add(temp);
+                        DataProvider.Instance.Database.TEAMOFLEAGUEs.Add(temp);
                     }
                 }
-                DataProvider.ins.DB.SaveChanges();
+                DataProvider.Instance.Database.SaveChanges();
                 foreach (var item in ListRoundObjects)
                 {
                     item.CurrentRound.IDGIAIDAU = CreateNewLeague.Instance.League.ID;
                     item.CurrentRound.NGAYBATDAU = item.StartTime;
                     item.CurrentRound.TENVONGDAU = item.NameOfRound;
-                    DataProvider.Instance.Database.ROUNDs.AddOrUpdate(item.CurrentRound);
+                    DataProvider.Instance.Database.ROUNDs.Add(item.CurrentRound);
                 }
+                DataProvider.Instance.Database.SaveChanges();
                 foreach (var item in ListMatchs)
                 {
-                    DataProvider.ins.Database.FOOTBALLMATCHes.AddOrUpdate(item);
+                    DataProvider.Instance.Database.FOOTBALLMATCHes.Add(item);
                 }
                 DataProvider.Instance.Database.SaveChanges();
                 //Success f = new Success();
                 //f.Show();
-                ListofLeagueViewModel.Instance.Refresh(ListofLeagueViewModel.Instance.Currentleague);
-
+                ListofLeagueViewModel.Instance.Leagues.Add(new LeagueCardOb(CreateNewLeague.Instance.League));
+                ListofLeagueViewModel.Instance.GoSuccess();
             }
             else
             {

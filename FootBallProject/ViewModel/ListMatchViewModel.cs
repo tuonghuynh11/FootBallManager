@@ -72,17 +72,15 @@ namespace FootBallProject.ViewModel
             set { leagues = value; }
         }
         public ICommand CreateNewMatch { get; set; }
-
-        private void LoadFootballMatchListByRound() { }
-        private void LoadRoundListByLeague() { }
         public ListMatchViewModel(int i)
         {
-            SelectedLeague = DataProvider.Instance.Database.LEAGUEs.Where(x => x.ID == 1).FirstOrDefault();
+            SelectedLeague = DataProvider.Instance.Database.LEAGUEs.Where(x => x.NGAYBATDAU != null).FirstOrDefault();
             LoadMatchlistbyRound();
         }
         public ListMatchViewModel()
         {
-            SelectedLeague = DataProvider.Instance.Database.LEAGUEs.Where(x => x.ID == 1).FirstOrDefault();
+            Instance = this;
+            SelectedLeague = DataProvider.Instance.Database.LEAGUEs.Where(x => x.NGAYBATDAU != null).FirstOrDefault();
             SelectedRound = null;
             LoadLeague();
             LoadRound();
@@ -107,7 +105,6 @@ namespace FootBallProject.ViewModel
                 FootballMatchCards.Clear();
                 StoredFootballMatchCards.Clear();
                 FootballMatchCard1.Clear();
-
                 Rounds = new ObservableCollection<ROUND>(DataProvider.Instance.Database.ROUNDs.Where(x => x.IDGIAIDAU == SelectedLeague.ID));
                 foreach(var item1 in Rounds)
                 {
@@ -115,35 +112,29 @@ namespace FootBallProject.ViewModel
                     foreach(var item in StoredFootballMatchCards)
                     {
                         FootballMatchCard1.Add(new FootballMatchCard(item.ID, item.TENTRANDAU, item.DIADIEM1, item.THOIGIAN, item));
-                        FootballMatchCards.Add(item);
-                    }
+                        FootballMatchCards.Add(item);                    }
                 }
-
+            if (ListMatchRightBarViewModel.Instance != null) ListMatchRightBarViewModel.Instance.RightSideBarItemViewModel = new EmptyRightSideBarViewModel();
         }
         public void LoadMatchlistbyRound()
         {
             if (SelectedRound == null) return;
-            FootballMatchCards.Clear();
-            StoredFootballMatchCards.Clear();
-            FootballMatchCard1.Clear();
-            StoredFootballMatchCards = new ObservableCollection<FOOTBALLMATCH>(DataProvider.Instance.Database.FOOTBALLMATCHes.Where(x => x.ROUND.LEAGUE.ID == SelectedLeague.ID));
-            foreach (var item in StoredFootballMatchCards)
+            else
             {
-                if (item.ROUND == SelectedRound)
+                FootballMatchCards.Clear();
+                StoredFootballMatchCards.Clear();
+                FootballMatchCard1.Clear();
+                StoredFootballMatchCards = new ObservableCollection<FOOTBALLMATCH>(DataProvider.Instance.Database.FOOTBALLMATCHes.Where(x => x.ROUND.LEAGUE.ID == SelectedLeague.ID));
+                foreach (var item in StoredFootballMatchCards)
                 {
-                    FootballMatchCard1.Add(new FootballMatchCard(item.ID, item.TENTRANDAU, item.DIADIEM1, item.THOIGIAN, item));
-                    FootballMatchCards.Add(item);
+                    if (item.ROUND == SelectedRound)
+                    {
+                        FootballMatchCard1.Add(new FootballMatchCard(item.ID, item.TENTRANDAU, item.DIADIEM1, item.THOIGIAN, item));
+                        FootballMatchCards.Add(item);
+                    }
                 }
+                if (ListMatchRightBarViewModel.Instance != null) ListMatchRightBarViewModel.Instance.RightSideBarItemViewModel = new EmptyRightSideBarViewModel();
             }
-        }
-        public void CreateNewMatchCard()
-        {
-            FOOTBALLMATCH match = new FOOTBALLMATCH()
-            {
-                IDVONG = SelectedRound.ID,
-
-
-            };
         }
     }
 

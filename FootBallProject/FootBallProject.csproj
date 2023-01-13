@@ -153,6 +153,9 @@
     <Compile Include="Component\League\ConfigAuto.xaml.cs">
       <DependentUpon>ConfigAuto.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Component\League\ConfigSuccess.xaml.cs">
+      <DependentUpon>ConfigSuccess.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Component\League\ConfigVongLoai.xaml.cs">
       <DependentUpon>ConfigVongLoai.xaml</DependentUpon>
     </Compile>
@@ -442,6 +445,7 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ClubInfomationViewModel.cs" />
     <Compile Include="ViewModel\ConfigAutoViewModel.cs" />
+    <Compile Include="ViewModel\ConfigThanhCong.cs" />
     <Compile Include="ViewModel\ConfigVongLoai1ViewModel.cs" />
     <Compile Include="ViewModel\ConfigVongLoai2ViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
@@ -497,6 +501,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Component\League\ConfigAuto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Component\League\ConfigSuccess.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

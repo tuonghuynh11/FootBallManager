@@ -1,5 +1,4 @@
-﻿using FootBallProject.Class;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,19 +16,13 @@ using System.Windows.Shapes;
 namespace FootBallProject.Component.League
 {
     /// <summary>
-    /// Interaction logic for LeagueCard.xaml
+    /// Interaction logic for ConfigSuccess.xaml
     /// </summary>
-    public partial class LeagueCard : UserControl
+    public partial class ConfigSuccess : UserControl
     {
-        public LeagueCard()
+        public ConfigSuccess()
         {
             InitializeComponent();
-            if (AccessUser.userLogin.USERROLE.ID == 2)
-            {
-                btnEnable.Visibility = Visibility.Visible;
-            }
-            else btnEnable.Visibility = Visibility.Hidden;
-
         }
     }
 }

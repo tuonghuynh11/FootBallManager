@@ -4,6 +4,7 @@ using FootBallProject.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,7 +55,7 @@ namespace FootBallProject.Object
             get { return diadiem; }
             set { diadiem = value; OnPropertyChanged(); }
         }
-        public ObservableCollection<string> soluongdois = new ObservableCollection<string>() { "4", "8", "16", "32", "64" };
+        public ObservableCollection<string> soluongdois = new ObservableCollection<string>() { "4", "8", "16" };
         private string selectedSoluong;
         public string SelectedSoluong
         {
@@ -75,18 +76,19 @@ namespace FootBallProject.Object
             EndTime = p.NGAYKETTHUC.ToString().Split(' ')[0];
             SoDoi = DataProvider.Instance.Database.TEAMOFLEAGUEs.Where(x => x.IDGIAIDAU == p.ID).Count();
             League = p;
-            if (AccessUser.userLogin.USERROLE.ID == 2)
-            {
-                Enable = true;
-            }
-            else Enable = false;
+            //if (AccessUser.userLogin.USERROLE.ID == 2)
+            //{
+            //    Enable = true;
+            //}
+            //else Enable = false;
         }
         public void SaveLeague()
         {
             if (DisplayName != "" && QuocTich != null)
             {
                 League.TENGIAIDAU = DisplayName;
-                League.QUOCGIA = QuocTich.ToString();
+                League.QUOCTICH = QuocTich;
+                DataProvider.ins.Database.LEAGUEs.AddOrUpdate(League);
                 DataProvider.ins.Database.SaveChanges();
             }
         }

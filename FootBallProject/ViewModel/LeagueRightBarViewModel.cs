@@ -17,7 +17,7 @@ namespace FootBallProject.ViewModel
         private static LeagueRightBarViewModel _ins;
         public static LeagueRightBarViewModel Instance
         {
-            get { if (_ins == null) _ins = new LeagueRightBarViewModel(); return _ins; }
+            get {  return _ins; }
             set { _ins = value;  }
         }
         private LeagueCardOb _selectedLeagueCard;
@@ -55,6 +55,7 @@ namespace FootBallProject.ViewModel
         private void EditLeagueFunction(UserControl p)
         {
             LeagueCardOb card = p.DataContext as LeagueCardOb;
+            ListofLeagueViewModel.Instance.Currentleague = card;
             RightSideBarItemViewModel = new LeagueEditViewModel(card);
         }
         private void ShowInfoFuntion(UserControl p)
@@ -68,7 +69,6 @@ namespace FootBallProject.ViewModel
         {
             ListofLeagueViewModel.Instance.Currentleague = card;
             RightSideBarItemViewModel = new LeagueInfomationViewModel(card);
-            //ListofLeagueViewModel.Instance.Refresh(card);
         }
         public void DeleteFuntion(UserControl p)
         {
@@ -80,5 +80,4 @@ namespace FootBallProject.ViewModel
             RightSideBarItemViewModel = _emptyStateRightBarViewModel;
         }
     }
-
 }
