@@ -63,8 +63,6 @@ namespace FootBallProject.ViewModel
 
             {
                 CurrentCard.UpdateFootballMatch();
-
-
             }
         }
     }
