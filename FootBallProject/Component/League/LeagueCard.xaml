@@ -37,8 +37,8 @@
                                 <ColumnDefinition Width="50"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="{Binding DisplayName, FallbackValue='Tên giải đấu'}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-                            <materialDesign:PopupBox Grid.Column="1" HorizontalAlignment="left"
-                             Visibility="{Binding Enable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <materialDesign:PopupBox x:Name="btnEnable" Grid.Column="1" HorizontalAlignment="left"
+                        >
                                 <StackPanel>
                                     <Button Content="Chỉnh sửa"
                                         Command="{Binding EditLeague,Source={StaticResource LeagueRightBarVM}}"

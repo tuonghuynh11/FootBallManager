@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FootBallProject.Class;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace FootBallProject.Usercontrol
         public ListofLeague()
         {
             InitializeComponent();
+            if (AccessUser.userLogin.USERROLE.ID == 2)
+            {
+                btnEnable.Visibility= Visibility.Visible;
+            }
+            else btnEnable.Visibility = Visibility.Hidden;
         }
     }
 }

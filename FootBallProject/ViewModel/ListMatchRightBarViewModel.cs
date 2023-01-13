@@ -153,6 +153,11 @@ namespace FootBallProject.ViewModel
             FootballMatchCard card = p.DataContext as FootballMatchCard;
             RightSideBarItemViewModel = new ListMatchRightSideBarInfo2(card);
         }
+        public void ShowInfomation(FootballMatchCard p)
+        {
+            
+            RightSideBarItemViewModel = new ListMatchRightSideBarInfo2(p);
+        }
         private void CreateNewMatch1()
         {
             RightSideBarItemViewModel = new CreateNewMatchViewModel();

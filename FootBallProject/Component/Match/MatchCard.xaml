@@ -76,9 +76,14 @@
                                 <Image Source="{Binding TeamA.HINHANH}"></Image>
                             </Border>
                         </StackPanel>
-                        <TextBlock Grid.Column="1"
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2.5*"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0"
                                     Height="auto"
-                            VerticalAlignment="Center"
+                            VerticalAlignment="Bottom"
                             HorizontalAlignment="Center"
                             FontSize="30"
                             FontWeight="Bold"
@@ -88,6 +93,20 @@
                             <Run Text="{Binding ScoreTeamA, FallbackValue='0'}"></Run>
                             <Run Text=" - "></Run>
                             <Run Text="{Binding ScoreTeamB, FallbackValue='0'}"></Run></TextBlock>
+                            <TextBlock Grid.Row="1"
+                                    Height="auto"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Center"
+                            FontSize="14"
+                            Visibility="{Binding EnableTiSo, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter} }"
+                            FontWeight="Bold"
+                            TextTrimming="WordEllipsis"
+                            TextWrapping="WrapWithOverflow">
+                            
+                            <Run Text="{Binding TiSoTeamA}"></Run>
+                            <Run Text=" - "></Run>
+                            <Run Text="{Binding TiSoTeamB}"></Run></TextBlock>
+                        </Grid>
                         <StackPanel Grid.Column="2" Orientation="Vertical" VerticalAlignment="Center">
                             <Border Height="60"
                                     Width="60">

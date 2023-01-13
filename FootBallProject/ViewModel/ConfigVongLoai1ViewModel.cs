@@ -22,7 +22,7 @@ namespace FootBallProject.ViewModel
         private static ConfigVongLoai1ViewModel _instance;
         public static ConfigVongLoai1ViewModel Instance
         {
-            get { if (_instance == null) _instance = new ConfigVongLoai1ViewModel(ListofLeagueViewModel.Instance); return _instance; }
+            get { return _instance; }
             set { _instance = value; }
         }
         public ListofLeagueViewModel Ins;
@@ -56,7 +56,7 @@ namespace FootBallProject.ViewModel
             }
 
             TotalTeam = count.ToString();
-            numofTeam = Convert.ToInt32(CreateNewLeague.Instance.SelectedSoluong);
+            if (CreateNewLeague.Instance != null)numofTeam = Convert.ToInt32(CreateNewLeague.Instance.SelectedSoluong);
             CurrentTeam = numofTeam.ToString();
             if (count == numofTeam) Enable = true;
             else Enable = false;
@@ -76,7 +76,7 @@ namespace FootBallProject.ViewModel
             TotalTeam = "0";
             CurrentTeam = numofTeam.ToString();
             Enable = false;
-            CurrentTeam = CreateNewLeague.Instance.SelectedSoluong;
+            if (CreateNewLeague.Instance != null) CurrentTeam = CreateNewLeague.Instance.SelectedSoluong;
             CountinueCommand = new RelayCommand<object>((p) => { return true; }, (p) => { ContinueFuntion(); ListofLeagueViewModel.Instance.ContinueFuntion(); });
             GoBackCommand = new RelayCommand<object>((p) => { return true; }, (p) => { ListofLeagueViewModel.Instance.ReturnCreate(); });
         }

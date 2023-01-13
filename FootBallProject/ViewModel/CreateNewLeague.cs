@@ -10,7 +10,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Interop;
+using System.Windows.Media.Imaging;
 
 namespace FootBallProject.ViewModel
 {
@@ -43,7 +46,7 @@ namespace FootBallProject.ViewModel
         private static CreateNewLeague _instance;
         public static CreateNewLeague Instance
         {
-            get { if (_instance == null) _instance = new CreateNewLeague(); return _instance; }
+            get { return _instance; }
             set { _instance = value; }
         }
         public string DisplayName
@@ -169,12 +172,20 @@ namespace FootBallProject.ViewModel
 
         public ICommand Next { get; set; }
         public ICommand Return { get; set; }
+        public ICommand AddAvatar { get; set; }
+        private string linkAvatar;
+        public string LinkAvatar
+        {
+            get { return linkAvatar; }
+            set { linkAvatar = value; OnPropertyChanged(); }
+        }
+        public BitmapImage img;
         public CreateNewLeague()
         {
             Instance= this;
             _errorBaseViewModel = new ErrorBaseViewModel();
             _errorBaseViewModel.ErrorsChanged += ErrorBaseViewModel_ErrorsChanged;
-            soluongdois= new ObservableCollection<string>() { "4", "8", "16", "32" };
+            soluongdois= new ObservableCollection<string>() { "4", "8", "16" };
             SoluongDois = soluongdois;
             var list = DataProvider.ins.DB.DIADIEMs.ToList();
             foreach(var item in list)
@@ -191,6 +202,18 @@ namespace FootBallProject.ViewModel
             QuocGiaList = quocgialist;
             Next = new RelayCommand<object>((p) => { return CanGoNext(); }, (p) => { GoNext(); ListofLeagueViewModel.Instance.GoNext(); });
             Return = new RelayCommand<object>((p) => { return true; }, (p) => { ListofLeagueViewModel.Instance.Return(); });
+            AddAvatar = new RelayCommand<object>(p => { return true; }, p => AddAvatarFuntion());
+        }
+        private void AddAvatarFuntion()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files|*.bmp;*.jpg;*.png";
+            openFileDialog.FilterIndex = 1;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                img = new BitmapImage(new Uri(openFileDialog.FileName));
+                LinkAvatar = openFileDialog.FileName;
+            }
         }
         private bool enable;
         public bool Enable
@@ -207,13 +230,23 @@ namespace FootBallProject.ViewModel
         public void GoNext()
         {
             Instance = this;
-            CreateNewLeague.Instance.League = new LEAGUE()
+            if (CreateNewLeague.Instance.League == null)
             {
-                TENGIAIDAU = CreateNewLeague.Instance.DisplayName,
-                NGAYBATDAU = CreateNewLeague.Instance.StartTime,
-                NGAYKETTHUC = CreateNewLeague.Instance.EndTime,
-                IDQUOCGIA = CreateNewLeague.Instance.QuocTich.ID,
-            };
+                CreateNewLeague.Instance.League = new LEAGUE()
+                {
+                    TENGIAIDAU = CreateNewLeague.Instance.DisplayName,
+                    NGAYBATDAU = CreateNewLeague.Instance.StartTime,
+                    NGAYKETTHUC = CreateNewLeague.Instance.EndTime,
+                    IDQUOCGIA = CreateNewLeague.Instance.QuocTich.ID,
+                };
+            }
+            else
+            {
+                CreateNewLeague.Instance.League.TENGIAIDAU = CreateNewLeague.Instance.DisplayName;
+                CreateNewLeague.Instance.League.NGAYBATDAU = CreateNewLeague.Instance.StartTime;
+                CreateNewLeague.Instance.League.NGAYKETTHUC = CreateNewLeague.Instance.EndTime;
+                CreateNewLeague.Instance.League.IDQUOCGIA = CreateNewLeague.Instance.QuocTich.ID;
+            }
         }
     }
 }

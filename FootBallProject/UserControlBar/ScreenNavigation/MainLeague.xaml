@@ -23,8 +23,8 @@
                         <ColumnDefinition Width="809"></ColumnDefinition>
                         <ColumnDefinition Width="420"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <uc:ListofLeague DataContext="{StaticResource ListofLeaguevm}"></uc:ListofLeague>
-                    <rightbar:LeagueRightBar Grid.Column="1" DataContext="{StaticResource LeagueRightBarVM}"></rightbar:LeagueRightBar>
+                    <uc:ListofLeague></uc:ListofLeague>
+                    <rightbar:LeagueRightBar Grid.Column="1"></rightbar:LeagueRightBar>
                     <!--<ContentControl Grid.Column="1" Content="{Binding ContentViewModel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                 <ContentControl.Resources >
                     <DataTemplate DataType="{x:Type viewmodel:ListofLeagueViewModel}">
