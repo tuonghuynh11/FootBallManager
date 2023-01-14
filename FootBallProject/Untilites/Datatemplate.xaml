@@ -34,7 +34,7 @@
     <DataTemplate DataType="{x:Type vm:ListMatchViewModel}">
         <view:MainMatch />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type vm:ListofLeagueViewModel}">
+    <DataTemplate DataType="{x:Type vm:MainLeagueViewModel}">
         <view:MainLeague />
     </DataTemplate>
 </ResourceDictionary>
