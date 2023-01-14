@@ -205,17 +205,17 @@
             Margin="8,8,8,8"
             Style="{StaticResource text_grid_item}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="387*" />
-                <ColumnDefinition Width="173*"/>
+                <ColumnDefinition Width="100*" />
+                <ColumnDefinition Width="473*"/>
                 <ColumnDefinition Width="112*" />
                 <ColumnDefinition Width="112*" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="1" Margin="0  20 0 0" Text="{Binding LinkAvatar, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, FallbackValue='Cập nhật ảnh đại diện'}"></TextBlock>
             <Button Grid.Column="0"
                     Style="{StaticResource grid_button_item}"
-                    Width="60"
-                    Height="60"
-                    Command="{Binding AddImage}"
+                    Width="40"
+                    Height="40"
+                    Command="{Binding AddAvatar}"
                     HorizontalAlignment="Left"
                     >
                 <materialDesign:PackIcon Width="50" Height="40" Kind="Image"></materialDesign:PackIcon>

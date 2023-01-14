@@ -212,7 +212,7 @@ namespace FootBallProject.ViewModel
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 img = new BitmapImage(new Uri(openFileDialog.FileName));
-                LinkAvatar = openFileDialog.FileName;
+                LinkAvatar = System.IO.Path.GetFileName( openFileDialog.FileName);
             }
         }
         private bool enable;

@@ -50,7 +50,7 @@ namespace FootBallProject.ViewModel
         private void TeamPlayersList() => CurrentView = new TeamPlayersViewModel();
         private void StatisticalChart() => CurrentView = new StatisticalChartViewModel();
         private void TransferConfirm() => CurrentView = new TransferConfirmViewModel();
-        private void Match() => CurrentView = new ListMatchViewModel();
+        private void Match() => CurrentView = new MainMatchViewModel();
         private void League() => CurrentView = new MainLeagueViewModel();
 
 
