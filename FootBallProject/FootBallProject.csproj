@@ -447,6 +447,7 @@
     <Compile Include="ViewModel\FootballTeamListViewModel.cs" />
     <Compile Include="ViewModel\LeaderListViewModel.cs" />
     <Compile Include="ViewModel\MainLeagueViewModel.cs" />
+    <Compile Include="ViewModel\MainMatchViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MatchInformationViewModel.cs" />
     <Compile Include="ViewModel\MatchNoDisPlayViewModel.cs" />

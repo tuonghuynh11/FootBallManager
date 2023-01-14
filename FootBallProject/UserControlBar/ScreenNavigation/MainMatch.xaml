@@ -8,6 +8,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                      xmlns:viewmodel="clr-namespace:FootBallProject.ViewModel"
         xmlns:uc="clr-namespace:FootBallProject.Usercontrol"
+           
         xmlns:rightbar="clr-namespace:FootBallProject.Component.RightBar"
  Style="{StaticResource Page_Style}" 
              d:DesignHeight="790" d:DesignWidth="1290">
@@ -23,8 +24,8 @@
                         <ColumnDefinition Width="809"></ColumnDefinition>
                         <ColumnDefinition Width="420"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <uc:ListMatchUC DataContext="{StaticResource ListMatchVM}"></uc:ListMatchUC>
-                    <rightbar:MatchListRightBar Grid.Column="1" DataContext="{StaticResource ListMatchRightSideBarVM}"></rightbar:MatchListRightBar>
+                    <uc:ListMatchUC></uc:ListMatchUC>
+                    <rightbar:MatchListRightBar Grid.Column="1"></rightbar:MatchListRightBar>
                     <!--<ContentControl Grid.Column="1" Content="{Binding ContentViewModel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                 <ContentControl.Resources >
                     <DataTemplate DataType="{x:Type viewmodel:ListofLeagueViewModel}">
