@@ -42,7 +42,7 @@
                     ></Button>
                
                 </StackPanel>
-            <ScrollViewer VerticalScrollBarVisibility="auto">
+            <ScrollViewer Height="200" VerticalScrollBarVisibility="auto">
                 <StackPanel>
                     <ItemsControl ItemsSource="{Binding CardTeamADisplays}">
                         <ItemsControl.ItemTemplate>
@@ -76,7 +76,7 @@
                     ></Button>
                 </StackPanel>
 
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ScrollViewer Height="200" VerticalScrollBarVisibility="Auto">
                     <StackPanel>
                         <ItemsControl ItemsSource="{Binding CardTeamBDisplays}">
                             <ItemsControl.ItemTemplate>
