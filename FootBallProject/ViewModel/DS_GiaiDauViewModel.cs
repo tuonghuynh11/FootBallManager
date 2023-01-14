@@ -15,7 +15,7 @@ namespace FootBallProject.ViewModel
 
         public DS_GiaiDauViewModel()
         {
-            Leagues = new ObservableCollection<LEAGUE>(DataProvider.ins.DB.LEAGUEs);
+            Leagues = new ObservableCollection<LEAGUE>(DataProvider.ins.DB.LEAGUEs.Where(p=>p.NGAYBATDAU!=null));
         }
     }
 }
