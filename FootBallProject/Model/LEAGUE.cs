@@ -11,7 +11,8 @@ namespace FootBallProject.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class LEAGUE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,6 +29,18 @@ namespace FootBallProject.Model
                 var qg = DataProvider.ins.DB.QUOCTICHes.Find(IDQUOCGIA);
 
                 return qg == null ? " " : qg.TENQUOCGIA;
+            }
+            set { }
+        }
+
+        public int SLDB
+        {
+            get
+            {
+                int qg = DataProvider.ins.DB.TEAMOFLEAGUEs.Where(p=>p.IDGIAIDAU==ID).Count();
+
+
+                    return qg;
             }
             set { }
         }
