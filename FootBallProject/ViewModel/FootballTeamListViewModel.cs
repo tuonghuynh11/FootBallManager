@@ -69,7 +69,7 @@ namespace FootBallProject.ViewModel
                 QUOCGIA = "",
                 IDQUOCTICH = 1,
                 THANHPHO=1,
-                SODOCHIENTHUAT = "",
+                SODOCHIENTHUAT = "4-3-3",
                 SOLUONGTHANHVIEN = 0,
                 GIATRI = 0,
 

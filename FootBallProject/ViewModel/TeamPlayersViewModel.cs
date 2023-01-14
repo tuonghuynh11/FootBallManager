@@ -338,11 +338,11 @@ namespace FootBallProject.ViewModel
                     || wd1.txbNumber.Text == "" || wd1.txbNationality.Text == ""
                     || wd1.txbAge.Text == "" || wd1.txbPhysyque.Text == "" || wd1.txbFoot.Text == "" || wd1.txbPrice.Text == "")
                     {
-                        OKCancelPopUp oK = new OKCancelPopUp();
+                        PopUpCustom oK = new PopUpCustom("Chưa nhập đầy đủ thông tin", "Bạn chưa nhập đủ thông tin cầu thủ");
                         oK.Height = 200;
-                        oK.Width = 390;
-                        oK.titletxbl.Text = "Chưa nhập đậy đủ thông tin";
-                        oK.content.Text = "Bạn chưa nhập đủ thông tin cầu thủ";
+                        oK.Width = 360;
+                        oK.titletxbl.Foreground = System.Windows.Media.Brushes.Red;
+                        oK.border.Background = System.Windows.Media.Brushes.Yellow;
                         oK.ShowDialog();
                         return;
                         //System.Windows.Forms.MessageBox.Show("Bạn chưa nhập đầy đủ thông tin", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -353,60 +353,62 @@ namespace FootBallProject.ViewModel
                         string position = wd1.txbPos.Text.Trim();
                         if (!int.TryParse(wd1.txbAge.Text, out parsevalue))
                         {
-                            OKCancelPopUp oK = new OKCancelPopUp();
+                            PopUpCustom oK = new PopUpCustom("Nhập tuổi không đúng", "Bạn phải nhập tuổi bằng số nguyên");
                             oK.Height = 200;
-                            oK.Width = 390;
-                            oK.titletxbl.Text = "Nhập tuổi không đúng";
-                            oK.content.Text = "Bạn phải nhập tuổi bằng số nguyên";
+                            oK.Width = 320;
+                            oK.titletxbl.Foreground = System.Windows.Media.Brushes.Red;
+                            oK.border.Background = System.Windows.Media.Brushes.Yellow;
                             oK.ShowDialog();
                             return;
                         }
                         else if (int.Parse(wd1.txbAge.Text) < 0)
                         {
-                            OKCancelPopUp oK = new OKCancelPopUp();
+                            PopUpCustom oK = new PopUpCustom("Nhập tuổi không đúng", "Bạn phải nhập tuổi bằng số nguyên");
                             oK.Height = 200;
-                            oK.Width = 390;
-                            oK.titletxbl.Text = "Nhập tuổi không đúng";
-                            oK.content.Text = "Bạn phải nhập tuổi bằng số nguyên";
+                            oK.Width = 320;
+                            oK.titletxbl.Foreground = System.Windows.Media.Brushes.Red;
+                            oK.border.Background = System.Windows.Media.Brushes.Yellow;
                             oK.ShowDialog();
                             return;
                         }
                         if (!int.TryParse(wd1.txbHeight.Text, out parsevalue))
                         {
-                            OKCancelPopUp oK = new OKCancelPopUp();
+                         
+                            PopUpCustom oK = new PopUpCustom("Nhập lại chiều cao", "Nhập theo số nguyên dương");
                             oK.Height = 200;
-                            oK.Width = 390;
-                            oK.titletxbl.Text = "Nhập lại chiều cao";
-                            oK.content.Text = "Nhập theo số nguyên dương";
+                            oK.Width = 320;
+                            oK.titletxbl.Foreground = System.Windows.Media.Brushes.Red;
+                            oK.border.Background = System.Windows.Media.Brushes.Yellow;
                             oK.ShowDialog();
                             return;
                         }
                         else if (int.Parse(wd1.txbHeight.Text) < 0)
                         {
-                            OKCancelPopUp oK = new OKCancelPopUp();
+                            PopUpCustom oK = new PopUpCustom("Nhập lại chiều cao", "Nhập theo số nguyên dương");
                             oK.Height = 200;
-                            oK.Width = 390;
-                            oK.titletxbl.Text = "Nhập lại chiều cao";
-                            oK.content.Text = "Nhập theo số nguyên dương";
+                            oK.Width = 320;
+                            oK.titletxbl.Foreground = System.Windows.Media.Brushes.Red;
+                            oK.border.Background = System.Windows.Media.Brushes.Yellow;
                             oK.ShowDialog();
                             return;
                         }
                         if (!int.TryParse(wd1.txbWeight.Text, out parsevalue))
                         {
-                            OKCancelPopUp oK = new OKCancelPopUp();
+                            PopUpCustom oK = new PopUpCustom("Nhập lại cân nặng", "Nhập theo số nguyên dương");
                             oK.Height = 200;
-                            oK.Width = 390;
-                            oK.titletxbl.Text = "Nhập lại cân nặng";
-                            oK.content.Text = "Nhập theo số nguyên dương";
-                            oK.ShowDialog(); return;
+                            oK.Width = 320;
+                            oK.titletxbl.Foreground = System.Windows.Media.Brushes.Red;
+                            oK.border.Background = System.Windows.Media.Brushes.Yellow;
+                            oK.ShowDialog();
+                             return;
                         }
                         else if (int.Parse(wd1.txbWeight.Text) < 0)
                         {
-                            OKCancelPopUp oK = new OKCancelPopUp();
+                            PopUpCustom oK = new PopUpCustom("Nhập lại cân nặng", "Nhập theo số nguyên dương");
                             oK.Height = 200;
-                            oK.Width = 390;
-                            oK.titletxbl.Text = "Nhập lại cân nặng";
-                            oK.content.Text = "Nhập theo số nguyên dương";
+                            oK.Width = 320;
+                            oK.titletxbl.Foreground = System.Windows.Media.Brushes.Red;
+                            oK.border.Background = System.Windows.Media.Brushes.Yellow;
                             oK.ShowDialog(); return;
                         }
                         //if (!Regex.IsMatch(wd1.txbHeight.Text, @"^\d+cm$"))
@@ -433,30 +435,38 @@ namespace FootBallProject.ViewModel
                         //}
                         if (!int.TryParse(wd1.txbNumber.Text, out parsevalue))
                         {
-                            OKCancelPopUp oK = new OKCancelPopUp();
+                          
+
+                            PopUpCustom oK = new PopUpCustom("Nhập số áo không đúng", "Xin nhập lại số áo");
                             oK.Height = 200;
-                            oK.Width = 390;
-                            oK.titletxbl.Text = "Nhập số áo không đúng";
-                            oK.content.Text = "Xin nhập lại số áo";
+                            oK.Width = 320;
+                            oK.titletxbl.Foreground = System.Windows.Media.Brushes.Red;
+                            oK.border.Background = System.Windows.Media.Brushes.Yellow;
+
+
                             oK.ShowDialog(); return;
                         }
                         else if (int.Parse(wd1.txbNumber.Text) < 0)
                         {
-                            OKCancelPopUp oK = new OKCancelPopUp();
+
+                            PopUpCustom oK = new PopUpCustom("Nhập số áo không đúng", "Xin nhập lại số áo");
                             oK.Height = 200;
-                            oK.Width = 390;
-                            oK.titletxbl.Text = "Nhập số áo không đúng";
-                            oK.content.Text = "Xin nhập lại số áo";
+                            oK.Width = 320;
+                            oK.titletxbl.Foreground = System.Windows.Media.Brushes.Red;
+                            oK.border.Background = System.Windows.Media.Brushes.Yellow;
                             oK.ShowDialog(); return;
                         }
                         ulong parsevalue2;
                         if (!UInt64.TryParse(wd1.txbPrice.Text, out parsevalue2))
                         {
-                            OKCancelPopUp oK = new OKCancelPopUp();
+                          
+                            PopUpCustom oK = new PopUpCustom("Nhập giá trị không đúng", "Xin nhập lại giá trị bằng số nguyên");
                             oK.Height = 200;
-                            oK.Width = 390;
-                            oK.titletxbl.Text = "Nhập giá trị không đúng";
-                            oK.content.Text = "Xin nhập lại giá trị bằng số nguyên";
+                            oK.Width = 320;
+                            oK.titletxbl.Foreground = System.Windows.Media.Brushes.Red;
+                            oK.border.Background = System.Windows.Media.Brushes.Yellow;
+
+
                             oK.ShowDialog(); return;
                         }
                         //else if (Int64.Parse(wd1.txbPrice.Text) < 0)
