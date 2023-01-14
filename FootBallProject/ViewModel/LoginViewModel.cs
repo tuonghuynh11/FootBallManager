@@ -268,7 +268,7 @@ namespace FootBallProject.ViewModel
         }
         private void InitCommand()
         {
-            SwichView = new RelayCommand<object>((p) => { return true; }, (p) => { SwichView1(); MessageBox.Show("Vao command"); });
+            SwichView = new RelayCommand<object>((p) => { return true; }, (p) => { SwichView1(); });
             GoToMainWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) => { DoOpenMainWindow(); });
             Hoangmang = new RelayCommand<object>((p) => { return true; }, (p) => { RememberUser(); });
             GetOTPCodeCommand = new RelayCommand<object>((p) => { return true; }, async (p) => await GetOPTAsync());
@@ -282,7 +282,6 @@ namespace FootBallProject.ViewModel
                 LoginSuccessful();
                 return;
             }
-
         }
         private void LoginSuccessful()
         {
@@ -290,7 +289,7 @@ namespace FootBallProject.ViewModel
             USER.ROLE = user.ROLENAME;
             USER.USERN = user.USERNAME;
             AccessUser.userLogin = user;
-            if (user.ROLENAME!="Admin")
+            if (user.ROLENAME != "Admin")
             {
                 //lấy id đội bóng của hlv đang đăng nhập trừ admin
                 USER.IDDB = DataProvider.ins.Database.HUANLUYENVIENs.Where(x => x.ID == user.IDNHANSU).FirstOrDefault().IDDOIBONG;
@@ -317,12 +316,15 @@ namespace FootBallProject.ViewModel
                     return true;
                 }
 
-                _ = MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng!\nVui lòng thử lại!", "Đăng nhập thất bại", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                Error f = new Error("Tên đăng nhập hoặc mật khẩu không đúng!\nVui lòng thử lại!");
+                f.ShowDialog();
                 return false;
             }
             catch
             {
-                MessageBox.Show("Đã có lỗi trong việc xác nhận tài khoản", "Thông báo", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                Error f = new Error("Đã có lỗi trong việc xác nhận tài khoản");
+                f.ShowDialog();
+                //MessageBox.Show("Đã có lỗi trong việc xác nhận tài khoản", "Thông báo", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                 return false;
             }
 
@@ -350,15 +352,7 @@ namespace FootBallProject.ViewModel
         }
         public void ResetView()
         {
-            CurrentView = new Login();
-            Gmail = "";
-            NewPassWord = null;
-            ReNewPassWord = null;
-            OTPInView = null;
-            Password = null;
-            _errorBaseViewModel.ClearAllErrors();
-            IsGetCode = false;
-
+            SwichView1();
         }
         bool IsValidEmail(string email)
         {
@@ -390,7 +384,6 @@ namespace FootBallProject.ViewModel
                 (sender as DispatcherTimer).Stop();
                 TimeCountDown = null;
             }
-
         }
         public async Task GetOPTAsync()
         {
@@ -398,28 +391,27 @@ namespace FootBallProject.ViewModel
             {
                 if (string.IsNullOrEmpty(Gmail))
                 {
-                    MessageBox.Show("Cần phải nhập địa chỉ mail trước khi lấy mã", "Thông báo", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                    Error f = new Error("Cần phải nhập địa chỉ mail trước khi lấy mã");
+                    f.ShowDialog();
                     return;
                 }
                 if (!IsValidEmail(Gmail))
                 {
-                    MessageBox.Show("Địa chỉ mail không hợp lệ", "Thông báo", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                    Error f = new Error("Email không hợp lệ");
+                    f.ShowDialog();
                     return;
                 }
 
                 StartCountdown();
                 OTP = RandomOTP();
-
-
                 await OTPServices.Instance.SaveOTP(Gmail, SHA256Cryptography.Instance.EncryptString(OTP));
-
                 await SetupAndSendOTPForEmailAsync();
             }
             catch
             {
-                MessageBox.Show("Có lỗi trong việc tạo OTP", "Thông báo", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                Error f = new Error("Có lỗi trong việc tạo OTP");
+                f.ShowDialog();
             }
-
         }
         public string RandomOTP()
         {
@@ -437,8 +429,8 @@ namespace FootBallProject.ViewModel
         }
         public async Task SetupAndSendOTPForEmailAsync()
         {
-            var body = File.ReadAllText("../../Resource/mail.html");
-            var from = new MailAddress("hienle12t1@gmail.com", "Lê Phan Hiển");
+            var body = File.ReadAllText("../../ResourceXAML/mail.html");
+            var from = new MailAddress("footballmanagement111@gmail.com", "Football Manager");
             var to = new MailAddress(Gmail.Trim());
             MailMessage mm = new MailMessage(from, to)
             {
@@ -451,9 +443,8 @@ namespace FootBallProject.ViewModel
             {
                 Host = "smtp.gmail.com",
                 Port = 587,
-                Credentials = new System.Net.NetworkCredential("hienle12t1@gmail.com", "uxyelqzebjtlyqzo"),
+                Credentials = new System.Net.NetworkCredential("footballmanagement111@gmail.com", "upovphfgbfmhacux"),
                 EnableSsl = true
-
             };
             try
             {
@@ -461,7 +452,8 @@ namespace FootBallProject.ViewModel
             }
             catch (Exception)
             {
-                MessageBox.Show("Đã có lỗi xảy ra, không thể gửi mã OTP", "OTP", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                Error f = new Error("Không thể gửi OTP");
+                f.ShowDialog();
             }
         }
         public void ConFirm()
@@ -471,22 +463,27 @@ namespace FootBallProject.ViewModel
                 OTPServices.Instance.DeleteOTPOverTime();
                 if (!OTPServices.Instance.CheckGetOTPFromEmail(Gmail, SHA256Cryptography.Instance.EncryptString(OTPInView)))
                 {
-                    MessageBox.Show("Mã xác nhận không chính xác", "Thông báo", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                    Error f = new Error("Mã xác nhận không chính xác");
+                    f.ShowDialog();
                     return;
                 }
                 if (UserServices.Instance.ChangePassWord(NewPassWord, Gmail))
                 {
-                    MessageBox.Show("Cập nhật mật khẩu thành công", "Thông báo", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-                    ResetView();
+                    Success f = new Success();
+                    f.ShowDialog();
+                    CurrentView = new Login();
                 }
                 else
                 {
-                    MessageBox.Show("Cập nhật mật khẩu thất bại", "Thông báo", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    Error f = new Error("Cập nhật mật khẩu thất bại");
+                    f.ShowDialog();
                 }
             }
             catch
             {
-                MessageBox.Show("Có lỗi trong việc cập nhật mật khẩu mới", "Thông báo", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                Error f = new Error("Có lỗi trong việc cập nhật mật khẩu mới");
+                f.ShowDialog();
+
             }
 
 

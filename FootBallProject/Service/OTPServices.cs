@@ -55,7 +55,7 @@ namespace FootBallProject.Service
                 var user = UserServices.Instance.GetUserByOTP(otp);
                 try
                 {
-                    user.IDOTP = null;
+                   if(user != null) user.IDOTP = null;
                 }
                 catch { }
             }

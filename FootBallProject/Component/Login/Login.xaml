@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:FootBallProject.Component.Login"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-            d:DataContext="{StaticResource LoginViewM}" 
              Background="Transparent"
              
             d:DesignHeight="450" d:DesignWidth="370"
