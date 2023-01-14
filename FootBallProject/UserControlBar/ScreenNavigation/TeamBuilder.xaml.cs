@@ -135,163 +135,270 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
 
         private void bttPlayerExchange_Click(object sender, RoutedEventArgs e)
         {
-            //Thêm chuỗi path để truyền image cho ImageBrush//
-            const string path = "pack://application:,,,";
-            //Thêm chuỗi path để truyền image cho ImageBrush//
-            if (dtgDSCauThu.SelectedItems.Count > 0)
+            try
             {
-                CAUTHU a = dtgDSCauThu.SelectedItems[0] as CAUTHU;
-                CAUTHU term2 = a;
-
-                if (dtgDSCauThuDuBi.SelectedItems.Count>0)
+                //Thêm chuỗi path để truyền image cho ImageBrush//
+                const string path = "pack://application:,,,";
+                //Thêm chuỗi path để truyền image cho ImageBrush//
+                if (dtgDSCauThu.SelectedItems.Count > 0)
                 {
-                    CAUTHU sub = dtgDSCauThuDuBi.SelectedItems[0] as CAUTHU;
-                  
+                    CAUTHU a = dtgDSCauThu.SelectedItems[0] as CAUTHU;
+                    CAUTHU term2 = a;
 
-                    if (a.VITRIAO=="GK" &&  sub.VITRI!="GK")
+                    if (dtgDSCauThuDuBi.SelectedItems.Count > 0)
                     {
-                        PopUpCustom popUpCustom = new PopUpCustom();
-                        popUpCustom.Show();
+                        CAUTHU sub = dtgDSCauThuDuBi.SelectedItems[0] as CAUTHU;
+
+
+                        if (a.VITRIAO == "GK" && sub.VITRI != "GK")
+                        {
+                            PopUpCustom popUpCustom = new PopUpCustom();
+                            popUpCustom.Show();
+                        }
+                        else
+                        {
+                            int main = mainteam.IndexOf(a);
+                            int subindex = 0;
+                            foreach (CAUTHU item in mainsubteam)
+                            {
+                                if (item.ID == sub.ID)
+                                {
+                                    break;
+                                }
+                                subindex++;
+                            }
+
+                            mainteam[main] = sub;
+                            mainteam[main].VITRIAO = term2.VITRIAO;
+
+                            mainsubteam[subindex] = a;
+
+
+                            dtgDSCauThuDuBi.Items.Refresh();
+                            dtgDSCauThuDuBi.UnselectAll();
+                            dtgDSCauThuDuBi.InvalidateProperty(DataGrid.SelectedItemProperty);
+                            dtgDSCauThuDuBi.SetValue(DataGrid.SelectedItemProperty, a);
+                            dtgDSCauThuDuBi.Items.Refresh();
+
+                            dtgDSCauThu.InvalidateProperty(DataGrid.SelectedItemProperty);
+                            dtgDSCauThu.SetValue(DataGrid.SelectedItemProperty, mainteam[main]);
+                            dtgDSCauThu.Items.Refresh();
+
+                        }
+
                     }
                     else
                     {
-                        int main = mainteam.IndexOf(a);
-                        int subindex = 0;
-                        foreach (CAUTHU item in mainsubteam)
+
+                        int curentitem = mainteam.IndexOf(a);
+                        string vitriao3 = a.VITRIAO;
+                        string vitriao2 = "";
+                        int curentreplaceitem2 = 0;
+                        CAUTHU current = new CAUTHU();
+                        current = a;
+                        CAUTHU replace = new CAUTHU();
+                        int flag = 0;
+                        if (term == 0)
                         {
-                            if (item.ID == sub.ID)
+                            //a.exchange(termplayer);
+                            //termplayer = a;
+                            replace = termPlayer;
+                            int curentreplaceitem = curentreplaceitem2 = mainteam.IndexOf(termPlayer);
+                            string vitriao = vitriao2 = termPlayer.VITRIAO;
+                            if ((a.VITRIAO == "GK" && mainteam[curentreplaceitem].VITRIAO != "GK") || (a.VITRIAO != "GK" && mainteam[curentreplaceitem].VITRIAO == "GK"))
                             {
-                                break;
+                                flag = 1;
+                                PopUpCustom popUpCustom = new PopUpCustom();
+                                popUpCustom.Show();
                             }
-                            subindex++;
+                            else
+                            {
+                                //Set vi trí mặc định trong đội hình chiến thuật
+                                mainteam[curentitem] = termPlayer;
+                                mainteam[curentreplaceitem] = a;
+
+
+
+                                a.VITRIAO = vitriao;
+                                termPlayer = a;
+
+                                term = 1;
+                                term1 = 0;
+
+                                changeteam[mainteam[curentitem].ID] = vitriao3;
+                                changeteam[mainteam[curentreplaceitem].ID] = vitriao2;
+
+                                flag = 0;
+                            }
+
                         }
 
-                        mainteam[main] = sub;
-                        mainteam[main].VITRIAO = term2.VITRIAO;
+                        //nếu term1 đang =0
+                        else
+                        {
+                            replace = termPlayer1;
+                            int curentreplaceitem1 = curentreplaceitem2 = mainteam.IndexOf(termPlayer1);
+                            string vitriao1 = vitriao2 = termPlayer1.VITRIAO;
 
-                        mainsubteam[subindex] = a;
+                            if ((a.VITRIAO == "GK" && mainteam[curentreplaceitem1].VITRIAO != "GK") || (a.VITRIAO != "GK" && mainteam[curentreplaceitem1].VITRIAO == "GK"))
+                            {
+                                flag = 1;
+                                PopUpCustom popUpCustom = new PopUpCustom();
+                                popUpCustom.Show();
+                            }
+                            else
+                            {
+                                mainteam[curentitem] = termPlayer1;
+                                mainteam[curentreplaceitem1] = a;
+                                a.VITRIAO = vitriao1;
+                                termPlayer1 = a;
+                                term1 = 1;
+                                term = 0;
+
+                                changeteam[mainteam[curentitem].ID] = vitriao3;
+                                changeteam[mainteam[curentreplaceitem1].ID] = vitriao2;
+
+                                flag = 1;
+                            }
 
 
-                        dtgDSCauThuDuBi.Items.Refresh();
-                       dtgDSCauThuDuBi.UnselectAll();
-                        dtgDSCauThuDuBi.InvalidateProperty(DataGrid.SelectedItemProperty);
-                        dtgDSCauThuDuBi.SetValue(DataGrid.SelectedItemProperty, a);
-                        dtgDSCauThuDuBi.Items.Refresh();
+
+                        }
+                        TeamBuilderViewModel newVm1 = new TeamBuilderViewModel();
+                        // newVm.MainTeamPlayers = mainteam;
+                        newVm1.SubTeamPlayers = mainsubteam;
+
+                        ///
+                        if (DoiHinhChienThuat433UC.Visibility == Visibility.Visible)
+                        {
+                            // team_433 = new Team_433(mainteam);
+                            if (flag != 1)
+                            {
+                                int j = 0;
+                                foreach (CAUTHU item in mainteam)
+                                {
+                                    if (item.ID == replace.ID)
+                                    {
+                                        item.VITRIAO = vitriao3;
+                                        j++;
+                                    }
+                                    if (item.ID == current.ID)
+                                    {
+                                        item.VITRIAO = vitriao2;
+                                        j++;
+                                    }
+                                    if (j == 2)
+                                    {
+                                        break;
+                                    }
+                                }
+
+                            }
+                            foreach (CAUTHU item in mainteam)
+                            {
+                                if (changeteam.ContainsKey(item.ID))
+                                {
+                                    item.VITRIAO = changeteam[item.ID];
+                                }
+                            }
+                            newVm1.Teamformat = new Team_433(mainteam, "basic");
+                            newVm1.MainTeamPlayers = newVm1.Teamformat.team;
+
+                            DoiHinhChienThuat433UC.DataContext = newVm1.Teamformat;
+                        }
+                        else if (DoiHinhChienThuat442UC.Visibility == Visibility.Visible)
+                        {
+                            if (flag != 1)
+                            {
+                                int j = 0;
+                                foreach (CAUTHU item in mainteam)
+                                {
+                                    if (item.ID == replace.ID)
+                                    {
+                                        item.VITRIAO = vitriao3;
+                                        j++;
+                                    }
+                                    if (item.ID == current.ID)
+                                    {
+                                        item.VITRIAO = vitriao2;
+                                        j++;
+                                    }
+                                    if (j == 2)
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                            foreach (CAUTHU item in mainteam)
+                            {
+                                if (changeteam.ContainsKey(item.ID))
+                                {
+                                    item.VITRIAO = changeteam[item.ID];
+                                }
+                            }
+                            newVm1.Teamformat = new Team_442(mainteam, "basic");
+                            newVm1.MainTeamPlayers = newVm1.Teamformat.team;
+
+                            DoiHinhChienThuat442UC.DataContext = newVm1.Teamformat;
+                        }
+                        else if (DoiHinhChienThuat4231UC.Visibility == Visibility.Visible)
+                        {
+                            if (flag != 1)
+                            {
+                                int j = 0;
+                                foreach (CAUTHU item in mainteam)
+                                {
+                                    if (item.ID == replace.ID)
+                                    {
+                                        item.VITRIAO = vitriao3;
+                                        j++;
+                                    }
+                                    if (item.ID == current.ID)
+                                    {
+                                        item.VITRIAO = vitriao2;
+                                        j++;
+                                    }
+                                    if (j == 2)
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                            foreach (CAUTHU item in mainteam)
+                            {
+                                if (changeteam.ContainsKey(item.ID))
+                                {
+                                    item.VITRIAO = changeteam[item.ID];
+                                }
+                            }
+                            newVm1.Teamformat = new Team_4231(mainteam, "basic");
+                            newVm1.MainTeamPlayers = newVm1.Teamformat.team;
+
+                            DoiHinhChienThuat4231UC.DataContext = newVm1.Teamformat;
+                        }
+
+
+                        // Xử lý khi trao đổi phải trỏ đến cầu thủ đang đổi
+                        ///
+
+                        this.DataContext = newVm1;
 
                         dtgDSCauThu.InvalidateProperty(DataGrid.SelectedItemProperty);
-                        dtgDSCauThu.SetValue(DataGrid.SelectedItemProperty, mainteam[main]);
+                        dtgDSCauThu.SetValue(DataGrid.SelectedItemProperty, a);
                         dtgDSCauThu.Items.Refresh();
 
+                        return;
                     }
 
-                }
-                else
-                {
-                   
-                    int curentitem = mainteam.IndexOf(a);
-                    string vitriao3 = a.VITRIAO;
-                    string vitriao2 = "";
-                    int curentreplaceitem2 = 0;
-                    CAUTHU current = new CAUTHU();
-                    current = a;
-                    CAUTHU replace = new CAUTHU();
-                    int flag = 0;
-                    if (term == 0)
-                    {
-                        //a.exchange(termplayer);
-                        //termplayer = a;
-                        replace = termPlayer;
-                        int curentreplaceitem = curentreplaceitem2= mainteam.IndexOf(termPlayer);
-                        string vitriao = vitriao2 = termPlayer.VITRIAO;
-                        if ((a.VITRIAO=="GK" && mainteam[curentreplaceitem].VITRIAO!="GK")|| (a.VITRIAO != "GK" && mainteam[curentreplaceitem].VITRIAO == "GK"))
-                        {
-                            flag = 1;
-                            PopUpCustom popUpCustom = new PopUpCustom();
-                            popUpCustom.Show();
-                        }
-                        else
-                        {
-                            //Set vi trí mặc định trong đội hình chiến thuật
-                            mainteam[curentitem] = termPlayer;
-                            mainteam[curentreplaceitem] = a;
-
-                           
-
-                            a.VITRIAO = vitriao;
-                            termPlayer = a;
-
-                            term = 1;
-                            term1 = 0;
-
-                            changeteam[mainteam[curentitem].ID] = vitriao3;
-                            changeteam[mainteam[curentreplaceitem].ID] = vitriao2;
-
-                            flag = 0;
-                        }
-                        
-                    }
-
-                    //nếu term1 đang =0
-                    else
-                    {
-                        replace = termPlayer1;
-                        int curentreplaceitem1 = curentreplaceitem2=mainteam.IndexOf(termPlayer1);
-                        string vitriao1 = vitriao2 = termPlayer1.VITRIAO;
-
-                        if ((a.VITRIAO == "GK" && mainteam[curentreplaceitem1].VITRIAO != "GK")|| (a.VITRIAO != "GK" && mainteam[curentreplaceitem1].VITRIAO == "GK"))
-                        {
-                            flag = 1;
-                            PopUpCustom popUpCustom = new PopUpCustom();
-                            popUpCustom.Show();
-                        }
-                        else
-                        {
-                            mainteam[curentitem] = termPlayer1;
-                            mainteam[curentreplaceitem1] = a;
-                            a.VITRIAO = vitriao1;
-                            termPlayer1 = a;
-                            term1 = 1;
-                            term = 0;
-
-                            changeteam[mainteam[curentitem].ID] = vitriao3;
-                            changeteam[mainteam[curentreplaceitem1].ID] = vitriao2;
-
-                            flag = 1;
-                        }
-                       
-                        
-                     
-                    }
-                    TeamBuilderViewModel newVm1 = new TeamBuilderViewModel();
+                    //Gán lại đội hình mới
+                    TeamBuilderViewModel newVm = new TeamBuilderViewModel();
                     // newVm.MainTeamPlayers = mainteam;
-                    newVm1.SubTeamPlayers = mainsubteam;
+                    newVm.SubTeamPlayers = mainsubteam;
 
                     ///
                     if (DoiHinhChienThuat433UC.Visibility == Visibility.Visible)
                     {
                         // team_433 = new Team_433(mainteam);
-                        if (flag!=1)
-                        {
-                            int j = 0;
-                            foreach (CAUTHU item in mainteam)
-                            {
-                                if (item.ID == replace.ID)
-                                {
-                                    item.VITRIAO = vitriao3;
-                                    j++;
-                                }
-                                if (item.ID == current.ID)
-                                {
-                                    item.VITRIAO = vitriao2;
-                                    j++;
-                                }
-                                if (j == 2)
-                                {
-                                    break;
-                                }
-                            }
-                           
-                        }
                         foreach (CAUTHU item in mainteam)
                         {
                             if (changeteam.ContainsKey(item.ID))
@@ -299,34 +406,13 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
                                 item.VITRIAO = changeteam[item.ID];
                             }
                         }
-                        newVm1.Teamformat = new Team_433(mainteam, "basic");
-                         newVm1.MainTeamPlayers = newVm1.Teamformat.team;
+                        newVm.Teamformat = new Team_433(mainteam, "basic");
+                        newVm.MainTeamPlayers = newVm.Teamformat.team;
 
-                        DoiHinhChienThuat433UC.DataContext = newVm1.Teamformat;
+                        DoiHinhChienThuat433UC.DataContext = newVm.Teamformat;
                     }
                     else if (DoiHinhChienThuat442UC.Visibility == Visibility.Visible)
                     {
-                        if (flag != 1)
-                        {
-                            int j = 0;
-                            foreach (CAUTHU item in mainteam)
-                            {
-                                if (item.ID == replace.ID)
-                                {
-                                    item.VITRIAO = vitriao3;
-                                    j++;
-                                }
-                                if (item.ID == current.ID)
-                                {
-                                    item.VITRIAO = vitriao2;
-                                    j++;
-                                }
-                                if (j == 2)
-                                {
-                                    break;
-                                }
-                            }
-                        }
                         foreach (CAUTHU item in mainteam)
                         {
                             if (changeteam.ContainsKey(item.ID))
@@ -334,34 +420,13 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
                                 item.VITRIAO = changeteam[item.ID];
                             }
                         }
-                        newVm1.Teamformat = new Team_442(mainteam, "basic");
-                        newVm1.MainTeamPlayers = newVm1.Teamformat.team;
+                        newVm.Teamformat = new Team_442(mainteam, "basic");
+                        newVm.MainTeamPlayers = newVm.Teamformat.team;
 
-                        DoiHinhChienThuat442UC.DataContext = newVm1.Teamformat;
+                        DoiHinhChienThuat442UC.DataContext = newVm.Teamformat;
                     }
                     else if (DoiHinhChienThuat4231UC.Visibility == Visibility.Visible)
                     {
-                        if (flag != 1)
-                        {
-                            int j = 0;
-                            foreach (CAUTHU item in mainteam)
-                            {
-                                if (item.ID == replace.ID)
-                                {
-                                    item.VITRIAO = vitriao3;
-                                    j++;
-                                }
-                                if (item.ID == current.ID)
-                                {
-                                    item.VITRIAO = vitriao2;
-                                    j++;
-                                }
-                                if (j == 2)
-                                {
-                                    break;
-                                }
-                            }
-                        }
                         foreach (CAUTHU item in mainteam)
                         {
                             if (changeteam.ContainsKey(item.ID))
@@ -369,85 +434,29 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
                                 item.VITRIAO = changeteam[item.ID];
                             }
                         }
-                        newVm1.Teamformat = new Team_4231(mainteam, "basic");
-                        newVm1.MainTeamPlayers = newVm1.Teamformat.team;
+                        newVm.Teamformat = new Team_4231(mainteam, "basic");
+                        newVm.MainTeamPlayers = newVm.Teamformat.team;
 
-                        DoiHinhChienThuat4231UC.DataContext = newVm1.Teamformat;
+                        DoiHinhChienThuat4231UC.DataContext = newVm.Teamformat;
                     }
 
 
                     // Xử lý khi trao đổi phải trỏ đến cầu thủ đang đổi
                     ///
 
-                    this.DataContext = newVm1;
+                    this.DataContext = newVm;
 
-                    dtgDSCauThu.InvalidateProperty(DataGrid.SelectedItemProperty);
-                    dtgDSCauThu.SetValue(DataGrid.SelectedItemProperty, a);
-                    dtgDSCauThu.Items.Refresh();
-
-                    return;
+                    //dtgDSCauThu.InvalidateProperty(DataGrid.SelectedItemProperty);
+                    //dtgDSCauThu.SetValue(DataGrid.SelectedItemProperty, a);
+                    //dtgDSCauThu.Items.Refresh();
                 }
-
-                //Gán lại đội hình mới
-                TeamBuilderViewModel newVm = new TeamBuilderViewModel();
-               // newVm.MainTeamPlayers = mainteam;
-                newVm.SubTeamPlayers = mainsubteam;
-
-                ///
-                if (DoiHinhChienThuat433UC.Visibility == Visibility.Visible)
-                {
-                    // team_433 = new Team_433(mainteam);
-                    foreach (CAUTHU item in mainteam)
-                    {
-                        if (changeteam.ContainsKey(item.ID))
-                        {
-                            item.VITRIAO = changeteam[item.ID];
-                        }
-                    }
-                    newVm.Teamformat = new Team_433( mainteam,"basic");
-                    newVm.MainTeamPlayers = newVm.Teamformat.team ;
-
-                    DoiHinhChienThuat433UC.DataContext = newVm.Teamformat;
-                }
-                else if (DoiHinhChienThuat442UC.Visibility == Visibility.Visible)
-                {
-                    foreach (CAUTHU item in mainteam)
-                    {
-                        if (changeteam.ContainsKey(item.ID))
-                        {
-                            item.VITRIAO = changeteam[item.ID];
-                        }
-                    }
-                    newVm.Teamformat = new Team_442(mainteam, "basic");
-                    newVm.MainTeamPlayers = newVm.Teamformat.team;
-
-                    DoiHinhChienThuat442UC.DataContext = newVm.Teamformat;
-                }
-                else if (DoiHinhChienThuat4231UC.Visibility == Visibility.Visible)
-                {
-                    foreach (CAUTHU item in mainteam)
-                    {
-                        if (changeteam.ContainsKey(item.ID))
-                        {
-                            item.VITRIAO = changeteam[item.ID];
-                        }
-                    }
-                    newVm.Teamformat = new Team_4231(mainteam, "basic");
-                    newVm.MainTeamPlayers = newVm.Teamformat.team;
-
-                    DoiHinhChienThuat4231UC.DataContext = newVm.Teamformat;
-                }
-
-
-                // Xử lý khi trao đổi phải trỏ đến cầu thủ đang đổi
-                ///
-
-                this.DataContext = newVm;
-
-                //dtgDSCauThu.InvalidateProperty(DataGrid.SelectedItemProperty);
-                //dtgDSCauThu.SetValue(DataGrid.SelectedItemProperty, a);
-                //dtgDSCauThu.Items.Refresh();
             }
+            catch (Exception)
+            {
+
+                return;
+            }
+            
         }
        
         private void tbSearch1_TextChanged(object sender, TextChangedEventArgs e)
@@ -839,7 +848,16 @@ namespace FootBallProject.UserControlBar.ScreenNavigation
             ComboBoxItem select = (ComboBoxItem)DHChienThuatcbb.SelectedItem;
 
             DOIBONG db= DataProvider.ins.DB.DOIBONGs.Where(d => d.ID == id_doi).First();
-            db.SODOCHIENTHUAT = select.Content.ToString();
+            try
+            {
+                db.SODOCHIENTHUAT = select.Content.ToString();
+
+            }
+            catch (Exception)
+            {
+
+                return ;
+            }
 
             DataProvider.ins.DB.SaveChanges();
             PopUpCustom popUp = new PopUpCustom("Thông báo", "Đã lưu đội hình",1);
