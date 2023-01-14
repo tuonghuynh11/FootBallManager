@@ -8,7 +8,6 @@
     <viewmodel:CreateNewMatchViewModel x:Key="CreateNewMatchVM"></viewmodel:CreateNewMatchViewModel>
     <viewmodel:ListMatchRightBarViewModel x:Key="ListMatchRightSideBarVM"></viewmodel:ListMatchRightBarViewModel>
     <viewmodel:LoginViewModel x:Key="LoginViewM"></viewmodel:LoginViewModel>
-    <viewmodel:MainViewModel2 x:Key="MainVM"></viewmodel:MainViewModel2>
     <object:LeagueCardOb x:Key="LeagueCardOb"></object:LeagueCardOb>
     <viewmodel:ListMatchViewModel x:Key="ListMatchVM"></viewmodel:ListMatchViewModel>
     <viewmodel:LeagueRightBarViewModel x:Key="LeagueRightBarVM"></viewmodel:LeagueRightBarViewModel>

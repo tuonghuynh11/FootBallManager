@@ -51,7 +51,7 @@ namespace FootBallProject.ViewModel
         private void StatisticalChart() => CurrentView = new StatisticalChartViewModel();
         private void TransferConfirm() => CurrentView = new TransferConfirmViewModel();
         private void Match() => CurrentView = new ListMatchViewModel();
-        private void League() => CurrentView = new ListofLeagueViewModel();
+        private void League() => CurrentView = new MainLeagueViewModel();
 
 
 
