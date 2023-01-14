@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Configuration;
 using FootBallProject.Model;
+using System.Globalization;
 
 namespace FootBallProject.UserControlBar
 {
@@ -135,6 +136,26 @@ namespace FootBallProject.UserControlBar
             GetIDDOIBONG = GetIDDOIBONG.Substring(0, GetIDDOIBONG.IndexOf('.'));
             int i = 0;
 
+            int flag = 0;
+            foreach(DS_Cal cal in Cals)
+            {
+                CultureInfo culture = new CultureInfo("en-US");
+                DateTime tempDate1 = Convert.ToDateTime("1/1/2001 " + cal.TimeStart, culture);
+                DateTime tempDate2 = Convert.ToDateTime("1/1/2001 " + cal.TimeEnd, culture);
+                if(tempDate1 >= tempDate2)
+                {
+                    flag = 1;
+                    break;
+                }
+                
+            }
+            if(flag == 1)
+            {
+                Error error = new Error("Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc");
+                error.ShowDialog();
+                return;
+            }
+            
             foreach (DS_Cal cal in Cals)
             {
                 if (i < givenlist)
