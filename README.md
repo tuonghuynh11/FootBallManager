@@ -280,9 +280,8 @@ tổ chức bóng đá nào cũng có thể sử dụng được là cực kỳ 
     <summary>Đối với người dùng</summary>
 
   * Liên hệ với nhà phát triển để được hỗ trợ khởi tạo cơ sở dữ liệu và kết nối đến cơ sở dữ liệu.
-  * (Thêm sau)
-    * Dowload phần mềm tại: 
-(Thêm sau)
+  * Giải nén và chạy file SetupFBM.msi hoặc setup.exe
+    * Dowload phần mềm tại: https://drive.google.com/file/d/1mpWYufvvIOTgdp3GduJG-4HodA3eRlLM/view?usp=share_link
 
 </details>
 
@@ -290,14 +289,14 @@ tổ chức bóng đá nào cũng có thể sử dụng được là cực kỳ 
     <summary>Đối với nhà phát triển</summary>
 
   * Dowload, giải nén phần mềm
-    * Github: (Thêm sau)
-    * Google Drive: (Thêm sau)
+    * Github: https://github.com/tuonghuynh11/FootBallManager.git
+    * Google Drive: https://drive.google.com/file/d/1mpWYufvvIOTgdp3GduJG-4HodA3eRlLM/view?usp=share_link
   * Cài đặt database
     * Khuyến nghị sử dụng các dịch vụ đám mây như Azure, AWS,… để sử dụng tất cả tính năng hiện có của chương trình  (server đi kèm với chương trình đã đóng).
     * Ngoài ra có thể sử dụng SQL Server (Lưu ý: cách này sẽ mất đi tính năng tương tác giữa các user ở các máy tính khác nhau).
-  * Khởi tạo Database bằng cách chạy script chứa trong file TaoCSL.sql
+  * Khởi tạo Database bằng cách chạy script chứa trong file Seed.sql
+    * Tải file script tại: https://drive.google.com/drive/folders/19dLylv-vX3-xv_FsNEGTmDLlKu8OiHTl?usp=share_link
   * Kết nối với Database vừa tạo bằng cách thay đổi connectionStrings trong file App.config.
-  * Có thể sử dụng project Seeds để tạo dữ liệu giả.
   * Đăng nhập với vai trò admin
       * tên đăng nhập: admin
       * mật khẩu: 1234
