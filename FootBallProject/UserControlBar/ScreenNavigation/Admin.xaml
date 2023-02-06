@@ -277,7 +277,7 @@
 
                 <Border  Grid.Row="0" Margin="5 0 5 5" CornerRadius="20" >
                     <Border.Background>
-                        <ImageBrush  ImageSource="http://wallpapertops.com/walldb/original/7/7/9/682381.jpg"></ImageBrush>
+                        <ImageBrush  ImageSource="https://hanoispiritofplace.com/wp-content/uploads/2017/06/hinh-nen-bong-da-dep-24.jpg"></ImageBrush>
                     </Border.Background>
                 </Border>
                 <Border  Grid.Row="0" Margin="5,0,5,5" CornerRadius="20" BorderThickness="3" BorderBrush="BlueViolet" >
