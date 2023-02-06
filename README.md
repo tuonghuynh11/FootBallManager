@@ -290,7 +290,7 @@ tổ chức bóng đá nào cũng có thể sử dụng được là cực kỳ 
 
   * Dowload, giải nén phần mềm
     * Github: https://github.com/tuonghuynh11/FootBallManager.git
-    * Google Drive: https://drive.google.com/drive/folders/1XzPCnvUmiCadZ-13LTmWjrAiPnM8qJf2?usp=share_link
+    * Google Drive: https://drive.google.com/drive/folders/1uEsH5jcrxA8ratYCrcpkUKKwWAtqMsbJ?usp=share_link
   * Cài đặt database
     * Khuyến nghị sử dụng các dịch vụ đám mây như Azure, AWS,… để sử dụng tất cả tính năng hiện có của chương trình  (server đi kèm với chương trình đã đóng).
     * Ngoài ra có thể sử dụng SQL Server (Lưu ý: cách này sẽ mất đi tính năng tương tác giữa các user ở các máy tính khác nhau).
