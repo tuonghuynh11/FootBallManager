@@ -305,7 +305,7 @@ tổ chức bóng đá nào cũng có thể sử dụng được là cực kỳ 
 
 ## 5. Hướng dẫn sử dụng
 
-* Video demo: (thêm sau)
+* Video demo: https://drive.google.com/file/d/1YYE5HnDN8Cv93Ns67jCzx4I7vgd4tz09/view?usp=share_link
 
 ## 6. Tác giả
 
